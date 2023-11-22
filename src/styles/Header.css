@@ -1,0 +1,18 @@
+.end {
+  right: 0;
+}
+.active {
+  border-bottom: 1px solid #db4444;
+}
+.nav li a {
+  transition: 0.9s ease-in all;
+  -webkit-transition: 0.9s ease-in all;
+  -moz-transition: 0.9s ease-in all;
+  -ms-transition: 0.9s ease-in all;
+  -o-transition: 0.9s ease-in all;
+}
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 0;
+  align-items: center;
+}

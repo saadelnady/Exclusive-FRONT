@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import "../../styles/Header.css";
 export const Header = () => {
+  const [activeLink, setActiveLink] = useState(null);
+
+  const handleActive = (link) => {
+    setActiveLink(link);
+  };
   return (
     <div className="border-bottom">
       <div className="bg-dark py-1">
@@ -62,23 +68,88 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="container py-3 d-flex justify-content-between align-items-center">
-        <NavLink to="/" className="text-decoration-none fs-3 text-dark">
-          Exclusive
-        </NavLink>
-        <ul className="nav ">
-          <li className="nav-item">
-            <a className="nav-link active" aria-current="page" href="#">
-              Active
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
-          </li>
-        </ul>
-      </div>
+      <nav class="navbar navbar-expand-lg   container">
+        <div class="container d-flex justify-content-between">
+          <NavLink to="/" className="text-decoration-none fs-3 text-dark">
+            Exclusive
+          </NavLink>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse  w-75" id="navbarNavAltMarkup">
+            <div class="navbar-nav w-100 justify-content-between">
+              <ul className="nav d-flex ">
+                <li className="nav-item">
+                  <NavLink
+                    aria-current="page"
+                    to="/"
+                    className={
+                      activeLink === "/home" ? "active nav-link " : "nav-link "
+                    }
+                    onClick={() => handleActive("/home")}
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    aria-current="page"
+                    to="/contact"
+                    className={
+                      activeLink === "/contact" ? "active nav-link" : "nav-link"
+                    }
+                    onClick={() => handleActive("/contact")}
+                  >
+                    Contact
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    aria-current="page"
+                    to="/about"
+                    className={
+                      activeLink === "/about" ? "active nav-link" : "nav-link"
+                    }
+                    onClick={() => handleActive("/about")}
+                  >
+                    About
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    aria-current="page"
+                    to="/register"
+                    className={
+                      activeLink === "/register"
+                        ? "active nav-link"
+                        : "nav-link"
+                    }
+                    onClick={() => handleActive("/register")}
+                  >
+                    SignUp
+                  </NavLink>
+                </li>
+              </ul>
+              <div className="search position-relative w-50  w-md-75 mt-2 mt-lg-0">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="what are you looking for ?"
+                />
+                <i className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 };
