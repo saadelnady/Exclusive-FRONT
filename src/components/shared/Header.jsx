@@ -1,12 +1,14 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../styles/Header.css";
-export const Header = () => {
-  const [activeLink, setActiveLink] = useState(null);
+import { User } from "./User";
+import { useState } from "react";
 
-  const handleActive = (link) => {
-    setActiveLink(link);
+export const Header = () => {
+  const [active, setIsActive] = useState(null);
+  const activeHandler = (listItem) => {
+    setIsActive(listItem);
   };
+
   return (
     <div className="border-bottom">
       <div className="bg-dark py-1">
@@ -67,14 +69,13 @@ export const Header = () => {
           </div>
         </div>
       </div>
-
-      <nav class="navbar navbar-expand-lg   container">
-        <div class="container d-flex justify-content-between">
-          <NavLink to="/" className="text-decoration-none fs-3 text-dark">
+      <nav className="navbar navbar-expand-lg ">
+        <div className="container d-flex justify-content-between">
+          <NavLink to="/" className="fs-3 text-dark">
             Exclusive
           </NavLink>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -82,57 +83,78 @@ export const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse  w-75" id="navbarNavAltMarkup">
-            <div class="navbar-nav w-100 justify-content-between">
-              <ul className="nav d-flex ">
-                <li className="nav-item">
-                  <NavLink
-                    aria-current="page"
-                    to="/"
-                    className={
-                      activeLink === "/home" ? "active nav-link " : "nav-link "
-                    }
-                    onClick={() => handleActive("/home")}
-                  >
+          <div
+            className="collapse navbar-collapse  w-75"
+            id="navbarNavAltMarkup"
+          >
+            <div className="navbar-nav w-100 justify-content-between">
+              <ul className="nav d-flex justify-content-between links">
+                <li
+                  className={
+                    active === "home"
+                      ? "nav-item  me-2 fs-5 text-dark active"
+                      : "nav-item  me-2 fs-5 text-dark "
+                  }
+                  onClick={() => {
+                    activeHandler("home");
+                  }}
+                >
+                  <NavLink aria-current="page" to="/" className="text-dark">
                     Home
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    active === "contact"
+                      ? "nav-item  me-2 fs-5 text-dark active"
+                      : "nav-item  me-2 fs-5 text-dark"
+                  }
+                  onClick={() => {
+                    activeHandler("contact");
+                  }}
+                >
                   <NavLink
                     aria-current="page"
                     to="/contact"
-                    className={
-                      activeLink === "/contact" ? "active nav-link" : "nav-link"
-                    }
-                    onClick={() => handleActive("/contact")}
+                    className="text-dark "
                   >
                     Contact
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    active === "About"
+                      ? "nav-item  me-2 fs-5 text-dark active"
+                      : "nav-item  me-2 fs-5 text-dark"
+                  }
+                  onClick={() => {
+                    activeHandler("About");
+                  }}
+                >
                   <NavLink
                     aria-current="page"
                     to="/about"
-                    className={
-                      activeLink === "/about" ? "active nav-link" : "nav-link"
-                    }
-                    onClick={() => handleActive("/about")}
+                    className=" text-dark"
                   >
                     About
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    active === "SignUp"
+                      ? "nav-item  me-2 fs-5 text-dark active"
+                      : "nav-item  me-2 fs-5 text-dark"
+                  }
+                  onClick={() => {
+                    activeHandler("SignUp");
+                  }}
+                >
                   <NavLink
                     aria-current="page"
                     to="/register"
-                    className={
-                      activeLink === "/register"
-                        ? "active nav-link"
-                        : "nav-link"
-                    }
-                    onClick={() => handleActive("/register")}
+                    className="text-dark "
                   >
                     SignUp
                   </NavLink>
@@ -141,12 +163,13 @@ export const Header = () => {
               <div className="search position-relative w-50  w-md-75 mt-2 mt-lg-0">
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control bg-light"
                   placeholder="what are you looking for ?"
                 />
                 <i className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle"></i>
               </div>
             </div>
+            <User />
           </div>
         </div>
       </nav>

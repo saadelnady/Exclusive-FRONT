@@ -1,16 +1,18 @@
 .end {
   right: 0;
 }
-.active {
-  border-bottom: 1px solid #db4444;
+.links li {
+  transition: border-bottom 0.5s linear;
+  -webkit-transition: border-bottom 0.5s linear;
+  -moz-transition: border-bottom 0.5s linear;
+  -ms-transition: border-bottom 0.5s linear;
+  -o-transition: border-bottom 0.5s linear;
 }
-.nav li a {
-  transition: 0.9s ease-in all;
-  -webkit-transition: 0.9s ease-in all;
-  -moz-transition: 0.9s ease-in all;
-  -ms-transition: 0.9s ease-in all;
-  -o-transition: 0.9s ease-in all;
+
+.links li.active {
+  border-bottom: 1px solid;
 }
+
 .navbar-collapse {
   flex-basis: 100%;
   flex-grow: 0;
