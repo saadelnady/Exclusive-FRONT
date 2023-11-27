@@ -6,3 +6,9 @@
 a {
   text-decoration: none;
 }
+:root {
+  --red-color: #db4444;
+}
+.row {
+  --bs-gutter-x: 0;
+}

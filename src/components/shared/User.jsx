@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import userImage from "../../images/pngs/user-logo.png";
-import iconCancel from "../../images/pngs/icon-cancel.png";
-import iconLogout from "../../images/pngs/Icon-logout.png";
-import iconMallBag from "../../images/pngs/icon-mallbag.png";
-import iconReviews from "../../images/pngs/Icon-Reviews.png";
+import userImage from "../../assets/images/pngs/user-logo.png";
+import iconCancel from "../../assets/images/pngs/icon-cancel.png";
+import iconLogout from "../../assets/images/pngs/Icon-logout.png";
+import iconMallBag from "../../assets/images/pngs/icon-mallbag.png";
+import iconReviews from "../../assets/images/pngs/Icon-Reviews.png";
 
 export const User = () => {
   return (
@@ -11,14 +11,14 @@ export const User = () => {
       <i className="bi bi-heart fs-3"></i>
       <i className="bi bi-cart3 fs-3"></i>
 
-      <div className="dropdown">
+      <div className="dropdown bg-dark rounded-circle w-25 h-25 text-center">
         <button
           className="btn  text-dark bg-transparent dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <img src={userImage} alt="user-logo" />
+          <img src={userImage} alt="user-logo" className="text-center" />
         </button>
         <ul className="dropdown-menu bg-dark ">
           <li>
