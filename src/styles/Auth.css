@@ -1,17 +1,21 @@
-.register .form-control {
+.register .form-control,
+.login .form-control {
   border: none;
   border-bottom: 1px solid var(--red-color);
   border-radius: 5px;
   transition: 0.5s;
 }
-.register .form-control:focus {
+.register .form-control:focus,
+.login .form-control:focus {
   border: none;
 }
-.register .submit {
+.register .submit,
+.login .submit {
   background-color: var(--red-color);
   color: #fff;
 }
-.register .submit:hover {
+.register .submit:hover,
+.login .submit:hover {
   color: var(--red-color);
   background-color: transparent;
   border: 1px solid var(--red-color);
@@ -21,4 +25,8 @@
 }
 .login-btn {
   border-bottom: 1px solid var(--red-color);
+}
+
+.forget-password {
+  color: var(--red-color);
 }

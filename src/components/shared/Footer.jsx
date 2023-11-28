@@ -1,3 +1,91 @@
+import { NavLink } from "react-router-dom";
+import iconSend from "../../assets/images/pngs/icon-send.png";
+import qrCode from "../../assets/images/pngs/Qr Code.png";
+import appStore from "../../assets/images/pngs/appstore.png";
+import googlePlay from "../../assets/images/pngs/GooglePlay.png";
+import "../../styles/Footer.css";
 export const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <div className="  bg-dark text-light py-5 justify-content-between ">
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-sm-7 mb-4 col-md-2">
+            <h2>Exclusive</h2>
+            <p className="fs-5 mb-4">Subscribe</p>
+            <p>Get 10% off your first order</p>
+            <div className="position-relative">
+              <input
+                type="email"
+                placeholder="Enter your email "
+                className="bg-transparent border-white text-light w-100 p-2 rounded"
+              />
+              <img
+                src={iconSend}
+                alt="iconSend"
+                className="position-absolute top-50 iconSend translate-middle"
+              />
+            </div>
+          </div>
+          <div className="col-12 col-sm-6 mb-4 offset-md-1 col-md-2 fs-5">
+            <h2>Support</h2>
+            <p>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
+            <p> exclusive@gmail.com</p>
+            <p> +88015-88888-9999</p>
+          </div>
+          <div className="col-12 col-sm-6 mb-4 offset-md-1 col-md-2">
+            <h2>Account</h2>
+            <ul>
+              <li>
+                <NavLink className="text-light">My Account</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">Login / Register</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">Cart</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">Wish list</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">shop</NavLink>
+              </li>
+            </ul>
+          </div>
+          <div className="col-12 col-sm-7 mb-4 col-md-2">
+            <h2>Quick Link</h2>
+            <ul>
+              <li>
+                <NavLink className="text-light">Privacy Policy</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">Terms Of Use</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">FAQ</NavLink>
+              </li>
+              <li>
+                <NavLink className="text-light">Contact</NavLink>
+              </li>
+            </ul>
+          </div>
+          <div className="col-12 col-sm-6 mb-4 col-md-2">
+            <h2>Download App</h2>
+            <p>Save $3 with App New User Only</p>
+            <div className="d-flex justify-content-around flex-wrap">
+              <img src={qrCode} alt="qrCode" />
+              <div>
+                <NavLink className="d-block my-3 ">
+                  <img src={googlePlay} alt="qrCode" />
+                </NavLink>
+                <NavLink className="d-block ">
+                  <img src={appStore} alt="qrCode" />
+                </NavLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };

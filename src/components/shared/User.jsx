@@ -4,50 +4,51 @@ import iconCancel from "../../assets/images/pngs/icon-cancel.png";
 import iconLogout from "../../assets/images/pngs/Icon-logout.png";
 import iconMallBag from "../../assets/images/pngs/icon-mallbag.png";
 import iconReviews from "../../assets/images/pngs/Icon-Reviews.png";
+import "../../styles/User.css";
 
 export const User = () => {
   return (
-    <div className="d-flex w-25 justify-content-evenly align-items-center">
-      <i className="bi bi-heart fs-3"></i>
+    <div className="user d-flex col-12  col-lg-3 justify-content-evenly  align-items-center">
+      <i className="bi bi-heart fs-3 wishlist  "></i>
       <i className="bi bi-cart3 fs-3"></i>
 
-      <div className="dropdown bg-dark rounded-circle w-25 h-25 text-center">
+      <div className="dropdown text-center">
         <button
-          className="btn  text-dark bg-transparent dropdown-toggle"
+          className="user-logo rounded-circle dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <img src={userImage} alt="user-logo" className="text-center" />
+          <img src={userImage} alt="user-logo" />
         </button>
-        <ul className="dropdown-menu bg-dark ">
-          <li>
-            <NavLink className="dropdown-item bg-transparent text-dark">
-              <img src={userImage} alt="user-logo" />
+        <ul className="dropdown-menu bg-dark p-3">
+          <li className="d-flex justify-content-between align-items-center mb-2">
+            <img src={userImage} alt="user-logo" />
+            <NavLink className="dropdown-item bg-transparent text-light">
               Manage my account
             </NavLink>
           </li>
-          <li>
+          <li className="d-flex justify-content-between align-items-center mb-2">
+            <img src={iconMallBag} alt="bag-img" />
             <NavLink className="dropdown-item bg-transparent text-light">
-              <img src={iconMallBag} alt="bag-img" />
               My Orders
             </NavLink>
           </li>
-          <li>
-            <NavLink className="dropdown-item bg-transparent text-dark">
-              <img src={iconCancel} alt="cancel-img" />
+          <li className="d-flex justify-content-between align-items-center mb-2">
+            <img src={iconCancel} alt="cancel-img" />
+            <NavLink className="dropdown-item bg-transparent text-light">
               My Cancellations
             </NavLink>
           </li>
-          <li>
-            <NavLink className="dropdown-item bg-transparent text-dark">
-              <img src={iconReviews} alt="reviews" />
+          <li className="d-flex justify-content-between align-items-center mb-2">
+            <img src={iconReviews} alt="reviews" />
+            <NavLink className="dropdown-item bg-transparent text-light">
               My Reviews
             </NavLink>
           </li>
-          <li>
-            <NavLink className="dropdown-item bg-transparent text-dark">
-              <img src={iconLogout} alt="icon-logout" />
+          <li className="d-flex justify-content-between align-items-center mb-2">
+            <img src={iconLogout} alt="icon-logout" />
+            <NavLink className="dropdown-item bg-transparent text-light">
               Logout
             </NavLink>
           </li>

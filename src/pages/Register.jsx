@@ -1,6 +1,7 @@
 import mobileImage from "../assets/images/pngs/mobile.png";
 import googleIcon from "../assets/images/pngs/Icon-Google.png";
-import "../styles/register.css";
+import "../styles/Auth.css";
+
 import { NavLink } from "react-router-dom";
 export const Register = () => {
   return (
@@ -15,27 +16,27 @@ export const Register = () => {
           <input
             type="text"
             placeholder="first Name"
-            className="form-control mb-5"
+            className="form-control mb-5 fs-4"
           />
           <input
             type="text"
             placeholder="last Name"
-            className="form-control mb-5"
+            className="form-control mb-5 fs-4"
           />
           <input
             type="text"
             placeholder="mobile phone"
-            className="form-control mb-5"
+            className="form-control mb-5 fs-4"
           />
           <input
             type="email"
-            placeholder="e-mail"
-            className="form-control mb-5"
+            placeholder="E-mail"
+            className="form-control mb-5 fs-4"
           />
           <input
             type="password"
             placeholder="password"
-            className="form-control mb-5"
+            className="form-control mb-5 fs-4"
           />
           <button className="btn d-block text-center w-100 p-3  fs-4 submit mb-4">
             Create Account
@@ -46,7 +47,9 @@ export const Register = () => {
           </button>
           <p className="text-center mt-4 fs-5">
             Already have account ?{" "}
-            <NavLink className="login-btn text-dark p-2">Log in</NavLink>
+            <NavLink to="/login" className="login-btn text-dark p-2">
+              Log in
+            </NavLink>
           </p>
         </form>
       </div>

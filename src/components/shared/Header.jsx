@@ -160,7 +160,7 @@ export const Header = () => {
                   </NavLink>
                 </li>
               </ul>
-              <div className="search position-relative w-50  w-md-75 mt-2 mt-lg-0">
+              <div className="search position-relative col-12 col-md-5 my-2 mt-lg-0">
                 <input
                   type="text"
                   className="form-control bg-light"

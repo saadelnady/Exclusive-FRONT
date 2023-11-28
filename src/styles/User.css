@@ -1,0 +1,40 @@
+.user .dropdown-toggle::after {
+  display: none;
+  border: none;
+}
+.user i,
+.user li a,
+.user-logo {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.user-logo {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: rgba(255, 0, 0, 0.647);
+}
+.user-logo:hover {
+  background-color: var(--red-color);
+}
+.dropdown-menu[data-bs-popper] {
+  left: -150px;
+}
+
+.user li:hover a {
+  transform: translateX(10px);
+}
+.wishlist {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  cursor: pointer;
+}
+.wishlist:hover {
+  color: var(--red-color);
+}
