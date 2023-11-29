@@ -72,7 +72,7 @@ export const Footer = () => {
           <div className="col-12 col-sm-6 mb-4 col-md-2">
             <h2>Download App</h2>
             <p>Save $3 with App New User Only</p>
-            <div className="d-flex justify-content-around flex-wrap">
+            <div className="d-flex justify-content-around flex-wrap align-items-center">
               <img src={qrCode} alt="qrCode" />
               <div>
                 <NavLink className="d-block my-3 ">

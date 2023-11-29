@@ -5,12 +5,13 @@ import iconLogout from "../../assets/images/pngs/Icon-logout.png";
 import iconMallBag from "../../assets/images/pngs/icon-mallbag.png";
 import iconReviews from "../../assets/images/pngs/Icon-Reviews.png";
 import "../../styles/User.css";
-
+import { CiHeart } from "react-icons/ci";
+import { BsCart3 } from "react-icons/bs";
 export const User = () => {
   return (
     <div className="user d-flex col-12  col-lg-3 justify-content-evenly  align-items-center">
-      <i className="bi bi-heart fs-3 wishlist  "></i>
-      <i className="bi bi-cart3 fs-3"></i>
+      <CiHeart className="fs-2 wishlist" />
+      <BsCart3 className="fs-2 cart" />
 
       <div className="dropdown text-center">
         <button

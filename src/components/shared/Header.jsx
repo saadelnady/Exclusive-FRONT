@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "../../styles/Header.css";
 import { User } from "./User";
 import { useState } from "react";
+import { CiSearch } from "react-icons/ci";
 
 export const Header = () => {
   const [active, setIsActive] = useState(null);
@@ -166,7 +167,7 @@ export const Header = () => {
                   className="form-control bg-light"
                   placeholder="what are you looking for ?"
                 />
-                <i className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle"></i>
+                <CiSearch className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle" />
               </div>
             </div>
             <User />

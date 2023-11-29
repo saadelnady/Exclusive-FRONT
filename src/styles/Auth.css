@@ -1,3 +1,15 @@
+.eyeIcon,
+.register .google-signup {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.register {
+  min-height: 1050px;
+}
+
 .register .form-control,
 .login .form-control {
   border: none;
@@ -22,11 +34,29 @@
 }
 .register .google-signup {
   border: 1px solid var(--red-color);
+  background-color: white;
+}
+.register .google-signup:hover {
+  background-color: #eee;
+}
+.remember-me {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--red-color);
+  background-color: red;
 }
 .login-btn {
   border-bottom: 1px solid var(--red-color);
 }
 
 .forget-password {
+  color: var(--red-color);
+}
+
+.eyeIcon {
+  right: 20px;
+  cursor: pointer;
+}
+.eyeIcon:hover {
   color: var(--red-color);
 }
