@@ -5,9 +5,7 @@ const initialValues = {
   mobilePhone: "",
   password: "",
 };
-const onSubmit = (values) => {
-  return values;
-};
+
 const validate = (values) => {
   const errors = {};
 
@@ -50,4 +48,4 @@ const validate = (values) => {
 
   return errors;
 };
-export { initialValues, onSubmit, validate };
+export { initialValues, validate };

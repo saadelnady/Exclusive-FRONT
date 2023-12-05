@@ -3,5 +3,6 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Contact } from "./pages/Contact";
 import { About } from "./pages/About";
+import { Activation } from "./pages/Activation.jsx";
 
-export { Home, Login, Register, Contact, About };
+export { Home, Login, Register, Contact, About, Activation };

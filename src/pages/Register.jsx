@@ -5,17 +5,22 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
-import {
-  initialValues,
-  onSubmit,
-  validate,
-} from "../validation/registerValidation.js";
+import { initialValues, validate } from "../validation/registerValidation.js";
+import { handleRegiter } from "../formsSubmitions/registerSubmition.js";
+
 export const Register = () => {
   const [visible, setVisible] = useState(true);
-  const formik = useFormik({ initialValues, onSubmit, validate });
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      handleRegiter(values, formik, navigate);
+    },
+    validate,
+  });
 
   return (
     <div className="register row ">
@@ -25,7 +30,7 @@ export const Register = () => {
       <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold p-5">
         <h1 className="fs-1">Create an account</h1>
         <p className="fs-5 fw-normal">Enter your details below</p>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} action="POST">
           <input
             name="firstName"
             onChange={formik.handleChange}
@@ -74,7 +79,7 @@ export const Register = () => {
           <input
             name="email"
             onChange={formik.handleChange}
-            value={formik.values.handleChange}
+            value={formik.values.email}
             onBlur={formik.handleBlur}
             type="email"
             placeholder="E-mail"

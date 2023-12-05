@@ -1,21 +1,26 @@
 import mobileImage from "../assets/images/pngs/mobile.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
-import {
-  initialValues,
-  onSubmit,
-  validate,
-} from "../validation/loginValidation";
+import { initialValues, validate } from "../validation/loginValidation";
+import { handleLogin } from "../formsSubmitions/loginSubmition";
 import "../styles/Auth.css";
 import { useFormik } from "formik";
 
 export const Login = () => {
   const [visible, setVisible] = useState(true);
-  const formik = useFormik({ initialValues, onSubmit, validate });
+  const navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      handleLogin(values, formik, navigate);
+    },
+    validate,
+  });
 
   return (
     <div className="login row align-items-center">

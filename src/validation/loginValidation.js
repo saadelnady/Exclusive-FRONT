@@ -2,9 +2,7 @@ const initialValues = {
   email: "",
   password: "",
 };
-const onSubmit = (values) => {
-  return values;
-};
+
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
@@ -24,4 +22,4 @@ const validate = (values) => {
   }
   return errors;
 };
-export { initialValues, onSubmit, validate };
+export { initialValues, validate };
