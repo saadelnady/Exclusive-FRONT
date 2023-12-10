@@ -1,6 +1,7 @@
 import axios from "axios";
-import { serverUrl } from "../utils/utils";
+
 import { toast } from "react-toastify";
+import { serverUrl } from "../API/API";
 
 const handleLogin = async (values, { resetForm }, navigate) => {
   axios
@@ -16,7 +17,7 @@ const handleLogin = async (values, { resetForm }, navigate) => {
       resetForm();
       setTimeout(() => {
         navigate("/");
-      }, 3000);
+      }, 2000);
     })
     .catch((errors) => {
       const { message } = errors.response.data;

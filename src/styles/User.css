@@ -22,9 +22,8 @@
   background-color: var(--red-color);
 }
 .dropdown-menu[data-bs-popper] {
-  left: -150px;
+  left: -210px;
 }
-
 .user li:hover a {
   transform: translateX(10px);
 }

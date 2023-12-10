@@ -32,7 +32,7 @@ export const Footer = () => {
             <p> exclusive@gmail.com</p>
             <p> +88015-88888-9999</p>
           </div>
-          <div className="col-12 col-sm-6 mb-4 offset-md-1 col-md-2">
+          <div className="col-12 col-sm-7 mb-4 offset-md-1 col-md-2">
             <h2>Account</h2>
             <ul>
               <li>

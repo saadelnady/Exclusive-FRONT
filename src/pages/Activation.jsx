@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { serverUrl } from "../utils/utils";
+
 import axios from "axios";
+import { serverUrl } from "../API/API";
 
 export const Activation = () => {
   const { activationToken } = useParams();
