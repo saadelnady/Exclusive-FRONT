@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "../../store/actions/userActions";
 export const User = () => {
-  const user = useSelector((state) => state.userReducer);
+  const { isAuthenticated, user } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,10 +23,11 @@ export const User = () => {
 
   return (
     <div className="user d-flex col-12  col-lg-3 justify-content-evenly  align-items-center">
-      <CiHeart className="fs-2 wishlist" />
+      {isAuthenticated && <CiHeart className="fs-2 wishlist" />}
+
       <BsCart3 className="fs-2 cart" />
 
-      {user && (
+      {isAuthenticated && (
         <div className="dropdown text-center">
           <button
             className="user-logo rounded-circle dropdown-toggle"

@@ -2,8 +2,7 @@ import { NavLink } from "react-router-dom";
 import "../../styles/Header.css";
 import { User } from "./User";
 import { useState } from "react";
-import { CiSearch } from "react-icons/ci";
-
+import { Announce, Search } from "../../routes";
 export const Header = () => {
   const [active, setIsActive] = useState(null);
   const activeHandler = (listItem) => {
@@ -12,66 +11,9 @@ export const Header = () => {
 
   return (
     <div className="border-bottom">
-      <div className="bg-dark py-1">
-        <div className="container text-light  d-flex justify-content-evenly align-center flex-wrap">
-          <p className="d-flex justify-content-center py-2 fs-6  align-center text-center flex-wrap">
-            Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-            <NavLink
-              className="ms-md-5 fw-bold fs-6 bg-transparent text-light"
-              to="/"
-            >
-              ShopNow
-            </NavLink>
-          </p>
-
-          <div className="dropdown m-0">
-            <button
-              className="btn outline-none text-light dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              English
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <NavLink
-                  className="dropdown-item bg-transparent text-dark"
-                  to="/"
-                >
-                  Arabic
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item bg-transparent text-dark"
-                  to="/"
-                >
-                  English
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item bg-transparent text-dark"
-                  to="/"
-                >
-                  French
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="dropdown-item bg-transparent text-dark"
-                  to="/"
-                >
-                  German
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <Announce />
       <nav className="navbar navbar-expand-lg ">
-        <div className="container d-flex justify-content-between">
+        <div className="container d-flex justify-content-between align-items-center">
           <NavLink to="/" className="fs-3 text-dark">
             Exclusive
           </NavLink>
@@ -91,7 +33,7 @@ export const Header = () => {
             id="navbarNavAltMarkup"
           >
             <div className="navbar-nav w-100 justify-content-between">
-              <ul className="nav d-flex justify-content-between links">
+              <ul className="nav d-flex justify-content-between links align-items-center">
                 <li
                   className={
                     active === "home"
@@ -161,14 +103,7 @@ export const Header = () => {
                   </NavLink>
                 </li>
               </ul>
-              <div className="search position-relative col-12 col-lg-5 my-2 mt-lg-0">
-                <input
-                  type="text"
-                  className="form-control bg-light"
-                  placeholder="what are you looking for ?"
-                />
-                <CiSearch className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle" />
-              </div>
+              <Search />
             </div>
             <User />
           </div>

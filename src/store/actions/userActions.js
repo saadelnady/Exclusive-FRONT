@@ -1,17 +1,14 @@
 import { getData, serverUrl } from "../../API/API";
+import * as actionCreators from "./actionsCreators";
 
-const getUser = (payLoad) => {
-  return {
-    type: "GETUSER",
-    payLoad,
-  };
-};
-const fetchUser = () => {
+export const fetchUser = () => {
   return async (dispatch) => {
-    getData(`${serverUrl}/api/users/getProfile`).then((data) => {
-      dispatch(getUser(data));
-    });
+    dispatch(actionCreators.loadUser());
+    try {
+      const data = await getData(`${serverUrl}/api/users/getProfile`);
+      dispatch(actionCreators.getUserSuccess(data));
+    } catch (error) {
+      dispatch(actionCreators.getUserFail(error));
+    }
   };
 };
-
-export { fetchUser };

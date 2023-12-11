@@ -1,0 +1,17 @@
+.search-result {
+  z-index: 999;
+}
+.search-img {
+  width: 100px;
+  height: 100px;
+}
+.search-result li {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.search-result li:hover {
+  background: #000;
+}

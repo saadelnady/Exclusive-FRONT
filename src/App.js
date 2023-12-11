@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Footer, Header } from "./components/shared";
+import { Footer, Header } from "./routes";
 import { Home, Login, Register, Contact, About, Activation } from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
