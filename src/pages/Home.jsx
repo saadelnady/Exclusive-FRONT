@@ -6,7 +6,9 @@ export const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
+    if (localStorage.getItem("TOKEN")) {
+      dispatch(fetchUser());
+    }
   }, [dispatch]);
 
   return <div>Home</div>;

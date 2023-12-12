@@ -1,7 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Footer, Header } from "./routes";
-import { Home, Login, Register, Contact, About, Activation } from "./routes";
+import {
+  Home,
+  Login,
+  Register,
+  Contact,
+  About,
+  Activation,
+  Product,
+} from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/products/:productId" element={<Product />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
       </Routes>
       <ToastContainer

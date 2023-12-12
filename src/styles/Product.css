@@ -1,0 +1,56 @@
+.sliderImgs div {
+  cursor: pointer;
+}
+.productSlider .mainImg {
+  width: 80%;
+  max-width: 100%;
+}
+.sliderImgs > div {
+  width: 120px;
+}
+.product-details .counter {
+  border: 1px solid #ccc;
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.product-details .counter button {
+  border: none;
+  outline: none;
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.product-details .counter button:hover {
+  background-color: var(--red-color);
+  color: white;
+}
+.product-details .counter .amount {
+  font-size: 20px;
+  padding: 0 10px;
+  width: 75px;
+  text-align: center;
+}
+.product-details .buy-now {
+  color: white;
+  background-color: var(--red-color);
+  border: none;
+  outline: none;
+  padding: 6px 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
