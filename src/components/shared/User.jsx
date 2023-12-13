@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import DefaultUserImage from "../../assets/images/pngs/user-logo.png";
-import iconCancel from "../../assets/images/pngs/icon-cancel.png";
-import iconLogout from "../../assets/images/pngs/Icon-logout.png";
-import iconMallBag from "../../assets/images/pngs/icon-mallbag.png";
-import iconReviews from "../../assets/images/pngs/Icon-Reviews.png";
+import iconCancel from "../../assets/images/pngs/ic-cancel.png";
+import iconLogout from "../../assets/images/pngs/ic-logout.png";
+import iconMallBag from "../../assets/images/pngs/ic-mallbag.png";
+import iconReviews from "../../assets/images/pngs/ic-Reviews.png";
 import "../../styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";

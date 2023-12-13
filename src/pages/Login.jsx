@@ -27,10 +27,10 @@ export const Login = () => {
       <div className="col-12 col-md-6">
         <img src={mobileImage} alt="mobileImage" className="w-100" />
       </div>
-      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold p-5">
+      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
         <h1 className="fs-1">Log in to Exclusive</h1>
-        <p className="fs-5 fw-normal">Enter your details below</p>
-        <form onSubmit={formik.handleSubmit}>
+        <p className="fs-5 fw-normal mt-4">Enter your details below</p>
+        <form onSubmit={formik.handleSubmit} className="mt-5">
           <input
             type="email"
             name="email"

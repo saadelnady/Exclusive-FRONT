@@ -1,13 +1,14 @@
 * {
   padding: 0;
   margin: 0;
-  font-family: Poppins;
+  font-family: Inter;
 }
 a {
   text-decoration: none;
 }
 :root {
   --red-color: #db4444;
+  --bg-light: rgba(245, 245, 245, 1);
 }
 .row {
   --bs-gutter-x: 0;
@@ -15,7 +16,26 @@ a {
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 p {
   margin: 0;
+}
+.special-header {
+  position: relative;
+  color: var(--red-color);
+}
+.special-header:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 25px;
+  border-radius: 5px;
+  background-color: var(--red-color);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }

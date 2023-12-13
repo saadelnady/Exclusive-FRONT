@@ -1,5 +1,5 @@
 import mobileImage from "../assets/images/pngs/mobile.png";
-import googleIcon from "../assets/images/pngs/Icon-Google.png";
+import googleIcon from "../assets/images/pngs/ic-Google.png";
 import "../styles/Auth.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -27,10 +27,10 @@ export const Register = () => {
       <div className="col-12 col-md-6">
         <img src={mobileImage} alt="mobileImage" className="w-100" />
       </div>
-      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold p-5">
+      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
         <h1 className="fs-1">Create an account</h1>
         <p className="fs-5 fw-normal">Enter your details below</p>
-        <form onSubmit={formik.handleSubmit} action="POST">
+        <form onSubmit={formik.handleSubmit} action="POST" className="mt-5">
           <input
             name="firstName"
             onChange={formik.handleChange}

@@ -10,6 +10,7 @@ import { Footer } from "./components/shared/Footer.jsx";
 import { Header } from "./components/shared/Header";
 import { Search } from "./components/shared/Search";
 import { Announce } from "./components/shared/Announce";
+import { Card } from "./components/shared/Card";
 
 import { ProductDetails } from "./components/ProductDetails";
 import { RelatedItem } from "./components/RelatedItem";
@@ -28,4 +29,5 @@ export {
   Product,
   ProductDetails,
   RelatedItem,
+  Card,
 };

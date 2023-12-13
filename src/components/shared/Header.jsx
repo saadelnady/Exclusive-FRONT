@@ -14,7 +14,7 @@ export const Header = () => {
       <Announce />
       <nav className="navbar navbar-expand-lg ">
         <div className="container d-flex justify-content-between align-items-center">
-          <NavLink to="/" className="fs-3 text-dark">
+          <NavLink to="/" className="fs-3 text-dark fw-bold">
             Exclusive
           </NavLink>
           <button

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-// import { products } from "../../static/data";
+
 import { NavLink } from "react-router-dom";
 import "../../styles/Search.css";
 import axios from "axios";
 import { serverUrl } from "../../API/API";
-// import product1 from "../../static/images/1.png";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,7 +38,7 @@ export const Search = () => {
   const handleBlur = () => {
     setSearchData([]);
   };
-  console.log(searchData.length);
+
   return (
     <div className="search position-relative col-12 col-lg-5 my-2 mt-lg-0">
       <input

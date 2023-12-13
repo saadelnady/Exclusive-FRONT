@@ -1,19 +1,25 @@
 import { NavLink } from "react-router-dom";
-import iconSend from "../../assets/images/pngs/icon-send.png";
+import iconSend from "../../assets/images/pngs/ic-send.png";
 import qrCode from "../../assets/images/pngs/Qr Code.png";
-import appStore from "../../assets/images/pngs/appstore.png";
-import googlePlay from "../../assets/images/pngs/GooglePlay.png";
+import appStore from "../../assets/images/pngs/ic-appstore.png";
+import googlePlay from "../../assets/images/pngs/ic-GooglePlay.png";
+import copyright from "../../assets/images/pngs/ic-copyRight.png";
+import icTwitter from "../../assets/images/pngs/ic-Twitter.png";
+import icFacebook from "../../assets/images/pngs/ic-Facebook.png";
+import icInstagram from "../../assets/images/pngs/ic-instagram.png";
+import icLinkedin from "../../assets/images/pngs/ic-Linkedin.png";
+
 import "../../styles/Footer.css";
 export const Footer = () => {
   return (
-    <div className="  bg-dark text-light py-5 justify-content-between ">
+    <div className="footer text-light pt-5 justify-content-between ">
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-7 mb-4 col-md-2">
             <h2>Exclusive</h2>
             <p className="fs-5 mb-4">Subscribe</p>
             <p>Get 10% off your first order</p>
-            <div className="position-relative">
+            <div className="position-relative mt-3">
               <input
                 type="email"
                 placeholder="Enter your email "
@@ -71,11 +77,11 @@ export const Footer = () => {
           </div>
           <div className="col-12 col-sm-6 mb-4 col-md-2">
             <h2>Download App</h2>
-            <p>Save $3 with App New User Only</p>
-            <div className="d-flex justify-content-around flex-wrap align-items-center">
+            <p className="text-light">Save $3 with App New User Only</p>
+            <div className="d-flex justify-content-around flex-wrap align-items-center mt-4 ">
               <img src={qrCode} alt="qrCode" />
               <div>
-                <NavLink className="d-block my-3 ">
+                <NavLink className="d-block mb-3 ">
                   <img src={googlePlay} alt="qrCode" />
                 </NavLink>
                 <NavLink className="d-block ">
@@ -83,8 +89,29 @@ export const Footer = () => {
                 </NavLink>
               </div>
             </div>
+            <div className="social-media d-flex justify-content-evenly mt-3">
+              <NavLink>
+                <img src={icFacebook} alt="" />
+              </NavLink>
+              <NavLink>
+                <img src={icTwitter} alt="" />
+              </NavLink>
+
+              <NavLink>
+                <img src={icInstagram} alt="" />
+              </NavLink>
+              <NavLink>
+                <img src={icLinkedin} alt="" />
+              </NavLink>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="copyRight border-top opacity-25">
+        <p className="fs-5 py-3 d-flex align-items-center justify-content-center">
+          <img src={copyright} alt="" className="me-2" />
+          Copyright Rimel 2022. All right reserved
+        </p>
       </div>
     </div>
   );

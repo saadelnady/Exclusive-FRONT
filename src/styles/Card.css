@@ -1,0 +1,72 @@
+.product-card {
+  position: relative;
+  width: 300px;
+  max-width: 100%;
+}
+.product-card .header {
+  position: relative;
+  background-color: var(--bg-light);
+  overflow: hidden;
+  text-align: center;
+}
+.product-card .discountPercentage {
+  position: absolute;
+  background-color: var(--red-color);
+  top: 20px;
+  left: 20px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  color: #fff;
+}
+.product-card .product-icons {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+}
+.product-card .product-icons a {
+  color: black;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.product-card .product-icons a:hover {
+  color: #fff;
+  background-color: var(--red-color);
+}
+.product-card .addToCart {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  border: none;
+  background-color: black;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.product-card:hover .addToCart {
+  bottom: 0;
+}
+
+.product-card .content .final-price {
+  color: rgba(219, 68, 68, 1);
+}
+.product-card .content .price-before-discount {
+  color: rgba(0, 0, 0, 1);
+}
