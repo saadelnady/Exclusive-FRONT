@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Footer, Header } from "./routes";
+import { Footer, Header, Profile } from "./routes";
 import {
   Home,
   Login,
@@ -24,6 +24,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/:productId" element={<Product />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
       </Routes>
       <ToastContainer

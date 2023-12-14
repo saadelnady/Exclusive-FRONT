@@ -5,6 +5,7 @@ import { Contact } from "./pages/Contact";
 import { About } from "./pages/About";
 import { Activation } from "./pages/Activation.jsx";
 import { Product } from "./pages/Product.jsx";
+import { Profile } from "./pages/Profile.jsx";
 
 import { Footer } from "./components/shared/Footer.jsx";
 import { Header } from "./components/shared/Header";
@@ -30,4 +31,5 @@ export {
   ProductDetails,
   RelatedItem,
   Card,
+  Profile,
 };

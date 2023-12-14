@@ -21,13 +21,13 @@
 .login .form-control:focus {
   border: none;
 }
-.register .submit,
-.login .submit {
+.submit,
+.submit {
   background-color: var(--red-color);
   color: #fff;
 }
-.register .submit:hover,
-.login .submit:hover {
+.submit:hover,
+.submit:hover {
   color: var(--red-color);
   background-color: transparent;
   border: 1px solid var(--red-color);

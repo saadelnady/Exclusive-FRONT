@@ -8,7 +8,7 @@ a {
 }
 :root {
   --red-color: #db4444;
-  --bg-light: rgba(245, 245, 245, 1);
+  --bg-light: #d9d9d9;
 }
 .row {
   --bs-gutter-x: 0;
@@ -20,6 +20,7 @@ ul {
 }
 p {
   margin: 0;
+  word-wrap: break-word;
 }
 .special-header {
   position: relative;

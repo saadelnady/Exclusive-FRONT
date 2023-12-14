@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import DefaultUserImage from "../../assets/images/pngs/user-logo.png";
 import iconCancel from "../../assets/images/pngs/ic-cancel.png";
 import iconLogout from "../../assets/images/pngs/ic-logout.png";
@@ -11,8 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect } from "react";
 import { fetchUser } from "../../store/actions/userActions";
+import { toast } from "react-toastify";
+
 export const User = () => {
   const { isAuthenticated, user } = useSelector((state) => state.userReducer);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,7 +23,12 @@ export const User = () => {
       dispatch(fetchUser());
     }
   }, [dispatch]);
-
+  const handleLogOut = () => {
+    localStorage.removeItem("TOKEN");
+    toast.success("You have logged out");
+    navigate("/");
+    window.location.reload();
+  };
   return (
     <div className="user d-flex col-12  col-lg-3 justify-content-evenly  align-items-center">
       {isAuthenticated && <CiHeart className="fs-2 wishlist" />}
@@ -35,16 +43,15 @@ export const User = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              src={user.userImage || DefaultUserImage}
-              alt="user-logo"
-              className="w-100"
-            />
+            <img src={user.userImage} alt="user-logo" className="w-100" />
           </button>
           <ul className="dropdown-menu bg-dark p-3">
             <li className="d-flex justify-content-between align-items-center mb-2">
               <img src={DefaultUserImage} alt="user-logo" />
-              <NavLink className="dropdown-item bg-transparent text-light">
+              <NavLink
+                className="dropdown-item bg-transparent text-light"
+                to={`/profile`}
+              >
                 Manage my account({user.firstName || "user name"})
               </NavLink>
             </li>
@@ -68,7 +75,10 @@ export const User = () => {
             </li>
             <li className="d-flex justify-content-between align-items-center mb-2">
               <img src={iconLogout} alt="icon-logout" />
-              <NavLink className="dropdown-item bg-transparent text-light">
+              <NavLink
+                className="dropdown-item bg-transparent text-light"
+                onClick={handleLogOut}
+              >
                 Logout
               </NavLink>
             </li>
