@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { fetchUser } from "../store/actions/userActions";
 import { CiCamera } from "react-icons/ci";
 
@@ -8,7 +8,7 @@ import "../styles/Profile.css";
 
 export const Profile = () => {
   const [visible, setVisible] = useState(true);
-
+  const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
   const { userImage, firstName, email, lastName, address } = user;
   const dispatch = useDispatch();
@@ -17,23 +17,29 @@ export const Profile = () => {
       dispatch(fetchUser());
     }
   }, [dispatch]);
+  const handleCancel = () => {
+    navigete("/");
+  };
   return (
-    <div className="container py-5 profile">
-      <div className="header d-flex justify-content-between flex-wrap mb-4">
+    <div className="container profile">
+      <div className="header d-flex justify-content-between align-items-center flex-wrap py-5">
         <div className="links">
           <NavLink to={"/"} className="fs-5 me-2">
             Home
           </NavLink>
-          /<NavLink className="text-dark fs-5 ms-2">My Account</NavLink>
+          /
+          <NavLink className="text-dark fs-5 ms-2" to={"/profile"}>
+            My Account
+          </NavLink>
         </div>
         <div className="wellcome fs-5">
           wellcome! <span className="fw-bold fs-4">{user.firstName} </span>
         </div>
       </div>
-      <div className="row  ">
+      <div className="row">
         <aside className="col-12 col-sm-3">
           <ul>
-            <p className="my-4 fw-bold fs-5">Manage My Account</p>
+            <p className="my-4  fs-5">Manage My Account</p>
             <li className="ps-4 mb-2">
               <NavLink>My Profile</NavLink>
             </li>
@@ -45,7 +51,7 @@ export const Profile = () => {
             </li>
           </ul>
           <ul>
-            <p className="my-4 fw-bold fs-5">My Orders</p>
+            <p className="my-4  fs-5">My Orders</p>
             <li className="ps-4 mb-2">
               <NavLink>My Returns</NavLink>
             </li>
@@ -54,11 +60,11 @@ export const Profile = () => {
             </li>
           </ul>
           <ul>
-            <p className="my-4 fw-bold fs-5">My WishList</p>
+            <p className="my-4  fs-5">My WishList</p>
           </ul>
         </aside>
         <div className="col-12 col-sm-8 offset-sm-1 shadow p-5 rounded">
-          <h3 className="edit fw-bold">Edit Your Profile</h3>
+          <h3 className="edit  ">Edit Your Profile</h3>
           <form action="">
             <div className="user-pic rounded mx-auto my-5 position-relative user-img rounded-pill bg-light">
               <img src={userImage} alt="" />
@@ -109,7 +115,7 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-            <p className="fw-bold my-4 fs-5">Password Changes</p>
+            <p className="  my-4 fs-5">Password Changes</p>
             <input
               type="password"
               name="password"
@@ -131,11 +137,11 @@ export const Profile = () => {
               className="form-control mb-3 fs-5 bg-light"
               autoComplete="password"
             />
-            <div className="w-auto ">
-              <button className="btn d-inline-block text-center cancel">
+            <div className="d-flex justify-content-end mt-4">
+              <button className="btn text-center" onClick={handleCancel}>
                 Cancel
               </button>
-              <button className="btn d-inline-block text-center p-3 fs-5 submit">
+              <button className="btn text-center p-3 fs-5 submit">
                 Save Changes
               </button>
             </div>

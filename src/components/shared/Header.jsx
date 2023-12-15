@@ -10,7 +10,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="border-bottom">
+    <div className="border-bottom ">
       <Announce />
       <nav className="navbar navbar-expand-lg ">
         <div className="container d-flex justify-content-between align-items-center">

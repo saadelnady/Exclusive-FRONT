@@ -1,9 +1,7 @@
 .wellcome span {
   color: var(--red-color);
 }
-.header .links a {
-  color: var(--bg-light);
-}
+
 aside ul li a {
   color: var(--bg-light);
 }

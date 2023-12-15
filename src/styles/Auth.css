@@ -6,9 +6,6 @@
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
-.register {
-  min-height: 1050px;
-}
 
 .register .form-control,
 .login .form-control {
@@ -21,17 +18,7 @@
 .login .form-control:focus {
   border: none;
 }
-.submit,
-.submit {
-  background-color: var(--red-color);
-  color: #fff;
-}
-.submit:hover,
-.submit:hover {
-  color: var(--red-color);
-  background-color: transparent;
-  border: 1px solid var(--red-color);
-}
+
 .register .google-signup {
   border: 1px solid var(--red-color);
   background-color: white;

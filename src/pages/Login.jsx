@@ -25,7 +25,7 @@ export const Login = () => {
   return (
     <div className="login row align-items-center">
       <div className="col-12 col-md-6">
-        <img src={mobileImage} alt="mobileImage" className="w-100" />
+        <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
       </div>
       <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
         <h1 className="fs-1">Log in to Exclusive</h1>
@@ -92,7 +92,7 @@ export const Login = () => {
             </label>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <button className="btn text-center p-3 fs-4 submit " type="sbmit">
+            <button className="btn p-3 fs-4 submit " type="sbmit">
               Login
             </button>
             <NavLink className="forget-password p-3 fs-5">

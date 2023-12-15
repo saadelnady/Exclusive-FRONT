@@ -25,7 +25,7 @@ export const Register = () => {
   return (
     <div className="register row ">
       <div className="col-12 col-md-6">
-        <img src={mobileImage} alt="mobileImage" className="w-100" />
+        <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
       </div>
       <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
         <h1 className="fs-1">Create an account</h1>
@@ -126,7 +126,7 @@ export const Register = () => {
             </p>
           ) : null}
           <button
-            className="btn d-block text-center w-100 p-3  fs-4 submit mb-4"
+            className="btn d-block w-100 p-3  fs-4 submit mb-4"
             type="submit"
           >
             Create Account
