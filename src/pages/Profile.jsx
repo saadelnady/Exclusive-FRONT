@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { fetchUser } from "../store/actions/userActions";
 import { CiCamera } from "react-icons/ci";
 
 import "../styles/Profile.css";
 
 export const Profile = () => {
-  const [visible, setVisible] = useState(true);
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
   const { userImage, firstName, email, lastName, address } = user;
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {

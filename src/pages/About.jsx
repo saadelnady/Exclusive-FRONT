@@ -4,7 +4,17 @@ import icShop from "../assets/images/pngs/ic-shop.png";
 import icDollarSign from "../assets/images/pngs/ic-dollar.png";
 import icShoppingBag from "../assets/images/pngs/ic-mallbag.png";
 import icMoneyBag from "../assets/images/pngs/ic-moneyBag.png";
+import personOne from "../assets/images/pngs/person-1.png";
+import personOTwo from "../assets/images/pngs/person-2.png";
+import personThree from "../assets/images/pngs/person-3.png";
+import icTwitter2 from "../assets/images/pngs/ic-Twitter-2.png";
+import instagram2 from "../assets/images/pngs/ic-instagram-2.png";
+import linkedIn2 from "../assets/images/pngs/ic-Linkedin-2.png";
+import icDelivery from "../assets/images/pngs/ic-delivery-2.png";
+import icHeadPhone from "../assets/images/pngs/ic-headPhone.png";
+import icVerifecation from "../assets/images/pngs/ic-verification.png";
 import "../styles/About.css";
+
 export const About = () => {
   return (
     <div className="container">
@@ -39,32 +49,118 @@ export const About = () => {
       </div>
       <div className="statistics d-flex flex-wrap justify-content-center  gap-5 justify-content-md-between mt-5">
         <div className="border rounded p-4  text-center  ">
-          <div className="statistic-img  mx-auto   bg-dark rounded-pill p-4">
-            <img src={icShop} alt="" className="w-100" />
+          <div className="statistic-img  mx-auto rounded-pill mb-3">
+            <img src={icShop} alt="" />
           </div>
           <h4>10.5k</h4>
           <p>Sallers active our site</p>
         </div>
         <div className="border rounded p-4 text-center   ">
-          <div className=" statistic-img mx-auto bg-dark rounded-pill p-4">
-            <img src={icDollarSign} alt="" className="w-100" />
+          <div className=" statistic-img mx-auto rounded-pill  mb-3">
+            <img src={icDollarSign} alt="" />
           </div>
           <h4>33k</h4>
           <p>Mopnthly Produduct Sale</p>
         </div>
         <div className="border rounded p-4 text-center  ">
-          <div className=" statistic-img mx-auto bg-dark rounded-pill p-4">
-            <img src={icShoppingBag} alt="" className="w-100" />
+          <div className=" statistic-img mx-auto rounded-pill mb-3">
+            <img src={icShoppingBag} alt="" />
           </div>
           <h4>45.5k</h4>
           <p>Customer active in our site</p>
         </div>
         <div className="border rounded p-4 text-center  ">
-          <div className="statistic-img  mx-auto bg-dark rounded-pill p-4">
-            <img src={icMoneyBag} alt="" className="w-100" />
+          <div className="statistic-img  mx-auto rounded-pill mb-3">
+            <img src={icMoneyBag} alt="" />
           </div>
           <h4>25k</h4>
           <p>Anual gross sale in our site</p>
+        </div>
+      </div>
+      <div className="team-members my-5">
+        <div className="row justify-content-center justify-content-sm-between">
+          <div className="col-12 col-md-5 col-lg-3 mb-3">
+            <div className="bg-light p-4 pb-0 team-member-img ">
+              <img src={personOne} alt="" className="w-100 h-100" />
+            </div>
+            <h2 className="my-3 fw-bold">Tom Cruise</h2>
+            <p>Founder & Chairman</p>
+            <div className="social mt-4">
+              <NavLink className="me-2">
+                <img src={icTwitter2} alt="" />
+              </NavLink>
+              <NavLink className="me-2">
+                <img src={instagram2} alt="" />
+              </NavLink>
+              <NavLink>
+                <img src={linkedIn2} alt="" />
+              </NavLink>
+            </div>
+          </div>
+          <div className="col-12 col-md-5 col-lg-3 mb-3">
+            <div className="bg-light p-4 pb-0 team-member-img ">
+              <img src={personOTwo} alt="" className="w-100 h-100" />
+            </div>
+            <h2 className="my-3 fw-bold">Emma Watson</h2>
+            <p>Managing Director</p>
+            <div className="social mt-4">
+              <NavLink className="me-2">
+                <img src={icTwitter2} alt="" />
+              </NavLink>
+              <NavLink className="me-2">
+                <img src={instagram2} alt="" />
+              </NavLink>
+              <NavLink>
+                <img src={linkedIn2} alt="" />
+              </NavLink>
+            </div>
+          </div>
+          <div className="col-12 col-md-5 col-lg-3">
+            <div className="bg-light p-4 pb-0 team-member-img ">
+              <img src={personThree} alt="" className="w-100 h-100" />
+            </div>
+            <h2 className="my-3 fw-bold">Will Smith</h2>
+            <p>Product Designer</p>
+            <div className="social mt-4">
+              <NavLink className="me-2">
+                <img src={icTwitter2} alt="" />
+              </NavLink>
+              <NavLink className="me-2">
+                <img src={instagram2} alt="" />
+              </NavLink>
+              <NavLink>
+                <img src={linkedIn2} alt="" />
+              </NavLink>
+            </div>
+          </div>
+        </div>
+        <ul className="d-flex  mx-auto bullets justify-content-evenly align-items-center mt-4">
+          <li className="rounded-pill"></li>
+          <li className="rounded-pill"></li>
+          <li className="rounded-pill active"></li>
+          <li className="rounded-pill"></li>
+          <li className="rounded-pill"></li>
+        </ul>
+      </div>
+      <div className="services row justify-content-center justify-content-sm-between text-center my-5">
+        <div className="col-12 col-sm-5 col-lg-4 mb-4 mb-sm-0 py-3">
+          <img src={icDelivery} alt="" className="bg-dark rounded-pill p-3" />
+          <h4 className="mt-4">FREE AND FAST DELIVERY</h4>
+          <p>Free delivery for all orders over $140</p>
+        </div>
+        <div className="col-12 col-sm-5 col-lg-3 mb-4 mb-sm-0 py-3">
+          <img src={icHeadPhone} alt="" className="bg-dark rounded-pill p-3" />
+          <h4 className="mt-4">24/7 CUSTOMER SERVICE</h4>
+          <p>Friendly 24/7 customer support</p>
+        </div>
+        <div className="col-12 col-sm-5 col-lg-4 py-3">
+          <img
+            src={icVerifecation}
+            alt=""
+            className="bg-dark rounded-pill p-3"
+          />
+          <h4 className="mt-4">MONEY BACK GUARANTEE</h4>
+          <p>We reurn money within 30 days</p>
         </div>
       </div>
     </div>

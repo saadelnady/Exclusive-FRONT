@@ -9,8 +9,8 @@ export const getData = async (URL) => {
     };
 
     const response = await axios.get(URL, { headers });
+    const data = response.data.data;
 
-    const data = response.data.data.user;
     return data;
   } catch (error) {
     console.log(error);

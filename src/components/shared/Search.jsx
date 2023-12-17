@@ -1,42 +1,29 @@
-import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+
 import "../../styles/Search.css";
-import axios from "axios";
-import { serverUrl } from "../../API/API";
+import { fetchProducts } from "../../store/actions/productsActions";
 
 export const Search = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchData, setSearchData] = useState([]);
+  const { products } = useSelector((state) => state.productsReducer);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${serverUrl}/api/products`);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-        const { products } = await response.data.data;
-        setSearchData(products);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-  const searchHandler = (e) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    if (searchData) {
-      const filteredProducts = searchData.filter((product) => {
-        return product.productName
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase());
-      });
-      setSearchData(filteredProducts);
-    }
-  };
-
-  const handleBlur = () => {
-    setSearchData([]);
+    const filteredProducts = products.filter((product) => {
+      return product.productName
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setSearchResult(filteredProducts);
   };
 
   return (
@@ -45,32 +32,29 @@ export const Search = () => {
         type="text"
         className="form-control bg-light search"
         placeholder="what are you looking for ?"
+        onChange={handleSearch}
         value={searchTerm}
-        onChange={searchHandler}
-        onBlur={handleBlur}
       />
       <CiSearch className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle" />
-
-      {searchData || searchData.length !== 0 || searchTerm !== "" ? (
-        <ul className="position-absolute bg-dark search-result w-100 ">
-          {searchData.map((product, index) => {
+      {searchResult && searchResult.length !== 0 ? (
+        <div className="search-result position-absolute w-100 bg-dark rounded ">
+          {searchResult.map((product, index) => {
             return (
-              <li key={index} className="p-3">
-                <NavLink
-                  className="d-flex justify-content-between align-items-center"
-                  to={`/products/${product._id}`}
-                >
-                  <img
-                    src={product.productImage}
-                    alt="product-img"
-                    className="search-img"
-                  />
-                  <p className="text-light">{product.productName}</p>
-                </NavLink>
-              </li>
+              <NavLink
+                key={index}
+                to={`/product/${product._id}`}
+                className="d-flex justify-content-between align-items-center text-light mb-2 p-3"
+              >
+                <img
+                  src={product.productImage}
+                  alt=""
+                  className="search-img rounded"
+                />
+                <p>{product.productName}</p>
+              </NavLink>
             );
           })}
-        </ul>
+        </div>
       ) : null}
     </div>
   );

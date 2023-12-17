@@ -23,7 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/products/:productId" element={<Product />} />
+        <Route path="/product/:productId" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
       </Routes>

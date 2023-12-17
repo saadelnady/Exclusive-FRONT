@@ -1,4 +1,9 @@
 export const LOAD_USER = "LOAD_USER";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAIL = "GET_USER_FAIL";
+
+export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
+export const GET_PRODUCTS_SUCCESS = "GET_PRODUCTS_SUCCESS";
+export const GET_PRODUCTS_FAIL = "GET_PRODUCTS_FAIL";
+
 export const CLEAR_ERROR = "CLEAR_ERROR";
