@@ -27,9 +27,7 @@
 .user li:hover a {
   transform: translateX(10px);
 }
-.wishlist {
-  cursor: pointer;
-}
+
 .wishlist:hover {
   color: var(--red-color);
 }

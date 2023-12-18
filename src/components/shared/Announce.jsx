@@ -3,7 +3,7 @@ import "../../styles/Header.css";
 
 export const Announce = () => {
   return (
-    <div className="announce py-1">
+    <div className="bg-black py-1">
       <div className="container text-light  d-flex justify-content-evenly align-center flex-wrap">
         <p className="d-flex justify-content-center py-2 fs-6  align-center text-center flex-wrap">
           Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!

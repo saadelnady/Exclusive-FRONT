@@ -105,14 +105,14 @@ export const Register = () => {
 
             {visible ? (
               <IoEyeOutline
-                className="eyeIcon position-absolute fs-3 top-50 pointer translate-middle-y"
+                className="eyeIcon position-absolute fs-3 top-50 cursor-pointer translate-middle-y"
                 onClick={() => {
                   setVisible(!visible);
                 }}
               />
             ) : (
               <IoEyeOffOutline
-                className="eyeIcon position-absolute fs-3 top-50 pointer translate-middle-y"
+                className="eyeIcon position-absolute fs-3 top-50 cursor-pointer translate-middle-y"
                 onClick={() => {
                   setVisible(!visible);
                 }}
@@ -126,17 +126,17 @@ export const Register = () => {
             </p>
           ) : null}
           <button
-            className="btn d-block w-100 p-3  fs-4 submit mb-4"
+            className="btn d-block w-100 p-3 fs-4 submit my-4"
             type="submit"
           >
             Create Account
           </button>
-          <button className=" d-block btn  text-center w-100 p-3 fs-4 google-signup   ">
+          <button className=" d-block btn  text-center w-100 p-3 fs-4 google-signup">
             <img src={googleIcon} alt="google-Icon" className="me-2" />
             Sign up with Google
           </button>
           <p className="text-center mt-4 fs-5">
-            Already have account ?{" "}
+            Already have account ?
             <NavLink to="/login" className="login-btn text-dark p-2">
               Log in
             </NavLink>

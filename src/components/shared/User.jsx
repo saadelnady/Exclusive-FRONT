@@ -29,9 +29,10 @@ export const User = () => {
     navigate("/");
     window.location.reload();
   };
+
   return (
-    <div className="user d-flex col-12  col-lg-3 justify-content-evenly  align-items-center">
-      {isAuthenticated && <CiHeart className="fs-2 wishlist" />}
+    <div className="user d-flex col-12  col-lg-4 justify-content-evenly align-items-center">
+      <CiHeart className="fs-2 cursor-pointer" />
 
       <BsCart3 className="fs-2 cart" />
 
@@ -84,6 +85,12 @@ export const User = () => {
             </li>
           </ul>
         </div>
+      )}
+
+      {!isAuthenticated && (
+        <NavLink className="btn submit" to="/createCompany">
+          Create Company
+        </NavLink>
       )}
     </div>
   );

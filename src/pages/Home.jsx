@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../store/actions/userActions";
+import { Categouries } from "../components/shared/Categouries";
+import { Slider, FlashSale } from "../routes";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -11,5 +13,13 @@ export const Home = () => {
     }
   }, [dispatch]);
 
-  return <div>Home</div>;
+  return (
+    <div className="container">
+      <div className="row justify-content-between align-items-start">
+        <Categouries />
+        <Slider />
+      </div>
+      <FlashSale />
+    </div>
+  );
 };

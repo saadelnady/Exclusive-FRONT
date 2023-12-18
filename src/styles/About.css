@@ -12,7 +12,6 @@
   text-align: center;
   border: 20px solid var(--bg-light);
   padding: 15px;
-  background-color: black;
 }
 
 .statistics > div:hover {
@@ -23,7 +22,6 @@
 .statistic-img img {
   width: 100%;
   z-index: 1;
-  background-color: black;
 }
 
 .team-members > div .team-member-img {
@@ -40,7 +38,6 @@
   width: 17px;
   height: 17px;
   background-color: var(--bg-light);
-  cursor: pointer;
 }
 .bullets li.active {
   outline: 5px solid var(--bg-light);

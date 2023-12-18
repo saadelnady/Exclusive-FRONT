@@ -42,19 +42,19 @@ export const ProductDetails = () => {
 
   return (
     <div className="container mb-5">
-      <div className="py-5 fs-6 product-links">
-        <NavLink className=" "> Account</NavLink> /
-        <NavLink className=" "> Gaming</NavLink> /
-        <NavLink className="text-dark ">Havic HV G-92 Gamepad</NavLink>
+      <div className="links py-5 fs-6 ">
+        <NavLink className="fs-5"> Account</NavLink> /
+        <NavLink className="fs-5"> Gaming</NavLink> /
+        <NavLink className="text-dark fs-5 ms-2">Havic HV G-92 Gamepad</NavLink>
       </div>
       <div className="details row">
         <div className="productSlider d-flex flex-column flex-md-row align-items-center col-12 col-lg-7 justify-content-between">
           <div className="sliderImgs d-flex flex-row flex-md-column h-100 justify-content-between mb-4 mb-md-0 ">
-            <div className="bg-light  p-4">
+            <div className="bg-light p-4">
               <img
                 src={productImg_1}
                 alt=""
-                className="w-100 h-100"
+                className="w-100 h-100 cursor-pointer"
                 onClick={(productImg_1) => {
                   handleSliderImage(productImg_1);
                 }}
@@ -64,7 +64,7 @@ export const ProductDetails = () => {
               <img
                 src={productImg_2}
                 alt=""
-                className="w-100 h-100"
+                className="w-100 h-100  cursor-pointer"
                 onClick={(productImg_2) => {
                   handleSliderImage(productImg_2);
                 }}
@@ -74,17 +74,17 @@ export const ProductDetails = () => {
               <img
                 src={productImg_3}
                 alt=""
-                className="w-100 h-100"
+                className="w-100 h-100 cursor-pointer"
                 onClick={(productImg_3) => {
                   handleSliderImage(productImg_3);
                 }}
               />
             </div>
-            <div className="bg-light p-4 ">
+            <div className="bg-light p-4">
               <img
                 src={productImg_4}
                 alt=""
-                className="w-100 w-100 h-100 cursor"
+                className="w-100 w-100 h-100 cursor-pointer"
                 onClick={(productImg_4) => {
                   handleSliderImage(productImg_4);
                 }}
@@ -120,24 +120,38 @@ export const ProductDetails = () => {
             <ul className="productColors d-flex justify-content-evenly flex-wrap w-50">
               <li
                 data-src="black"
-                className={activeColor === "black" ? "black active" : "black"}
+                className={
+                  activeColor === "black"
+                    ? "black active cursor-pointer"
+                    : "black cursor-pointer"
+                }
                 onClick={() => handleColorActive("black")}
               ></li>
               <li
                 data-src="yellow"
                 className={
-                  activeColor === "yellow" ? "yellow active" : "yellow"
+                  activeColor === "yellow"
+                    ? "yellow active cursor-pointer"
+                    : "yellow cursor-pointer"
                 }
                 onClick={() => handleColorActive("yellow")}
               ></li>
               <li
                 data-src="pink"
-                className={activeColor === "pink" ? "pink active" : "pink"}
+                className={
+                  activeColor === "pink"
+                    ? "pink active cursor-pointer"
+                    : "pink cursor-pointer"
+                }
                 onClick={() => handleColorActive("pink")}
               ></li>
               <li
                 data-src="red"
-                className={activeColor === "red" ? "red active" : "red"}
+                className={
+                  activeColor === "red"
+                    ? "red active cursor-pointer"
+                    : "red cursor-pointer"
+                }
                 onClick={() => handleColorActive("red")}
               ></li>
             </ul>
@@ -146,7 +160,11 @@ export const ProductDetails = () => {
             <p className="me-4 fs-4">Size :</p>
             <ul className="select-size d-flex justify-content-between flex-wrap w-75">
               <li
-                className={activeSize === "XS" ? "active" : ""}
+                className={
+                  activeSize === "XS"
+                    ? "active cursor-pointer"
+                    : "cursor-pointer"
+                }
                 onClick={() => {
                   handleSizeActive("XS");
                 }}
@@ -154,7 +172,11 @@ export const ProductDetails = () => {
                 XS
               </li>
               <li
-                className={activeSize === "S" ? "active" : ""}
+                className={
+                  activeSize === "S"
+                    ? "active cursor-pointer"
+                    : " cursor-pointer"
+                }
                 onClick={() => {
                   handleSizeActive("S");
                 }}
@@ -162,7 +184,11 @@ export const ProductDetails = () => {
                 S
               </li>
               <li
-                className={activeSize === "M" ? "active" : ""}
+                className={
+                  activeSize === "M"
+                    ? "active cursor-pointer"
+                    : " cursor-pointer"
+                }
                 onClick={() => {
                   handleSizeActive("M");
                 }}
@@ -170,7 +196,11 @@ export const ProductDetails = () => {
                 M
               </li>
               <li
-                className={activeSize === "L" ? "active" : ""}
+                className={
+                  activeSize === "L"
+                    ? "active cursor-pointer"
+                    : " cursor-pointer"
+                }
                 onClick={() => {
                   handleSizeActive("L");
                 }}
@@ -178,7 +208,11 @@ export const ProductDetails = () => {
                 L
               </li>
               <li
-                className={activeSize === "XL" ? "active" : ""}
+                className={
+                  activeSize === "XL"
+                    ? "active cursor-pointer"
+                    : " cursor-pointer"
+                }
                 onClick={() => {
                   handleSizeActive("XL");
                 }}
@@ -198,7 +232,7 @@ export const ProductDetails = () => {
               </button>
             </div>
             <button className="buy-now">Buy Now</button>
-            <CiHeart className="heart" />
+            <CiHeart className="heart cursor-pointer" />
           </div>
           <div className="border mt-4 ">
             <div className="delivery d-flex align-items-center  justify-content-start p-4 border-bottom">

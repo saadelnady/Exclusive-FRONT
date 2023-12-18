@@ -27,7 +27,7 @@ export const Search = () => {
   };
 
   return (
-    <div className="search position-relative col-12 col-lg-5 my-2 mt-lg-0">
+    <div className="search position-relative col-12 col-lg-5 my-2 my-lg-0">
       <input
         type="text"
         className="form-control bg-light search"

@@ -42,7 +42,6 @@
 
 .eyeIcon {
   right: 20px;
-  cursor: pointer;
 }
 .eyeIcon:hover {
   color: var(--red-color);

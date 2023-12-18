@@ -49,28 +49,28 @@ export const About = () => {
       </div>
       <div className="statistics d-flex flex-wrap justify-content-center  gap-5 justify-content-md-between mt-5">
         <div className="border rounded p-4  text-center  ">
-          <div className="statistic-img  mx-auto rounded-pill mb-3">
+          <div className="statistic-img mx-auto rounded-pill mb-3 bg-black">
             <img src={icShop} alt="" />
           </div>
           <h4>10.5k</h4>
           <p>Sallers active our site</p>
         </div>
         <div className="border rounded p-4 text-center   ">
-          <div className=" statistic-img mx-auto rounded-pill  mb-3">
+          <div className="statistic-img mx-auto rounded-pill bg-black mb-3">
             <img src={icDollarSign} alt="" />
           </div>
           <h4>33k</h4>
           <p>Mopnthly Produduct Sale</p>
         </div>
         <div className="border rounded p-4 text-center  ">
-          <div className=" statistic-img mx-auto rounded-pill mb-3">
+          <div className=" statistic-img mx-auto rounded-pill  bg-black mb-3">
             <img src={icShoppingBag} alt="" />
           </div>
           <h4>45.5k</h4>
           <p>Customer active in our site</p>
         </div>
         <div className="border rounded p-4 text-center  ">
-          <div className="statistic-img  mx-auto rounded-pill mb-3">
+          <div className="statistic-img  mx-auto rounded-pill mb-3 bg-black">
             <img src={icMoneyBag} alt="" />
           </div>
           <h4>25k</h4>
@@ -134,12 +134,12 @@ export const About = () => {
             </div>
           </div>
         </div>
-        <ul className="d-flex  mx-auto bullets justify-content-evenly align-items-center mt-4">
-          <li className="rounded-pill"></li>
-          <li className="rounded-pill"></li>
-          <li className="rounded-pill active"></li>
-          <li className="rounded-pill"></li>
-          <li className="rounded-pill"></li>
+        <ul className="d-flex mx-auto bullets justify-content-evenly align-items-center mt-4">
+          <li className="rounded-pill cursor-pointer"></li>
+          <li className="rounded-pill cursor-pointer"></li>
+          <li className="rounded-pill cursor-pointer active"></li>
+          <li className="rounded-pill cursor-pointer"></li>
+          <li className="rounded-pill cursor-pointer"></li>
         </ul>
       </div>
       <div className="services row justify-content-center justify-content-sm-between text-center my-5">

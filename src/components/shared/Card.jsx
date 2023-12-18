@@ -10,7 +10,7 @@ export const Card = () => {
     <div className="product-card mb-4">
       <div className="header py-5 rounded">
         <img src={productImg} alt="" />
-        <button className="addToCart">Add To Cart</button>
+        <button className="addToCart bg-black">Add To Cart</button>
       </div>
       <p className="discountPercentage">
         <span>-40 </span>%

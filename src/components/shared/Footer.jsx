@@ -9,10 +9,9 @@ import icFacebook from "../../assets/images/pngs/ic-Facebook.png";
 import icInstagram from "../../assets/images/pngs/ic-instagram.png";
 import icLinkedin from "../../assets/images/pngs/ic-Linkedin.png";
 
-import "../../styles/Footer.css";
 export const Footer = () => {
   return (
-    <div className="footer text-light pt-5 justify-content-between ">
+    <div className=" bg-black text-light pt-5 justify-content-between ">
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-7 mb-4 col-md-2">
@@ -28,7 +27,7 @@ export const Footer = () => {
               <img
                 src={iconSend}
                 alt="iconSend"
-                className="position-absolute top-50 iconSend translate-middle"
+                className="position-absolute top-50 end-0 translate-middle-y cursor-pointer	"
               />
             </div>
           </div>

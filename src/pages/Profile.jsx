@@ -21,7 +21,7 @@ export const Profile = () => {
     navigete("/");
   };
   return (
-    <div className="container profile">
+    <div className="container profile mb-5">
       <div className="header d-flex justify-content-between align-items-center flex-wrap py-5">
         <div className="links">
           <NavLink to={"/"} className="fs-5 me-2">
@@ -69,7 +69,7 @@ export const Profile = () => {
             <div className="user-pic rounded mx-auto my-5 position-relative user-img rounded-pill bg-light">
               <img src={userImage} alt="" />
               <label htmlFor="userImage">
-                <CiCamera className="fs-1 bg-light p-2 rounded-pill ic-camera " />
+                <CiCamera className="fs-1 bg-light p-2 rounded-pill ic-camera cursor-pointer " />
               </label>
               <input type="file" id="userImage" />
             </div>

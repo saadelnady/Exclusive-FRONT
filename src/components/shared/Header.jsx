@@ -1,14 +1,9 @@
 import { NavLink } from "react-router-dom";
 import "../../styles/Header.css";
-import { User } from "./User";
-import { useState } from "react";
-import { Announce, Search } from "../../routes";
-export const Header = () => {
-  const [active, setIsActive] = useState(null);
-  const activeHandler = (listItem) => {
-    setIsActive(listItem);
-  };
 
+import { Announce, Search, User, NavBar } from "../../routes";
+
+export const Header = () => {
   return (
     <div className="border-bottom ">
       <Announce />
@@ -32,77 +27,8 @@ export const Header = () => {
             className="collapse navbar-collapse  w-75"
             id="navbarNavAltMarkup"
           >
-            <div className="navbar-nav w-100 justify-content-between">
-              <ul className="nav d-flex justify-content-between links align-items-center">
-                <li
-                  className={
-                    active === "home"
-                      ? "nav-item  me-2 fs-5 text-dark active"
-                      : "nav-item  me-2 fs-5 text-dark "
-                  }
-                  onClick={() => {
-                    activeHandler("home");
-                  }}
-                >
-                  <NavLink aria-current="page" to="/" className="text-dark">
-                    Home
-                  </NavLink>
-                </li>
-                <li
-                  className={
-                    active === "contact"
-                      ? "nav-item  me-2 fs-5 text-dark active"
-                      : "nav-item  me-2 fs-5 text-dark"
-                  }
-                  onClick={() => {
-                    activeHandler("contact");
-                  }}
-                >
-                  <NavLink
-                    aria-current="page"
-                    to="/contact"
-                    className="text-dark "
-                  >
-                    Contact
-                  </NavLink>
-                </li>
-                <li
-                  className={
-                    active === "About"
-                      ? "nav-item  me-2 fs-5 text-dark active"
-                      : "nav-item  me-2 fs-5 text-dark"
-                  }
-                  onClick={() => {
-                    activeHandler("About");
-                  }}
-                >
-                  <NavLink
-                    aria-current="page"
-                    to="/about"
-                    className=" text-dark"
-                  >
-                    About
-                  </NavLink>
-                </li>
-                <li
-                  className={
-                    active === "SignUp"
-                      ? "nav-item  me-2 fs-5 text-dark active"
-                      : "nav-item  me-2 fs-5 text-dark"
-                  }
-                  onClick={() => {
-                    activeHandler("SignUp");
-                  }}
-                >
-                  <NavLink
-                    aria-current="page"
-                    to="/register"
-                    className="text-dark "
-                  >
-                    SignUp
-                  </NavLink>
-                </li>
-              </ul>
+            <div className="navbar-nav d-flex w-100 justify-content-between align-items-center">
+              <NavBar />
               <Search />
             </div>
             <User />
