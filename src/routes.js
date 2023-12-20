@@ -14,11 +14,15 @@ import { Announce } from "./components/shared/Announce";
 import { Card } from "./components/shared/Card";
 import { NavBar } from "./components/shared/NavBar";
 import { User } from "./components/shared/User";
-import { FlashSale } from "./components/FlashSale.jsx";
+import { AboutUs } from "./components/shared/AboutUs.jsx";
 
 import { ProductDetails } from "./components/ProductDetails";
 import { RelatedItem } from "./components/RelatedItem";
 import { Slider } from "./components/Slider";
+import { FlashSale } from "./components/FlashSale.jsx";
+import { CategouriesBrowse } from "./components/CategouriesBrowse.jsx";
+import { BestSelling } from "./components/BestSelling.jsx";
+import { OurProducts } from "./components/OurProducts.jsx";
 
 export {
   Home,
@@ -40,4 +44,8 @@ export {
   User,
   Slider,
   FlashSale,
+  AboutUs,
+  CategouriesBrowse,
+  BestSelling,
+  OurProducts,
 };

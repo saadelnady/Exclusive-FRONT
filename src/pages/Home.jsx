@@ -2,7 +2,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../store/actions/userActions";
 import { Categouries } from "../components/shared/Categouries";
-import { Slider, FlashSale } from "../routes";
+import {
+  Slider,
+  FlashSale,
+  AboutUs,
+  CategouriesBrowse,
+  BestSelling,
+  OurProducts,
+} from "../routes";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -20,6 +27,10 @@ export const Home = () => {
         <Slider />
       </div>
       <FlashSale />
+      <CategouriesBrowse />
+      <BestSelling />
+      <OurProducts />
+      <AboutUs />
     </div>
   );
 };

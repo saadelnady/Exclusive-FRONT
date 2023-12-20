@@ -1,3 +1,11 @@
+import img3 from "../assets/images/pngs/Gamepad-6.png";
+import computer from "../assets/images/pngs/ic-Category-Computer.png";
+import cellphone from "../assets/images/pngs/ic-Category-CellPhone.png";
+import SmartWatch from "../assets/images/pngs/ic-Category-SmartWatch.png";
+import headphone from "../assets/images/pngs/ic-Category-Headphone.png";
+import Gamepad from "../assets/images/pngs/ic-Category-Gamepad.png";
+import camera from "../assets/images/pngs/ic-Category-Camera.png";
+
 export const categoriesData = [
   {
     id: 1,
@@ -60,5 +68,32 @@ export const categoriesData = [
     subTitle: "",
     image_Url:
       "https://static.vecteezy.com/system/resources/previews/011/996/555/original/3d-black-headphone-illustration-ecommerce-icon-png.png",
+  },
+];
+
+export const categoriesBrowsingData = [
+  {
+    categoryImg: camera,
+    categoryTitle: "Camera",
+  },
+  {
+    categoryImg: computer,
+    categoryTitle: "Computers",
+  },
+  {
+    categoryImg: cellphone,
+    categoryTitle: "Phones",
+  },
+  {
+    categoryImg: SmartWatch,
+    categoryTitle: "SmartWatch",
+  },
+  {
+    categoryImg: headphone,
+    categoryTitle: "HeadPhones",
+  },
+  {
+    categoryImg: Gamepad,
+    categoryTitle: "Gaming",
   },
 ];

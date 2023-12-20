@@ -88,8 +88,8 @@ export const User = () => {
       )}
 
       {!isAuthenticated && (
-        <NavLink className="btn submit" to="/createCompany">
-          Create Company
+        <NavLink className="btn submit" to="/seller">
+          Become Seller
         </NavLink>
       )}
     </div>
