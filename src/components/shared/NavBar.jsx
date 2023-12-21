@@ -52,16 +52,16 @@ export const NavBar = () => {
       </li>
       <li
         className={
-          active === "SignUp"
+          active === "Login"
             ? "nav-item  me-2 fs-5 text-dark active"
             : "nav-item  me-2 fs-5 text-dark"
         }
         onClick={() => {
-          activeHandler("SignUp");
+          activeHandler("Login");
         }}
       >
-        <NavLink aria-current="page" to="/register" className="text-dark ">
-          SignUp
+        <NavLink aria-current="page" to="/userLogin" className="text-dark ">
+             Login
         </NavLink>
       </li>
     </ul>

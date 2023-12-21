@@ -9,7 +9,10 @@ import {
   CategouriesBrowse,
   BestSelling,
   OurProducts,
+  NewArrival,
 } from "../routes";
+import bgAnnounce2 from "../assets/images/pngs/bg-announce-2.png";
+import { NavLink } from "react-router-dom";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -29,7 +32,13 @@ export const Home = () => {
       <FlashSale />
       <CategouriesBrowse />
       <BestSelling />
+      <div>
+        <NavLink>
+          <img src={bgAnnounce2} alt="" className="w-100" />
+        </NavLink>
+      </div>
       <OurProducts />
+      <NewArrival />
       <AboutUs />
     </div>
   );

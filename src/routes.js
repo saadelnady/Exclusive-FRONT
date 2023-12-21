@@ -1,11 +1,13 @@
 import { Home } from "./pages/Home";
-import { Login } from "./pages/Login";
-import { Register } from "./pages/Register";
+import { UserLogin } from "./pages/UserLogin.jsx";
+import { UserRegister } from "./pages/UserRegister";
 import { Contact } from "./pages/Contact";
 import { About } from "./pages/About";
 import { Activation } from "./pages/Activation.jsx";
 import { Product } from "./pages/Product.jsx";
 import { Profile } from "./pages/Profile.jsx";
+import { SellerRegister } from "./pages/SellerRegister";
+import { SellerLogin } from "./pages/SellerLogin";
 
 import { Footer } from "./components/shared/Footer.jsx";
 import { Header } from "./components/shared/Header";
@@ -23,11 +25,12 @@ import { FlashSale } from "./components/FlashSale.jsx";
 import { CategouriesBrowse } from "./components/CategouriesBrowse.jsx";
 import { BestSelling } from "./components/BestSelling.jsx";
 import { OurProducts } from "./components/OurProducts.jsx";
+import { NewArrival } from "./components/NewArrival.jsx";
 
 export {
   Home,
-  Login,
-  Register,
+  UserLogin,
+  UserRegister,
   Contact,
   About,
   Activation,
@@ -48,4 +51,7 @@ export {
   CategouriesBrowse,
   BestSelling,
   OurProducts,
+  NewArrival,
+  SellerRegister,
+  SellerLogin,
 };

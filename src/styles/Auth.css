@@ -32,7 +32,8 @@
   border: 2px solid var(--red-color);
   background-color: red;
 }
-.login-btn {
+.login-btn,
+.register-btn {
   border-bottom: 1px solid var(--red-color);
 }
 

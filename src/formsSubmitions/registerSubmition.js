@@ -2,15 +2,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { serverUrl } from "../API/API";
 
-const handleRegiter = (values, { resetForm }, navigate) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
+const handleRegistration = (values, { resetForm }, navigate, userType) => {
+  let endPoint = "";
+  if (userType === "user") {
+    endPoint = "/api/users/register";
+  } else if (userType === "seller") {
+    endPoint = "/api/sellers/register";
+  }
+  console.log("endPoint====>", endPoint);
   axios
-    .post(`${serverUrl}/api/users/register`, values, config)
+    .post(`${serverUrl}${endPoint}`, values)
     .then((res) => {
       const { message } = res.data;
       toast.success(message);
@@ -19,11 +20,12 @@ const handleRegiter = (values, { resetForm }, navigate) => {
       resetForm();
       setTimeout(() => {
         navigate("/");
-      }, 1500);
+      }, 2500);
     })
     .catch((error) => {
       const { message } = error.response.data;
       toast.error(message);
     });
 };
-export { handleRegiter };
+
+export { handleRegistration };

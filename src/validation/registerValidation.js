@@ -13,16 +13,16 @@ const validate = (values) => {
     errors.firstName = "First Name is required";
   } else if (values.firstName.length < 3) {
     errors.firstName = "First Name must be at least 3 characters";
-  } else if (values.firstName.length > 10) {
-    errors.firstName = "First Name must be less than 10 characters";
+  } else if (values.firstName.length > 20) {
+    errors.firstName = "First Name must be less than 20 characters";
   }
 
   if (!values.lastName) {
     errors.lastName = "Last Name is required";
   } else if (values.lastName.length < 3) {
     errors.lastName = "Last Name must be at least 3 characters";
-  } else if (values.lastName.length > 10) {
-    errors.lastName = "Last Name must be less than 10 characters";
+  } else if (values.lastName.length > 20) {
+    errors.lastName = "Last Name must be less than 20 characters";
   }
 
   if (!values.mobilePhone) {
@@ -30,11 +30,13 @@ const validate = (values) => {
   } else if (!/^\d{11}$/.test(values.mobilePhone)) {
     errors.mobilePhone = "Invalid phone number";
   }
+
   if (!values.email) {
     errors.email = "Email is required";
   } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
     errors.email = "Invalid email address";
   }
+
   if (!values.password) {
     errors.password = "Password is required";
   } else if (!/^.{9,25}$/.test(values.password)) {

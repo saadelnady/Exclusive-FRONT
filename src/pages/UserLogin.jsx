@@ -10,14 +10,14 @@ import { handleLogin } from "../formsSubmitions/loginSubmition";
 import "../styles/Auth.css";
 import { useFormik } from "formik";
 
-export const Login = () => {
+export const UserLogin = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleLogin(values, formik, navigate);
+      handleLogin(values, formik, navigate, "user");
     },
     validate,
   });
@@ -99,6 +99,16 @@ export const Login = () => {
               Forget Password ?
             </NavLink>
           </div>
+          <p className="text-center fs-4 mt-4">
+            Don't have an account ?
+            <NavLink
+              aria-current="page"
+              to="/userRegister"
+              className="ms-4 register-btn text-dark p-2"
+            >
+              SignUp
+            </NavLink>
+          </p>
         </form>
       </div>
     </div>

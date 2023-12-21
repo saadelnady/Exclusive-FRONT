@@ -2,7 +2,7 @@ import { Card } from "../routes";
 
 export const BestSelling = () => {
   return (
-    <div className="border-bottom py-5 mb-5">
+    <div className="border-bottom py-5 mb-5 overflow-hidden">
       <h5 className="special-header ps-5 py-2 mb-5">This Month</h5>
       <div className=" d-flex justify-content-between flex-wrap align-items-center mb-5">
         <h1 className="fw-bold text-center text-md-start">

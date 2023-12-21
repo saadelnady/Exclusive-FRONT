@@ -24,7 +24,7 @@ export const OurProducts = () => {
           />
         </div>
       </div>
-      <div className="d-flex justify-content-between  flex-wrap">
+      <div className="d-flex justify-content-center justify-content-md-between  flex-wrap">
         <Card />
         <Card />
         <Card />
