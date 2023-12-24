@@ -12,3 +12,15 @@ export const fetchUser = () => {
     }
   };
 };
+export const fetchUsers = () => {
+  return async (dispatch) => {
+    dispatch(actionCreators.loadUsers());
+    try {
+      const data = await getData(`${serverUrl}/api/users`);
+      console.log(data);
+      dispatch(actionCreators.getUsersSuccess(data.users));
+    } catch (error) {
+      dispatch(actionCreators.getUsersFail(error));
+    }
+  };
+};

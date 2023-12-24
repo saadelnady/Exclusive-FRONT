@@ -8,6 +8,7 @@ import { Product } from "./pages/Product.jsx";
 import { Profile } from "./pages/Profile.jsx";
 import { SellerRegister } from "./pages/SellerRegister";
 import { SellerLogin } from "./pages/SellerLogin";
+import { AdminDashboard } from "./pages/AdminDashboard.jsx";
 
 import { Footer } from "./components/shared/Footer.jsx";
 import { Header } from "./components/shared/Header";
@@ -54,4 +55,5 @@ export {
   NewArrival,
   SellerRegister,
   SellerLogin,
+  AdminDashboard,
 };

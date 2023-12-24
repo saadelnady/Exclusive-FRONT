@@ -9,17 +9,29 @@ const handleRegistration = (values, { resetForm }, navigate, userType) => {
   } else if (userType === "seller") {
     endPoint = "/api/sellers/register";
   }
-  console.log("endPoint====>", endPoint);
+
   axios
     .post(`${serverUrl}${endPoint}`, values)
     .then((res) => {
       const { message } = res.data;
+
       toast.success(message);
-      const token = res.data.data.user.token;
+      let token = "";
+      if (userType === "user") {
+        token = res.data.data.user.token;
+      } else if (userType === "seller") {
+        token = res.data.data.seller.token;
+      }
+
       localStorage.setItem("TOKEN", JSON.stringify(token));
+
       resetForm();
       setTimeout(() => {
-        navigate("/");
+        if (userType === "user") {
+          navigate("/");
+        } else if (userType === "seller") {
+          navigate("/sellerDashboard");
+        }
       }, 2500);
     })
     .catch((error) => {

@@ -1,27 +1,38 @@
-import * as actionTypes from "./actionTypes";
+import { USERS_ACTIONS_TYPES, USER_ACTIONS_TYPES } from "./actionTypes";
 
 export const loadUser = () => {
   return {
-    type: actionTypes.LOAD_USER,
+    type: USER_ACTIONS_TYPES.LOAD_USER,
   };
 };
-
 export const getUserSuccess = (payLoad) => {
   return {
-    type: actionTypes.GET_USER_SUCCESS,
+    type: USER_ACTIONS_TYPES.GET_USER_SUCCESS,
     payLoad,
   };
 };
-
 export const getUserFail = (payLoad) => {
   return {
-    type: actionTypes.GET_USER_FAIL,
+    type: USER_ACTIONS_TYPES.GET_USER_FAIL,
     payLoad,
   };
 };
-
-export const clearError = () => {
+//============================================================================
+export const loadUsers = () => {
   return {
-    type: actionTypes.CLEAR_ERROR,
+    type: USERS_ACTIONS_TYPES.LOAD_USERS,
   };
 };
+export const getUsersSuccess = (payLoad) => {
+  return {
+    type: USERS_ACTIONS_TYPES.GET_USERS_SUCCESS,
+    payLoad,
+  };
+};
+export const getUsersFail = (payLoad) => {
+  return {
+    type: USERS_ACTIONS_TYPES.GET_USERS_FAIL,
+    payLoad,
+  };
+};
+//============================================================================

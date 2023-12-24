@@ -10,23 +10,41 @@ const handleLogin = async (values, { resetForm }, navigate, userType) => {
   } else if (userType === "seller") {
     endPoint = "/api/sellers/login";
   }
-  console.log("endPoint====>", endPoint);
 
   axios
     .post(`${serverUrl}${endPoint}`, values)
     .then((res) => {
       toast.success(res.data.message);
-      const { token } = res.data.data.user;
+
+      let token = "";
+
+      if (userType === "user") {
+        token = res.data.data.user.token;
+        console.log("user  tokeeeen ==== >", token);
+      } else if (userType === "seller") {
+        token = res.data.data.seller.token;
+        console.log("seller  tokeeeen ==== >", token);
+      }
       localStorage.setItem("TOKEN", JSON.stringify(token));
 
       resetForm();
+
       setTimeout(() => {
-        navigate("/");
+        if (userType === "user") {
+          navigate("/");
+          const adminRole = res.data.data.user.role === "ADMIN";
+          if (adminRole) {
+            navigate("/adminDashboard");
+          }
+        } else if (userType === "seller") {
+          navigate("/sellerDashboard");
+        }
       }, 2500);
     })
     .catch((errors) => {
+      console.log(errors);
       const { message } = errors.response.data;
-
+      console.log(errors);
       toast.error(message);
     });
 };

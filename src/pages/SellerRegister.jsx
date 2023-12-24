@@ -24,7 +24,7 @@ export const SellerRegister = () => {
   });
 
   return (
-    <div className="register row ">
+    <div className="register row align-items-center">
       <div className="col-12 col-md-4">
         <img src={sellerImage} alt="mobileImage" className="w-100 " />
       </div>

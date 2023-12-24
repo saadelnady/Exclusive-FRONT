@@ -7,22 +7,15 @@ import iconReviews from "../../assets/images/pngs/ic-Reviews.png";
 import "../../styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { useEffect } from "react";
-import { fetchUser } from "../../store/actions/userActions";
 import { toast } from "react-toastify";
 
 export const User = () => {
   const { isAuthenticated, user } = useSelector((state) => state.userReducer);
+
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchUser());
-    }
-  }, [dispatch]);
   const handleLogOut = () => {
     localStorage.removeItem("TOKEN");
     toast.success("You have logged out");
@@ -88,7 +81,7 @@ export const User = () => {
       )}
 
       {!isAuthenticated && (
-        <NavLink className="btn submit" to="/sellerLogin" >
+        <NavLink className="btn submit" to="/sellerLogin">
           login as a Seller
         </NavLink>
       )}

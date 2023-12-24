@@ -13,11 +13,22 @@ import {
   Product,
   SellerLogin,
   SellerRegister,
+  AdminDashboard,
 } from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchUser } from "./store/actions/userActions";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN")) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
   return (
     <div className="App">
       <Header />
@@ -32,7 +43,9 @@ function App() {
         <Route path="/sellerLogin" element={<SellerLogin />} />
         <Route path="/sellerRegister" element={<SellerRegister />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
+        <Route path="/adminDashboard" element={<AdminDashboard />} />
       </Routes>
+
       <ToastContainer
         position="top-center"
         autoClose={5000}
