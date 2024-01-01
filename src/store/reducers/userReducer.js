@@ -4,7 +4,7 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  isAuthenticated: false,
+  isUserAuthenticated: false,
   isLoading: false,
   error: null,
   user: {},
@@ -13,14 +13,14 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_ACTIONS_TYPES.LOAD_USER:
+    case USER_ACTIONS_TYPES.GET_USER:
       return { ...state, isLoading: true };
 
     case USER_ACTIONS_TYPES.GET_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        isAuthenticated: true,
+        isUserAuthenticated: true,
         user: action.payLoad,
         error: null,
       };
@@ -29,18 +29,17 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isAuthenticated: false,
+        isUserAuthenticatedUser: false,
         error: action.payLoad,
       };
 
-    case USERS_ACTIONS_TYPES.LOAD_USERS:
+    case USERS_ACTIONS_TYPES.GET_USERS:
       return { ...state, isLoading: true };
 
     case USERS_ACTIONS_TYPES.GET_USERS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-
         users: action.payLoad,
         error: null,
       };
@@ -49,7 +48,6 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-
         error: action.payLoad,
       };
 

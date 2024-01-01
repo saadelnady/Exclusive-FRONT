@@ -10,8 +10,20 @@ import {
 } from "../routes";
 import bgAnnounce2 from "../assets/images/pngs/bg-announce-2.png";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchUser } from "../store/actions/userActions";
+// import { fetchSeller } from "../store/actions/sellerActions";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN")) {
+      dispatch(fetchUser());
+      // dispatch(fetchSeller());
+    }
+  }, [dispatch]);
   return (
     <div className="container">
       <div className="row justify-content-between align-items-start">

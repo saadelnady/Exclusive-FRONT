@@ -1,13 +1,13 @@
 import { PRODUCT_ACTIONS_TYPES, PRODUCTS_ACTIONS_TYPES } from "./actionTypes";
 
-export const loadProducts = () => {
+export const getProducts = () => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.LOAD_PRODUCTS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS,
   };
 };
 export const loadProduct = () => {
   return {
-    type: PRODUCT_ACTIONS_TYPES.LOAD_PRODUCT,
+    type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
   };
 };
 

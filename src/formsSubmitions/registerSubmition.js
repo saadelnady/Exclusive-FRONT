@@ -13,15 +13,11 @@ const handleRegistration = (values, { resetForm }, navigate, userType) => {
   axios
     .post(`${serverUrl}${endPoint}`, values)
     .then((res) => {
+      console.log(res);
       const { message } = res.data;
+      const token = res.data.data.token;
 
       toast.success(message);
-      let token = "";
-      if (userType === "user") {
-        token = res.data.data.user.token;
-      } else if (userType === "seller") {
-        token = res.data.data.seller.token;
-      }
 
       localStorage.setItem("TOKEN", JSON.stringify(token));
 

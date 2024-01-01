@@ -8,7 +8,8 @@ a {
 }
 :root {
   --red-color: #db4444;
-  --bg-light: #d9d9d9;
+  --bg-light: #eee;
+  --blue-color: #1d1d42;
 }
 .row {
   --bs-gutter-x: 0;

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import {
   Footer,
@@ -13,25 +13,22 @@ import {
   Product,
   SellerLogin,
   SellerRegister,
-  AdminDashboard,
+  Seller,
+  Admin,
 } from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchUser } from "./store/actions/userActions";
 
 function App() {
-  const dispatch = useDispatch();
+  const location = useLocation();
 
-  useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchUser());
-    }
-  }, [dispatch]);
+  const shouldHide =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/seller");
+
   return (
     <div className="App">
-      <Header />
+      {!shouldHide && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -43,7 +40,8 @@ function App() {
         <Route path="/sellerLogin" element={<SellerLogin />} />
         <Route path="/sellerRegister" element={<SellerRegister />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
-        <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/seller/*" element={<Seller />} />
       </Routes>
 
       <ToastContainer
@@ -58,7 +56,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <Footer />
+      {!shouldHide && <Footer />}
     </div>
   );
 }

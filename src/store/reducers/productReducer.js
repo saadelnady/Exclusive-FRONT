@@ -10,7 +10,7 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCT_ACTIONS_TYPES.LOAD_PRODUCT:
+    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT:
       return { ...state, isLoading: true };
 
     case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS:
@@ -24,7 +24,7 @@ const productReducer = (state = initialState, action) => {
     case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
 
-    case PRODUCTS_ACTIONS_TYPES.LOAD_PRODUCTS:
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS:
       return { ...state, isLoading: true };
 
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_SUCCESS:

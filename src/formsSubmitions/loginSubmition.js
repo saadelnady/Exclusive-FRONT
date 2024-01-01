@@ -16,15 +16,8 @@ const handleLogin = async (values, { resetForm }, navigate, userType) => {
     .then((res) => {
       toast.success(res.data.message);
 
-      let token = "";
+      const token = res.data.data.token;
 
-      if (userType === "user") {
-        token = res.data.data.user.token;
-        console.log("user  tokeeeen ==== >", token);
-      } else if (userType === "seller") {
-        token = res.data.data.seller.token;
-        console.log("seller  tokeeeen ==== >", token);
-      }
       localStorage.setItem("TOKEN", JSON.stringify(token));
 
       resetForm();
@@ -32,12 +25,12 @@ const handleLogin = async (values, { resetForm }, navigate, userType) => {
       setTimeout(() => {
         if (userType === "user") {
           navigate("/");
-          const adminRole = res.data.data.user.role === "ADMIN";
+          const adminRole = res.data.data.role === "ADMIN";
           if (adminRole) {
-            navigate("/adminDashboard");
+            navigate("/admin");
           }
         } else if (userType === "seller") {
-          navigate("/sellerDashboard");
+          navigate("/seller");
         }
       }, 2500);
     })

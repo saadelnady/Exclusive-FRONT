@@ -8,12 +8,15 @@ import "../../styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { useSelector } from "react-redux";
-
 import { toast } from "react-toastify";
 
 export const User = () => {
-  const { isAuthenticated, user } = useSelector((state) => state.userReducer);
-
+  const { isUserAuthenticated, user } = useSelector(
+    (state) => state.userReducer
+  );
+  const { isSellerAuthenticated, seller } = useSelector(
+    (state) => state.sellerReducer
+  );
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -29,7 +32,7 @@ export const User = () => {
 
       <BsCart3 className="fs-2 cart" />
 
-      {isAuthenticated && (
+      {(isUserAuthenticated || isSellerAuthenticated) && (
         <div className="dropdown text-center">
           <button
             className="user-logo rounded-circle dropdown-toggle"
@@ -37,7 +40,11 @@ export const User = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img src={user.userImage} alt="user-logo" className="w-100" />
+            <img
+              src={user.userImage || seller.sellerImage}
+              alt="user-logo"
+              className="w-100"
+            />
           </button>
           <ul className="dropdown-menu bg-dark p-3">
             <li className="d-flex justify-content-between align-items-center mb-2">
@@ -46,7 +53,8 @@ export const User = () => {
                 className="dropdown-item bg-transparent text-light"
                 to={`/profile`}
               >
-                Manage my account({user.firstName || "user name"})
+                Manage my account(
+                {user.firstName || seller.firstName || "user name"})
               </NavLink>
             </li>
             <li className="d-flex justify-content-between align-items-center mb-2">
@@ -80,7 +88,7 @@ export const User = () => {
         </div>
       )}
 
-      {!isAuthenticated && (
+      {!isSellerAuthenticated && !isUserAuthenticated && (
         <NavLink className="btn submit" to="/sellerLogin">
           login as a Seller
         </NavLink>

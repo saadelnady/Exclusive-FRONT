@@ -3,7 +3,7 @@ import * as actionCreators from "./productActionsCreators";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
-    dispatch(actionCreators.loadProducts);
+    dispatch(actionCreators.getProducts);
     try {
       const data = await getData(`${serverUrl}/api/products`);
 

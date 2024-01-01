@@ -5,18 +5,24 @@ import { fetchUser } from "../store/actions/userActions";
 import { CiCamera } from "react-icons/ci";
 
 import "../styles/Profile.css";
+import { fetchSeller } from "../store/actions/sellerActions";
 
 export const Profile = () => {
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
-  const { userImage, firstName, email, lastName, address } = user;
+  const { seller } = useSelector((state) => state.sellerReducer);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchUser());
+      if (!user) {
+        dispatch(fetchUser());
+      } else {
+        dispatch(fetchSeller());
+      }
     }
-  }, [dispatch]);
+  }, [dispatch, user]);
   const handleCancel = () => {
     navigete("/");
   };
@@ -33,7 +39,10 @@ export const Profile = () => {
           </NavLink>
         </div>
         <div className="wellcome fs-5">
-          wellcome! <span className="fw-bold fs-4">{user.firstName} </span>
+          wellcome!{" "}
+          <span className="fw-bold fs-4">
+            {user.firstName || seller.firstName}{" "}
+          </span>
         </div>
       </div>
       <div className="row">
@@ -67,7 +76,7 @@ export const Profile = () => {
           <h3 className="edit  ">Edit Your Profile</h3>
           <form action="">
             <div className="user-pic rounded mx-auto my-5 position-relative user-img rounded-pill bg-light">
-              <img src={userImage} alt="" />
+              <img src={user.userImage || seller.sellerImage} alt="" />
               <label htmlFor="userImage">
                 <CiCamera className="fs-1 bg-light p-2 rounded-pill ic-camera cursor-pointer " />
               </label>
@@ -78,7 +87,7 @@ export const Profile = () => {
                 <div className="d-flex flex-column">
                   <label htmlFor="firstName">First Name</label>
                   <input
-                    value={firstName}
+                    value={user.firstName || seller.firstName}
                     type="text"
                     id="firstName"
                     className="form-control mb-3 fs-5 bg-light"
@@ -87,7 +96,7 @@ export const Profile = () => {
                 <div className="d-flex flex-column">
                   <label htmlFor="email">Email</label>
                   <input
-                    value={email}
+                    value={user.email || seller.email}
                     type="email"
                     id="email"
                     className="form-control mb-3 fs-5 bg-light"
@@ -98,7 +107,7 @@ export const Profile = () => {
                 <div className="d-flex flex-column">
                   <label htmlFor="lastName">Last Name</label>
                   <input
-                    value={lastName}
+                    value={user.lastName || seller.lastName}
                     type="text"
                     id="lastName"
                     className="form-control mb-3 fs-5 bg-light"
@@ -107,7 +116,7 @@ export const Profile = () => {
                 <div className="d-flex flex-column">
                   <label htmlFor="address">Address</label>
                   <input
-                    value={address}
+                    value={user.address || seller.address}
                     type="text"
                     id="address"
                     className="form-control mb-3 fs-5 bg-light"

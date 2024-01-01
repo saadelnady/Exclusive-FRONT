@@ -1,0 +1,9 @@
+table tr,
+table th {
+  padding: 10px;
+  text-align: center;
+}
+
+table tr img {
+  width: 100px;
+}

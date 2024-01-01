@@ -1,8 +1,8 @@
 import { USERS_ACTIONS_TYPES, USER_ACTIONS_TYPES } from "./actionTypes";
 
-export const loadUser = () => {
+export const getUser = () => {
   return {
-    type: USER_ACTIONS_TYPES.LOAD_USER,
+    type: USER_ACTIONS_TYPES.GET_USER,
   };
 };
 export const getUserSuccess = (payLoad) => {
@@ -18,9 +18,9 @@ export const getUserFail = (payLoad) => {
   };
 };
 //============================================================================
-export const loadUsers = () => {
+export const getUsers = () => {
   return {
-    type: USERS_ACTIONS_TYPES.LOAD_USERS,
+    type: USERS_ACTIONS_TYPES.GET_USERS,
   };
 };
 export const getUsersSuccess = (payLoad) => {
