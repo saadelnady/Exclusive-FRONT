@@ -103,7 +103,7 @@ export const UserLogin = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/userRegister"
+              to="/user/register"
               className="ms-4 register-btn text-dark p-2"
             >
               SignUp

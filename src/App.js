@@ -24,7 +24,7 @@ function App() {
 
   const shouldHide =
     location.pathname.startsWith("/admin") ||
-    location.pathname.startsWith("/seller");
+    location.pathname.startsWith("/Seller");
 
   return (
     <div className="App">
@@ -32,17 +32,19 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/userLogin" element={<UserLogin />} />
-        <Route path="/userRegister" element={<UserRegister />} />
+        <Route path="/user/login" element={<UserLogin />} />
+        <Route path="/user/register" element={<UserRegister />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:productId" element={<Product />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/sellerLogin" element={<SellerLogin />} />
-        <Route path="/sellerRegister" element={<SellerRegister />} />
+        <Route path="/seller/login" element={<SellerLogin />} />
+        <Route path="/seller/register" element={<SellerRegister />} />
         <Route path="/activation/:activationToken" element={<Activation />} />
         <Route path="/admin/*" element={<Admin />} />
-        <Route path="/seller/*" element={<Seller />} />
+        <Route path="/Seller/*" element={<Seller />} />
       </Routes>
+
+      {!shouldHide && <Footer />}
 
       <ToastContainer
         position="top-center"
@@ -56,7 +58,6 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      {!shouldHide && <Footer />}
     </div>
   );
 }

@@ -103,7 +103,7 @@ export const SellerLogin = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/sellerRegister"
+              to="/seller/register"
               className="ms-4 register-btn text-dark p-2"
             >
               SignUp as seller

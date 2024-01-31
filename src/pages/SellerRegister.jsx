@@ -138,7 +138,7 @@ export const SellerRegister = () => {
           </button>
           <p className="text-center mt-4 fs-5">
             Already have account ?
-            <NavLink to="/sellerLogin" className="login-btn text-dark p-2">
+            <NavLink to="/seller/login" className="login-btn text-dark p-2">
               Log in
             </NavLink>
           </p>

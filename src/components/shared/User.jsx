@@ -14,9 +14,7 @@ export const User = () => {
   const { isUserAuthenticated, user } = useSelector(
     (state) => state.userReducer
   );
-  const { isSellerAuthenticated, seller } = useSelector(
-    (state) => state.sellerReducer
-  );
+
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -32,7 +30,7 @@ export const User = () => {
 
       <BsCart3 className="fs-2 cart" />
 
-      {(isUserAuthenticated || isSellerAuthenticated) && (
+      {isUserAuthenticated && (
         <div className="dropdown text-center">
           <button
             className="user-logo rounded-circle dropdown-toggle"
@@ -40,11 +38,7 @@ export const User = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
-              src={user.userImage || seller.sellerImage}
-              alt="user-logo"
-              className="w-100"
-            />
+            <img src={user.userImage} alt="user-logo" className="w-100" />
           </button>
           <ul className="dropdown-menu bg-dark p-3">
             <li className="d-flex justify-content-between align-items-center mb-2">
@@ -54,7 +48,7 @@ export const User = () => {
                 to={`/profile`}
               >
                 Manage my account(
-                {user.firstName || seller.firstName || "user name"})
+                {user.firstName || "user name"})
               </NavLink>
             </li>
             <li className="d-flex justify-content-between align-items-center mb-2">
@@ -88,8 +82,8 @@ export const User = () => {
         </div>
       )}
 
-      {!isSellerAuthenticated && !isUserAuthenticated && (
-        <NavLink className="btn submit" to="/sellerLogin">
+      {!isUserAuthenticated && (
+        <NavLink className="btn submit" to="/seller/login">
           login as a Seller
         </NavLink>
       )}

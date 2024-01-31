@@ -26,7 +26,7 @@ const handleRegistration = (values, { resetForm }, navigate, userType) => {
         if (userType === "user") {
           navigate("/");
         } else if (userType === "seller") {
-          navigate("/sellerDashboard");
+          navigate("/Seller/");
         }
       }, 2500);
     })

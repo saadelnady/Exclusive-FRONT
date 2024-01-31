@@ -60,8 +60,8 @@ export const NavBar = () => {
           activeHandler("Login");
         }}
       >
-        <NavLink aria-current="page" to="/userLogin" className="text-dark ">
-             Login
+        <NavLink aria-current="page" to="/user/login" className="text-dark ">
+          Login
         </NavLink>
       </li>
     </ul>

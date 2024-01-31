@@ -30,7 +30,7 @@ const handleLogin = async (values, { resetForm }, navigate, userType) => {
             navigate("/admin");
           }
         } else if (userType === "seller") {
-          navigate("/seller");
+          navigate("/Seller/");
         }
       }, 2500);
     })
