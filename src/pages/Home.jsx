@@ -1,9 +1,8 @@
-import { Categouries } from "../components/shared/Categouries";
 import {
   Slider,
   FlashSale,
   AboutUs,
-  CategouriesBrowse,
+  CategoriesBrowse,
   BestSelling,
   OurProducts,
   NewArrival,
@@ -13,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "../store/actions/userActions";
+import { Categories } from "../components/shared/Categories";
 // import { fetchSeller } from "../store/actions/sellerActions";
 
 export const Home = () => {
@@ -21,17 +21,16 @@ export const Home = () => {
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUser());
-      // dispatch(fetchSeller());
     }
   }, [dispatch]);
   return (
     <div className="container">
       <div className="row justify-content-between align-items-start">
-        <Categouries />
+        <Cate`gories />
         <Slider />
       </div>
       <FlashSale />
-      <CategouriesBrowse />
+      <CategoriesBrowse />
       <BestSelling />
       <div>
         <NavLink>

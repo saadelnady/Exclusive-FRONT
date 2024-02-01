@@ -8,8 +8,8 @@ import {
   Profile,
   AdminSideBar,
   JoinRequests,
-  Categouries,
-  SubCategouries,
+  Categories,
+  SubCategories,
   AddCategory,
   AddSubCategory,
 } from "../../routes";
@@ -34,9 +34,9 @@ export const Admin = () => {
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/joinRequests" element={<JoinRequests />} />
-          <Route path="/categouries" element={<Categouries />} />
+          <Route path="/Categories" element={<Categories />} />
           <Route path="/addCategory" element={<AddCategory />} />
-          <Route path="/subCategouries" element={<SubCategouries />} />
+          <Route path="/subCategories" element={<SubCategories />} />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
         </Routes>
       </div>

@@ -54,7 +54,7 @@ export const AdminSideBar = () => {
                 HandleToggle("isCategoriesActive");
               }}
             >
-              <NavLink to="/admin/categouries">Categouries</NavLink>
+              <NavLink to="/admin/Categories">Categories</NavLink>
               <span>
                 <FaChevronRight
                   className={`text-light arrow-right ${
@@ -78,7 +78,7 @@ export const AdminSideBar = () => {
                 HandleToggle("isSubCategoriesActive");
               }}
             >
-              <NavLink to="/admin/subCategouries">Sub Categouries</NavLink>
+              <NavLink to="/admin/subCategories">Sub Categories</NavLink>
               <span>
                 <FaChevronRight
                   className={`text-light arrow-right ${

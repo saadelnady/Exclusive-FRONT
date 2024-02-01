@@ -30,17 +30,17 @@ import { ProductDetails } from "./components/ProductDetails";
 import { RelatedItem } from "./components/RelatedItem";
 import { Slider } from "./components/Slider";
 import { FlashSale } from "./components/FlashSale";
-import { CategouriesBrowse } from "./components/CategouriesBrowse";
+import { CategoriesBrowse } from "./components/CategoriesBrowse.jsx";
 import { BestSelling } from "./components/BestSelling";
 import { OurProducts } from "./components/OurProducts";
 import { NewArrival } from "./components/NewArrival";
 // =============================================================================
 // admin
 import { AdminDashboard } from "./pages/Admin/AdminDashboard";
-import { Categouries } from "./pages/Admin/Categouries.jsx";
+import { Categories } from "./pages/Admin/Categories.jsx";
 import { AddCategory } from "./pages/Admin/AddCategory.jsx";
 import { AddSubCategory } from "./pages/Admin/AddSubCategory.jsx";
-import { SubCategouries } from "./pages/Admin/SubCategouries.jsx";
+import { SubCategories } from "./pages/Admin/SubCategories.jsx";
 import { JoinRequests } from "./pages/Admin/JoinRequests.jsx";
 import { DashboardCard } from "./components/shared/Admin/DashBoardCard";
 import { Statstics } from "./components/shared/Admin/Statstics";
@@ -69,7 +69,7 @@ export {
   Slider,
   FlashSale,
   AboutUs,
-  CategouriesBrowse,
+  CategoriesBrowse,
   BestSelling,
   OurProducts,
   NewArrival,
@@ -99,8 +99,8 @@ export {
   SellersList,
   UsersList,
   JoinRequests,
-  Categouries,
-  SubCategouries,
+  Categories,
+  SubCategories,
   AddCategory,
   AddSubCategory,
 };

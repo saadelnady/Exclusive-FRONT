@@ -5,28 +5,29 @@ export const getProducts = () => {
     type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS,
   };
 };
-export const loadProduct = () => {
-  return {
-    type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
-  };
-};
-
 export const getProductsSuccess = (payLoad) => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_SUCCESS,
     payLoad,
   };
 };
-export const getProductSuccess = (payLoad) => {
+export const getProductsFail = (payLoad) => {
   return {
-    type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL,
     payLoad,
   };
 };
 
-export const getProductsFail = (payLoad) => {
+// ==================================================================================
+export const loadProduct = () => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL,
+    type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
+  };
+};
+
+export const getProductSuccess = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS,
     payLoad,
   };
 };

@@ -2,7 +2,7 @@ import arrow_left from "../assets/images/pngs/ic-arrow-left.png";
 import arrow_right from "../assets/images/pngs/ic-arrow-right.png";
 import { categoriesBrowsingData } from "../static/data";
 import "../styles/CategouriesBrowse.css";
-export const CategouriesBrowse = () => {
+export const CategoriesBrowse = () => {
   return (
     <div className="border-bottom pb-5">
       <h5 className="special-header ps-5 py-2 mb-5">Categories</h5>
