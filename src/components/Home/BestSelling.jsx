@@ -1,4 +1,4 @@
-import { Card } from "../routes";
+import { Card } from "../../routes";
 
 export const BestSelling = () => {
   return (

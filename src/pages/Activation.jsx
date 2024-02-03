@@ -14,7 +14,7 @@ export const Activation = () => {
       const activationEmail = async () => {
         try {
           const response = await axios.post(
-            `${serverUrl}/api/users/activation`,
+            `${  serverUrl}/api/users/activation`,
             {
               activationToken,
             }

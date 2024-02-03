@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import arrival1 from "../assets/images/pngs/Arrival-1.png";
-import arrival2 from "../assets/images/pngs/Arrival-2.png";
-import arrival3 from "../assets/images/pngs/Arrival-3.png";
-import arrival4 from "../assets/images/pngs/Arrival-4.png";
+import arrival1 from "../../assets/images/pngs/Arrival-1.png";
+import arrival2 from "../../assets/images/pngs/Arrival-2.png";
+import arrival3 from "../../assets/images/pngs/Arrival-3.png";
+import arrival4 from "../../assets/images/pngs/Arrival-4.png";
 export const NewArrival = () => {
   return (
     <div>

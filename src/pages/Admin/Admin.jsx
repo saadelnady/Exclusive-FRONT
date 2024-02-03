@@ -14,6 +14,7 @@ import {
   AddSubCategory,
 } from "../../routes";
 import { fetchSellers } from "../../store/actions/sellerActions";
+import { fetchCategories } from "../../store/actions/categoryActions";
 
 export const Admin = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export const Admin = () => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
+      dispatch(fetchCategories());
     }
   }, [dispatch]);
   return (

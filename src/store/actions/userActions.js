@@ -1,4 +1,5 @@
 import { getData, serverUrl } from "../../API/API";
+
 import * as actionCreators from "./userActionsCreators";
 
 export const fetchUser = () => {

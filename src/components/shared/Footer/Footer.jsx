@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
-import iconSend from "../../assets/images/pngs/ic-send.png";
-import qrCode from "../../assets/images/pngs/Qr Code.png";
-import appStore from "../../assets/images/pngs/ic-appstore.png";
-import googlePlay from "../../assets/images/pngs/ic-GooglePlay.png";
-import copyright from "../../assets/images/pngs/ic-copyRight.png";
-import icTwitter from "../../assets/images/pngs/ic-Twitter.png";
-import icFacebook from "../../assets/images/pngs/ic-Facebook.png";
-import icInstagram from "../../assets/images/pngs/ic-instagram.png";
-import icLinkedin from "../../assets/images/pngs/ic-Linkedin.png";
+import iconSend from "../../../assets/images/pngs/ic-send.png";
+import qrCode from "../../../assets/images/pngs/Qr Code.png";
+import appStore from "../../../assets/images/pngs/ic-appstore.png";
+import googlePlay from "../../../assets/images/pngs/ic-GooglePlay.png";
+import copyright from "../../../assets/images/pngs/ic-copyRight.png";
+import icTwitter from "../../../assets/images/pngs/ic-Twitter.png";
+import icFacebook from "../../../assets/images/pngs/ic-Facebook.png";
+import icInstagram from "../../../assets/images/pngs/ic-instagram.png";
+import icLinkedin from "../../../assets/images/pngs/ic-Linkedin.png";
 
 export const Footer = () => {
   return (

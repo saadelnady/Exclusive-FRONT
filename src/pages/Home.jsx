@@ -12,7 +12,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchUser } from "../store/actions/userActions";
-import { Categories } from "../components/shared/Categories";
+import { Categories } from "../components/shared/Categories/Categories";
 // import { fetchSeller } from "../store/actions/sellerActions";
 
 export const Home = () => {
@@ -26,7 +26,7 @@ export const Home = () => {
   return (
     <div className="container">
       <div className="row justify-content-between align-items-start">
-        <Cate`gories />
+        <Categories />
         <Slider />
       </div>
       <FlashSale />

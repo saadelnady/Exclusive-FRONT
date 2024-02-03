@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import "../../styles/Header.css";
+import "../../../styles/Header.css";
 
-import { Announce, Search, User, NavBar } from "../../routes";
+import { Announce, Search, User, NavBar } from "../../../routes";
 
 export const Header = () => {
   return (

@@ -6,7 +6,7 @@ export const fetchCategories = () => {
     dispatch(actionCreators.getCategories);
     try {
       const data = await getData(`${serverUrl}/api/categories`);
-      console.log(data);
+      console.log(data.categories);
       dispatch(actionCreators.getCategoriesSuccess(data.categories));
     } catch (error) {
       dispatch(actionCreators.getCategoriesFail(error));

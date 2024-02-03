@@ -14,26 +14,26 @@ import { Admin } from "./pages/Admin/Admin";
 import { Seller } from "./pages/Seller/Seller";
 // =============================================================================
 // shared components
-import { Footer } from "./components/shared/Footer";
-import { Header } from "./components/shared/Header";
-import { Search } from "./components/shared/Search";
+import { Footer } from "./components/shared/Footer/Footer.jsx";
+import { Header } from "./components/shared/Header/Header";
+import { Search } from "./components/shared/Header/Search.jsx";
 import { Announce } from "./components/shared/Announce";
 import { Card } from "./components/shared/Card";
-import { NavBar } from "./components/shared/NavBar";
-import { User } from "./components/shared/User";
+import { NavBar } from "./components/shared/Header/NavBar.jsx";
+import { User } from "./components/shared/Header/User.jsx";
 import { AboutUs } from "./components/shared/AboutUs";
 import { Loading } from "./components/shared/Loading";
 
 // =============================================================================
 // not shared components
 import { ProductDetails } from "./components/ProductDetails";
-import { RelatedItem } from "./components/RelatedItem";
-import { Slider } from "./components/Slider";
-import { FlashSale } from "./components/FlashSale";
-import { CategoriesBrowse } from "./components/CategoriesBrowse.jsx";
-import { BestSelling } from "./components/BestSelling";
-import { OurProducts } from "./components/OurProducts";
-import { NewArrival } from "./components/NewArrival";
+import { RelatedItem } from "./components/Home/RelatedItem.jsx";
+import { Slider } from "./components/Home/Slider.jsx";
+import { FlashSale } from "./components/Home/FlashSale.jsx";
+import { CategoriesBrowse } from "./components/Home/CategoriesBrowse.jsx";
+import { BestSelling } from "./components/Home/BestSelling.jsx";
+import { OurProducts } from "./components/Home/OurProducts.jsx";
+import { NewArrival } from "./components/Home/NewArrival.jsx";
 // =============================================================================
 // admin
 import { AdminDashboard } from "./pages/Admin/AdminDashboard";

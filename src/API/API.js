@@ -1,7 +1,5 @@
 import axios from "axios";
-
 export const serverUrl = "http://localhost:4000";
-
 export const getData = async (URL) => {
   try {
     const headers = {
