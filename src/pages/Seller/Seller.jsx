@@ -1,24 +1,26 @@
-import { Route, Routes } from "react-router-dom";
-import {
-  AddProduct,
-  Loading,
-  Profile,
-  SellerDashboard,
-  SellerHeader,
-  SellerSideBar,
-} from "../../routes";
+import { Route, Routes, useNavigate } from "react-router-dom";
+
 import { fetchSeller } from "../../store/actions/sellerActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { SellerSideBar } from "../../components/Seller/SellerSideBar";
+import { SellerHeader } from "../../components/Seller/SellerHeader";
+import { SellerDashboard } from "./SellerDashboard";
+import { AddProduct } from "./AddProduct";
+import { Loading } from "../../components/shared/Loading";
+import { ProfilePage } from "../Profile";
 
 export const Seller = () => {
   const { isLoading } = useSelector((state) => state.sellerReducer);
   console.log(isLoading);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchSeller());
+    } else {
+      navigate("/seller/login");
     }
   }, [dispatch]);
   return (
@@ -31,7 +33,7 @@ export const Seller = () => {
             <SellerHeader />
             <Routes>
               <Route path="/" element={<SellerDashboard />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="/addProduct" element={<AddProduct />} />
             </Routes>
           </div>

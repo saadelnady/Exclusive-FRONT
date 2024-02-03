@@ -1,10 +1,5 @@
-import { ProductDetails, RelatedItem } from "../routes";
+import Product from "../components/Product/Index";
 
-export const Product = () => {
-  return (
-    <>
-      <ProductDetails />
-      <RelatedItem />
-    </>
-  );
+export const ProductPage = () => {
+  return <Product />;
 };

@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Statstics, UsersList, SellersList } from "../../routes";
-import "../../styles/Admin/AdminDashboard.css";
 
+import "./styles/Admin.css";
+import { SellersList } from "../../components/Admin/SellersList";
+import { UsersList } from "../../components/Admin/UsersList";
+import { Statstics } from "../../components/Admin/Statstics";
 export const AdminDashboard = () => {
   const [isUsers, setIsUsers] = useState(true);
   return (

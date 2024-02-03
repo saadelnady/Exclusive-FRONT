@@ -2,17 +2,16 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser, fetchUsers } from "../../store/actions/userActions";
 import { Route, Routes } from "react-router-dom";
-import {
-  AdminDashboard,
-  AdminHeader,
-  Profile,
-  AdminSideBar,
-  JoinRequests,
-  Categories,
-  SubCategories,
-  AddCategory,
-  AddSubCategory,
-} from "../../routes";
+import { AdminSideBar } from "../../components/Admin/AdminSideBar";
+import { AdminHeader } from "../../components/Admin/AdminHeader";
+import { AdminDashboard } from "../../pages/Admin/AdminDashboard";
+import { ProfilePage } from "../../pages/Profile";
+import { JoinRequests } from "../../pages/Admin/JoinRequests";
+import { Categories } from "../../pages/Admin/Categories";
+import { AddCategory } from "../../pages/Admin/AddCategory";
+import { SubCategories } from "../../pages/Admin/SubCategories";
+import { AddSubCategory } from "../../pages/Admin/AddSubCategory";
+
 import { fetchSellers } from "../../store/actions/sellerActions";
 import { fetchCategories } from "../../store/actions/categoryActions";
 
@@ -34,7 +33,7 @@ export const Admin = () => {
         <AdminHeader />
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/joinRequests" element={<JoinRequests />} />
           <Route path="/Categories" element={<Categories />} />
           <Route path="/addCategory" element={<AddCategory />} />

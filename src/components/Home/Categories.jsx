@@ -1,23 +1,20 @@
 import { NavLink } from "react-router-dom";
-// import { categoriesData } from "../../static/data";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCategories } from "../../../store/actions/categoryActions";
-import { serverUrl } from "../../../API/API";
+import { fetchCategories } from "../../store/actions/categoryActions";
+import { serverUrl } from "../../API/API";
 import { SubCategories } from "./SubCategories";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-
-import "../../../styles/Home/Categories.css";
+import "./styles/Categories.css";
 export const Categories = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
-  console.log(categories);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
-
   return (
-    <ul className="categouries-links col-md-3 col-lg-2 pt-4 fs-5 border-end d-none d-md-flex flex-column justify-content-between">
+    <ul className="categouries-links pt-4 fs-5 border-end ">
       {categories.map((category, index) => {
         return (
           <>
@@ -31,7 +28,7 @@ export const Categories = () => {
                   <p>
                     {category?.title}
                     {category?.subCategories?.length > 0 && (
-                      <MdOutlineKeyboardArrowRight />
+                      <MdOutlineKeyboardArrowRight className="arrow-right" />
                     )}
                   </p>
                 </div>

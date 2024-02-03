@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { DashboardCard } from "../../../routes";
+import { DashboardCard } from "./DashBoardCard";
 
 export const Statstics = (props) => {
   const { users } = useSelector((state) => state.userReducer);

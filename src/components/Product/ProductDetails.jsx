@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
-import "../styles/Product.css";
-import productImg_1 from "../assets/images/pngs/Gamepad-1.png";
-import productImg_2 from "../assets/images/pngs/Gamepad-2.png";
-import productImg_3 from "../assets/images/pngs/Gamepad-3.png";
-import productImg_4 from "../assets/images/pngs/Gamepad-4.png";
-import productImg_5 from "../assets/images/pngs/Gamepad-5.png";
-import iconDelivery from "../assets/images/pngs/ic-delivery.png";
-import iconReturn from "../assets/images/pngs/ic-return.png";
-import stars from "../assets/images/pngs/ic_stars.png";
+import productImg_1 from "../../assets/images/pngs/Gamepad-1.png";
+import productImg_2 from "../../assets/images/pngs/Gamepad-2.png";
+import productImg_3 from "../../assets/images/pngs/Gamepad-3.png";
+import productImg_4 from "../../assets/images/pngs/Gamepad-4.png";
+import productImg_5 from "../../assets/images/pngs/Gamepad-5.png";
+import iconDelivery from "../../assets/images/pngs/ic-delivery.png";
+import iconReturn from "../../assets/images/pngs/ic-return.png";
+import stars from "../../assets/images/pngs/ic_stars.png";
 import { useState } from "react";
 import { CiHeart } from "react-icons/ci";
+import "../../styles/Product.css";
 
 export const ProductDetails = () => {
   const [imgSrc, setImageSrc] = useState(productImg_5);

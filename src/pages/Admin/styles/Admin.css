@@ -1,3 +1,9 @@
+.AdminDashboard {
+  background-color: var(--bg-light);
+}
+.admin-image {
+  width: 100px;
+}
 .sideBar {
   background-color: var(--blue-color);
   width: 250px;
@@ -15,4 +21,14 @@
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
+}
+.statstics {
+  background-color: var(--bg-light);
+}
+.categories-page table img {
+  width: 60px;
+  height: 60px;
+  margin: 20px 0;
+  border: 3px solid red;
+  object-fit: cover;
 }

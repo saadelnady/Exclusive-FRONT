@@ -1,5 +1,6 @@
 import "../../styles/Product.css";
-import { Card } from "../../routes";
+import { Card } from "./Card";
+
 export const RelatedItem = () => {
   return (
     <div className="container ">

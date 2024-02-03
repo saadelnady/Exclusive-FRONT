@@ -5,9 +5,7 @@ export const fetchSeller = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getSeller());
     try {
-      const data = await getData(
-        `${process.env.serverUrl}/api/sellers/getSellerProfile`
-      );
+      const data = await getData(`${serverUrl}/api/sellers/getSellerProfile`);
       dispatch(actionCreators.getSellerSuccess(data.seller));
     } catch (error) {
       dispatch(actionCreators.getSellerFail(error));

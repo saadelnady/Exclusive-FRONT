@@ -1,6 +1,28 @@
-.categouries-links {
-  overflow: initial;
+@media (max-width: 992px) {
+  .categouries-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .arrow-right {
+    display: none;
+  }
 }
+@media (min-width: 992px) {
+  .categouries-links {
+    overflow: initial;
+    width: 24%;
+  }
+  .categouries-links > li:hover .sub-categories-links {
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    padding: 5px 10px;
+    opacity: 1;
+    right: -105%;
+    visibility: visible;
+  }
+}
+
 .categouries-links li {
   position: relative;
   border-radius: 5px;
@@ -45,27 +67,19 @@
   position: absolute;
   top: 0%;
   right: -105%;
-
+  visibility: hidden;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -ms-transition: 0.5s;
-  -o-transition: 0.5s;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
 }
 
-.categouries-links > li:hover .sub-categories-links {
-  display: flex;
-  flex-direction: column;
-  z-index: 999;
-  padding: 5px 10px;
-  opacity: 1;
-  right: -105%;
-}
 .sub-categories-links li {
   display: flex;
   justify-content: space-between;

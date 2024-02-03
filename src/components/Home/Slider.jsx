@@ -3,7 +3,7 @@ import bgAnnounce1 from "../../assets/images/pngs/bg-announce-1.png";
 import { NavLink } from "react-router-dom";
 export const Slider = () => {
   return (
-    <div className="col-md-8 col-md-9 mt-3 position-relative mb-5">
+    <div className="Slider mt-3 position-relative mb-5">
       <NavLink>
         <img src={bgAnnounce1} alt="" className="w-100" />
       </NavLink>

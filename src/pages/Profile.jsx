@@ -7,7 +7,7 @@ import { CiCamera } from "react-icons/ci";
 import "../styles/Profile.css";
 import { fetchSeller } from "../store/actions/sellerActions";
 
-export const Profile = () => {
+export const ProfilePage = () => {
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
   const { seller } = useSelector((state) => state.sellerReducer);

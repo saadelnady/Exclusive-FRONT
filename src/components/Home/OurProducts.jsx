@@ -1,6 +1,6 @@
 import arrow_left from "../../assets/images/pngs/ic-arrow-left.png";
 import arrow_right from "../../assets/images/pngs/ic-arrow-right.png";
-import { Card } from "../../routes";
+import { Card } from "../shared/Card";
 
 export const OurProducts = () => {
   return (

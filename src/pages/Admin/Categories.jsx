@@ -7,9 +7,9 @@ export const Categories = () => {
   console.log(categories);
 
   return (
-    <div className="vh-100 bg-light container-fluid  ">
-      <div className=" bg-white">
-        <table className="w-100 py-5 rounded ">
+    <div className="categories-page min-vh-100 bg-light  ">
+      <div className="container   bg-white">
+        <table className="w-100 p-3 rounded text-center">
           <thead>
             <tr className="border-bottom p-3">
               <th>ID</th>
@@ -20,8 +20,8 @@ export const Categories = () => {
           </thead>
           <tbody>
             {categories.map((category, index) => (
-              <tr key={index} className="border-bottom ">
-                <td>{index + 1}</td>
+              <tr key={index} className=" ">
+                <td className="border-end">{index + 1}</td>
                 <td>
                   <img
                     src={`${serverUrl}/uploads/categories/${category.image}`}

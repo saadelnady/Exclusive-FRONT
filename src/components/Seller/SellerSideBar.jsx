@@ -1,27 +1,14 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSeller } from "../../../store/actions/sellerActions";
+
 import { CgMenuRight } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { toast } from "react-toastify";
-import "../../../styles/Admin/SideBar.css";
+import { useSelector } from "react-redux";
 
 export const SellerSideBar = () => {
   const { seller } = useSelector((state) => state.sellerReducer);
-
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchSeller());
-    } else {
-      navigate("/seller/login");
-    }
-  }, [dispatch]);
-
   const handleLogOut = () => {
     localStorage.removeItem("TOKEN");
     toast.success("You have logged out");

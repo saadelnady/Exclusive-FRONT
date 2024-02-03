@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import "../../../styles/List.css";
+
 export const UsersList = () => {
   const { users } = useSelector((state) => state.userReducer);
   return (

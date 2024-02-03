@@ -1,24 +1,23 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import {
-  Footer,
-  Header,
-  Profile,
-  UserRegister,
-  Home,
-  UserLogin,
-  Contact,
-  About,
-  Activation,
-  Product,
-  SellerLogin,
-  SellerRegister,
-  Seller,
-  Admin,
-} from "./routes";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Admin } from "./pages/Admin/Admin.jsx";
+import { ProductPage } from "./pages/Product.jsx";
+import { HomePage } from "./pages/Home.jsx";
+import { AboutPage } from "./pages/About.jsx";
+import { UserLoginPage } from "./pages/UserLogin.jsx";
+import { UserRegisterPage } from "./pages/UserRegister.jsx";
+import { ContactPage } from "./pages/Contact.jsx";
+import { ProfilePage } from "./pages/Profile.jsx";
+import { SellerLoginPage } from "./pages/SellerLogin.jsx";
+import { SellerRegisterPage } from "./pages/SellerRegister.jsx";
+import { ActivationPage } from "./pages/Activation.jsx";
+import { Seller } from "./pages/Seller/Seller.jsx";
+import { Header } from "./components/shared/Header/Header.jsx";
+import { Footer } from "./components/shared/Footer/Footer.jsx";
 function App() {
   const location = useLocation();
 
@@ -30,16 +29,19 @@ function App() {
     <div className="App">
       {!shouldHide && <Header />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/user/login" element={<UserLogin />} />
-        <Route path="/user/register" element={<UserRegister />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/product/:productId" element={<Product />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/seller/login" element={<SellerLogin />} />
-        <Route path="/seller/register" element={<SellerRegister />} />
-        <Route path="/activation/:activationToken" element={<Activation />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/user/login" element={<UserLoginPage />} />
+        <Route path="/user/register" element={<UserRegisterPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/products/:productId" element={<ProductPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/seller/login" element={<SellerLoginPage />} />
+        <Route path="/seller/register" element={<SellerRegisterPage />} />
+        <Route
+          path="/activation/:activationToken"
+          element={<ActivationPage />}
+        />
         <Route path="/admin/*" element={<Admin />} />
         <Route path="/Seller/*" element={<Seller />} />
       </Routes>
