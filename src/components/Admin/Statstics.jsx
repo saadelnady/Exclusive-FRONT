@@ -7,7 +7,7 @@ export const Statstics = (props) => {
   const { sellers } = useSelector((state) => state.sellerReducer);
 
   const sellersCount = sellers.length;
-  const usersCount = users.length;
+  const usersCount = users.length - 1;
   return (
     <div className="d-flex justify-content-evenly p-4">
       <DashboardCard

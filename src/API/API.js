@@ -1,16 +1,39 @@
 import axios from "axios";
+
 export const serverUrl = "http://localhost:4000";
-export const getData = async (URL) => {
+
+const headers = {
+  token: JSON.parse(localStorage.getItem("TOKEN")),
+};
+
+const handleRequest = async (method, URL, data = null) => {
   try {
-    const headers = {
-      token: JSON.parse(localStorage.getItem("TOKEN")),
-    };
+    const response = await axios({
+      method,
+      url: `${serverUrl}${URL}`,
+      headers,
+      data,
+    });
 
-    const response = await axios.get(URL, { headers });
-    const data = response.data.data;
-
-    return data;
+    return response.data.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error;
   }
+};
+
+export const getData = async (URL) => {
+  return handleRequest("get", URL);
+};
+
+export const postData = async (URL, data) => {
+  return handleRequest("post", URL, data);
+};
+
+export const putData = async (URL, data) => {
+  return handleRequest("put", URL, data);
+};
+
+export const deleteData = async (URL) => {
+  return handleRequest("delete", URL);
 };

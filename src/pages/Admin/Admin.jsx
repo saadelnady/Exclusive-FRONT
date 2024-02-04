@@ -8,13 +8,13 @@ import { AdminDashboard } from "../../pages/Admin/AdminDashboard";
 import { ProfilePage } from "../../pages/Profile";
 import { JoinRequests } from "../../pages/Admin/JoinRequests";
 import { Categories } from "../../pages/Admin/Categories";
-import { AddCategory } from "../../pages/Admin/AddCategory";
+import { AddCategoryPage } from "../../pages/Admin/AddCategory";
 import { SubCategories } from "../../pages/Admin/SubCategories";
 import { AddSubCategory } from "../../pages/Admin/AddSubCategory";
 
 import { fetchSellers } from "../../store/actions/sellerActions";
-import { fetchCategories } from "../../store/actions/categoryActions";
-
+import { getCategories } from "../../store/actions/categoryActions";
+import "../../components/Admin/styles/Admin.css";
 export const Admin = () => {
   const dispatch = useDispatch();
 
@@ -23,7 +23,7 @@ export const Admin = () => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
-      dispatch(fetchCategories());
+      dispatch(getCategories());
     }
   }, [dispatch]);
   return (
@@ -36,7 +36,7 @@ export const Admin = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/joinRequests" element={<JoinRequests />} />
           <Route path="/Categories" element={<Categories />} />
-          <Route path="/addCategory" element={<AddCategory />} />
+          <Route path="/addCategory" element={<AddCategoryPage />} />
           <Route path="/subCategories" element={<SubCategories />} />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
         </Routes>

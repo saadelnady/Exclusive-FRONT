@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./styles/Admin.css";
+
 import { SellersList } from "../../components/Admin/SellersList";
 import { UsersList } from "../../components/Admin/UsersList";
 import { Statstics } from "../../components/Admin/Statstics";

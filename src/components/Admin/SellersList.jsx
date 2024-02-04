@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
+import { Loading } from "../shared/Loading";
 
 export const SellersList = () => {
-  const { sellers } = useSelector((state) => state.sellerReducer);
+  const { sellers, isLoading } = useSelector((state) => state.sellerReducer);
   return (
-    <div>
+    <>
+      {isLoading && <Loading />}
       <table className="w-100 bg-light rounded">
         <thead>
           <tr className="border-bottom">
@@ -34,6 +36,6 @@ export const SellersList = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };

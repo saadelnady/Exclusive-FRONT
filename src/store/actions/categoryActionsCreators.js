@@ -1,4 +1,7 @@
-import { CATEGORIES_ACTIONS_TYPES } from "./actionTypes";
+import {
+  CATEGORIES_ACTIONS_TYPES,
+  CATEGORY_ACTIONS_TYPES,
+} from "./actionTypes";
 
 export const getCategories = () => {
   return {
@@ -19,22 +22,58 @@ export const getCategoriesFail = (payLoad) => {
 };
 
 // ==================================================================================
-// export const loadProduct = () => {
-//   return {
-//     type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
-//   };
-// };
+export const addCategory = () => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY,
+  };
+};
+export const addCategorySuccess = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_SUCCESS,
+    payLoad,
+  };
+};
+export const addCategoryFail = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL,
+    payLoad,
+  };
+};
+// ==================================================================================
 
-// export const getProductSuccess = (payLoad) => {
-//   return {
-//     type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS,
-//     payLoad,
-//   };
-// };
+export const editCategory = () => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY,
+  };
+};
+export const editCategorySuccess = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_Success,
+    payLoad,
+  };
+};
+export const editCategoryFail = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL,
+    payLoad,
+  };
+};
+// ==================================================================================
 
-// export const getProductFail = (payLoad) => {
-//   return {
-//     type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT_FAIL,
-//     payLoad,
-//   };
-// };
+export const deleteCategory = () => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY,
+  };
+};
+export const deleteCategorySuccess = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_SUCCESS,
+    payLoad,
+  };
+};
+export const deleteCategoryFail = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_FAIL,
+    payLoad,
+  };
+};

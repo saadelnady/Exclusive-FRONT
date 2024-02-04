@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCategories } from "../../store/actions/categoryActions";
+import { getCategories } from "../../store/actions/categoryActions";
 import { serverUrl } from "../../API/API";
 import { SubCategories } from "./SubCategories";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -11,7 +11,7 @@ export const Categories = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(getCategories());
   }, [dispatch]);
   return (
     <ul className="categouries-links pt-4 fs-5 border-end ">
