@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
 import { FaEnvelope } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { serverUrl } from "../../API/API";
 
 export const AdminHeader = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -14,7 +15,11 @@ export const AdminHeader = () => {
         <div className="d-flex  align-items-center">
           <IoIosNotifications className="fs-2 cursor-pointer" />
           <FaEnvelope className="fs-2 cursor-pointer" />
-          <img src={user.userImage} alt="AdminImage" className="admin-image" />
+          <img
+            src={`${serverUrl}/${user.userImage}`}
+            alt="AdminImage"
+            className="admin-image"
+          />
           <p className="text-dark fs-3">{user.firstName}</p>
         </div>
       </div>

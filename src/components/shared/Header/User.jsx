@@ -9,6 +9,7 @@ import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { serverUrl } from "../../../API/API";
 
 export const User = () => {
   const { isUserAuthenticated, user } = useSelector(
@@ -38,7 +39,11 @@ export const User = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img src={user.userImage} alt="user-logo" className="w-100" />
+            <img
+              src={`${serverUrl}/${user.userImage}`}
+              alt="user-logo"
+              className="w-100"
+            />
           </button>
           <ul className="dropdown-menu bg-dark p-3">
             <li className="d-flex justify-content-between align-items-center mb-2">

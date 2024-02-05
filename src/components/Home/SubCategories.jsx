@@ -10,10 +10,7 @@ export const SubCategories = ({ category }) => {
           <NavLink
             to={`${serverUrl}/categories/${category.title}/${subCategory.title}`}
           >
-            <img
-              src={`${serverUrl}/uploads/subCategories/${subCategory.image}`}
-              alt=""
-            />
+            <img src={`${serverUrl}/${subCategory.image}`} alt="" />
           </NavLink>
           <span>{subCategory.title}</span>
         </li>

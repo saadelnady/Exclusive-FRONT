@@ -24,7 +24,7 @@ export const Categories = () => {
                 <td className="border-end">{index + 1}</td>
                 <td>
                   <img
-                    src={`${serverUrl}/uploads/categories/${category.image}`}
+                    src={`${serverUrl}/${category.image}`}
                     alt=""
                     className="rounded-pill"
                   />

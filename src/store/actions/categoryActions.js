@@ -1,3 +1,4 @@
+import axios from "axios";
 import { deleteData, getData, postData, putData } from "../../API/API";
 import * as actionCreators from "./categoryActionsCreators";
 
@@ -15,15 +16,15 @@ export const getCategories = () => {
   };
 };
 
-export const addCategory = (categoryData) => {
+export const addCategory = (formData) => {
   return async (dispatch) => {
-    dispatch(actionCreators.addCategory);
+    dispatch(actionCreators.addCategory(formData));
 
     try {
-      const data = await postData(`/api/categories`, categoryData);
-
+      const data = await postData(`/api/categories`, formData);
       dispatch(actionCreators.addCategorySuccess(data.newCategory));
     } catch (error) {
+      console.log("error Add--------->", error);
       dispatch(actionCreators.addCategoryFail(error));
     }
   };

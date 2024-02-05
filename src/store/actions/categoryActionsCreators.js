@@ -22,9 +22,10 @@ export const getCategoriesFail = (payLoad) => {
 };
 
 // ==================================================================================
-export const addCategory = () => {
+export const addCategory = (payLoad) => {
   return {
     type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY,
+    payLoad,
   };
 };
 export const addCategorySuccess = (payLoad) => {

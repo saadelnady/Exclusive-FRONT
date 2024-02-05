@@ -9,23 +9,41 @@ import { useNavigate } from "react-router-dom";
 import { MdError } from "react-icons/md";
 import "./styles/AddCategory.css";
 import { addCategory } from "../../store/actions/categoryActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Loading } from "../shared/Loading";
 
 export const AddCategry = () => {
+  const { category, isLoading } = useSelector((state) => state.categoryReducer);
+
+  console.log(category);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleAddCategorySubmition(values);
+      handleSubmition(values);
     },
     validate,
   });
-  const handleAddCategorySubmition = (values) => {
+  const handleSubmition = async (values) => {
+    const formData = new FormData();
+    formData.append("title", values?.title);
+    formData.append("image", values?.image);
+    dispatch(addCategory(formData));
+    const response = await dispatch(addCategory(formData));
+
+    // Handle the response
+    if (response && response.data) {
+      // If your server responds with JSON data
+      console.log("Server response:", response.data);
+
+      // Handle success, reset form, navigate, etc.
+      // formik.resetForm();
+      // navigate("/admin/categories");
+    } else {
+      console.error("Invalid server response:", response);
+    }
     formik.resetForm();
-    console.log(values);
-    dispatch(addCategory(values));
-    // navigate("/admin/categories");
   };
   return (
     <div className="vh-100 bg-light">
@@ -97,8 +115,11 @@ export const AddCategry = () => {
               {formik.errors.title}
             </p>
           ) : null}
-          <button type="submit" className="btn btn-danger">
-            Add Category
+          <button
+            type="submit"
+            className="btn btn-danger d-flex align-items-center justify-content-between"
+          >
+            {isLoading ? <Loading /> : "Add Category"}
           </button>
         </form>
       </div>

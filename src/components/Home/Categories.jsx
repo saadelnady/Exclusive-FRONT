@@ -21,10 +21,7 @@ export const Categories = () => {
             <li key={index}>
               <NavLink to={`/category/${category.title}`} className="text-dark">
                 <div>
-                  <img
-                    src={`${serverUrl}/uploads/categories/${category.image}`}
-                    alt=""
-                  />
+                  <img src={`${serverUrl}/${category.image}`} alt="" />
                   <p>
                     {category?.title}
                     {category?.subCategories?.length > 0 && (

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const serverUrl = "http://localhost:4000";
+export const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const headers = {
   token: JSON.parse(localStorage.getItem("TOKEN")),
