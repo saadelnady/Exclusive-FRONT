@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { fetchUser } from "../../store/actions/userActions";
 import { CiCamera } from "react-icons/ci";
 
 import "./styles/Profile.css";
-import { fetchSeller } from "../../store/actions/sellerActions";
+import { fetchUser } from "../../store/actions/user/userActions";
+import { fetchSeller } from "../../store/actions/seller/sellerActions";
 import { serverUrl } from "../../API/API";
 
 export const Index = () => {

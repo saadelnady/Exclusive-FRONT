@@ -5,6 +5,7 @@ import { SubCategories } from "./SubCategories";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import "./styles/Categories.css";
 import { useSelector } from "react-redux";
+
 export const Categories = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
 

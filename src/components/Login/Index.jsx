@@ -5,22 +5,41 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
+import { toast } from "react-toastify";
+
 import { initialValues, validate } from "../../validation/loginValidation";
-import { handleLogin } from "../../formsSubmitions/loginSubmition";
 import "../Auth.css";
 import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../store/actions/user/userActions";
 
 const Index = () => {
+  const userReducer = useSelector((state) => state.userReducer);
+  console.log(userReducer.user);
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleLogin(values, formik, navigate, "user");
+      handleLogin(values);
     },
     validate,
   });
+
+  const handleLogin = (values) => {
+    const payload = { values, toast };
+    dispatch(loginUser(payload));
+    setTimeout(() => {
+      if (userReducer.user === "ADMIN") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+      window.location.reload();
+    }, 2500);
+  };
 
   return (
     <div className="login row align-items-center">

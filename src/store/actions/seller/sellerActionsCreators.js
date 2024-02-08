@@ -1,4 +1,4 @@
-import { SELLER_ACTIONS_TYPES, SELLERS_ACTIONS_TYPES } from "./actionTypes";
+import { SELLER_ACTIONS_TYPES, SELLERS_ACTIONS_TYPES } from "../actionTypes";
 
 export const getSeller = () => {
   return {

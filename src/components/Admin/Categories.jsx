@@ -10,9 +10,9 @@ import { NavLink } from "react-router-dom";
 import Warning from "../shared/Warning";
 import {
   DELETE_ALL_PRODUCT_RELATED,
-  DELETE_MESSEGE,
+  DELETE_MESSAGE,
 } from "../../helpers/warningMessges";
-import { deleteCategory } from "../../store/actions/categoryActions";
+import { deleteCategory } from "../../store/actions/category/categoryActions";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -33,8 +33,8 @@ export const Categories = ({ isWarning, handleWarning }) => {
     <div className="categories-page ">
       {isWarning && (
         <Warning
-          messege={DELETE_MESSEGE}
-          subMessege={DELETE_ALL_PRODUCT_RELATED}
+          message={DELETE_MESSAGE}
+          subMessage={DELETE_ALL_PRODUCT_RELATED}
           handleWarning={handleWarning}
           handleAction={handleDeleteCategory}
         />

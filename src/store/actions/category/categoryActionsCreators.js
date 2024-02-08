@@ -1,7 +1,7 @@
 import {
   CATEGORIES_ACTIONS_TYPES,
   CATEGORY_ACTIONS_TYPES,
-} from "./actionTypes";
+} from "../actionTypes";
 
 export const getCategories = () => {
   return {

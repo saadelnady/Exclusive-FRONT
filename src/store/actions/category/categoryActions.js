@@ -1,10 +1,10 @@
-import { deleteData, getData, postData, putData } from "../../API/API";
-import { showToast } from "../../helpers/toast_helper";
+import { deleteData, getData, postData, putData } from "../../../API/API";
+import { showToast } from "../../../helpers/toast_helper";
 import * as actionCreators from "./categoryActionsCreators";
 
 export const fetchCategories = () => {
   return async (dispatch) => {
-    dispatch(actionCreators.getCategories);
+    dispatch(actionCreators.getCategories());
     try {
       const data = await getData(`/api/categories`);
       console.log(data);

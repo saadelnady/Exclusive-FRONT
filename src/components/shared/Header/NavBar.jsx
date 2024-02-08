@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
   const [active, setIsActive] = useState(null);
   const activeHandler = (listItem) => {
     setIsActive(listItem);
@@ -50,20 +52,22 @@ export const NavBar = () => {
           About
         </NavLink>
       </li>
-      <li
-        className={
-          active === "Login"
-            ? "nav-item  me-2 fs-5 text-dark active"
-            : "nav-item  me-2 fs-5 text-dark"
-        }
-        onClick={() => {
-          activeHandler("Login");
-        }}
-      >
-        <NavLink aria-current="page" to="/user/login" className="text-dark ">
-          Login
-        </NavLink>
-      </li>
+      {!isLoggedIn && (
+        <li
+          className={
+            active === "Login"
+              ? "nav-item  me-2 fs-5 text-dark active"
+              : "nav-item  me-2 fs-5 text-dark"
+          }
+          onClick={() => {
+            activeHandler("Login");
+          }}
+        >
+          <NavLink aria-current="page" to="/user/login" className="text-dark ">
+            Login
+          </NavLink>
+        </li>
+      )}
     </ul>
   );
 };

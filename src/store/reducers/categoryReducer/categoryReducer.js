@@ -1,7 +1,7 @@
 import {
   CATEGORIES_ACTIONS_TYPES,
   CATEGORY_ACTIONS_TYPES,
-} from "../actions/actionTypes";
+} from "../../actions/actionTypes";
 
 const initialState = {
   isLoading: false,

@@ -1,4 +1,4 @@
-import { getData, serverUrl } from "../../API/API";
+import { getData, serverUrl } from "../../../API/API";
 import * as actionCreators from "./productActionsCreators";
 
 export const fetchProducts = () => {

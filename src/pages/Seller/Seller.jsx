@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-import { fetchSeller } from "../../store/actions/sellerActions";
+import { fetchSeller } from "../../store/actions/seller/sellerActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { SellerSideBar } from "../../components/Seller/SellerSideBar";

@@ -1,10 +1,10 @@
 import {
   USERS_ACTIONS_TYPES,
   USER_ACTIONS_TYPES,
-} from "../actions/actionTypes";
+} from "../../actions/actionTypes";
 
 const initialState = {
-  isUserAuthenticated: false,
+  isLoggedIn: false,
   isLoading: false,
   error: null,
   user: {},
@@ -20,7 +20,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isUserAuthenticated: true,
+        isLoggedIn: true,
         user: action.payLoad,
         error: null,
       };
@@ -29,10 +29,32 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        isUserAuthenticatedUser: false,
+        isLoggedIn: false,
+        error: action.payLoad,
+      };
+    // ====================================================================================================
+    case USER_ACTIONS_TYPES.POST_USER_LOGIN:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case USER_ACTIONS_TYPES.POST_USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+        user: action.payLoad,
+        error: null,
+      };
+    case USER_ACTIONS_TYPES.POST_USER_LOGIN_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
         error: action.payLoad,
       };
 
+    // ====================================================================================================
     case USERS_ACTIONS_TYPES.GET_USERS:
       return { ...state, isLoading: true };
 

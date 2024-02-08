@@ -1,5 +1,5 @@
-import { PRODUCT_ACTIONS_TYPES } from "../actions/actionTypes";
-import { PRODUCTS_ACTIONS_TYPES } from "../actions/actionTypes";
+import { PRODUCT_ACTIONS_TYPES } from "../../actions/actionTypes";
+import { PRODUCTS_ACTIONS_TYPES } from "../../actions/actionTypes";
 
 const initialState = {
   isLoading: false,

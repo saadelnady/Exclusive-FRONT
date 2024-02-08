@@ -1,4 +1,4 @@
-import { PRODUCT_ACTIONS_TYPES, PRODUCTS_ACTIONS_TYPES } from "./actionTypes";
+import { PRODUCT_ACTIONS_TYPES, PRODUCTS_ACTIONS_TYPES } from "../actionTypes";
 
 export const getProducts = () => {
   return {

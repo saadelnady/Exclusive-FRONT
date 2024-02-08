@@ -10,9 +10,10 @@ import { BsCart3 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { serverUrl } from "../../../API/API";
+import { Loading } from "../Loading";
 
 export const User = () => {
-  const { isUserAuthenticated, user } = useSelector(
+  const { isLoggedIn, user, isLoading } = useSelector(
     (state) => state.userReducer
   );
 
@@ -30,8 +31,8 @@ export const User = () => {
       <CiHeart className="fs-2 cursor-pointer" />
 
       <BsCart3 className="fs-2 cart" />
-
-      {isUserAuthenticated && (
+      {isLoading && <Loading />}
+      {isLoggedIn && (
         <div className="dropdown text-center">
           <button
             className="user-logo rounded-circle dropdown-toggle"
@@ -87,7 +88,7 @@ export const User = () => {
         </div>
       )}
 
-      {!isUserAuthenticated && (
+      {!isLoggedIn && (
         <NavLink className="btn submit" to="/seller/login">
           login as a Seller
         </NavLink>

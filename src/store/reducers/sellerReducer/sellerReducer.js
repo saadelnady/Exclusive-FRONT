@@ -1,10 +1,10 @@
 import {
   SELLERS_ACTIONS_TYPES,
   SELLER_ACTIONS_TYPES,
-} from "../actions/actionTypes";
+} from "../../actions/actionTypes";
 
 const initialState = {
-  isSellerAuthenticated: false,
+  isLoggedIn: false,
   isLoading: false,
   error: null,
   seller: {},
@@ -19,14 +19,14 @@ const sellerReducer = (state = initialState, action) => {
     case SELLER_ACTIONS_TYPES.GET_SELLER_SUCCESS:
       return {
         ...state,
-        isSellerAuthenticated: true,
+        isLoggedIn: true,
         isLoading: false,
         seller: action.payLoad,
         error: null,
       };
 
     case SELLER_ACTIONS_TYPES.GET_SELLER_FAIL:
-      return { ...state, error: action.payLoad, isSellerAuthenticated: false };
+      return { ...state, error: action.payLoad, isLoggedIn: false };
     // ======================================================================================
 
     case SELLERS_ACTIONS_TYPES.GET_SELLERS:

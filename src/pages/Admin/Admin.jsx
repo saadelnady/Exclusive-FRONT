@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUser, fetchUsers } from "../../store/actions/userActions";
+import { fetchUser, fetchUsers } from "../../store/actions/user/userActions";
 import { Route, Routes } from "react-router-dom";
 
 import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
@@ -14,8 +14,8 @@ import { AddCategory } from "../../components/Admin/AddCategory";
 
 import Profile from "../../components/Profile/Index";
 
-import { fetchSellers } from "../../store/actions/sellerActions";
-import { fetchCategories } from "../../store/actions/categoryActions";
+import { fetchSellers } from "../../store/actions/seller/sellerActions";
+import { fetchCategories } from "../../store/actions/category/categoryActions";
 import "../../components/Admin/styles/Admin.css";
 
 export const Admin = ({ isWarning, handleWarning }) => {
