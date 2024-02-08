@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import "../../../styles/Header.css";
-import { Announce } from "../Announce";
+import "../styles/Header.css";
+import { Announce } from "./Announce";
 import { NavBar } from "./NavBar";
 import { Search } from "./Search";
 import { User } from "./User";

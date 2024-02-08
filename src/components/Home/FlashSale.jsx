@@ -1,4 +1,4 @@
-import "../../styles/Sale.css";
+import "./styles/Sale.css";
 import arrow_left from "../../assets/images/pngs/ic-arrow-left.png";
 import arrow_right from "../../assets/images/pngs/ic-arrow-right.png";
 import { Card } from "../shared/Card";

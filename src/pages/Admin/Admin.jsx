@@ -1,21 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser, fetchUsers } from "../../store/actions/userActions";
 import { Route, Routes } from "react-router-dom";
-import { AdminSideBar } from "../../components/Admin/AdminSideBar";
-import { AdminHeader } from "../../components/Admin/AdminHeader";
-import { AdminDashboard } from "../../pages/Admin/AdminDashboard";
-import { ProfilePage } from "../../pages/Profile";
-import { JoinRequests } from "../../pages/Admin/JoinRequests";
-import { Categories } from "../../pages/Admin/Categories";
-import { AddCategoryPage } from "../../pages/Admin/AddCategory";
-import { SubCategories } from "../../pages/Admin/SubCategories";
-import { AddSubCategory } from "../../pages/Admin/AddSubCategory";
+
+import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
+import { AdminHeader } from "../../components/Admin/shared/AdminHeader";
+import { AdminDashboard } from "../../components/Admin/AdminDashBoard";
+import { JoinRequests } from "../../components/Admin/JoinRequests";
+import { Categories } from "../../components/Admin/Categories";
+import { AddSubCategory } from "../../components/Admin/AddSubCategory";
+import { SubCategories } from "../../components/Admin/SubCategories";
+import { AddCategory } from "../../components/Admin/AddCategory";
+
+import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/sellerActions";
-import { getCategories } from "../../store/actions/categoryActions";
+import { fetchCategories } from "../../store/actions/categoryActions";
 import "../../components/Admin/styles/Admin.css";
-export const Admin = () => {
+
+export const Admin = ({ isWarning, handleWarning }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleSidebarActivation = () => {
+    setIsActive(!isActive);
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,20 +31,32 @@ export const Admin = () => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
-      dispatch(getCategories());
+      dispatch(fetchCategories());
     }
   }, [dispatch]);
   return (
-    <div className="d-flex ">
-      <AdminSideBar />
+    <div className="admin-layout">
+      <AdminSideBar
+        isActive={isActive}
+        handleSidebarActivation={handleSidebarActivation}
+      />
       <div className="d-flex flex-column w-100 ">
-        <AdminHeader />
+        <AdminHeader handleSidebarActivation={handleSidebarActivation} />
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/joinRequests" element={<JoinRequests />} />
-          <Route path="/Categories" element={<Categories />} />
-          <Route path="/addCategory" element={<AddCategoryPage />} />
+          <Route
+            path="/Categories"
+            element={
+              <Categories isWarning={isWarning} handleWarning={handleWarning} />
+            }
+          />
+          <Route path="/addCategory" element={<AddCategory />} />
+          <Route
+            path="/Categories/editCategory/:categoryId"
+            element={<AddCategory />}
+          />
           <Route path="/subCategories" element={<SubCategories />} />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
         </Routes>

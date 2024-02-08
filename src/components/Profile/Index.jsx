@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { fetchUser } from "../store/actions/userActions";
+import { fetchUser } from "../../store/actions/userActions";
 import { CiCamera } from "react-icons/ci";
 
-import "../styles/Profile.css";
-import { fetchSeller } from "../store/actions/sellerActions";
+import "./styles/Profile.css";
+import { fetchSeller } from "../../store/actions/sellerActions";
+import { serverUrl } from "../../API/API";
 
-export const ProfilePage = () => {
+export const Index = () => {
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -76,7 +77,13 @@ export const ProfilePage = () => {
           <h3 className="edit  ">Edit Your Profile</h3>
           <form action="">
             <div className="user-pic rounded mx-auto my-5 position-relative user-img rounded-pill bg-light">
-              <img src={user.userImage || seller.sellerImage} alt="" />
+              <img
+                src={
+                  `${serverUrl}/${user.userImage} ` ||
+                  `${serverUrl}/${seller.sellerImage} `
+                }
+                alt=""
+              />
               <label htmlFor="userImage">
                 <CiCamera className="fs-1 bg-light p-2 rounded-pill ic-camera cursor-pointer " />
               </label>
@@ -160,3 +167,4 @@ export const ProfilePage = () => {
     </div>
   );
 };
+export default Index;

@@ -1,34 +1,38 @@
-import mobileImage from "../assets/images/pngs/mobile.png";
-import googleIcon from "../assets/images/pngs/ic-Google.png";
-import "../styles/Auth.css";
+import googleIcon from "../../assets/images/pngs/ic-Google.png";
+import "../Auth.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
+import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { initialValues, validate } from "../validation/registerValidation.js";
-import { handleRegistration } from "../formsSubmitions/registerSubmition.js";
+import {
+  initialValues,
+  validate,
+} from "../../validation/registerValidation.js";
+import { handleRegistration } from "../../formsSubmitions/registerSubmition.js";
 
-export const UserRegisterPage = () => {
+const SellerRegister = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleRegistration(values, formik, navigate, "user");
+      handleRegistration(values, formik, navigate, "seller");
     },
     validate,
   });
 
   return (
-    <div className="register row ">
-      <div className="col-12 col-md-6">
-        <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
+    <div className="register row align-items-center">
+      <div className="col-12 col-md-4">
+        <img src={sellerImage} alt="mobileImage" className="w-100 " />
       </div>
       <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
-        <h1 className="fs-1">Create an account</h1>
+        <h1 className="fs-1">Create a seller account</h1>
         <p className="fs-5 fw-normal">Enter your details below</p>
         <form onSubmit={formik.handleSubmit} action="POST" className="mt-5">
           <input
@@ -137,7 +141,7 @@ export const UserRegisterPage = () => {
           </button>
           <p className="text-center mt-4 fs-5">
             Already have account ?
-            <NavLink to="/userLogin" className="login-btn text-dark p-2">
+            <NavLink to="/seller/login" className="login-btn text-dark p-2">
               Log in
             </NavLink>
           </p>
@@ -146,3 +150,4 @@ export const UserRegisterPage = () => {
     </div>
   );
 };
+export default SellerRegister;

@@ -9,7 +9,7 @@ import iconReturn from "../../assets/images/pngs/ic-return.png";
 import stars from "../../assets/images/pngs/ic_stars.png";
 import { useState } from "react";
 import { CiHeart } from "react-icons/ci";
-import "../../styles/Product.css";
+import "./styles/Product.css";
 
 export const ProductDetails = () => {
   const [imgSrc, setImageSrc] = useState(productImg_5);

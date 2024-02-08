@@ -7,19 +7,14 @@ const headers = {
 };
 
 const handleRequest = async (method, URL, data = null) => {
-  try {
-    const response = await axios({
-      method,
-      url: `${serverUrl}${URL}`,
-      headers,
-      data,
-    });
+  const response = await axios({
+    method,
+    url: `${serverUrl}${URL}`,
+    headers,
+    data,
+  });
 
-    return response.data.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return response.data;
 };
 
 export const getData = async (URL) => {

@@ -6,7 +6,7 @@ export const fetchSeller = () => {
     dispatch(actionCreators.getSeller());
     try {
       const data = await getData(`/api/sellers/getSellerProfile`);
-      dispatch(actionCreators.getSellerSuccess(data.seller));
+      dispatch(actionCreators.getSellerSuccess(data.data.seller));
     } catch (error) {
       dispatch(actionCreators.getSellerFail(error));
     }
@@ -19,7 +19,7 @@ export const fetchSellers = () => {
     dispatch(actionCreators.getSellers());
     try {
       const data = await getData(`/api/sellers`);
-      dispatch(actionCreators.getSellersSuccess(data.sellers));
+      dispatch(actionCreators.getSellersSuccess(data.data.sellers));
     } catch (error) {
       dispatch(actionCreators.getSellersFail(error));
     }

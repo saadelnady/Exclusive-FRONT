@@ -1,4 +1,3 @@
-import "../../styles/Product.css";
 import { Card } from "./Card";
 
 export const RelatedItem = () => {

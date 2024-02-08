@@ -5,6 +5,7 @@
 }
 a {
   text-decoration: none;
+  color: black;
 }
 :root {
   --red-color: #db4444;
@@ -74,4 +75,7 @@ h4,
 h5,
 h6 {
   color: black;
+}
+.container {
+  padding: 0;
 }

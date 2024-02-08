@@ -14,8 +14,9 @@ export const SellerSideBar = () => {
     toast.success("You have logged out");
     navigate("/seller/login");
   };
+
   return (
-    <div className="sideBar">
+    <div className="Seller-Sidebar">
       <aside className=" px-3 h-75">
         <div className="d-flex justify-content-between align-items-center px-1  ">
           <h2 className="text-light py-5 px-3">{seller.firstName}.</h2>

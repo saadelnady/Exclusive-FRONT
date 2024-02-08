@@ -1,7 +1,7 @@
 import arrow_left from "../../assets/images/pngs/ic-arrow-left.png";
 import arrow_right from "../../assets/images/pngs/ic-arrow-right.png";
 import { categoriesBrowsingData } from "../../static/data";
-import "../../styles/CategouriesBrowse.css";
+import "./styles/CategouriesBrowse.css";
 export const CategoriesBrowse = () => {
   return (
     <div className="border-bottom pb-5">

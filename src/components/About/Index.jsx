@@ -4,11 +4,11 @@ import { OurStory } from "./OurStory.jsx";
 import { Statistics } from "./Statistics.jsx";
 import { TeamMembers } from "./TeamMembers.jsx";
 import { AboutUs } from "./AboutUs.jsx";
+import "./styles/About.css";
 
 const Index = () => {
   return (
-    <>
-      {" "}
+    <div className="container">
       <div className="links py-5">
         <NavLink to={"/"} className="fs-5 me-2">
           Home
@@ -22,7 +22,7 @@ const Index = () => {
       <Statistics />
       <TeamMembers />
       <AboutUs />
-    </>
+    </div>
   );
 };
 export default Index;

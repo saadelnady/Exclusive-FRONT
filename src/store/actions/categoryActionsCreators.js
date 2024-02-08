@@ -42,20 +42,21 @@ export const addCategoryFail = (payLoad) => {
 };
 // ==================================================================================
 
-export const editCategory = () => {
+export const editCategory = (payLoad) => {
   return {
     type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY,
+    payLoad,
   };
 };
 export const editCategorySuccess = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_Success,
+    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_SUCCESS,
     payLoad,
   };
 };
 export const editCategoryFail = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL,
+    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_FAIL,
     payLoad,
   };
 };

@@ -4,8 +4,8 @@ import { ContactInfo } from "./ContactInfo.jsx";
 import { ContactForm } from "./ContactForm.jsx";
 const Index = () => {
   return (
-    <>
-      <div className="links py-5">
+    <div className="container contact py-5">
+      <div className=" mb-5 links  ">
         <NavLink to={"/"} className="fs-5 me-2">
           Home
         </NavLink>
@@ -18,7 +18,7 @@ const Index = () => {
         <ContactInfo />
         <ContactForm />
       </div>
-    </>
+    </div>
   );
 };
 export default Index;

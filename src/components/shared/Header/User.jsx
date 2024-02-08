@@ -4,7 +4,7 @@ import iconCancel from "../../../assets/images/pngs/ic-cancel.png";
 import iconLogout from "../../../assets/images/pngs/ic-logout.png";
 import iconMallBag from "../../../assets/images/pngs/ic-mallbag.png";
 import iconReviews from "../../../assets/images/pngs/ic-Reviews.png";
-import "../../../styles/User.css";
+import "../styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { useSelector } from "react-redux";

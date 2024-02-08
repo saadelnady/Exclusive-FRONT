@@ -11,6 +11,7 @@ import { NewArrival } from "./NewArrival";
 import { AboutUs } from "../About/AboutUs";
 import bgAnnounce2 from "../../assets/images/pngs/bg-announce-2.png";
 import { Categories } from "./Categories";
+import { fetchCategories } from "../../store/actions/categoryActions";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Index = () => {
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUser());
+      dispatch(fetchCategories());
     }
   }, [dispatch]);
   return (

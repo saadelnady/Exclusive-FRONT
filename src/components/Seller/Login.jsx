@@ -1,34 +1,33 @@
-import mobileImage from "../assets/images/pngs/mobile.png";
+import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
-import { initialValues, validate } from "../validation/loginValidation";
-import { handleLogin } from "../formsSubmitions/loginSubmition";
-import "../styles/Auth.css";
+import { initialValues, validate } from "../../validation/loginValidation";
+import { handleLogin } from "../../formsSubmitions/loginSubmition";
+import "../Auth.css";
 import { useFormik } from "formik";
 
-export const UserLoginPage = () => {
+const SellerLogin = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleLogin(values, formik, navigate, "user");
+      handleLogin(values, formik, navigate, "seller");
     },
     validate,
   });
-
   return (
     <div className="login row align-items-center">
-      <div className="col-12 col-md-6">
-        <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
+      <div className="col-12 col-md-4">
+        <img src={sellerImage} alt="mobileImage" className="w-100 " />
       </div>
-      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
-        <h1 className="fs-1">Log in to Exclusive</h1>
+      <div className="col-10 mx-auto offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
+        <h1 className="fs-1">Wellcome to seller panel</h1>
         <p className="fs-5 fw-normal mt-4">Enter your details below</p>
         <form onSubmit={formik.handleSubmit} className="mt-5">
           <input
@@ -103,10 +102,10 @@ export const UserLoginPage = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/user/register"
+              to="/seller/register"
               className="ms-4 register-btn text-dark p-2"
             >
-              SignUp
+              SignUp as seller
             </NavLink>
           </p>
         </form>
@@ -114,3 +113,4 @@ export const UserLoginPage = () => {
     </div>
   );
 };
+export default SellerLogin;

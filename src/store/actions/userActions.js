@@ -7,7 +7,7 @@ export const fetchUser = () => {
     dispatch(actionCreators.getUser());
     try {
       const data = await getData(`/api/users/getUserProfile`);
-      dispatch(actionCreators.getUserSuccess(data.user));
+      dispatch(actionCreators.getUserSuccess(data.data.user));
     } catch (error) {
       dispatch(actionCreators.getUserFail(error));
     }
@@ -18,7 +18,7 @@ export const fetchUsers = () => {
     dispatch(actionCreators.getUsers());
     try {
       const data = await getData(`/api/users`);
-      dispatch(actionCreators.getUsersSuccess(data.users));
+      dispatch(actionCreators.getUsersSuccess(data.data.users));
     } catch (error) {
       dispatch(actionCreators.getUsersFail(error));
     }

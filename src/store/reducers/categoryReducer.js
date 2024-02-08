@@ -8,6 +8,7 @@ const initialState = {
   error: null,
   categories: [],
   category: {},
+  message: "",
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -43,15 +44,25 @@ const categoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_SUCCESS:
+      console.log("action.payLoad=------------>", action.payLoad);
       return {
         ...state,
         isLoading: false,
         error: null,
-        categories: [...state.categories, action.payLoad],
+        categories: [...state.categories, action.payLoad.data.category],
+        category: { ...state.category, ...action.payLoad.data.category },
+        message: action.payLoad.message,
       };
 
     case CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL:
-      return { ...state, error: action.payLoad };
+      console.log("action.payLoad=------------>", action.payLoad);
+
+      return {
+        ...state,
+        isLoading: false,
+        error: "error",
+        message: action.payLoad,
+      };
 
     // ==================================================
 
@@ -66,7 +77,7 @@ const categoryReducer = (state = initialState, action) => {
       };
 
     case CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_FAIL:
-      return { ...state, error: action.payLoad };
+      return { ...state, isLoading: false, error: "error" };
 
     // ==================================================
 
@@ -86,7 +97,7 @@ const categoryReducer = (state = initialState, action) => {
 
     case CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
-      
+
     default:
       return state;
   }

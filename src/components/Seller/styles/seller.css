@@ -1,0 +1,18 @@
+.Seller-Sidebar {
+  background-color: var(--blue-color);
+  width: 250px;
+}
+.Seller-Sidebar .arrow-right {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.Seller-Sidebar .arrow-right.active {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}

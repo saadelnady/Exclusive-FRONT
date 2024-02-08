@@ -1,4 +1,4 @@
-import "../../styles/Card.css";
+import "./styles/Card.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 

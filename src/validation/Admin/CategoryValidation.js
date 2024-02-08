@@ -1,5 +1,6 @@
 const initialValues = {
   image: "",
+  previewImage: "",
   title: "",
 };
 

@@ -1,0 +1,22 @@
+.admin-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  padding: 15px 0;
+}
+@media (max-width: 768px) {
+  .burger-icon {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .burger-icon {
+    display: none;
+  }
+  .admin-header {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+}

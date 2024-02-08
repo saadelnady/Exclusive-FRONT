@@ -7,7 +7,7 @@ export const fetchProducts = () => {
     try {
       const data = await getData(`${serverUrl}/api/products`);
 
-      dispatch(actionCreators.getProductsSuccess(data.products));
+      dispatch(actionCreators.getProductsSuccess(data.data.products));
     } catch (error) {
       dispatch(actionCreators.getProductsFail(error));
     }

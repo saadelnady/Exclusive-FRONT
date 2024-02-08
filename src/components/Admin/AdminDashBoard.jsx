@@ -1,13 +1,13 @@
 import { useState } from "react";
 
+import { SellersList } from "./shared/SellersList";
+import { UsersList } from "./shared/UsersList";
+import { Statstics } from "./shared/Statstics";
 
-import { SellersList } from "../../components/Admin/SellersList";
-import { UsersList } from "../../components/Admin/UsersList";
-import { Statstics } from "../../components/Admin/Statstics";
 export const AdminDashboard = () => {
   const [isUsers, setIsUsers] = useState(true);
   return (
-    <div className="AdminDashboard w-100 p-4 vh-100">
+    <div className="AdminDashboard w-100 vh-100">
       <Statstics isUsers={isUsers} setIsUsers={setIsUsers} />
       {isUsers ? <UsersList /> : <SellersList />}
     </div>

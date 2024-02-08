@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import "../../../styles/Search.css";
+import "../styles/Search.css";
 import { fetchProducts } from "../../../store/actions/productActions";
 
 export const Search = () => {

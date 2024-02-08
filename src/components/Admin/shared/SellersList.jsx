@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { Loading } from "../shared/Loading";
-import { serverUrl } from "../../API/API";
+import { Loading } from "../../shared/Loading";
+import { serverUrl } from "../../../API/API";
 
 export const SellersList = () => {
   const { sellers, isLoading } = useSelector((state) => state.sellerReducer);
