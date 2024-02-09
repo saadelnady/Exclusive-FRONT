@@ -123,7 +123,7 @@ export const AddCategory = () => {
   };
 
   return (
-    <div className="vh-100 bg-light">
+    <div className="vh-100 bg-light py-5">
       <div className="container">
         <h1 className="mb-5 fw-bold">
           {categoryId ? "Edit Category " : "Add New Category"}

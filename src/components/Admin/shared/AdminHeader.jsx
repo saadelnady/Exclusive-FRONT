@@ -7,7 +7,7 @@ import "../styles/AdminHeader.css";
 export const AdminHeader = ({ handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
   return (
-    <div className="admin-header px-2">
+    <div className="admin-header">
       <CgMenuRight
         className="fs-1 cursor-pointer burger-icon"
         onClick={() => {

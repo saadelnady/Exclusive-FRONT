@@ -1,16 +1,16 @@
 .admin-header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #ccc;
-  padding: 15px 0;
+  padding: 15px 20px;
 }
 @media (max-width: 768px) {
   .burger-icon {
     display: block;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .burger-icon {
     display: none;
   }

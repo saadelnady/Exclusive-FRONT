@@ -39,7 +39,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
           handleAction={handleDeleteCategory}
         />
       )}
-      <div className=" container bg-white ">
+      <div className="categories-list bg-white ">
         <table className="w-100 rounded text-center">
           <thead>
             <tr className="">
@@ -56,11 +56,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
               <tr key={index} className=" ">
                 <td className="border-end">{index + 1}</td>
                 <td>
-                  <img
-                    src={`${serverUrl}/${category.image}`}
-                    alt=""
-                    className="rounded-pill"
-                  />
+                  <img src={`${serverUrl}/${category.image}`} alt="" />
                 </td>
                 <td>{category.title}</td>
                 <td>{formatDateAndTime(category.createdAt)}</td>
@@ -83,7 +79,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
                           setCategoryId(category._id);
                         }}
                       >
-                        <RiDeleteBin6Line /> delete
+                        <RiDeleteBin6Line /> Delete
                       </button>
                     </div>
                   </div>

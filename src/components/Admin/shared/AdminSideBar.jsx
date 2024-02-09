@@ -7,6 +7,8 @@ import { FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { userLogout } from "../../../store/actions/user/userActions";
+
+import "../styles/AdminSideBar.css";
 export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
   const [toggleStates, setToggleStates] = useState({
@@ -38,7 +40,7 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
           className="close-Sidebar"
         />
       </div>
-      <div className="h-50 d-flex justify-content-between flex-column">
+      <div className="Admin-links d-flex justify-content-between flex-column">
         <ul className="main-nav">
           <li className="fs-5">
             <NavLink to="/admin">Dashboard</NavLink>

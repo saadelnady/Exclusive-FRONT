@@ -1,15 +1,25 @@
 import { useState } from "react";
 
-import { SellersList } from "./shared/SellersList";
-import { UsersList } from "./shared/UsersList";
 import { Statstics } from "./shared/Statstics";
-
+import "./styles/AdminDashboard.css";
+import { useSelector } from "react-redux";
+import { List } from "./shared/List";
 export const AdminDashboard = () => {
   const [isUsers, setIsUsers] = useState(true);
+  const userReducer = useSelector((state) => state.userReducer);
+  const sellerReducer = useSelector((state) => state.sellerReducer);
+
   return (
-    <div className="AdminDashboard w-100 vh-100">
+    <div className="AdminDashboard w-100 ">
       <Statstics isUsers={isUsers} setIsUsers={setIsUsers} />
-      {isUsers ? <UsersList /> : <SellersList />}
+      {isUsers ? (
+        <List data={userReducer.users} isLoading={userReducer.isLoading} />
+      ) : (
+        <List
+          data={sellerReducer.sellers}
+          isLoading={sellerReducer.isLoading}
+        />
+      )}
     </div>
   );
 };
