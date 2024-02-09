@@ -10,7 +10,10 @@ import { MdError } from "react-icons/md";
 import { CiCamera } from "react-icons/ci";
 
 import "./styles/AddCategory.css";
-import { addCategory, editCategory } from "../../store/actions/category/categoryActions";
+import {
+  addCategory,
+  editCategory,
+} from "../../store/actions/category/categoryActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
@@ -44,6 +47,12 @@ export const AddCategory = () => {
           previewImage: `${serverUrl}/${category.image}`,
         });
       }
+    } else {
+      formik.setValues({
+        title: "",
+        image: "",
+        previewImage: "",
+      });
     }
   }, [categoryId, categories, formik.setValues]);
 
