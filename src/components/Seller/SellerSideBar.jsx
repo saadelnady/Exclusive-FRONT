@@ -4,15 +4,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { CgMenuRight } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { sellerLogout } from "../../store/actions/seller/sellerActions";
 
 export const SellerSideBar = () => {
   const { seller } = useSelector((state) => state.sellerReducer);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogOut = () => {
-    localStorage.removeItem("TOKEN");
-    toast.success("You have logged out");
-    navigate("/seller/login");
+    const payLoad = { toast, navigate };
+    dispatch(sellerLogout(payLoad));
   };
 
   return (

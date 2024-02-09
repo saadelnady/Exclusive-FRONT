@@ -2,6 +2,7 @@ import { getData, postData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 
 import * as actionCreators from "./userActionsCreators";
+// ========================================================================================
 
 export const fetchUser = () => {
   return async (dispatch) => {
@@ -14,14 +15,25 @@ export const fetchUser = () => {
     }
   };
 };
-export const loginUser = ({ values, toast }) => {
+// ========================================================================================
+
+export const userLogin = ({ values, toast, navigate }) => {
   return async (dispatch) => {
     dispatch(actionCreators.postUserLogin(values));
     try {
       const response = await postData(`/api/users/login`, values);
-      dispatch(actionCreators.postUserLoginSuccess(response?.data?.role));
+      const role = response?.data?.role;
+      dispatch(actionCreators.postUserLoginSuccess(response?.data));
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
+      setTimeout(() => {
+        if (role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+        window.location.reload();
+      });
     } catch (error) {
       console.log("error   ===== >", error?.response?.data?.message);
       dispatch(actionCreators.postUserLoginFail(error));
@@ -29,6 +41,55 @@ export const loginUser = ({ values, toast }) => {
     }
   };
 };
+// ========================================================================================
+
+export const userLogout = ({ toast, navigate, role }) => {
+  return async (dispatch) => {
+    dispatch(actionCreators.postUserLogout());
+
+    try {
+      dispatch(actionCreators.postUserLogoutSuccess());
+      localStorage.removeItem("TOKEN");
+      showToast(toast, "You have logged out successfully", "success");
+
+      setTimeout(() => {
+        if (role === "ADMIN") {
+          navigate("/user/login");
+        } else {
+          navigate("/");
+        }
+
+        window.location.reload();
+      }, 2500);
+    } catch (error) {
+      dispatch(actionCreators.postUserLogoutFail());
+      showToast(toast, "Something wrong when logout", "error");
+    }
+  };
+};
+// ========================================================================================
+export const userRegister = ({ values, toast, navigate }) => {
+  return async (dispatch) => {
+    dispatch(actionCreators.postUserRegister(values));
+
+    try {
+      const response = await postData("/api/users/register", values);
+      console.log("response ====>", response);
+      localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      showToast(toast, response?.message, "success");
+      setTimeout(() => {
+        navigate("/");
+        window.location.reload();
+      });
+      dispatch(actionCreators.postUserRegisterSuccess(response?.data));
+    } catch (error) {
+      dispatch(actionCreators.postUserRegisterFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+// ========================================================================================
+
 export const fetchUsers = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getUsers());

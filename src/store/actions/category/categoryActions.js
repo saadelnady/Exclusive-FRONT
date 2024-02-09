@@ -7,7 +7,6 @@ export const fetchCategories = () => {
     dispatch(actionCreators.getCategories());
     try {
       const data = await getData(`/api/categories`);
-      console.log(data);
       dispatch(actionCreators.getCategoriesSuccess(data.data.categories));
     } catch (error) {
       dispatch(actionCreators.getCategoriesFail(error));
@@ -23,7 +22,6 @@ export const addCategory = ({ formData, toast }) => {
       dispatch(actionCreators.addCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
-      console.log("errorrrrrrr from categoryActions", error);
       dispatch(actionCreators.addCategoryFail(error?.response?.data?.message));
       showToast(toast, error?.response?.data?.message, "error");
     }

@@ -7,10 +7,11 @@ import iconReviews from "../../../assets/images/pngs/ic-Reviews.png";
 import "../styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { serverUrl } from "../../../API/API";
 import { Loading } from "../Loading";
+import { userLogout } from "../../../store/actions/user/userActions";
 
 export const User = () => {
   const { isLoggedIn, user, isLoading } = useSelector(
@@ -18,12 +19,10 @@ export const User = () => {
   );
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogOut = () => {
-    localStorage.removeItem("TOKEN");
-    toast.success("You have logged out");
-    navigate("/");
-    window.location.reload();
+    const payLoad = { toast, navigate };
+    dispatch(userLogout(payLoad));
   };
 
   return (

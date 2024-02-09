@@ -1,18 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineLogout } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
+import { userLogout } from "../../../store/actions/user/userActions";
 export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
   const [toggleStates, setToggleStates] = useState({
     isCategoriesActive: false,
     isSubCategoriesActive: false,
   });
-
+  const dispatch = useDispatch();
   const HandleToggle = (key) => {
     setToggleStates((prevStates) => ({
       ...prevStates,
@@ -23,12 +24,9 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    localStorage.removeItem("TOKEN");
-    toast.success("You have logged out");
-    navigate("/user/login");
-    window.location.reload();
+    const payLoad = { toast, navigate, role: "ADMIN" };
+    dispatch(userLogout(payLoad));
   };
-
   return (
     <div className={`Admin-SideBar px-3 ${isActive ? "active" : ""}`}>
       <div className="d-flex justify-content-between align-items-center px-1  ">

@@ -4,23 +4,31 @@ import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import { initialValues, validate } from "../../validation/loginValidation";
-import { handleLogin } from "../../formsSubmitions/loginSubmition";
+
 import "../Auth.css";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { sellerLogin } from "../../store/actions/seller/sellerActions";
 
 const SellerLogin = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleLogin(values, formik, navigate, "seller");
+      handleLogin(values);
     },
     validate,
   });
+
+  const handleLogin = (values) => {
+    const payLoad = { values, toast, navigate };
+    dispatch(sellerLogin(payLoad));
+  };
   return (
     <div className="login row align-items-center">
       <div className="col-12 col-md-4">

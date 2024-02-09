@@ -4,6 +4,7 @@ import "../Auth.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -12,19 +13,24 @@ import {
   initialValues,
   validate,
 } from "../../validation/registerValidation.js";
-import { handleRegistration } from "../../formsSubmitions/registerSubmition.js";
+import { useDispatch } from "react-redux";
+import { userRegister } from "../../store/actions/user/userActions.js";
 
 const Index = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleRegistration(values, formik, navigate, "user");
+      handleRegistration(values);
     },
     validate,
   });
-
+  const handleRegistration = (values) => {
+    const payLoad = { values, toast, navigate };
+    dispatch(userRegister(payLoad));
+  };
   return (
     <div className="register row ">
       <div className="col-12 col-md-6">

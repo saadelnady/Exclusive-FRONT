@@ -3,6 +3,7 @@ import "../Auth.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
+import { toast } from "react-toastify";
 
 import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
 
@@ -13,18 +14,24 @@ import {
   initialValues,
   validate,
 } from "../../validation/registerValidation.js";
-import { handleRegistration } from "../../formsSubmitions/registerSubmition.js";
+import { useDispatch } from "react-redux";
+import { sellerRegister } from "../../store/actions/seller/sellerActions.js";
 
 const SellerRegister = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleRegistration(values, formik, navigate, "seller");
+      handleRegister(values);
     },
     validate,
   });
+  const handleRegister = (values) => {
+    const payLoad = { values, toast, navigate };
+    dispatch(sellerRegister(payLoad));
+  };
 
   return (
     <div className="register row align-items-center">

@@ -11,11 +11,12 @@ import { initialValues, validate } from "../../validation/loginValidation";
 import "../Auth.css";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../store/actions/user/userActions";
+import { userLogin } from "../../store/actions/user/userActions";
+import { Loading } from "../shared/Loading";
 
 const Index = () => {
-  const userReducer = useSelector((state) => state.userReducer);
-  console.log(userReducer.user);
+  const { isLoading } = useSelector((state) => state.userReducer);
+
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,16 +30,8 @@ const Index = () => {
   });
 
   const handleLogin = (values) => {
-    const payload = { values, toast };
-    dispatch(loginUser(payload));
-    setTimeout(() => {
-      if (userReducer.user === "ADMIN") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
-      window.location.reload();
-    }, 2500);
+    const payload = { values, toast, navigate };
+    dispatch(userLogin(payload));
   };
 
   return (
@@ -111,8 +104,12 @@ const Index = () => {
             </label>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <button className="btn p-3 fs-4 submit " type="sbmit">
+            <button
+              className="btn p-3 fs-4 submit d-flex justify-content-between align-items-center"
+              type="sbmit"
+            >
               Login
+              {isLoading && <Loading />}
             </button>
             <NavLink className="forget-password p-3 fs-5">
               Forget Password ?

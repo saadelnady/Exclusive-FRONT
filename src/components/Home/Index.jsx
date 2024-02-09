@@ -9,8 +9,9 @@ import { NavLink } from "react-router-dom";
 import { OurProducts } from "./OurProducts";
 import { NewArrival } from "./NewArrival";
 import { AboutUs } from "../About/AboutUs";
-import bgAnnounce2 from "../../assets/images/pngs/bg-announce-2.png";
 import { Categories } from "./Categories";
+
+import bgAnnounce2 from "../../assets/images/pngs/bg-announce-2.png";
 
 import { fetchUser } from "../../store/actions/user/userActions";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
@@ -34,11 +35,11 @@ const Index = () => {
       <FlashSale />
       <CategoriesBrowse />
       <BestSelling />
-      <div>
-        <NavLink>
-          <img src={bgAnnounce2} alt="" className="w-100" />
-        </NavLink>
-      </div>
+
+      <NavLink>
+        <img src={bgAnnounce2} alt="" className="w-100" />
+      </NavLink>
+
       <OurProducts />
       <NewArrival />
       <AboutUs />
