@@ -22,7 +22,9 @@
     visibility: visible;
   }
 }
-
+.categouries-links .arrow-right {
+  font-size: 30px;
+}
 .categouries-links li {
   position: relative;
   border-radius: 5px;

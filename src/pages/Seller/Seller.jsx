@@ -13,7 +13,7 @@ import Profile from "../../components/Profile/Index";
 
 export const Seller = () => {
   const { isLoading } = useSelector((state) => state.sellerReducer);
-  console.log(isLoading);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -31,7 +31,7 @@ const Index = () => {
         <Categories />
         <Slider />
       </div>
-      <CategoriesBrowse />
+
       <FlashSale />
       <CategoriesBrowse />
       <BestSelling />

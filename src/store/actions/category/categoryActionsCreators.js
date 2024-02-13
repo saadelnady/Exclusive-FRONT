@@ -3,9 +3,10 @@ import {
   CATEGORY_ACTIONS_TYPES,
 } from "../actionTypes";
 
-export const getCategories = () => {
+export const getCategories = (payLoad) => {
   return {
     type: CATEGORIES_ACTIONS_TYPES.GET_CATEGORIES,
+    payLoad,
   };
 };
 export const getCategoriesSuccess = (payLoad) => {
@@ -24,19 +25,19 @@ export const getCategoriesFail = (payLoad) => {
 // ==================================================================================
 export const addCategory = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY,
+    type: CATEGORY_ACTIONS_TYPES.POST_CATEGORY,
     payLoad,
   };
 };
 export const addCategorySuccess = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_SUCCESS,
+    type: CATEGORY_ACTIONS_TYPES.POST_CATEGORY_SUCCESS,
     payLoad,
   };
 };
 export const addCategoryFail = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL,
+    type: CATEGORY_ACTIONS_TYPES.POST_CATEGORY_FAIL,
     payLoad,
   };
 };
@@ -44,19 +45,19 @@ export const addCategoryFail = (payLoad) => {
 
 export const editCategory = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY,
+    type: CATEGORY_ACTIONS_TYPES.PUT_CATEGORY,
     payLoad,
   };
 };
 export const editCategorySuccess = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_SUCCESS,
+    type: CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_SUCCESS,
     payLoad,
   };
 };
 export const editCategoryFail = (payLoad) => {
   return {
-    type: CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_FAIL,
+    type: CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_FAIL,
     payLoad,
   };
 };

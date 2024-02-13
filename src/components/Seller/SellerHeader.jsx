@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export const SellerHeader = () => {
   const { seller } = useSelector((state) => state.sellerReducer);
-  console.log(seller);
+ 
   return (
     <div className="bg-light py-3 ">
       <div className="d-flex justify-content-between align-items-center border-bottom px-2 mx-3 mb-3">

@@ -1,38 +1,107 @@
 import { useFormik } from "formik";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { MdError } from "react-icons/md";
 import { CiCamera } from "react-icons/ci";
-
-import { serverUrl } from "../../API/API";
 
 import { Loading } from "../shared/Loading";
 import {
   initialValues,
   validate,
 } from "../../validation/Admin/SubCategoryValidation";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  addSubCategory,
+  editSubCategory,
+} from "../../store/actions/subCategory/subCategoryActions";
+import { serverUrl } from "../../API/API";
+
 export const AddSubCategory = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
-  const [previewImage, setPreviewImage] = useState("");
+  const { subCategories, isLoading } = useSelector(
+    (state) => state.subCategoryReducer
+  );
 
+  const [previewImage, setPreviewImage] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { subCategoryId } = useParams();
-  const isLoading = false;
 
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleSubmition(values);
+      handleSubmit(values);
     },
     validate,
   });
-  const handleSubmition = (values) => {
+  const handleSubmit = (values) => {
+    if (subCategoryId) {
+      handleEditSubCategory(values);
+    } else {
+      handleAddSubCategory(values);
+    }
+
+    // resetForm();
+    // console.log("values ------------>", values);
+  };
+  useEffect(() => {
+    if (subCategoryId) {
+      const targetSubCategory = subCategories.find(
+        (subCategory) => subCategory._id === subCategoryId
+      );
+      if (targetSubCategory) {
+        formik.setValues({
+          title: targetSubCategory.title,
+          image: targetSubCategory.image,
+          previewImage: `${serverUrl}/${targetSubCategory.image}`,
+          category: targetSubCategory.category._id,
+        });
+      }
+    } else {
+      formik.setValues({
+        title: "",
+        image: "",
+        previewImage: "",
+      });
+    }
+  }, [subCategoryId, subCategories, formik.setValues]);
+
+  const handleEditSubCategory = (values) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("image", values.image);
+    formData.append("category", values.category);
+    setPreviewImage("");
+    const payload = { formData, toast, subCategoryId };
+    dispatch(editSubCategory(payload));
+    resetForm();
+
     console.log(values);
   };
+
+  const handleAddSubCategory = (values) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("image", values.image);
+    formData.append("category", values.category);
+    setPreviewImage("");
+    const payload = { formData, toast };
+    dispatch(addSubCategory(payload));
+    resetForm();
+  };
+  const resetForm = () => {
+    formik.resetForm();
+    setPreviewImage("");
+    document.getElementById("categoryTitle").value = "";
+    setTimeout(() => {
+      navigate("/admin/subCategories");
+      window.location.reload();
+    }, 2000);
+  };
+
   // ================================================================================
   const handleImageChange = (event) => {
-    console.log("event.currentTarget", event.currentTarget.files);
     const imageFile = event.currentTarget.files[0];
 
     event.currentTarget.value = null;
@@ -43,7 +112,6 @@ export const AddSubCategory = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageDataURL = e.target.result;
-        console.log(imageDataURL);
         setPreviewImage(imageDataURL);
         formik.setFieldValue("image", imageFile);
         formik.setFieldValue("previewImage", imageDataURL); // Assigning imageDataURL directly, no need to use previewImage state
@@ -55,13 +123,13 @@ export const AddSubCategory = () => {
   const handleRemoveImage = () => {
     formik.setFieldValue("image", null);
     formik.setFieldValue("previewImage", null);
-    document.getElementById("CategoryImage").value = null; // Reset the input field
+    document.getElementById("subCategoryImage").value = null; // Reset the input field
     setPreviewImage(""); // Reset the preview image
   };
 
   return (
     <div className="vh-100 bg-light py-5">
-      <div className="container">
+      <div className="container addsubcategory">
         <h1 className="mb-5 fw-bold">
           {subCategoryId ? "Edit Subcategory " : "Add New Subcategory"}
         </h1>
@@ -74,7 +142,10 @@ export const AddSubCategory = () => {
             <label htmlFor="subCategoryImage">
               {formik.values.previewImage ? (
                 <div className="subCategoryImage" id="subCategoryImage">
-                  <img src={formik.values.previewImage} alt="Category" />
+                  <img
+                    src={formik.values.previewImage}
+                    alt="subCategoryImage"
+                  />
                 </div>
               ) : (
                 <div className="add-img">
@@ -112,11 +183,11 @@ export const AddSubCategory = () => {
             type="text"
             id="categoryTitle"
             placeholder="Subcategory title"
-            className="form-control mb-3 w-50"
+            className="form-control mb-3"
             name="title"
             value={formik.values.title}
-            // onChange={formik.handleChange}
-            // onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
           {formik.touched.title && formik.errors.title ? (
             <p>
@@ -125,15 +196,27 @@ export const AddSubCategory = () => {
             </p>
           ) : null}
 
-          <select name="" id="">
+          <select
+            name="category"
+            id="category"
+            onChange={formik.handleChange}
+            value={formik.values.category}
+          >
             {categories?.map((category, index) => {
               return (
-                <option key={index} value={category.title}>
+                <option key={index} value={category._id}>
                   {category.title}
                 </option>
               );
             })}
           </select>
+
+          {formik.touched.category && formik.errors.category ? (
+            <p>
+              <MdError className="fs-3 me-2" />
+              {formik.errors.category}
+            </p>
+          ) : null}
           <button type="submit" className="btn btn-danger">
             {isLoading ? (
               <Loading />

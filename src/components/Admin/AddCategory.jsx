@@ -95,7 +95,7 @@ export const AddCategory = () => {
   };
   // ================================================================================
   const handleImageChange = (event) => {
-    console.log("event.currentTarget", event.currentTarget.files);
+ 
     const imageFile = event.currentTarget.files[0];
 
     event.currentTarget.value = null;
@@ -106,7 +106,7 @@ export const AddCategory = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageDataURL = e.target.result;
-        console.log(imageDataURL);
+   
         setPreviewImage(imageDataURL);
         formik.setFieldValue("image", imageFile);
         formik.setFieldValue("previewImage", imageDataURL); // Assigning imageDataURL directly, no need to use previewImage state

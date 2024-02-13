@@ -25,7 +25,7 @@ export const Categories = () => {
                     )}
                   </p>
                 </div>
-              </NavLink>{" "}
+              </NavLink>
               {category?.subCategories?.length > 0 && (
                 <SubCategories category={category} />
               )}

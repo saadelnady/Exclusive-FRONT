@@ -37,7 +37,7 @@ export const AddProduct = () => {
     setImages([...images, ...selectedImages]);
   };
 
-  console.log(images);
+ 
 
   return (
     <div className="bg-light h-100">

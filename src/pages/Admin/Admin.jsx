@@ -17,6 +17,7 @@ import Profile from "../../components/Profile/Index";
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
 import "../../components/Admin/styles/Admin.css";
+import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -57,7 +58,19 @@ export const Admin = ({ isWarning, handleWarning }) => {
             path="/Categories/editCategory/:categoryId"
             element={<AddCategory />}
           />
-          <Route path="/subCategories" element={<SubCategories />} />
+          <Route
+            path="/subCategories/editSubCategory/:subCategoryId"
+            element={<AddSubCategory />}
+          />
+          <Route
+            path="/subCategories"
+            element={
+              <SubCategories
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+              />
+            }
+          />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
         </Routes>
       </div>

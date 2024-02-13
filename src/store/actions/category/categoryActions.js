@@ -1,58 +1,62 @@
 import { deleteData, getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
-import * as actionCreators from "./categoryActionsCreators";
+import * as actionsCreators from "./categoryActionsCreators";
+// =========================================================================================
 
 export const fetchCategories = () => {
   return async (dispatch) => {
-    dispatch(actionCreators.getCategories());
+    dispatch(actionsCreators.getCategories());
     try {
-      const data = await getData(`/api/categories`);
-      dispatch(actionCreators.getCategoriesSuccess(data.data.categories));
+      const response = await getData(`/api/categories`);
+      dispatch(actionsCreators.getCategoriesSuccess(response.data.categories));
     } catch (error) {
-      dispatch(actionCreators.getCategoriesFail(error));
+      dispatch(actionsCreators.getCategoriesFail(error));
     }
   };
 };
+// =========================================================================================
 
 export const addCategory = ({ formData, toast }) => {
   return async (dispatch) => {
-    dispatch(actionCreators.addCategory(formData));
+    dispatch(actionsCreators.addCategory(formData));
     try {
       const response = await postData(`/api/categories`, formData);
-      dispatch(actionCreators.addCategorySuccess(response));
+      dispatch(actionsCreators.addCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
-      dispatch(actionCreators.addCategoryFail(error?.response?.data?.message));
+      dispatch(actionsCreators.addCategoryFail(error?.response?.data?.message));
       showToast(toast, error?.response?.data?.message, "error");
     }
   };
 };
+// =========================================================================================
 
 export const editCategory = ({ categoryId, formData, toast }) => {
   return async (dispatch) => {
-    dispatch(actionCreators.editCategory(formData));
+    dispatch(actionsCreators.editCategory(formData));
 
     try {
       const response = await putData(`/api/categories/${categoryId}`, formData);
-      dispatch(actionCreators.editCategorySuccess(response?.data));
+      dispatch(actionsCreators.editCategorySuccess(response?.data));
       showToast(toast, response?.message, "success");
     } catch (error) {
-      dispatch(actionCreators.editCategoryFail(error));
+      dispatch(actionsCreators.editCategoryFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
   };
 };
+// =========================================================================================
 
 export const deleteCategory = ({ categoryId, toast }) => {
   return async (dispatch) => {
-    dispatch(actionCreators.deleteCategory);
+    dispatch(actionsCreators.deleteCategory());
 
     try {
       const response = await deleteData(`/api/categories/${categoryId}`);
-      dispatch(actionCreators.deleteCategorySuccess(response.data));
+      dispatch(actionsCreators.deleteCategorySuccess(response.data));
       showToast(toast, response?.message, "success");
     } catch (error) {
-      dispatch(actionCreators.deleteCategoryFail(error));
+      dispatch(actionsCreators.deleteCategoryFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
   };

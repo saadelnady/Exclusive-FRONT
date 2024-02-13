@@ -35,7 +35,7 @@ export const userLogin = ({ values, toast, navigate }) => {
         window.location.reload();
       });
     } catch (error) {
-      console.log("error   ===== >", error?.response?.data?.message);
+   
       dispatch(actionCreators.postUserLoginFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
@@ -74,7 +74,7 @@ export const userRegister = ({ values, toast, navigate }) => {
 
     try {
       const response = await postData("/api/users/register", values);
-      console.log("response ====>", response);
+   
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {

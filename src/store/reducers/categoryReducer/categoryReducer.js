@@ -40,11 +40,10 @@ const categoryReducer = (state = initialState, action) => {
 
     // ==================================================
 
-    case CATEGORY_ACTIONS_TYPES.ADD_CATEGORY:
+    case CATEGORY_ACTIONS_TYPES.POST_CATEGORY:
       return { ...state, isLoading: true };
 
-    case CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_SUCCESS:
-      console.log("action.payLoad=------------>", action.payLoad);
+    case CATEGORY_ACTIONS_TYPES.POST_CATEGORY_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -54,9 +53,7 @@ const categoryReducer = (state = initialState, action) => {
         message: action.payLoad.message,
       };
 
-    case CATEGORY_ACTIONS_TYPES.ADD_CATEGORY_FAIL:
-      console.log("action.payLoad=------------>", action.payLoad);
-
+    case CATEGORY_ACTIONS_TYPES.POST_CATEGORY_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -66,17 +63,17 @@ const categoryReducer = (state = initialState, action) => {
 
     // ==================================================
 
-    case CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY:
+    case CATEGORY_ACTIONS_TYPES.PUT_CATEGORY:
       return { ...state, isLoading: true };
 
-    case CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_SUCCESS:
+    case CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_SUCCESS:
       return {
         ...state,
         isLoading: false,
         category: { ...state.category, ...action.payLoad },
       };
 
-    case CATEGORY_ACTIONS_TYPES.EDIT_CATEGORY_FAIL:
+    case CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_FAIL:
       return { ...state, isLoading: false, error: "error" };
 
     // ==================================================
