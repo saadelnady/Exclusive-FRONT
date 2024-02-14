@@ -50,6 +50,7 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+  object-fit: cover;
 }
 .categouries-links div,
 .categouries-links p {
@@ -80,6 +81,8 @@
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
+  max-height: 200px;
+  overflow-y: scroll;
 }
 
 .sub-categories-links li {

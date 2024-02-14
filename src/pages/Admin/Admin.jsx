@@ -17,7 +17,6 @@ import Profile from "../../components/Profile/Index";
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
 import "../../components/Admin/styles/Admin.css";
-import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);

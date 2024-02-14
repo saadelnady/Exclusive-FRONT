@@ -65,7 +65,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
           <Loading />
         ) : (
           <>
-            {subCategories.length > 0 ? (
+            {subCategories?.length > 0 ? (
               <table className="w-100 rounded text-center">
                 <thead>
                   <tr className="">
@@ -79,28 +79,28 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {subCategories.map((subCategory, index) => (
+                  {subCategories?.map((subCategory, index) => (
                     <tr key={index} className=" ">
                       <td className="border-end">
                         {(currentPage - 1) * limit + index + 1}
                       </td>
                       <td>
                         <img
-                          src={`${serverUrl}/${subCategory.image}`}
+                          src={`${serverUrl}/${subCategory?.image}`}
                           alt=""
                           className="subCategory-image"
                         />
                       </td>
-                      <td>{subCategory.title}</td>
-                      <td>{subCategory.category.title}</td>
-                      <td>{formatDateAndTime(subCategory.createdAt)}</td>
-                      <td>{formatDateAndTime(subCategory.updatedAt)}</td>
+                      <td>{subCategory?.title}</td>
+                      <td>{subCategory?.category?.title}</td>
+                      <td>{formatDateAndTime(subCategory?.createdAt)}</td>
+                      <td>{formatDateAndTime(subCategory?.updatedAt)}</td>
                       <td>
                         <div className="options-wrapper">
                           <HiDotsVertical className=" " />
                           <div className="options">
                             <NavLink
-                              to={`/admin/subCategories/editSubCategory/${subCategory._id}`}
+                              to={`/admin/subCategories/editSubCategory/${subCategory?._id}`}
                             >
                               <button className="edit">
                                 <FaRegEdit /> Edit
@@ -109,7 +109,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
                             <button
                               onClick={() => {
                                 handleWarning();
-                                setSubCategoryId(subCategory._id);
+                                setSubCategoryId(subCategory?._id);
                               }}
                             >
                               <RiDeleteBin6Line /> delete
