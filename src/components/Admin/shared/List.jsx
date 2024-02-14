@@ -33,12 +33,7 @@ export const List = ({ data, isLoading }) => {
                   <tr key={index} className="border-bottom ">
                     <td>{index}</td>
                     <td>
-                      <img
-                        src={`${serverUrl}/${
-                          item.sellerImage || item.userImage
-                        }`}
-                        alt=""
-                      />
+                      <img src={`${serverUrl}/${item.image}`} alt="" />
                     </td>
                     <td>{item.firstName}</td>
                     <td>{item.lastName}</td>

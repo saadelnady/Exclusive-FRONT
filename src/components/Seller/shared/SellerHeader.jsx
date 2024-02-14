@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export const SellerHeader = () => {
   const { seller } = useSelector((state) => state.sellerReducer);
- 
+
   return (
     <div className="bg-light py-3 ">
       <div className="d-flex justify-content-between align-items-center border-bottom px-2 mx-3 mb-3">
@@ -18,8 +18,8 @@ export const SellerHeader = () => {
         <div className="d-flex  align-items-center">
           <IoIosNotifications className="fs-2 cursor-pointer" />
           <FaEnvelope className="fs-2 cursor-pointer" />
-          <img src={seller.sellerImage} alt="Seller-img" />
-          <p className="text-dark fs-3">{seller.firstName}</p>
+          <img src={seller?.image} alt="Seller-img" />
+          <p className="text-dark fs-3">{seller?.firstName}</p>
         </div>
       </div>
     </div>

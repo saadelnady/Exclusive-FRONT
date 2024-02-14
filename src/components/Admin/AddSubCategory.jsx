@@ -14,19 +14,21 @@ import { useEffect, useState } from "react";
 import {
   addSubCategory,
   editSubCategory,
+  fetchSubCategory,
 } from "../../store/actions/subCategory/subCategoryActions";
 import { serverUrl } from "../../API/API";
+import { fetchCategories } from "../../store/actions/category/categoryActions";
 
 export const AddSubCategory = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
-  const { subCategories, isLoading } = useSelector(
+  console.log("categories ----->", categories);
+  const { isLoading, subCategory } = useSelector(
     (state) => state.subCategoryReducer
   );
-
-  const [previewImage, setPreviewImage] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { subCategoryId } = useParams();
+  const [previewImage, setPreviewImage] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues,
@@ -35,38 +37,51 @@ export const AddSubCategory = () => {
     },
     validate,
   });
+
   const handleSubmit = (values) => {
     if (subCategoryId) {
       handleEditSubCategory(values);
     } else {
       handleAddSubCategory(values);
     }
-
-    // resetForm();
-    // console.log("values ------------>", values);
   };
+  // ================================================================================
+
   useEffect(() => {
     if (subCategoryId) {
-      const targetSubCategory = subCategories.find(
-        (subCategory) => subCategory._id === subCategoryId
-      );
-      if (targetSubCategory) {
-        formik.setValues({
-          title: targetSubCategory.title,
-          image: targetSubCategory.image,
-          previewImage: `${serverUrl}/${targetSubCategory.image}`,
-          category: targetSubCategory.category._id,
-        });
-      }
+      dispatch(fetchSubCategory(subCategoryId));
     } else {
       formik.setValues({
         title: "",
         image: "",
         previewImage: "",
+        category: "",
       });
     }
-  }, [subCategoryId, subCategories, formik.setValues]);
+  }, [dispatch]);
 
+  useEffect(() => {
+    if (subCategory && subCategoryId) {
+      formik.setValues({
+        title: subCategory.title,
+        image: subCategory.image,
+        previewImage: `${serverUrl}/${subCategory.image}`,
+      });
+    } else {
+      formik.setValues({
+        title: "",
+        image: "",
+        previewImage: "",
+        category: "",
+      });
+    }
+  }, [subCategory, subCategoryId]);
+
+  useEffect(() => {
+    dispatch(fetchCategories({ limit: 10, page: 1 }));
+  }, []);
+
+  // ================================================================================
   const handleEditSubCategory = (values) => {
     const formData = new FormData();
     formData.append("title", values.title);
@@ -76,9 +91,8 @@ export const AddSubCategory = () => {
     const payload = { formData, toast, subCategoryId };
     dispatch(editSubCategory(payload));
     resetForm();
-
-    console.log(values);
   };
+  // ================================================================================
 
   const handleAddSubCategory = (values) => {
     const formData = new FormData();
@@ -90,6 +104,8 @@ export const AddSubCategory = () => {
     dispatch(addSubCategory(payload));
     resetForm();
   };
+  // ================================================================================
+
   const resetForm = () => {
     formik.resetForm();
     setPreviewImage("");

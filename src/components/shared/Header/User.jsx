@@ -40,7 +40,7 @@ export const User = () => {
             aria-expanded="false"
           >
             <img
-              src={`${serverUrl}/${user.userImage}`}
+              src={`${serverUrl}/${user.image}`}
               alt="user-logo"
               className="w-100"
             />

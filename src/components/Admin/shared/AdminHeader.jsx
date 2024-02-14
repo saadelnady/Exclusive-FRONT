@@ -18,7 +18,7 @@ export const AdminHeader = ({ handleSidebarActivation }) => {
         <IoIosNotifications className="fs-2 cursor-pointer" />
         <FaEnvelope className="fs-2 cursor-pointer" />
         <img
-          src={`${serverUrl}/${user.userImage}`}
+          src={`${serverUrl}/${user.image}`}
           alt="AdminImage"
           className="admin-image"
         />

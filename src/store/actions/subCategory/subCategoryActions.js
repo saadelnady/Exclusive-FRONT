@@ -16,6 +16,24 @@ export const fetchSubCategories = ({ page, limit }) => {
   };
 };
 // =========================================================================================
+
+export const fetchSubCategory = (subCategoryId) => {
+  return async (dispatch) => {
+    console.log("subCategoryId ---- > ", subCategoryId);
+    dispatch(actionsCreators.getSubCategories(subCategoryId));
+    try {
+      const response = await getData(`/api/subCategories/${subCategoryId}`);
+      console.log("response ---- > ", response);
+
+      dispatch(
+        actionsCreators.getSubCategorySuccess(response.data.subCategory)
+      );
+    } catch (error) {
+      dispatch(actionsCreators.getSubCategoryFail(error));
+    }
+  };
+};
+// =========================================================================================
 export const addSubCategory = ({ formData, toast }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.addSubCategory(formData));

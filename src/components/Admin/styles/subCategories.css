@@ -17,11 +17,10 @@
 }
 .subCategories-page {
   position: relative;
-  padding: 60px 0 60px 0;
+  padding: 20px 0 60px 0;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .subCategories-page > div {
   border-radius: 6px;
@@ -36,17 +35,17 @@
     overflow-x: scroll;
   }
 }
+
+.subCategories-page .subCategories-list {
+  width: 95%;
+  margin: 40px auto;
+}
 @media (min-width: 1200px) {
   .subCategories-page .subCategories-list {
     width: 90%;
-    margin: 0 auto;
+    margin: 30px auto;
   }
 }
-.subCategories-page .subCategories-list {
-  width: 95%;
-  margin: 0 auto;
-}
-
 .subCategories-page > div table {
   height: 100%;
 }

@@ -21,6 +21,26 @@ export const getCategoriesFail = (payLoad) => {
     payLoad,
   };
 };
+// ==================================================================================
+
+export const getCategory = (payLoad) => {
+  return {
+    type:   CATEGORY_ACTIONS_TYPES.GET_CATEGORY,
+    payLoad,
+  };
+};
+export const getCategorySuccess = (payLoad) => {
+  return {
+    type:  CATEGORY_ACTIONS_TYPES.GET_CATEGORY_SUCCESS,
+    payLoad,
+  };
+};
+export const getCategoryFail = (payLoad) => {
+  return {
+    type: CATEGORY_ACTIONS_TYPES.GET_CATEGORY_FAIL,
+    payLoad,
+  };
+};
 
 // ==================================================================================
 export const addCategory = (payLoad) => {

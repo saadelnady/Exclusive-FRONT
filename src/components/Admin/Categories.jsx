@@ -12,17 +12,43 @@ import {
   DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
   DELETE_MESSAGE,
 } from "../../helpers/warningMessges";
-import { deleteCategory } from "../../store/actions/category/categoryActions";
-import { useState } from "react";
+import {
+  deleteCategory,
+  fetchCategories,
+} from "../../store/actions/category/categoryActions";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Loading } from "../shared/Loading";
+import { Search } from "../shared/Search";
+import { Pagination } from "../shared/Pagination";
 
 export const Categories = ({ isWarning, handleWarning }) => {
-  const { categories, isLoading } = useSelector(
+  const { categories, isLoading, total } = useSelector(
     (state) => state.categoryReducer
   );
   const [categoryId, setCategoryId] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const dispatch = useDispatch();
+
+  // ==========================================================
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // ==========================================================
+
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN")) {
+      dispatch(fetchCategories({ limit, page: currentPage }));
+    }
+  }, [currentPage, dispatch]);
+
+  // ==========================================================
   const handleDeleteCategory = () => {
     const payLoad = { categoryId, toast };
     dispatch(deleteCategory(payLoad));
@@ -31,6 +57,8 @@ export const Categories = ({ isWarning, handleWarning }) => {
       window.location.reload();
     }, 2000);
   };
+  // ==========================================================
+
   return (
     <div className="categories-page ">
       {isWarning && (
@@ -41,11 +69,15 @@ export const Categories = ({ isWarning, handleWarning }) => {
           handleAction={handleDeleteCategory}
         />
       )}
+      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
+        <h1 className="fw-bold col-12 col-lg-5">All Categories </h1>
 
+        <Search data={categories} setSearchResult={setSearchResult} />
+      </div>
       <div className="categories-list bg-white ">
         {isLoading ? (
           <Loading />
-        ) : categories.length > 0 ? (
+        ) : categories?.length > 0 || searchResult?.length > 0 ? (
           <table className="w-100 rounded text-center">
             <thead>
               <tr className="">
@@ -58,50 +90,61 @@ export const Categories = ({ isWarning, handleWarning }) => {
               </tr>
             </thead>
             <tbody>
-              {categories?.map((category, index) => (
-                <tr key={index} className=" ">
-                  <td className="border-end">{index + 1}</td>
-                  <td>
-                    <img
-                      src={`${serverUrl}/${category.image}`}
-                      alt="categoryImage"
-                      className="category-image"
-                    />
-                  </td>
-                  <td>{category.title}</td>
-                  <td>{formatDateAndTime(category.createdAt)}</td>
-                  <td>{formatDateAndTime(category.updatedAt)}</td>
+              {(searchResult.length > 0 ? searchResult : categories).map(
+                (category, index) => (
+                  <tr key={index} className=" ">
+                    <td className="border-end">
+                      {" "}
+                      {(currentPage - 1) * limit + index + 1}
+                    </td>
+                    <td>
+                      <img
+                        src={`${serverUrl}/${category?.image}`}
+                        alt="categoryImage"
+                        className="category-image"
+                      />
+                    </td>
+                    <td>{category?.title}</td>
+                    <td>{formatDateAndTime(category?.createdAt)}</td>
+                    <td>{formatDateAndTime(category?.updatedAt)}</td>
 
-                  <td>
-                    <div className="options-wrapper">
-                      <HiDotsVertical className=" " />
-                      <div className="options">
-                        <NavLink
-                          to={`/admin/Categories/editCategory/${category._id}`}
-                        >
-                          <button className="edit">
-                            <FaRegEdit /> Edit
+                    <td>
+                      <div className="options-wrapper">
+                        <HiDotsVertical className=" " />
+                        <div className="options">
+                          <NavLink
+                            to={`/admin/Categories/editCategory/${category?._id}`}
+                          >
+                            <button className="edit">
+                              <FaRegEdit /> Edit
+                            </button>
+                          </NavLink>
+                          <button
+                            onClick={() => {
+                              handleWarning();
+                              setCategoryId(category?._id);
+                            }}
+                          >
+                            <RiDeleteBin6Line /> Delete
                           </button>
-                        </NavLink>
-                        <button
-                          onClick={() => {
-                            handleWarning();
-                            setCategoryId(category._id);
-                          }}
-                        >
-                          <RiDeleteBin6Line /> Delete
-                        </button>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </table>
         ) : (
-          <p>No categories to show</p>
+          <p>there 's no categories to show</p>
         )}
       </div>
+      <Pagination
+        itemsPerPage={limit}
+        paginate={handlePageChange}
+        currentPage={currentPage}
+        totalItems={total}
+      />
     </div>
   );
 };

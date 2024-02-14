@@ -5,9 +5,11 @@ import { CgMenuRight } from "react-icons/cg";
 import { HiOutlineLogout } from "react-icons/hi";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { sellerLogout } from "../../store/actions/seller/sellerActions";
+import { sellerLogout } from "../../../store/actions/seller/sellerActions";
+import "../styles/sellerSideBar.css";
+import { FaXmark } from "react-icons/fa6";
 
-export const SellerSideBar = () => {
+export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,11 +19,16 @@ export const SellerSideBar = () => {
   };
 
   return (
-    <div className="Seller-Sidebar">
-      <aside className=" px-3 h-75">
+    <div className={`Seller-Sidebar  px-3 ${isActive ? "active" : ""}`}>
+      <aside className="px-3 h-75">
         <div className="d-flex justify-content-between align-items-center px-1  ">
-          <h2 className="text-light py-5 px-3">{seller.firstName}.</h2>
-          <CgMenuRight className="text-light fs-1 cursor-pointer" />
+          <h2 className="text-light py-5 px-3">{seller?.firstName}.</h2>
+          <FaXmark
+            onClick={() => {
+              handleSidebarActivation();
+            }}
+            className="close-Sidebar"
+          />
         </div>
         <div className="h-50 d-flex justify-content-between flex-column">
           <ul>

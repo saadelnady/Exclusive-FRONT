@@ -3,12 +3,28 @@ import { showToast } from "../../../helpers/toast_helper";
 import * as actionsCreators from "./categoryActionsCreators";
 // =========================================================================================
 
-export const fetchCategories = () => {
+export const fetchCategories = ({ limit, page, text }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getCategories());
     try {
-      const response = await getData(`/api/categories`);
+      const response = await getData(
+        `/api/categories?limit=${limit}&page=${page}&text=${text}`
+      );
+      console.log("response ==== >", response);
       dispatch(actionsCreators.getCategoriesSuccess(response.data.categories));
+    } catch (error) {
+      dispatch(actionsCreators.getCategoriesFail(error));
+    }
+  };
+};
+// =========================================================================================
+
+export const fetchCategory = (categoryId) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getCategory());
+    try {
+      const response = await getData(`/api/categories/${categoryId}`);
+      dispatch(actionsCreators.getCategorySuccess(response?.data?.category));
     } catch (error) {
       dispatch(actionsCreators.getCategoriesFail(error));
     }

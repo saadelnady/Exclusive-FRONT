@@ -15,7 +15,6 @@ import { AddCategory } from "../../components/Admin/AddCategory";
 import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
-import { fetchCategories } from "../../store/actions/category/categoryActions";
 import "../../components/Admin/styles/Admin.css";
 
 export const Admin = ({ isWarning, handleWarning }) => {
@@ -31,7 +30,6 @@ export const Admin = ({ isWarning, handleWarning }) => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
-      dispatch(fetchCategories());
     }
   }, [dispatch]);
   return (
@@ -58,7 +56,7 @@ export const Admin = ({ isWarning, handleWarning }) => {
             element={<AddCategory />}
           />
           <Route
-            path="/subCategories/editSubCategory/:subCategoryId"
+            path="/subCategories/:subCategoryId"
             element={<AddSubCategory />}
           />
           <Route

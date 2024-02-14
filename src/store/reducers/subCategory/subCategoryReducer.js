@@ -34,7 +34,7 @@ const subCategoryReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        category: action.payLoad,
+        subCategory: action.payLoad,
       };
     case SUBCATEGORY_ACTIONS_TYPES.GET_SUBCATEGORY_FAIL:
       return {
@@ -72,14 +72,12 @@ const subCategoryReducer = (state = initialState, action) => {
     case SUBCATEGORY_ACTIONS_TYPES.PUT_SUBCATEGORY:
       return { ...state, isLoading: true };
     case SUBCATEGORY_ACTIONS_TYPES.PUT_SUBCATEGORY_SUCCESS:
-      console.log("action.payLoad  ========>", action.payLoad);
       return {
         ...state,
         isLoading: false,
         subCategory: {
           ...state,
-          isLoading: false,
-          error: "error",
+
           message: action.payLoad,
         },
       };

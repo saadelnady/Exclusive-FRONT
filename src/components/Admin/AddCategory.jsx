@@ -13,6 +13,7 @@ import "./styles/AddCategory.css";
 import {
   addCategory,
   editCategory,
+  fetchCategory,
 } from "../../store/actions/category/categoryActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../shared/Loading";
@@ -20,10 +21,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { serverUrl } from "../../API/API";
 
 export const AddCategory = () => {
-  const { isLoading, categories } = useSelector(
-    (state) => state.categoryReducer
-  );
+  const { isLoading, category } = useSelector((state) => state.categoryReducer);
+  console.log("category from add ======>", category);
   const { categoryId } = useParams();
+  console.log("qdlqhfhfqhwekfhq", categoryId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -39,14 +40,7 @@ export const AddCategory = () => {
 
   useEffect(() => {
     if (categoryId) {
-      const category = categories.find((cat) => cat._id === categoryId);
-      if (category) {
-        formik.setValues({
-          title: category.title,
-          image: category.image,
-          previewImage: `${serverUrl}/${category.image}`,
-        });
-      }
+      dispatch(fetchCategory(categoryId));
     } else {
       formik.setValues({
         title: "",
@@ -54,7 +48,23 @@ export const AddCategory = () => {
         previewImage: "",
       });
     }
-  }, [categoryId, categories, formik.setValues]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (category && categoryId) {
+      formik.setValues({
+        title: category.title,
+        image: category.image,
+        previewImage: `${serverUrl}/${category.image}`,
+      });
+    } else {
+      formik.setValues({
+        title: "",
+        image: "",
+        previewImage: "",
+      });
+    }
+  }, [category, categoryId]);
 
   const handleSubmition = (values) => {
     if (categoryId) {
@@ -95,7 +105,6 @@ export const AddCategory = () => {
   };
   // ================================================================================
   const handleImageChange = (event) => {
- 
     const imageFile = event.currentTarget.files[0];
 
     event.currentTarget.value = null;
@@ -106,7 +115,7 @@ export const AddCategory = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageDataURL = e.target.result;
-   
+
         setPreviewImage(imageDataURL);
         formik.setFieldValue("image", imageFile);
         formik.setFieldValue("previewImage", imageDataURL); // Assigning imageDataURL directly, no need to use previewImage state

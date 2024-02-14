@@ -33,6 +33,7 @@ const categoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case CATEGORY_ACTIONS_TYPES.GET_CATEGORY_SUCCESS:
+      console.log("action.payLoad ======= >", action.payLoad);
       return { ...state, isLoading: false, category: action.payLoad };
 
     case CATEGORY_ACTIONS_TYPES.GET_CATEGORY_FAIL:
@@ -49,7 +50,7 @@ const categoryReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         categories: [...state.categories, action.payLoad.data.category],
-        category: { ...state.category, ...action.payLoad.data.category },
+        category: {},
         message: action.payLoad.message,
       };
 
@@ -70,7 +71,8 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        category: { ...state.category, ...action.payLoad },
+        categories: [],
+        category: {},
       };
 
     case CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_FAIL:

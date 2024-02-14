@@ -23,7 +23,7 @@ const Index = () => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUser());
     }
-    dispatch(fetchCategories());
+    dispatch(fetchCategories({ limit: 7, page: 1 }));
   }, [dispatch]);
   return (
     <div className="container">

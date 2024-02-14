@@ -79,8 +79,8 @@ export const Index = () => {
             <div className="user-pic rounded mx-auto my-5 position-relative user-img rounded-pill bg-light">
               <img
                 src={
-                  `${serverUrl}/${user.userImage} ` ||
-                  `${serverUrl}/${seller.sellerImage} `
+                  `${serverUrl}/${user.image} ` ||
+                  `${serverUrl}/${seller.image} `
                 }
                 alt=""
               />
