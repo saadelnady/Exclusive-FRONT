@@ -10,10 +10,7 @@ import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
-import {
-  initialValues,
-  validate,
-} from "../../validation/registerValidation.js";
+import { initialValues, validate } from "../validation/registerValidation.js";
 import { useDispatch } from "react-redux";
 import { sellerRegister } from "../../store/actions/seller/sellerActions.js";
 

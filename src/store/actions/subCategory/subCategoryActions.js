@@ -1,13 +1,20 @@
 import { deleteData, getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionsCreators from "./subCategoriesActionsCreator";
-export const fetchSubCategories = ({ page, limit }) => {
+export const fetchSubCategories = ({ page, limit, text }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getSubCategories());
     try {
-      const response = await getData(
-        `/api/subCategories?limit=${limit}&page=${page}`
-      );
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/subCategories?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/subCategories?limit=${limit}&page=${page}`
+        );
+      }
 
       dispatch(actionsCreators.getSubCategoriesSuccess(response.data));
     } catch (error) {

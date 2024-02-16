@@ -1,18 +1,21 @@
-.Seller-Sidebar {
-  background-color: var(--blue-color);
-  width: 250px;
+.seller-layout {
+  display: flex;
+  min-height: 100vh;
 }
-.Seller-Sidebar .arrow-right {
-  transition: 0.5s;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -ms-transition: 0.5s;
-  -o-transition: 0.5s;
+.SellerDashboard {
+  background-color: var(--bg-light);
 }
-.Seller-Sidebar .arrow-right.active {
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
+
+.special-form {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
 }

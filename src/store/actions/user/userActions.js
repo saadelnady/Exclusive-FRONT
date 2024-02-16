@@ -8,8 +8,8 @@ export const fetchUser = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getUser());
     try {
-      const data = await getData(`/api/users/getUserProfile`);
-      dispatch(actionCreators.getUserSuccess(data.data.user));
+      const response = await getData(`/api/users/getUserProfile`);
+      dispatch(actionCreators.getUserSuccess(response.data.user));
     } catch (error) {
       dispatch(actionCreators.getUserFail(error));
     }
@@ -33,9 +33,8 @@ export const userLogin = ({ values, toast, navigate }) => {
           navigate("/");
         }
         window.location.reload();
-      });
+      }, 2500);
     } catch (error) {
-   
       dispatch(actionCreators.postUserLoginFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
@@ -74,7 +73,7 @@ export const userRegister = ({ values, toast, navigate }) => {
 
     try {
       const response = await postData("/api/users/register", values);
-   
+
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {

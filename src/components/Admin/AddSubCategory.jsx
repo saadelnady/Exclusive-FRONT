@@ -8,7 +8,7 @@ import { Loading } from "../shared/Loading";
 import {
   initialValues,
   validate,
-} from "../../validation/Admin/SubCategoryValidation";
+} from "../validation/Admin/SubCategoryValidation";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {

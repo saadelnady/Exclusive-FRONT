@@ -6,8 +6,8 @@ export const fetchSeller = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getSeller());
     try {
-      const data = await getData(`/api/sellers/getSellerProfile`);
-      dispatch(actionCreators.getSellerSuccess(data.data.seller));
+      const response = await getData(`/api/sellers/getSellerProfile`);
+      dispatch(actionCreators.getSellerSuccess(response?.data?.seller));
     } catch (error) {
       dispatch(actionCreators.getSellerFail(error));
     }
@@ -24,9 +24,8 @@ export const sellerLogin = ({ values, toast, navigate }) => {
       setTimeout(() => {
         navigate("/Seller");
         window.location.reload();
-      });
+      }, 2500);
     } catch (error) {
-   
       dispatch(actionCreators.postSellerLoginFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
@@ -60,7 +59,7 @@ export const sellerRegister = ({ values, toast, navigate }) => {
 
     try {
       const response = await postData("/api/sellers/register", values);
-   
+
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {
@@ -80,8 +79,8 @@ export const fetchSellers = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getSellers());
     try {
-      const data = await getData(`/api/sellers`);
-      dispatch(actionCreators.getSellersSuccess(data.data.sellers));
+      const response = await getData(`/api/sellers`);
+      dispatch(actionCreators.getSellersSuccess(response?.data?.sellers));
     } catch (error) {
       dispatch(actionCreators.getSellersFail(error));
     }

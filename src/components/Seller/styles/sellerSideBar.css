@@ -33,6 +33,7 @@
   .Seller-Sidebar .close-Sidebar {
     color: white;
     cursor: pointer;
+    font-size: 30px;
   }
 }
 
@@ -53,6 +54,10 @@
 .statstics {
   background-color: var(--bg-light);
 }
-.Seller-Sidebar .Admin-links {
+.Seller-Sidebar .Seller-links {
   height: 50vh;
+}
+.Seller-Sidebar .Seller-links .main-links > li {
+  margin-bottom: 15px;
+  cursor: pointer;
 }

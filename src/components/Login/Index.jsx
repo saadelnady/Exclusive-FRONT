@@ -7,7 +7,7 @@ import { MdError } from "react-icons/md";
 
 import { toast } from "react-toastify";
 
-import { initialValues, validate } from "../../validation/loginValidation";
+import { initialValues, validate } from "../validation/loginValidation";
 import "../Auth.css";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";

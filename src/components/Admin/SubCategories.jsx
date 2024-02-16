@@ -26,8 +26,8 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
   const { isLoading, subCategories, total } = useSelector(
     (state) => state.subCategoryReducer
   );
+
   const [subCategoryId, setSubCategoryId] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
   const dispatch = useDispatch();
 
   // ==========================================================
@@ -68,12 +68,12 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
       )}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-lg-5">All SubCategories </h1>
-        <Search data={subCategories} setSearchResult={setSearchResult} />
+        <Search type={"subCategories"} />
       </div>
       <div className="subCategories-list bg-white ">
         {isLoading ? (
           <Loading />
-        ) : subCategories?.length > 0 || searchResult?.length > 0 ? (
+        ) : subCategories?.length > 0 ? (
           <table className="w-100 rounded text-center">
             <thead>
               <tr className="">
@@ -87,48 +87,46 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
               </tr>
             </thead>
             <tbody>
-              {(searchResult?.length > 0 ? searchResult : subCategories).map(
-                (subCategory, index) => (
-                  <tr key={index} className=" ">
-                    <td className="border-end">
-                      {(currentPage - 1) * limit + index + 1}
-                    </td>
-                    <td>
-                      <img
-                        src={`${serverUrl}/${subCategory?.image}`}
-                        alt="subCategoryimage"
-                        className="subCategory-image"
-                      />
-                    </td>
-                    <td>{subCategory?.title}</td>
-                    <td>{subCategory?.category?.title}</td>
-                    <td>{formatDateAndTime(subCategory?.createdAt)}</td>
-                    <td>{formatDateAndTime(subCategory?.updatedAt)}</td>
-                    <td>
-                      <div className="options-wrapper">
-                        <HiDotsVertical className=" " />
-                        <div className="options">
-                          <NavLink
-                            to={`/admin/subCategories/${subCategory?._id}`}
-                          >
-                            <button className="edit">
-                              <FaRegEdit /> Edit
-                            </button>
-                          </NavLink>
-                          <button
-                            onClick={() => {
-                              handleWarning();
-                              setSubCategoryId(subCategory?._id);
-                            }}
-                          >
-                            <RiDeleteBin6Line /> delete
+              {subCategories.map((subCategory, index) => (
+                <tr key={index} className=" ">
+                  <td className="border-end">
+                    {(currentPage - 1) * limit + index + 1}
+                  </td>
+                  <td>
+                    <img
+                      src={`${serverUrl}/${subCategory?.image}`}
+                      alt="subCategoryimage"
+                      className="subCategory-image"
+                    />
+                  </td>
+                  <td>{subCategory?.title}</td>
+                  <td>{subCategory?.category?.title}</td>
+                  <td>{formatDateAndTime(subCategory?.createdAt)}</td>
+                  <td>{formatDateAndTime(subCategory?.updatedAt)}</td>
+                  <td>
+                    <div className="options-wrapper">
+                      <HiDotsVertical className=" " />
+                      <div className="options">
+                        <NavLink
+                          to={`/admin/subCategories/${subCategory?._id}`}
+                        >
+                          <button className="edit">
+                            <FaRegEdit /> Edit
                           </button>
-                        </div>
+                        </NavLink>
+                        <button
+                          onClick={() => {
+                            handleWarning();
+                            setSubCategoryId(subCategory?._id);
+                          }}
+                        >
+                          <RiDeleteBin6Line /> delete
+                        </button>
                       </div>
-                    </td>
-                  </tr>
-                )
-              )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         ) : (

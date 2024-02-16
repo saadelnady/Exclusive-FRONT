@@ -31,7 +31,7 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
   };
   return (
     <div className={`Admin-SideBar px-3 ${isActive ? "active" : ""}`}>
-      <div className="d-flex justify-content-between align-items-center px-1  ">
+      <div className="d-flex justify-content-between align-items-center px-1">
         <h2 className="text-light py-5 px-3">{user.firstName}.</h2>
         <FaXmark
           onClick={() => {
@@ -71,7 +71,7 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
               <li className="fs-5 ms-3">
                 <NavLink to="/admin/addCategory" className="btn btn-danger">
                   Add Category
-                </NavLink>{" "}
+                </NavLink>
               </li>
             </ul>
           )}
@@ -95,7 +95,7 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
               <li className="fs-5 ms-3">
                 <NavLink to="/admin/addSubCategory" className="btn btn-danger">
                   Add sub Category
-                </NavLink>{" "}
+                </NavLink>
               </li>
             </ul>
           )}

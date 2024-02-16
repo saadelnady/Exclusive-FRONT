@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import {
   initialValues,
   validate,
-} from "../../validation/Admin/CategoryValidation";
+} from "../validation/Admin/CategoryValidation";
 import { toast } from "react-toastify";
 
 import { MdError } from "react-icons/md";

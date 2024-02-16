@@ -26,9 +26,9 @@ export const Categories = ({ isWarning, handleWarning }) => {
   const { categories, isLoading, total } = useSelector(
     (state) => state.categoryReducer
   );
+
+  console.log("total -------->", total);
   const [categoryId, setCategoryId] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const dispatch = useDispatch();
 
@@ -72,12 +72,12 @@ export const Categories = ({ isWarning, handleWarning }) => {
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-lg-5">All Categories </h1>
 
-        <Search data={categories} setSearchResult={setSearchResult} />
+        <Search type={"categories"} />
       </div>
       <div className="categories-list bg-white ">
         {isLoading ? (
           <Loading />
-        ) : categories?.length > 0 || searchResult?.length > 0 ? (
+        ) : categories?.length > 0 ? (
           <table className="w-100 rounded text-center">
             <thead>
               <tr className="">
@@ -90,49 +90,47 @@ export const Categories = ({ isWarning, handleWarning }) => {
               </tr>
             </thead>
             <tbody>
-              {(searchResult.length > 0 ? searchResult : categories).map(
-                (category, index) => (
-                  <tr key={index} className=" ">
-                    <td className="border-end">
-                      {" "}
-                      {(currentPage - 1) * limit + index + 1}
-                    </td>
-                    <td>
-                      <img
-                        src={`${serverUrl}/${category?.image}`}
-                        alt="categoryImage"
-                        className="category-image"
-                      />
-                    </td>
-                    <td>{category?.title}</td>
-                    <td>{formatDateAndTime(category?.createdAt)}</td>
-                    <td>{formatDateAndTime(category?.updatedAt)}</td>
+              {categories.map((category, index) => (
+                <tr key={index} className=" ">
+                  <td className="border-end">
+                    {" "}
+                    {(currentPage - 1) * limit + index + 1}
+                  </td>
+                  <td>
+                    <img
+                      src={`${serverUrl}/${category?.image}`}
+                      alt="categoryImage"
+                      className="category-image"
+                    />
+                  </td>
+                  <td>{category?.title}</td>
+                  <td>{formatDateAndTime(category?.createdAt)}</td>
+                  <td>{formatDateAndTime(category?.updatedAt)}</td>
 
-                    <td>
-                      <div className="options-wrapper">
-                        <HiDotsVertical className=" " />
-                        <div className="options">
-                          <NavLink
-                            to={`/admin/Categories/editCategory/${category?._id}`}
-                          >
-                            <button className="edit">
-                              <FaRegEdit /> Edit
-                            </button>
-                          </NavLink>
-                          <button
-                            onClick={() => {
-                              handleWarning();
-                              setCategoryId(category?._id);
-                            }}
-                          >
-                            <RiDeleteBin6Line /> Delete
+                  <td>
+                    <div className="options-wrapper">
+                      <HiDotsVertical className=" " />
+                      <div className="options">
+                        <NavLink
+                          to={`/admin/Categories/editCategory/${category?._id}`}
+                        >
+                          <button className="edit">
+                            <FaRegEdit /> Edit
                           </button>
-                        </div>
+                        </NavLink>
+                        <button
+                          onClick={() => {
+                            handleWarning();
+                            setCategoryId(category?._id);
+                          }}
+                        >
+                          <RiDeleteBin6Line /> Delete
+                        </button>
                       </div>
-                    </td>
-                  </tr>
-                )
-              )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         ) : (

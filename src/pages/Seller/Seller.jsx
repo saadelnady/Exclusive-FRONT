@@ -1,19 +1,19 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { fetchSeller } from "../../store/actions/seller/sellerActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { SellerSideBar } from "../../components/Seller/shared/SellerSideBar";
 import { SellerHeader } from "../../components/Seller/shared/SellerHeader";
 import { SellerDashboard } from "../../components/Seller/SellerDashboard";
 import { AddProduct } from "../../components/Seller/AddProduct";
-import { Loading } from "../../components/shared/Loading";
+import { Products } from "../../components/Seller/Products.jsx";
+
 import "../../components/Seller/styles/seller.css";
 import Profile from "../../components/Profile/Index";
+import { fetchCategories } from "../../store/actions/category/categoryActions.js";
 
 export const Seller = () => {
-  const { isLoading } = useSelector((state) => state.sellerReducer);
-
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
@@ -25,27 +25,26 @@ export const Seller = () => {
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchSeller());
+      dispatch(fetchCategories());
     } else {
       navigate("/seller/login");
     }
   }, [dispatch]);
   return (
-    <>
-      <div className="d-flex min-vh-100">
-        <SellerSideBar
-          isActive={isActive}
-          handleSidebarActivation={handleSidebarActivation}
-        />
-        <div className="d-flex flex-column w-100">
-          <SellerHeader />
-          <Routes>
-            <Route path="/" element={<SellerDashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/addProduct" element={<AddProduct />} />
-          </Routes>
-        </div>
+    <div className="seller-layout">
+      <SellerSideBar
+        isActive={isActive}
+        handleSidebarActivation={handleSidebarActivation}
+      />
+      <div className="d-flex flex-column w-100">
+        <SellerHeader handleSidebarActivation={handleSidebarActivation} />
+        <Routes>
+          <Route path="/" element={<SellerDashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
       </div>
-      )}
-    </>
+    </div>
   );
 };

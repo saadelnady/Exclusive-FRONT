@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { CgMenuRight } from "react-icons/cg";
 import "../styles/AdminHeader.css";
+
 export const AdminHeader = ({ handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
   return (
@@ -14,7 +15,7 @@ export const AdminHeader = ({ handleSidebarActivation }) => {
           handleSidebarActivation();
         }}
       />
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center flex-wrap">
         <IoIosNotifications className="fs-2 cursor-pointer" />
         <FaEnvelope className="fs-2 cursor-pointer" />
         <img
@@ -22,7 +23,6 @@ export const AdminHeader = ({ handleSidebarActivation }) => {
           alt="AdminImage"
           className="admin-image"
         />
-        <p className="text-dark fs-3">{user.firstName}</p>
       </div>
     </div>
   );

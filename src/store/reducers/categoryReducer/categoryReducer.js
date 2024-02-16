@@ -9,6 +9,7 @@ const initialState = {
   categories: [],
   category: {},
   message: "",
+  total: 0,
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -20,7 +21,9 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        categories: action.payLoad,
+        categories: action.payLoad.categories,
+        total: action.payLoad.total,
+
         error: null,
       };
 

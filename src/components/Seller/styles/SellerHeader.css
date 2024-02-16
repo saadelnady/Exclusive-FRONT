@@ -1,4 +1,4 @@
-.admin-header {
+.Seller-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,13 +14,13 @@
   .burger-icon {
     display: none;
   }
-  .admin-header {
+  .Seller-header {
     display: flex;
     justify-content: end;
     align-items: center;
   }
 }
 
-.admin-image {
+.Seller-image {
   width: 100px;
 }

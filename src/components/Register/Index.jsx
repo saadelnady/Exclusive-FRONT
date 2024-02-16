@@ -9,10 +9,7 @@ import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
-import {
-  initialValues,
-  validate,
-} from "../../validation/registerValidation.js";
+import { initialValues, validate } from "../validation/registerValidation.js";
 import { useDispatch } from "react-redux";
 import { userRegister } from "../../store/actions/user/userActions.js";
 

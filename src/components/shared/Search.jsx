@@ -4,23 +4,20 @@ import { CiSearch } from "react-icons/ci";
 import "./styles/Search.css";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
+import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
 
-export const Search = ({ data, setSearchResult }) => {
+export const Search = ({ type }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    // You need to filter categories here based on search term
-    // const filteredData = data.filter((item) => {
-    //   return item.title.toLowerCase().includes(e.target.value.toLowerCase());
-    // });
 
-    // setSearchResult(filteredData);
     setTimeout(() => {
-      const filteredData = dispatch(
-        fetchCategories({ limit: 10, page: 1, text: searchTerm })
-      );
-      setSearchResult(filteredData);
+      if (type === "categories") {
+        dispatch(fetchCategories({ limit: 10, page: 1, text: searchTerm }));
+      } else if (type === "subCategories") {
+        dispatch(fetchSubCategories({ limit: 10, page: 1, text: searchTerm }));
+      }
     }, 500);
   };
 
@@ -32,9 +29,6 @@ export const Search = ({ data, setSearchResult }) => {
         placeholder="what are you looking for ?"
         onChange={handleSearch}
         value={searchTerm}
-        onBlur={() => {
-          setSearchResult([]);
-        }}
       />
       <CiSearch className="bi bi-search position-absolute top-50 fs-5 fw-bold end translate-middle" />
     </div>
