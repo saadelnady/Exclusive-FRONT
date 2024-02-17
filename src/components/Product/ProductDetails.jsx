@@ -20,6 +20,8 @@ export const ProductDetails = () => {
   const handleColorActive = (color) => {
     setActiveColor(color);
   };
+  const sizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
   const handleSizeActive = (size) => {
     setActiveSize(size);
   };
@@ -159,66 +161,21 @@ export const ProductDetails = () => {
           <div className="size d-flex align-items-center mb-4 ">
             <p className="me-4 fs-4">Size :</p>
             <ul className="select-size d-flex justify-content-between flex-wrap w-75">
-              <li
-                className={
-                  activeSize === "XS"
-                    ? "active cursor-pointer"
-                    : "cursor-pointer"
-                }
-                onClick={() => {
-                  handleSizeActive("XS");
-                }}
-              >
-                XS
-              </li>
-              <li
-                className={
-                  activeSize === "S"
-                    ? "active cursor-pointer"
-                    : " cursor-pointer"
-                }
-                onClick={() => {
-                  handleSizeActive("S");
-                }}
-              >
-                S
-              </li>
-              <li
-                className={
-                  activeSize === "M"
-                    ? "active cursor-pointer"
-                    : " cursor-pointer"
-                }
-                onClick={() => {
-                  handleSizeActive("M");
-                }}
-              >
-                M
-              </li>
-              <li
-                className={
-                  activeSize === "L"
-                    ? "active cursor-pointer"
-                    : " cursor-pointer"
-                }
-                onClick={() => {
-                  handleSizeActive("L");
-                }}
-              >
-                L
-              </li>
-              <li
-                className={
-                  activeSize === "XL"
-                    ? "active cursor-pointer"
-                    : " cursor-pointer"
-                }
-                onClick={() => {
-                  handleSizeActive("XL");
-                }}
-              >
-                XL
-              </li>
+              {sizes.map((size) => (
+                <li
+                  key={size}
+                  className={
+                    activeSize === size
+                      ? "active cursor-pointer"
+                      : "cursor-pointer"
+                  }
+                  onClick={() => {
+                    handleSizeActive(size);
+                  }}
+                >
+                  {size}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="d-flex align-items-center justify-content-between product-buttons">

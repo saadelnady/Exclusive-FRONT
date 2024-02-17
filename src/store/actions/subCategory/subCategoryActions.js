@@ -66,7 +66,7 @@ export const editSubCategory = ({ subCategoryId, formData, toast }) => {
         `/api/subCategories/${subCategoryId}`,
         formData
       );
-      console.log("response === >", response);
+
       dispatch(
         actionsCreators.editSubCategorySuccess(response?.data?.subCategory)
       );

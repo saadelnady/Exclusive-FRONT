@@ -92,7 +92,7 @@ h6 {
   flex-direction: column;
   padding: 30px;
 }
-.spcial-input {
+.special-input {
   outline: none;
   border: 1px solid var(--red-color);
   border-radius: 6px;
@@ -106,6 +106,6 @@ h6 {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
-.spcial-input:focus {
+.special-input:focus {
   box-shadow: 0 0.5rem 1rem var(--red-color);
 }

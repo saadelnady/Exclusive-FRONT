@@ -17,7 +17,7 @@ export const fetchCategories = ({ limit = "", page = "", text = "" } = {}) => {
       } else {
         response = await getData(`/api/categories`);
       }
-      console.log("response ==== >", response);
+
       dispatch(actionsCreators.getCategoriesSuccess(response.data));
     } catch (error) {
       dispatch(actionsCreators.getCategoriesFail(error));
