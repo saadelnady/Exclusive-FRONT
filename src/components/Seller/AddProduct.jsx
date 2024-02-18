@@ -42,12 +42,13 @@ export const AddProduct = () => {
 
   const handleSubmition = () => {
     // Access the images from Formik values
-    const images = formik.values.images;
-    console.log(formik.values.title);
-    console.log(formik.values.description);
-    console.log("Uploaded images:", images);
-    console.log("category:", selectedCategory);
-    console.log("subCategory:", formik.values.subCategory);
+    // const images = formik.values.images;
+    // console.log(formik.values.title);
+    // console.log(formik.values.description);
+    // console.log("Uploaded images:", images);
+    // console.log("category:", selectedCategory);
+    // console.log("subCategory:", formik.values.subCategory);
+    console.log("formik.values", formik.values);
   };
 
   /* ================================================================================================== */
@@ -92,59 +93,145 @@ export const AddProduct = () => {
 
   const handleSubCategoryChange = (event) => {
     const { name, value } = event.target;
-    console.log("name ===", name);
-    console.log("value ===", value);
+
     setSelectedSubCategory(value);
     formik.setFieldValue(name, value);
   };
 
   /* ================================================================================================== */
+
   const sizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
-  const [activeSize, setActiveSize] = useState(null);
-
-  const handleSizeActive = (size) => {
-    setActiveSize(size);
-  };
   const removeProductOption = (index) => {
-    const newProductOptions = [...formik.values.productOptions];
-    newProductOptions.splice(index, 1);
+    const newOptions = [...formik.values.options];
+    newOptions.splice(index, 1);
     formik.setValues({
       ...formik.values,
-      productOptions: newProductOptions,
+      options: newOptions,
     });
   };
   const addProductOption = () => {
     formik.setValues({
       ...formik.values,
-      productOptions: [
-        ...formik.values.productOptions,
+      options: [
+        ...formik.values.options,
         {
           size: "",
           color: "",
           price: "",
-          stockCount: "",
+          stockCount: 0,
         },
       ],
     });
   };
+  /* ================================================================================================== */
 
-  // const increaseHandler = () => {
-  //   formik.setFieldValue("stockCount", +formik.values.stockCount + 1);
-  // };
+  const handleInputChange = (e, index, fieldName) => {
+    const { name, value } = e.target;
+    let newOptions = [...formik.values.options];
 
-  // const decreaseHandler = () => {
-  //   formik.setFieldValue(
-  //     "stockCount",
-  //     formik.values.stockCount > 0 ? +formik.values.stockCount - 1 : 0
-  //   );
-  // };
+    if (fieldName === "priceBeforeDiscount" || fieldName === "discountValue") {
+      // If the changed field is priceBeforeDiscount or discountValue
+      const priceBeforeDiscount = parseFloat(
+        formik.values.options[index].price.priceBeforeDiscount
+      );
+      const discountValue = parseFloat(
+        formik.values.options[index].price.discountValue
+      );
+      let discountPercentage = 0;
+      let finalPrice = 0;
+
+      if (
+        !isNaN(priceBeforeDiscount) &&
+        !isNaN(discountValue) &&
+        priceBeforeDiscount !== 0
+      ) {
+        // Calculate discount percentage and final price
+        discountPercentage = (discountValue / priceBeforeDiscount) * 100;
+        finalPrice = priceBeforeDiscount - discountValue;
+      }
+
+      // Update the newOptions array with the calculated values
+      newOptions[index] = {
+        ...newOptions[index],
+        price: {
+          ...newOptions[index].price,
+          [fieldName]: value,
+          discountPercentage: isNaN(discountPercentage)
+            ? ""
+            : discountPercentage.toFixed(2), // Set discountPercentage to 2 decimal places
+          finalPrice: isNaN(finalPrice) ? "" : finalPrice.toFixed(2), // Set finalPrice to 2 decimal places
+        },
+      };
+    } else {
+      // If the changed field is not priceBeforeDiscount or discountValue, update the value directly
+      newOptions[index] = {
+        ...newOptions[index],
+        price: {
+          ...newOptions[index].price,
+          [fieldName]: value,
+        },
+      };
+    }
+
+    // Update formik values with the updated newOptions array
+    formik.setValues({
+      ...formik.values,
+      options: newOptions,
+    });
+  };
+  /* ================================================================================================== */
+  const handleColorChange = (e, index) => {
+    const { name, value } = e.target;
+    // Update formik state with the new color value
+    formik.setFieldValue(`options[${index}].${name}`, value);
+  };
+
+  /* ================================================================================================== */
+  const handleDecrease = (index) => {
+    let newOptions = [...formik.values.options];
+    const currentStockCount = parseInt(newOptions[index].stockCount);
+    if (!isNaN(currentStockCount) && currentStockCount > 0) {
+      newOptions[index].stockCount = currentStockCount - 1;
+      formik.setValues({
+        ...formik.values,
+        options: newOptions,
+      });
+    }
+  };
+
+  const handleIncrease = (index) => {
+    let newOptions = [...formik.values.options];
+    const currentStockCount = parseInt(newOptions[index].stockCount);
+    if (!isNaN(currentStockCount)) {
+      newOptions[index].stockCount = currentStockCount + 1;
+      formik.setValues({
+        ...formik.values,
+        options: newOptions,
+      });
+    }
+  };
+
+  /* ================================================================================================== */
+  const handleStockCountChange = (e, index) => {
+    const { value } = e.target;
+    let newOptions = [...formik.values.options];
+    newOptions[index].stockCount = value;
+    formik.setValues({
+      ...formik.values,
+      options: newOptions,
+    });
+  };
+
+  /* ================================================================================================== */
 
   return (
     <div className="bg-light h-100 ">
       <h1 className="fw-bold shadow rounded py-3 px-5 my-3">Add product</h1>
       <div className="container">
         <form onSubmit={formik.handleSubmit} className="add-product">
+          {/* ================================================================================================== */}
+
           <div className="add-images d-flex flex-wrap">
             <label
               htmlFor="add-images"
@@ -276,134 +363,128 @@ export const AddProduct = () => {
           </div>
 
           {/* ================================================================================================== */}
-          <h3 className="text-center fw-bold">Product options</h3>
+          <h3 className="text-center fw-bold my-3">Product options</h3>
           {/* ================================================================================================== */}
-          {formik.values.productOptions.map((option, index) => (
-            <div key={index} className="border row py-4 px-2 rounded">
-              <div>
-                <label htmlFor={`size${index}`} className="fw-bold fs-4">
-                  Size:
-                </label>
-                <ul className="select-size d-flex justify-content-between flex-wrap w-75">
-                  {sizes.map((size) => (
-                    <li
-                      key={size}
-                      className={
-                        activeSize === size
-                          ? "active cursor-pointer"
-                          : "cursor-pointer"
-                      }
-                      onClick={() => {
-                        handleSizeActive(size);
-                      }}
-                    >
-                      {size}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <label htmlFor={`color${index}`} className="fw-bold fs-4">
-                  Color:
-                </label>
-                <input
-                  className="special-input"
-                  id={`color${index}`}
-                  name={`productOptions[${index}].color`}
-                  type="color"
-                  onChange={formik.handleChange}
-                  value={option.color}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor={`priceBeforeDiscount${index}`}
-                  className="fw-bold fs-4"
-                >
-                  Price Before Discount:
-                </label>
-                <input
-                  className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
-                  id={`priceBeforeDiscount${index}`}
-                  name={`productOptions[${index}].price.priceBeforeDiscount`}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={option.price.priceBeforeDiscount}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor={`discountPercentage${index}`}
-                  className="fw-bold fs-4"
-                >
-                  Discount Percentage:
-                </label>
-                <input
-                  className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
-                  id={`discountPercentage${index}`}
-                  name={`productOptions[${index}].price.discountPercentage`}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={option.price.discountPercentage}
-                />
-              </div>
-              <div>
-                <label htmlFor={`finalPrice${index}`} className="fw-bold fs-4">
-                  Final Price:
-                </label>
-                <input
-                  className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
-                  id={`finalPrice${index}`}
-                  name={`productOptions[${index}].price.finalPrice`}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={option.price.finalPrice}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor={`discountValue${index}`}
-                  className="fw-bold fs-4"
-                >
-                  Discount Value:
-                </label>
-                <input
-                  className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
-                  id={`discountValue${index}`}
-                  name={`productOptions[${index}].price.discountValue`}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={option.price.discountValue}
-                />
-              </div>
-              <div>
-                <label htmlFor={`stockCount${index}`} className="fw-bold fs-4">
-                  Stock Count:
-                </label>
-
-                <input
-                  className="col-1 py-2 px-3 fs-3 special-input text-center"
-                  id={`stockCount${index}`}
-                  name={`productOptions[${index}].stockCount`}
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={option.stockCount}
-                />
-              </div>
-              {index > 0 && (
-                <button
-                  type="button"
-                  onClick={() => removeProductOption(index)}
-                >
-                  Remove
-                </button>
-              )}
-            </div>
-          ))}
-
-          <button type="button" onClick={addProductOption}>
-            Add Product Option
-          </button>
+          <div className="options-table">
+            <button onClick={addProductOption} className="add-option">
+              +
+            </button>
+            <table>
+              <thead>
+                <tr>
+                  <th rowSpan="2">Color</th>
+                  <th rowSpan="2">Size</th>
+                  <th colSpan="4">Price</th>
+                  <th rowSpan="2">Stock Count</th>
+                </tr>
+                <tr>
+                  <th>Price before discount</th>
+                  <th>Discount percentage</th>
+                  <th>Discount Value</th>
+                  <th>Final price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formik.values.options.map((row, index) => (
+                  <tr key={index} className="option-row">
+                    <td>
+                      <button
+                        onClick={() => removeProductOption(index)}
+                        className="remove-option-row"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="color"
+                        name="color"
+                        onChange={(e) => {
+                          handleColorChange(e, index);
+                        }}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.options[index].color}
+                      />
+                    </td>
+                    <td>
+                      <select
+                        name="size"
+                        id=""
+                        className="fs-5 py-2 special-input"
+                        value={formik.values.options[index].size}
+                        onChange={formik.handleChange}
+                      >
+                        {sizes.map((size, index) => (
+                          <option key={index}>{size}</option>
+                        ))}
+                      </select>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        className="fs-3 special-input col-8 text-center"
+                        name="priceBeforeDiscount"
+                        value={
+                          formik.values.options[index].price.priceBeforeDiscount
+                        }
+                        onChange={(e) =>
+                          handleInputChange(e, index, "priceBeforeDiscount")
+                        }
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        className="fs-3 special-input col-8 text-center"
+                        name="priceBeforeDiscount"
+                        value={
+                          formik.values.options[index].price.discountPercentage
+                        }
+                        onChange={(e) =>
+                          handleInputChange(e, index, "discountPercentage")
+                        }
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        className="fs-3 special-input col-8 text-center"
+                        name="discountValue"
+                        value={formik.values.options[index].price.discountValue}
+                        onChange={(e) =>
+                          handleInputChange(e, index, "discountValue")
+                        }
+                      />
+                    </td>
+                    <td className="fs-4 fw-bold">
+                      <span className="final">
+                        {formik.values.options[index].price.finalPrice}
+                      </span>
+                      L.E
+                    </td>
+                    <td className="counter">
+                      <button
+                        className="decrease"
+                        onClick={() => handleDecrease(index)}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="fs-3 special-input col-5 text-center"
+                        value={formik.values.options[index].stockCount}
+                        onChange={(e) => handleStockCountChange(e, index)}
+                      />
+                      <button
+                        className="increase"
+                        onClick={() => handleIncrease(index)}
+                      >
+                        +
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {/* ================================================================================================== */}
 

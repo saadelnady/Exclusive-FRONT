@@ -4,7 +4,7 @@ const initialValues = {
   images: [],
   category: "",
   subCategory: "",
-  productOptions: [
+  options: [
     {
       size: "",
       color: "",
@@ -44,7 +44,16 @@ const validate = (values) => {
     errors.description = "product description must be less than 25 characters";
   }
   // ==============================================================
+  if (!values.options.size || !values.options.color) {
+    errors.size = "you have to add Product size or color";
+  }
+  // ==============================================================
 
+  if (!values.options.price.priceBeforeDiscount) {
+    errors.price = "you have to add Product price or color";
+  } else if (!values.options.price.priceBeforeDiscount) {
+    errors.price = "you have to add Product price or color";
+  }
   return errors;
 };
 export { initialValues, validate };
