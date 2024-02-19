@@ -4,10 +4,11 @@ const initialValues = {
   images: [],
   category: "",
   subCategory: "",
+  productOwner: "",
   options: [
     {
       size: "",
-      color: "",
+      color: "#000000",
       stockCount: 0,
       price: {
         priceBeforeDiscount: "",
@@ -21,39 +22,56 @@ const initialValues = {
 
 const validate = (values) => {
   const errors = {};
-  if (values.images.length === 0) {
-    errors.images = "Product images is required";
-  } else if (values.images.length > 10) {
-    errors.images = " You should not add more than 10 photos";
+  if (!values.images) {
+    errors.images = "Product images are required";
   }
 
-  // ==============================================================
   if (!values.title) {
     errors.title = "Product title is required";
-  } else if (values.title.length < 3) {
-    errors.title = "product title must be at least 3 characters";
-  } else if (values.title.length > 20) {
-    errors.title = "product title must be less than 20 characters";
+  } else if (values.title.length < 3 || values.title.length > 20) {
+    errors.title = "Product title must be between 3 and 20 characters";
   }
-  // ==============================================================
+
   if (!values.description) {
     errors.description = "Product description is required";
-  } else if (values.description.length < 3) {
-    errors.description = "product description must be at least 3 characters";
-  } else if (values.description.length > 25) {
-    errors.description = "product description must be less than 25 characters";
+  } else if (values.description.length < 3 || values.description.length > 25) {
+    errors.description =
+      "Product description must be between 3 and 25 characters";
   }
-  // ==============================================================
-  if (!values.options.size || !values.options.color) {
-    errors.size = "you have to add Product size or color";
-  }
-  // ==============================================================
 
-  if (!values.options.price.priceBeforeDiscount) {
-    errors.price = "you have to add Product price or color";
-  } else if (!values.options.price.priceBeforeDiscount) {
-    errors.price = "you have to add Product price or color";
-  }
+  // if (!values.options[0].color || !values.options[0].size) {
+  //   errors.options = {
+  //     ...errors.options,
+  //     color: "You have to add a product's color & size",
+  //   };
+  // }
+
+  // if (!values.options[0].price.priceBeforeDiscount) {
+  //   errors.options = {
+  //     ...errors.options,
+  //     priceBeforeDiscount: "Product price before is required",
+  //   };
+  // }
+
+  // if (
+  //   !values.options[0].price.discountPercentage &&
+  //   !values.options[0].price.discountValue
+  // ) {
+  //   errors.options = {
+  //     ...errors.options,
+  //     price:
+  //       "You have to add product discount percentage or discount value, at least one of them",
+  //   };
+  // }
+
+  // if (!values.options[0].stockCount) {
+  //   errors.options = {
+  //     ...errors.options,
+  //     stockCount: "Product stock count shouldn't be 0",
+  //   };
+  // }
+
   return errors;
 };
+
 export { initialValues, validate };

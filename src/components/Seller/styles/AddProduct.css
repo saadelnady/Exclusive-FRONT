@@ -30,23 +30,26 @@
   font-weight: bold;
   font-size: 20px;
 }
-.add-product .options-table table th,
-.add-product .options-table table td {
-  border: 1px solid var(--red-color);
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-  padding: 0 15px;
-}
 
-.add-product .options-table table {
+.add-product .options-table {
+  border: 1px solid var(--red-color);
+  border-radius: 10px;
   text-align: center;
   width: 100%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.add-product .options-table table {
+  width: 100%;
+  border-collapse: unset;
+}
+.add-product .options-table table thead {
+  border-bottom: 1px solid var(--red-color);
 }
 .add-product .options-table table td {
-  padding: 5px 15px;
+  padding: 5px 10px;
 }
 .add-product .options-table .option-row {
   position: relative;
