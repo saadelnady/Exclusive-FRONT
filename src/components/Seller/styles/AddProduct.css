@@ -7,7 +7,7 @@
   -o-border-radius: 5px;
   padding: 30px 40px;
 }
-.add-product div {
+.add-product > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,6 +25,7 @@
 }
 .add-product .options-table thead {
   background-color: #eff1ff;
+  height: 120px;
 }
 .add-product .options-table table th {
   font-weight: bold;

@@ -8,7 +8,7 @@ const initialValues = {
   options: [
     {
       size: "",
-      color: "#000000",
+      color: "",
       stockCount: 0,
       price: {
         priceBeforeDiscount: "",
@@ -22,56 +22,66 @@ const initialValues = {
 
 const validate = (values) => {
   const errors = {};
-  if (!values.images) {
+  if (values?.images?.length === 0) {
     errors.images = "Product images are required";
   }
-
-  if (!values.title) {
+  if (!values?.title) {
     errors.title = "Product title is required";
-  } else if (values.title.length < 3 || values.title.length > 20) {
+  } else if (values?.title?.length < 3 || values?.title?.length > 20) {
     errors.title = "Product title must be between 3 and 20 characters";
   }
 
-  if (!values.description) {
+  if (!values?.description) {
     errors.description = "Product description is required";
-  } else if (values.description.length < 3 || values.description.length > 25) {
+  } else if (
+    values?.description?.length < 3 ||
+    values?.description?.length > 25
+  ) {
     errors.description =
       "Product description must be between 3 and 25 characters";
   }
 
-  // if (!values.options[0].color || !values.options[0].size) {
-  //   errors.options = {
-  //     ...errors.options,
-  //     color: "You have to add a product's color & size",
-  //   };
-  // }
+  const optionsErrors = [];
 
-  // if (!values.options[0].price.priceBeforeDiscount) {
-  //   errors.options = {
-  //     ...errors.options,
-  //     priceBeforeDiscount: "Product price before is required",
-  //   };
-  // }
+  values.options.forEach((option, index) => {
+    const optionErrors = {};
 
-  // if (
-  //   !values.options[0].price.discountPercentage &&
-  //   !values.options[0].price.discountValue
-  // ) {
-  //   errors.options = {
-  //     ...errors.options,
-  //     price:
-  //       "You have to add product discount percentage or discount value, at least one of them",
-  //   };
-  // }
+    // Color error
+    if (!option.color) {
+      optionErrors.color = `Product color is required in option number ${
+        index + 1
+      }`;
+    }
 
-  // if (!values.options[0].stockCount) {
-  //   errors.options = {
-  //     ...errors.options,
-  //     stockCount: "Product stock count shouldn't be 0",
-  //   };
-  // }
+    // Size error
+    if (!option.size) {
+      optionErrors.size = `Product size is required in option number ${
+        index + 1
+      }`;
+    }
 
+    if (!option.price?.priceBeforeDiscount) {
+      optionErrors.priceBeforeDiscount = `Product priceBeforeDiscount is required in option number ${
+        index + 1
+      }`;
+    }
+    if (!option.price?.discountPercentage) {
+      optionErrors.discountPercentage = `Product discountPercentage is required in option number ${
+        index + 1
+      }`;
+    }
+    if (!option.stockCount) {
+      optionErrors.stockCount = `Product stockCount is required in option number ${
+        index + 1
+      }`;
+    }
+
+    // Other errors for the option fields can be added similarly
+
+    // Push the errors for the current option into the optionsErrors array
+    optionsErrors.push(optionErrors);
+  });
+  errors.optionsErrors = optionsErrors;
   return errors;
 };
-
 export { initialValues, validate };
