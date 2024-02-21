@@ -5,9 +5,14 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  padding: 30px 40px;
+  padding: 30px 10px;
 }
-.add-product > div {
+@media (min-width: 768px) {
+  .add-product {
+    padding: 30px 40px;
+  }
+}
+.add-product .item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,14 +23,13 @@
 .add-product > .add-images img {
   width: 100px;
 }
-/* eff1ff  */
-.add-product .options-table {
-  position: relative;
-  margin: 40px 0;
-}
+
 .add-product .options-table thead {
   background-color: #eff1ff;
   height: 120px;
+}
+.add-product .options-table tr:nth-child(even) {
+  background-color: #eff1ff;
 }
 .add-product .options-table table th {
   font-weight: bold;
@@ -33,14 +37,14 @@
 }
 
 .add-product .options-table {
-  border: 1px solid var(--red-color);
-  border-radius: 10px;
+  display: flex;
+  border-radius: 20px;
   text-align: center;
-  width: 100%;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  overflow-x: auto;
 }
 .add-product .options-table table {
   width: 100%;
@@ -51,10 +55,9 @@
 }
 .add-product .options-table table td {
   padding: 5px 10px;
+  height: 100px;
 }
-.add-product .options-table .option-row {
-  position: relative;
-}
+
 .add-product .options-table .counter .decrease,
 .add-product .options-table .counter .increase {
   border: none;
@@ -80,16 +83,24 @@
   color: white;
 }
 
-.add-product .options-table .add-option,
+.add-product .add-option,
 .add-product .options-table .option-row .remove-option-row {
-  position: absolute;
-  top: 0;
-  left: -20px;
   background-color: transparent;
   font-size: 30px;
   font-weight: bold;
   border: none;
   outline: none;
+}
+.add-product .options-table .option-row {
+  position: relative;
+}
+.add-product .options-table .option-row .remove-option-row {
+  position: absolute;
+  left: -15px;
+}
+.add-product .add-option {
+  margin-top: 40px;
+  align-self: self-start;
 }
 .add-product .options-table .add-option {
   top: 40px;

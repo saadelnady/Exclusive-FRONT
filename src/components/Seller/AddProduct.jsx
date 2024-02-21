@@ -3,15 +3,21 @@ import { useFormik } from "formik";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { CiSquareRemove } from "react-icons/ci";
 import { initialValues, validate } from "../validation/Seller/Addproduct";
+import { toast } from "react-toastify";
+
 import "./styles/AddProduct.css";
 
 import { MdError } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ToolTip from "../shared/toolTip";
+import { useNavigate } from "react-router-dom";
+import { addProduct } from "../../store/actions/product/productActions";
 
 export const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   /* ================================================================================================== */
 
@@ -44,9 +50,28 @@ export const AddProduct = () => {
   }, [seller]);
 
   const handleSubmit = (values) => {
-    // console.log("formik.values ---------------->", values);
+    const formData = new FormData();
+    formData.append("images", values?.images);
+    formData.append("title", values?.title);
+    formData.append("description", values?.description);
+    formData.append("category", values?.category);
+    formData.append("subCategory", values?.subCategory);
+    formData.append("options", values?.options);
+    formData.append("productOwner", values?.productOwner);
+
+    const payload = { formData, toast };
+    dispatch(addProduct(payload));
+    // resetForm();
   };
 
+  const resetForm = () => {
+    formik.resetForm();
+
+    setTimeout(() => {
+      navigate("/Seller/products");
+      window.location.reload();
+    }, 2000);
+  };
   /* ================================================================================================== */
 
   const [images, setImages] = useState([]);
@@ -128,8 +153,8 @@ export const AddProduct = () => {
         ...(formik.values.options || []), // Use existing options if available, or start with an empty array
         {
           size: "",
-          color: "",
-          stockCount: 0,
+          color: "#FFFFFF",
+          stockCount: "0",
           price: {
             priceBeforeDiscount: "",
             discountPercentage: "",
@@ -183,8 +208,7 @@ export const AddProduct = () => {
       value !== ""
     ) {
       const calculatedDiscountValue = priceBeforeDiscount * (value / 100);
-      newOptions[index].price.discountValue =
-        calculatedDiscountValue.toFixed(2);
+      newOptions[index].price.discountValue = calculatedDiscountValue;
       formik.setValues({ ...formik.values, options: newOptions });
     }
 
@@ -273,26 +297,33 @@ export const AddProduct = () => {
   };
 
   /* ================================================================================================== */
+
   const isObjectNotEmpty = (obj) => {
-    return Object.keys(obj).length !== 0;
+    return obj && Object.keys(obj).length !== 0;
   };
   const getErrorMessage = (index, key) => {
-    console.log("=========>!!!ddwdw====", formik?.errors);
-    if (isObjectNotEmpty(formik?.errors)) {
-      if (formik?.errors?.optionsErrors[index] !== undefined) {
-        return <ToolTip text={formik?.errors?.optionsErrors[index]?.[key]} />;
+    const { errors, touched } = formik;
+
+    if (
+      (isObjectNotEmpty(errors) && touched?.options?.[index]?.[key]) ||
+      touched?.options?.[index]?.price?.[key]
+    ) {
+      const optionError = errors.optionsErrors?.[index]?.[key];
+      if (optionError) {
+        return <ToolTip text={optionError} />;
       }
     }
 
     return "";
   };
+
   return (
     <div className="bg-light h-100 ">
       <h1 className="fw-bold shadow rounded py-3 px-5 my-3">Add product</h1>
       <div className="container">
         <form onSubmit={formik.handleSubmit} className="add-product">
           {/* ================================================================================================== */}
-          <div className="add-images d-flex flex-wrap">
+          <div className="add-images item">
             <label
               htmlFor="add-images"
               className="btn btn-danger fs-4 mb-3 mb-xl-0"
@@ -336,14 +367,14 @@ export const AddProduct = () => {
             ) : null}
           </div>
           {/* ================================================================================================== */}
-          <div className="add-title">
+          <div className="add-title item">
             <label htmlFor="title" className="fw-bold fs-4">
               Product title:
             </label>
             <input
               type="text"
               name="title"
-              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
               value={formik.values.title}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -357,14 +388,14 @@ export const AddProduct = () => {
           ) : null}
 
           {/* =================================================================================== */}
-          <div className="add-description">
+          <div className="add-description item">
             <label htmlFor="description" className="fw-bold fs-4">
               Description:
             </label>
             <textarea
               name="description"
               id="description"
-              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
@@ -377,7 +408,7 @@ export const AddProduct = () => {
             </p>
           )}
           {/* ================================================================================================== */}
-          <div className="select-category">
+          <div className="select-category item">
             <label htmlFor="category" className="fw-bold fs-4">
               Category:
             </label>
@@ -386,7 +417,7 @@ export const AddProduct = () => {
               id="category"
               name="category"
               onChange={handleCategoryChange}
-              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
             >
               {categories.map((cat, index) => (
                 <option key={index} value={cat._id}>
@@ -396,14 +427,14 @@ export const AddProduct = () => {
             </select>
           </div>
           {/* ================================================================================================== */}
-          <div className="select-subCategory">
+          <div className="select-subCategory item">
             <label htmlFor="subCategory" className="fw-bold fs-4">
               Sub-category:
             </label>
             <select
               name="subCategory"
               id="subCategory"
-              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
               onChange={handleSubCategoryChange}
               value={formik?.values?.subCategory}
             >
@@ -418,8 +449,9 @@ export const AddProduct = () => {
           {/* ================================================================================================== */}
           <h3 className="text-center fw-bold my-3">Product options</h3>
           {/* ================================================================================================== */}
+
           <div className="options-table">
-            <button onClick={addProductOption} className="add-option">
+            <button onClick={addProductOption} className="add-option ">
               +
             </button>
             <table>
@@ -482,7 +514,7 @@ export const AddProduct = () => {
                     <td>
                       <input
                         type="text"
-                        className="fs-3 special-input col-8 text-center"
+                        className="fs-3 special-input col-12 text-center"
                         name="priceBeforeDiscount"
                         onBlur={formik?.handleBlur}
                         value={
@@ -502,7 +534,7 @@ export const AddProduct = () => {
                     <td>
                       <input
                         type="text"
-                        className="fs-3 special-input col-8 text-center"
+                        className="fs-3 special-input col-12 text-center"
                         name="discountPercentage"
                         onBlur={formik?.handleBlur}
                         value={
@@ -522,7 +554,7 @@ export const AddProduct = () => {
                     <td>
                       <input
                         type="text"
-                        className="fs-3 special-input col-8 text-center"
+                        className="fs-3 special-input col-12 text-center"
                         name="discountValue"
                         onBlur={formik?.handleBlur}
                         value={
@@ -536,6 +568,7 @@ export const AddProduct = () => {
                           )
                         }
                       />
+                      {getErrorMessage(index, "discountValue")}
                     </td>
                     <td className="fs-4 fw-bold">
                       <span className="final">
@@ -550,27 +583,29 @@ export const AddProduct = () => {
                       </span>
                       L.E
                     </td>
-                    <td className="counter">
-                      <button
-                        className="decrease"
-                        onClick={(e) => handleDecrease(e, index)}
-                      >
-                        -
-                      </button>
-                      <input
-                        name="stockCount"
-                        type="text"
-                        className="fs-3 special-input col-5 text-center"
-                        value={formik?.values?.options[index]?.stockCount}
-                        onBlur={formik.handleBlur}
-                        onChange={(e) => handleStockCountChange(e, index)}
-                      />
-                      <button
-                        className="increase"
-                        onClick={(e) => handleIncrease(e, index)}
-                      >
-                        +
-                      </button>
+                    <td className="counter ">
+                      <div className="d-flex justify-content-center">
+                        <button
+                          className="decrease"
+                          onClick={(e) => handleDecrease(e, index)}
+                        >
+                          -
+                        </button>
+                        <input
+                          name="stockCount"
+                          type="text"
+                          className="fs-3 special-input col-6  text-center"
+                          value={formik?.values?.options[index]?.stockCount}
+                          onBlur={formik.handleBlur}
+                          onChange={(e) => handleStockCountChange(e, index)}
+                        />
+                        <button
+                          className="increase"
+                          onClick={(e) => handleIncrease(e, index)}
+                        >
+                          +
+                        </button>
+                      </div>
                       {getErrorMessage(index, "stockCount")}
                     </td>
                   </tr>

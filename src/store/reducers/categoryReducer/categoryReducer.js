@@ -88,7 +88,7 @@ const categoryReducer = (state = initialState, action) => {
 
     case CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_SUCCESS:
       const updatedCategories = state.categories.filter(
-        (category) => category.id !== action.payLoad
+        (category) => category._id !== action?.payLoad
       );
       return {
         ...state,

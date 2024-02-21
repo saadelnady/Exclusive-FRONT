@@ -24,7 +24,7 @@ export const AddCategory = () => {
   const { isLoading, category } = useSelector((state) => state.categoryReducer);
   console.log("category from add ======>", category);
   const { categoryId } = useParams();
-  console.log("qdlqhfhfqhwekfhq", categoryId);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
