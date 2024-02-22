@@ -11,11 +11,17 @@ import { MdError } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import ToolTip from "../shared/toolTip";
 import { useNavigate } from "react-router-dom";
-import { addProduct } from "../../store/actions/product/productActions";
+import {
+  addProduct,
+  fetchProducts,
+} from "../../store/actions/product/productActions";
+import { isObjectNotEmpty } from "../../helpers/checkers";
 
 export const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
+  const [subCategories, setSubCategories] = useState([]);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -48,6 +54,10 @@ export const AddProduct = () => {
   useEffect(() => {
     formik.setFieldValue("productOwner", seller?._id);
   }, [seller]);
+  const { products } = useSelector((state) => state.productReducer);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
   const handleSubmit = (values) => {
     const formData = new FormData();
@@ -56,8 +66,29 @@ export const AddProduct = () => {
     formData.append("description", values?.description);
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
-    formData.append("options", values?.options);
     formData.append("productOwner", values?.productOwner);
+
+    values.images.forEach((image, index) => {
+      formData.append(`images`, image); // Append each file with the same key 'images'
+    });
+
+    values.options.forEach((option, index) => {
+      // Append option details
+      Object.entries(option).forEach(([key, value]) => {
+        // If the current value is an object (like 'price'), iterate over its properties
+        if (typeof value === "object") {
+          Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+            formData.append(
+              `options[${index}][${key}][${nestedKey}]`,
+              nestedValue
+            );
+          });
+          console.log("ssss --->", Object.entries(option));
+        } else {
+          formData.append(`options[${index}][${key}]`, value);
+        }
+      });
+    });
 
     const payload = { formData, toast };
     dispatch(addProduct(payload));
@@ -78,10 +109,11 @@ export const AddProduct = () => {
 
   const handleImageChange = (event) => {
     const selectedImages = Array.from(event.target.files);
+    // Check if image with the same name already exists
     const newImages = selectedImages.filter(
       (image) =>
         !images.find((existingImage) => existingImage.name === image.name)
-    ); // Check if image with the same name already exists
+    );
 
     // Update the images state with the File objects
     setImages([...images, ...newImages]);
@@ -126,7 +158,6 @@ export const AddProduct = () => {
   };
 
   /* ================================================================================================== */
-  const [subCategories, setSubCategories] = useState([]);
 
   const handleSubCategoryChange = (event) => {
     const { name, value } = event.target;
@@ -153,7 +184,7 @@ export const AddProduct = () => {
         ...(formik.values.options || []), // Use existing options if available, or start with an empty array
         {
           size: "",
-          color: "#FFFFFF",
+          color: "",
           stockCount: "0",
           price: {
             priceBeforeDiscount: "",
@@ -183,48 +214,31 @@ export const AddProduct = () => {
   /* ================================================================================================== */
   const handlePriceChange = (index, field, value) => {
     const newOptions = [...formik.values.options];
-    newOptions[index].price[field] = value;
+    const option = newOptions[index].price;
+
+    // Update the price field
+    option[field] = value;
+
+    // Log the values being passed to calculateFinalPrice
+    console.log("Values------..>", value, field);
+
+    // Calculate other fields based on the updated field
+    if (field === "discountValue") {
+      option.discountPercentage =
+        value !== "" ? (value / option.priceBeforeDiscount) * 100 : "";
+    } else if (field === "discountPercentage") {
+      option.discountValue =
+        value !== "" ? option.priceBeforeDiscount * (value / 100) : "";
+    } else if (
+      field === "priceBeforeDiscount" &&
+      option.discountPercentage === "" &&
+      option.discountValue === ""
+    ) {
+      option.finalPrice = value;
+    }
+
+    // Set the updated values
     formik.setValues({ ...formik.values, options: newOptions });
-
-    // Check if priceBeforeDiscount and either discountPercentage or discountValue are provided
-    const { priceBeforeDiscount, discountPercentage, discountValue } =
-      newOptions[index].price;
-
-    // Calculate discountPercentage if discountValue is provided
-    if (
-      field === "discountValue" &&
-      priceBeforeDiscount !== "" &&
-      value !== ""
-    ) {
-      const calculatedDiscountPercentage = (value / priceBeforeDiscount) * 100;
-      newOptions[index].price.discountPercentage = calculatedDiscountPercentage;
-      formik.setValues({ ...formik.values, options: newOptions });
-    }
-
-    // Calculate discountValue if discountPercentage is provided
-    if (
-      field === "discountPercentage" &&
-      priceBeforeDiscount !== "" &&
-      value !== ""
-    ) {
-      const calculatedDiscountValue = priceBeforeDiscount * (value / 100);
-      newOptions[index].price.discountValue = calculatedDiscountValue;
-      formik.setValues({ ...formik.values, options: newOptions });
-    }
-
-    // Recalculate the final price
-    if (
-      priceBeforeDiscount !== "" &&
-      (discountPercentage !== "" || discountValue !== "")
-    ) {
-      const finalPrice = calculateFinalPrice(
-        priceBeforeDiscount,
-        discountPercentage,
-        discountValue
-      );
-      newOptions[index].price.finalPrice = finalPrice;
-      formik.setValues({ ...formik.values, options: newOptions });
-    }
   };
 
   const calculateFinalPrice = (
@@ -232,29 +246,37 @@ export const AddProduct = () => {
     discountPercentage,
     discountValue
   ) => {
-    // Convert input values to numbers
     const price = parseFloat(priceBeforeDiscount);
-    const percentage = parseFloat(discountPercentage);
+    let percentage = parseFloat(discountPercentage);
     const discount = parseFloat(discountValue);
 
-    // Check if all required values are provided
-    if (isNaN(price) || (isNaN(percentage) && isNaN(discount))) {
-      return ""; // Return empty string if any required value is not provided or not a number
+    if (percentage === "" && discount === "") {
+      // Both percentage and discount provided, consider only percentage
+      return ""; // Return empty string or handle error
     }
 
-    // Calculate the discounted amount based on discount percentage or discount value
-    let discountedAmount = 0;
+    if (price === "0" || (percentage !== "" && percentage === "0")) {
+      return price.toFixed(2); // Return price if zero or invalid percentage
+    }
+
+    if (
+      price &&
+      (!percentage || percentage === 0) &&
+      (!discount || discount === 0)
+    ) {
+      return price.toFixed(2); // Return price if zero or invalid percentage
+    }
+    if (percentage === Infinity) {
+      percentage = "";
+      return 0;
+    }
     if (!isNaN(percentage)) {
-      discountedAmount = price * (percentage / 100);
+      return price * ((100 - percentage) / 100);
     } else if (!isNaN(discount)) {
-      discountedAmount = discount;
+      return (price - discount).toFixed(2);
     }
 
-    // Calculate the final price
-    const finalPrice = price - discountedAmount;
-
-    // Return the final price rounded to 2 decimal places
-    return finalPrice.toFixed(2);
+    return ""; // Default case, should not occur
   };
 
   /* ================================================================================================== */
@@ -298,9 +320,6 @@ export const AddProduct = () => {
 
   /* ================================================================================================== */
 
-  const isObjectNotEmpty = (obj) => {
-    return obj && Object.keys(obj).length !== 0;
-  };
   const getErrorMessage = (index, key) => {
     const { errors, touched } = formik;
 
@@ -539,7 +558,10 @@ export const AddProduct = () => {
                         onBlur={formik?.handleBlur}
                         value={
                           formik?.values?.options[index]?.price
-                            ?.discountPercentage
+                            ?.discountPercentage === Infinity
+                            ? ""
+                            : formik?.values?.options[index]?.price
+                                ?.discountPercentage
                         }
                         onChange={(e) =>
                           handlePriceChange(

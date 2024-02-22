@@ -21,7 +21,6 @@ import { fetchCategories } from "../../store/actions/category/categoryActions";
 
 export const AddSubCategory = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
-  console.log("categories ----->", categories);
   const { isLoading, subCategory } = useSelector(
     (state) => state.subCategoryReducer
   );
@@ -78,7 +77,11 @@ export const AddSubCategory = () => {
   }, [subCategory, subCategoryId]);
 
   useEffect(() => {
-    dispatch(fetchCategories({ limit: 10, page: 1 }));
+    dispatch(fetchCategories());
+    formik.setValues({
+      ...formik.values,
+      category: categories[0]._id,
+    });
   }, []);
 
   // ================================================================================

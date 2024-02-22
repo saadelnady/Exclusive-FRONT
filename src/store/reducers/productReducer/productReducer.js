@@ -10,21 +10,6 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT:
-      return { ...state, isLoading: true };
-
-    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS:
-      return {
-        ...state,
-        product: action.payLoad,
-        isLoading: false,
-        error: null,
-      };
-
-    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_FAIL:
-      return { ...state, isLoading: false, error: action.payLoad };
-    // ========================================================================
-
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS:
       return { ...state, isLoading: true };
 
@@ -38,6 +23,22 @@ const productReducer = (state = initialState, action) => {
 
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
+
+    // ========================================================================
+    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT:
+      return { ...state, isLoading: true };
+
+    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        product: action.payLoad,
+        isLoading: false,
+        error: null,
+      };
+
+    case PRODUCT_ACTIONS_TYPES.GET_PRODUCT_FAIL:
+      return { ...state, isLoading: false, error: action.payLoad };
+
     // ========================================================================
     case PRODUCT_ACTIONS_TYPES.POST_PRODUCT:
       return { ...state, isLoading: true };

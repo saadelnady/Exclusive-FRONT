@@ -45,12 +45,14 @@ export const addProduct = (payLoad) => {
     payLoad,
   };
 };
+
 export const addProductSuccess = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.POST_PRODUCT_SUCCESS,
     payLoad,
   };
 };
+
 export const addProductFail = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.POST_PRODUCT_FAIL,

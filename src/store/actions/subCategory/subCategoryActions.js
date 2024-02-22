@@ -26,11 +26,9 @@ export const fetchSubCategories = ({ page, limit, text }) => {
 
 export const fetchSubCategory = (subCategoryId) => {
   return async (dispatch) => {
-    console.log("subCategoryId ---- > ", subCategoryId);
     dispatch(actionsCreators.getSubCategories(subCategoryId));
     try {
       const response = await getData(`/api/subCategories/${subCategoryId}`);
-      console.log("response ---- > ", response);
 
       dispatch(
         actionsCreators.getSubCategorySuccess(response.data.subCategory)

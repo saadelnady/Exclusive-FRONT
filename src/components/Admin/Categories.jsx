@@ -27,7 +27,6 @@ export const Categories = ({ isWarning, handleWarning }) => {
     (state) => state.categoryReducer
   );
 
-  console.log("total -------->", total);
   const [categoryId, setCategoryId] = useState("");
 
   const dispatch = useDispatch();

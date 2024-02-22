@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { userReducer } from "./reducers/userReducer/userReducer.js";
-// import { productReducer } from "./reducers/productReducer/productReducer.js";
+import { productReducer } from "./reducers/productReducer/productReducer.js";
 import { sellerReducer } from "./reducers/sellerReducer/sellerReducer.js";
 import { categoryReducer } from "./reducers/categoryReducer/categoryReducer.js";
 import { subCategoryReducer } from "./reducers/subCategory/subCategoryReducer.js";
@@ -15,7 +15,7 @@ const composeEnhancers =
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 const appReducers = combineReducers({
   userReducer,
-  // productReducer,
+  productReducer,
   sellerReducer,
   categoryReducer,
   subCategoryReducer,

@@ -22,7 +22,6 @@ import { serverUrl } from "../../API/API";
 
 export const AddCategory = () => {
   const { isLoading, category } = useSelector((state) => state.categoryReducer);
-  console.log("category from add ======>", category);
   const { categoryId } = useParams();
 
   const dispatch = useDispatch();

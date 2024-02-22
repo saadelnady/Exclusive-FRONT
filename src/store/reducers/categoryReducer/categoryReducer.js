@@ -36,7 +36,6 @@ const categoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case CATEGORY_ACTIONS_TYPES.GET_CATEGORY_SUCCESS:
-      console.log("action.payLoad ======= >", action.payLoad);
       return { ...state, isLoading: false, category: action.payLoad };
 
     case CATEGORY_ACTIONS_TYPES.GET_CATEGORY_FAIL:

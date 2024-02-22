@@ -44,15 +44,18 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
-  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .add-product .options-table {
+    overflow-x: auto;
+  }
 }
 .add-product .options-table table {
   width: 100%;
   border-collapse: unset;
 }
-.add-product .options-table table thead {
-  border-bottom: 1px solid var(--red-color);
-}
+
 .add-product .options-table table td {
   padding: 5px 10px;
   height: 100px;
