@@ -1,16 +1,28 @@
-import { getData, postData, serverUrl } from "../../../API/API";
+import { getData, postData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
-import * as actionCreators from "./productActionsCreators";
+import * as actionsCreators from "./productActionsCreators";
 
 export const fetchProducts = () => {
   return async (dispatch) => {
-    dispatch(actionCreators.getProducts);
+    dispatch(actionsCreators.getProducts());
     try {
-      const data = await getData(`/api/products`);
-
-      dispatch(actionCreators.getProductsSuccess(data.data.products));
+      const response = await getData(`/api/products`);
+      dispatch(actionsCreators.getProductsSuccess(response.data.products));
     } catch (error) {
-      dispatch(actionCreators.getProductsFail(error));
+      dispatch(actionsCreators.getProductsFail(error));
+    }
+  };
+};
+export const fetchSellerProducts = (sellerId) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getSellerProducts(sellerId));
+    try {
+      const response = await getData(
+        `/api/products/sellerProducts?sellerId=${sellerId}`
+      );
+      dispatch(actionsCreators.getSellerProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getSellerProductsFail(error));
     }
   };
 };
@@ -18,12 +30,12 @@ export const fetchProducts = () => {
 
 export const fetchProduct = ({ productId }) => {
   return async (dispatch) => {
-    dispatch(actionCreators.getProduct(productId));
+    dispatch(actionsCreators.getProduct(productId));
     try {
       const response = await getData(`/api/products/${productId}`);
-      dispatch(actionCreators.getProductSuccess(response.data.product));
+      dispatch(actionsCreators.getProductSuccess(response.data.product));
     } catch (error) {
-      dispatch(actionCreators.getProductFail(error));
+      dispatch(actionsCreators.getProductFail(error));
     }
   };
 };
@@ -31,14 +43,14 @@ export const fetchProduct = ({ productId }) => {
 
 export const addProduct = ({ formData, toast }) => {
   return async (dispatch) => {
-    dispatch(actionCreators.addProduct(formData));
+    dispatch(actionsCreators.addProduct(formData));
     try {
       const response = await postData(`/api/products`, formData);
-
-      dispatch(actionCreators.addProductSuccess(response.data.product));
+      dispatch(actionsCreators.addProductSuccess(response));
       showToast(toast, response.message, "success");
     } catch (error) {
-      dispatch(actionCreators.addProductFail(error));
+      dispatch(actionsCreators.addProductFail(error?.response?.data?.message));
+      showToast(toast, error?.response?.data?.message, "error");
     }
   };
 };

@@ -22,7 +22,7 @@ export const Search = ({ type }) => {
   };
 
   return (
-    <div className="search-wrapper position-relative col-12 col-lg-4 my-2 my-lg-0">
+    <div className="search-wrapper position-relative col-12 col-lg-7 my-2 my-lg-0">
       <input
         type="text"
         className="form-control bg-light search"

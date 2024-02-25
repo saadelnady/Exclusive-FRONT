@@ -38,6 +38,26 @@ export const getProductFail = (payLoad) => {
     payLoad,
   };
 };
+// ==================================================================================
+export const getSellerProducts = () => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS,
+  };
+};
+
+export const getSellerProductsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_SUCCESS,
+    payLoad,
+  };
+};
+
+export const getSellerProductsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS__FAIL,
+    payLoad,
+  };
+};
 // ========================================================================
 export const addProduct = (payLoad) => {
   return {

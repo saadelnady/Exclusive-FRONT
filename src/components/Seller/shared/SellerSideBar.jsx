@@ -54,7 +54,7 @@ export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
               HandleToggle("isProductsActive");
             }}
           >
-            <NavLink to="/Seller/products"> products</NavLink>
+            <NavLink to="/Seller/products"> My products</NavLink>
             <span>
               <FaChevronRight
                 className={`text-light arrow-right ${

@@ -33,8 +33,8 @@ const validate = (values) => {
   // Validate product title
   if (!values?.title) {
     errors.title = "Product title is required";
-  } else if (values?.title?.length < 3 || values?.title?.length > 30) {
-    errors.title = "Product title must be between 3 and 30 characters";
+  } else if (values?.title?.length < 3 || values?.title?.length > 100) {
+    errors.title = "Product title must be between 3 and 100 characters";
   }
 
   // Validate product description

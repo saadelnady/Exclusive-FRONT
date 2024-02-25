@@ -83,7 +83,6 @@ export const AddProduct = () => {
               nestedValue
             );
           });
-          console.log("ssss --->", Object.entries(option));
         } else {
           formData.append(`options[${index}][${key}]`, value);
         }
@@ -220,7 +219,6 @@ export const AddProduct = () => {
     option[field] = value;
 
     // Log the values being passed to calculateFinalPrice
-    console.log("Values------..>", value, field);
 
     // Calculate other fields based on the updated field
     if (field === "discountValue") {

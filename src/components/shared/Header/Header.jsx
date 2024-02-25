@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
-import "../styles/Header.css";
 import { Announce } from "./Announce";
 import { NavBar } from "./NavBar";
 
 import { User } from "./User";
-import { Search } from "../Search";
+import { Search } from "./Search";
 
 export const Header = () => {
   return (
@@ -27,7 +26,7 @@ export const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div
-            className="collapse navbar-collapse  w-75"
+            className="collapse navbar-collapse col-12 col-md-10"
             id="navbarNavAltMarkup"
           >
             <div className="navbar-nav d-flex w-100 justify-content-between align-items-center">

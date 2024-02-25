@@ -12,8 +12,9 @@ import { Products } from "../../components/Seller/Products.jsx";
 import "../../components/Seller/styles/seller.css";
 import Profile from "../../components/Profile/Index";
 import { fetchCategories } from "../../store/actions/category/categoryActions.js";
+import { fetchSellerProducts } from "../../store/actions/product/productActions.js";
 
-export const Seller = () => {
+export const Seller = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
@@ -42,7 +43,12 @@ export const Seller = () => {
           <Route path="/" element={<SellerDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addProduct" element={<AddProduct />} />
-          <Route path="/products" element={<Products />} />
+          <Route
+            path="/products"
+            element={
+              <Products isWarning={isWarning} handleWarning={handleWarning} />
+            }
+          />
         </Routes>
       </div>
     </div>

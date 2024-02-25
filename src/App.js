@@ -25,7 +25,6 @@ import { Admin } from "./pages/Admin/Admin.jsx";
 
 function App() {
   const location = useLocation();
-
   const [isWarning, setIsWarning] = useState(false);
 
   const handleWarning = () => {
@@ -59,7 +58,12 @@ function App() {
             <Admin isWarning={isWarning} handleWarning={handleWarning} />
           }
         />
-        <Route path="/Seller/*" element={<Seller />} />
+        <Route
+          path="/Seller/*"
+          element={
+            <Seller isWarning={isWarning} handleWarning={handleWarning} />
+          }
+        />
       </Routes>
 
       {!shouldHide && <Footer />}

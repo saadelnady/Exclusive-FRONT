@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { CgMenuRight } from "react-icons/cg";
 import "../styles/SellerHeader.css";
 import { serverUrl } from "../../../API/API";
+import { Loading } from "../../shared/Loading";
 export const SellerHeader = ({ handleSidebarActivation }) => {
-  const { seller } = useSelector((state) => state.sellerReducer);
+  const { seller, isLoading } = useSelector((state) => state.sellerReducer);
 
   return (
     <div className="Seller-header">
@@ -18,11 +19,15 @@ export const SellerHeader = ({ handleSidebarActivation }) => {
       <div className="d-flex align-items-center flex-wrap">
         <IoIosNotifications className="fs-2 cursor-pointer" />
         <FaEnvelope className="fs-2 cursor-pointer" />
-        <img
-          src={`${serverUrl}/${seller.image}`}
-          alt="Seller-img"
-          className="Seller-image"
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <img
+            src={`${serverUrl}/${seller.image}`}
+            alt="Seller-img"
+            className="Seller-image"
+          />
+        )}
       </div>
     </div>
   );

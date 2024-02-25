@@ -6,6 +6,8 @@ const initialState = {
   product: {},
   products: [],
   error: null,
+  message: "",
+  total: 0,
 };
 
 const productReducer = (state = initialState, action) => {
@@ -16,12 +18,28 @@ const productReducer = (state = initialState, action) => {
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: action.payLoad,
         isLoading: false,
+        products: action.payLoad.products,
+        total: action.payLoad.total,
         error: null,
       };
 
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL:
+      return { ...state, isLoading: false, error: action.payLoad };
+
+    // ========================================================================
+    case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS:
+      return { ...state, isLoading: true };
+    case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        products: action.payLoad.data.products,
+        total: action.payLoad.total,
+        error: null,
+      };
+
+    case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS__FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
 
     // ========================================================================

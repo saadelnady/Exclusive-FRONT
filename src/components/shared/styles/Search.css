@@ -18,3 +18,9 @@
 .search-wrapper .search-items > div:hover {
   background-color: #ddd;
 }
+.search-result {
+  z-index: 999;
+}
+.search-result .search-img {
+  width: 50px;
+}

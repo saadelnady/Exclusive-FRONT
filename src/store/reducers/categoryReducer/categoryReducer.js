@@ -23,7 +23,6 @@ const categoryReducer = (state = initialState, action) => {
         isLoading: false,
         categories: action.payLoad.categories,
         total: action.payLoad.total,
-
         error: null,
       };
 
