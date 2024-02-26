@@ -43,7 +43,8 @@
   height: 100%;
 }
 
-.products-page div table tr th:not(:last-child),
+.products-page div table tr:first-of-type > th:not(:last-child),
+.products-page div table tr:last-of-type th,
 .products-page div table tbody tr td:not(:last-child) {
   border-right: 2px solid #eee;
 }

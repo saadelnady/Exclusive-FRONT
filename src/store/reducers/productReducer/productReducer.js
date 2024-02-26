@@ -30,6 +30,7 @@ const productReducer = (state = initialState, action) => {
     // ========================================================================
     case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS:
       return { ...state, isLoading: true };
+
     case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -86,6 +87,7 @@ const productReducer = (state = initialState, action) => {
         isLoading: false,
         products: [],
         product: {},
+        error: null,
       };
 
     case PRODUCT_ACTIONS_TYPES.PUT_PRODUCT_FAIL:

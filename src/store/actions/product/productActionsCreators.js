@@ -81,19 +81,19 @@ export const addProductFail = (payLoad) => {
 };
 // ========================================================================
 
-export const editSubCategory = (payLoad) => {
+export const editProduct = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.PUT_PRODUCT,
     payLoad,
   };
 };
-export const editSubCategorySuccess = (payLoad) => {
+export const editProductSuccess = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.PUT_PRODUCT_SUCCESS,
     payLoad,
   };
 };
-export const editSubCategoryFail = (payLoad) => {
+export const editProductFail = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.PUT_PRODUCT_FAIL,
     payLoad,

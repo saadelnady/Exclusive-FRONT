@@ -1,4 +1,4 @@
-import { getData, postData } from "../../../API/API";
+import { getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionsCreators from "./productActionsCreators";
 
@@ -13,6 +13,8 @@ export const fetchProducts = () => {
     }
   };
 };
+/* ================================================================================================== */
+
 export const fetchSellerProducts = (sellerId) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getSellerProducts(sellerId));
@@ -28,7 +30,7 @@ export const fetchSellerProducts = (sellerId) => {
 };
 /* ================================================================================================== */
 
-export const fetchProduct = ({ productId }) => {
+export const fetchProduct = (productId) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getProduct(productId));
     try {
@@ -50,6 +52,23 @@ export const addProduct = ({ formData, toast }) => {
       showToast(toast, response.message, "success");
     } catch (error) {
       dispatch(actionsCreators.addProductFail(error?.response?.data?.message));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+/* ================================================================================================== */
+
+export const editProduct = ({ formData, toast, productId }) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.editProduct(formData));
+    try {
+      const response = await putData(`/api/products/${productId}`, formData);
+
+      console.log("productId -------->", productId);
+      dispatch(actionsCreators.editProductSuccess(response));
+      showToast(toast, response.message, "success");
+    } catch (error) {
+      dispatch(actionsCreators.editProductFail(error?.response?.data?.message));
       showToast(toast, error?.response?.data?.message, "error");
     }
   };

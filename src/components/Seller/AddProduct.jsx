@@ -10,17 +10,23 @@ import "./styles/AddProduct.css";
 import { MdError } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import ToolTip from "../shared/toolTip";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   addProduct,
-  fetchProducts,
+  fetchProduct,
+  editProduct,
 } from "../../store/actions/product/productActions";
 import { isObjectNotEmpty } from "../../helpers/checkers";
+import { serverUrl } from "../../API/API";
 
 export const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
+  const { product } = useSelector((state) => state.productReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
   const [subCategories, setSubCategories] = useState([]);
+  const sizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+  const [images, setImages] = useState([]);
+  const { productId } = useParams();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,41 +40,132 @@ export const AddProduct = () => {
     },
     validate,
   });
+
   /* ================================================================================================== */
 
   useEffect(() => {
-    if (categories && categories.length > 0) {
-      const initialCategory = categories[0];
+    if (isObjectNotEmpty(product) && productId && categories.length > 0) {
+      const targetCategory = categories.find(
+        (cat) => cat._id === product?.category
+      );
+      setSubCategories(targetCategory.subCategories);
+    } else {
+      const initialCategory = categories[0] || {};
       formik.setValues({
         ...formik.values,
         category: initialCategory._id,
         subCategory:
-          initialCategory.subCategories.length > 0
-            ? initialCategory.subCategories[0]._id
+          initialCategory?.subCategories?.length > 0
+            ? initialCategory?.subCategories[0]?._id
             : null,
       });
       setSubCategories(initialCategory.subCategories);
     }
-  }, [categories]);
+  }, [categories, product, productId]);
 
   useEffect(() => {
     formik.setFieldValue("productOwner", seller?._id);
   }, [seller]);
-  const { products } = useSelector((state) => state.productReducer);
+
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    if (productId) {
+      dispatch(fetchProduct(productId));
+    } else {
+      formik.setValues({
+        title: "",
+        description: "",
+        images: [],
+        category: "",
+        subCategory: "",
+        productOwner: "",
+        options: [
+          {
+            size: "",
+            color: "#FFFFFF",
+            stockCount: "0",
+            price: {
+              priceBeforeDiscount: "",
+              discountPercentage: "",
+              finalPrice: "",
+              discountValue: "",
+            },
+          },
+        ],
+      });
+      setImages([]);
+    }
+  }, [productId, dispatch]);
+
+  useEffect(() => {
+    if (isObjectNotEmpty(product) && productId) {
+      const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
+      setImages(imagesPaths);
+      formik.setValues({
+        title: product.title,
+        description: product.description,
+        images: product.images,
+        category: product.category,
+        subCategory: product.subCategory,
+        productOwner: product.productOwner,
+        options: product.options
+          ? product.options.map((option) => ({
+              size: option.size,
+              color: option.color,
+              stockCount: option.stockCount,
+              price: {
+                priceBeforeDiscount: option.price.priceBeforeDiscount,
+                discountPercentage: option.price.discountPercentage,
+                discountValue: option.price.discountValue,
+                finalPrice: option.price.finalPrice,
+              },
+            }))
+          : [],
+      });
+    } else {
+      formik.setValues({
+        title: "",
+        description: "",
+        images: [],
+        category: "",
+        subCategory: "",
+        productOwner: "",
+        options: [
+          {
+            size: "",
+            color: "#FFFFFF",
+            stockCount: "0",
+            price: {
+              priceBeforeDiscount: "",
+              discountPercentage: "",
+              finalPrice: "",
+              discountValue: "",
+            },
+          },
+        ],
+      });
+    }
+  }, [productId, product]);
+
+  /* ================================================================================================== */
 
   const handleSubmit = (values) => {
+    if (productId) {
+      handleEditProduct(values);
+    } else {
+      handleAddProduct(values);
+    }
+  };
+
+  const handleAddProduct = (values) => {
     const formData = new FormData();
-    formData.append("images", values?.images);
+
     formData.append("title", values?.title);
     formData.append("description", values?.description);
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
     formData.append("productOwner", values?.productOwner);
 
-    values.images.forEach((image, index) => {
+    values.images.forEach((image) => {
       formData.append(`images`, image); // Append each file with the same key 'images'
     });
 
@@ -91,12 +188,47 @@ export const AddProduct = () => {
 
     const payload = { formData, toast };
     dispatch(addProduct(payload));
+    resetForm();
+  };
+
+  const handleEditProduct = (values) => {
+    const formData = new FormData();
+    console.log("values --->", values);
+    formData.append("title", values.title);
+    formData.append("description", values.description);
+    formData.append("category", values.category);
+    formData.append("subCategory", values.subCategory);
+    formData.append("productOwner", values.productOwner);
+
+    // Append the existing images
+    values.images.forEach((image) => {
+      formData.append("images", image);
+    });
+
+    values.options.forEach((option, index) => {
+      Object.entries(option).forEach(([key, value]) => {
+        if (typeof value === "object") {
+          Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+            formData.append(
+              `options[${index}][${key}][${nestedKey}]`,
+              nestedValue
+            );
+          });
+        } else {
+          formData.append(`options[${index}][${key}]`, value);
+        }
+      });
+    });
+
+    const payload = { formData, toast, productId };
+
+    dispatch(editProduct(payload));
+
     // resetForm();
   };
 
   const resetForm = () => {
     formik.resetForm();
-
     setTimeout(() => {
       navigate("/Seller/products");
       window.location.reload();
@@ -104,20 +236,18 @@ export const AddProduct = () => {
   };
   /* ================================================================================================== */
 
-  const [images, setImages] = useState([]);
-
   const handleImageChange = (event) => {
     const selectedImages = Array.from(event.target.files);
-    // Check if image with the same name already exists
     const newImages = selectedImages.filter(
       (image) =>
         !images.find((existingImage) => existingImage.name === image.name)
     );
 
-    // Update the images state with the File objects
+    // Update the images state with the File objects and their object URLs
     setImages([...images, ...newImages]);
+
     formik.setFieldValue("images", [
-      ...(formik.values.images || []), // Use existing images if available, or start with an empty array
+      ...(formik.values.images || []),
       ...newImages,
     ]);
 
@@ -197,7 +327,6 @@ export const AddProduct = () => {
   };
 
   /* ================================================================================================== */
-  const sizes = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
   const handleSizeChange = (e, index) => {
     const { name, value } = e.target;
@@ -218,9 +347,6 @@ export const AddProduct = () => {
     // Update the price field
     option[field] = value;
 
-    // Log the values being passed to calculateFinalPrice
-
-    // Calculate other fields based on the updated field
     if (field === "discountValue") {
       option.discountPercentage =
         value !== "" ? (value / option.priceBeforeDiscount) * 100 : "";
@@ -336,7 +462,9 @@ export const AddProduct = () => {
 
   return (
     <div className="bg-light h-100 ">
-      <h1 className="fw-bold shadow rounded py-3 px-5 my-3">Add product</h1>
+      <h1 className="fw-bold shadow rounded py-3 px-5 my-3">
+        {productId ? "Edit" : "Add"} product
+      </h1>
       <div className="container">
         <form onSubmit={formik.handleSubmit} className="add-product">
           {/* ================================================================================================== */}
@@ -364,8 +492,12 @@ export const AddProduct = () => {
                     className="d-flex flex-column align-items-center justify-content-between"
                   >
                     <img
-                      src={URL.createObjectURL(imgItem)}
-                      alt={`SelectedImage`}
+                      src={
+                        typeof imgItem === "string"
+                          ? imgItem
+                          : URL.createObjectURL(imgItem)
+                      }
+                      alt={`SelectedImages ${index}`}
                     />
                     <CiSquareRemove
                       className="fs-3 cursor-pointer"
@@ -376,6 +508,7 @@ export const AddProduct = () => {
                   </div>
                 ))}
             </div>
+
             {formik.touched.images && formik.errors.images ? (
               <p className="text-sm-end">
                 <MdError className="fs-3 me-2" />
@@ -434,6 +567,7 @@ export const AddProduct = () => {
               id="category"
               name="category"
               onChange={handleCategoryChange}
+              value={formik.values.category}
               className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
             >
               {categories.map((cat, index) => (
@@ -453,7 +587,7 @@ export const AddProduct = () => {
               id="subCategory"
               className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
               onChange={handleSubCategoryChange}
-              value={formik?.values?.subCategory}
+              value={formik?.values?.subCategory} //
             >
               {subCategories?.map((subCat, index) => (
                 <option key={index} value={subCat._id}>
@@ -637,7 +771,7 @@ export const AddProduct = () => {
           {/* ================================================================================================== */}
 
           <button className="btn p-3 fs-4 submit" type="submit">
-            Add Product
+            {productId ? "Edit" : "Add"} product
           </button>
         </form>
       </div>

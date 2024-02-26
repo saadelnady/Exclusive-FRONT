@@ -44,6 +44,10 @@ export const Seller = ({ isWarning, handleWarning }) => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route
+            path="/products/editProduct/:productId"
+            element={<AddProduct />}
+          />
+          <Route
             path="/products"
             element={
               <Products isWarning={isWarning} handleWarning={handleWarning} />
