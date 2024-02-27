@@ -64,6 +64,7 @@ export const AddProduct = () => {
   }, [categories, product, productId]);
 
   useEffect(() => {
+    console.log("seller?._id ------------->", seller?._id);
     formik.setFieldValue("productOwner", seller?._id);
   }, [seller]);
 
@@ -158,7 +159,7 @@ export const AddProduct = () => {
 
   const handleAddProduct = (values) => {
     const formData = new FormData();
-
+    console.log("addd values", values);
     formData.append("title", values?.title);
     formData.append("description", values?.description);
     formData.append("category", values?.category);
@@ -193,7 +194,6 @@ export const AddProduct = () => {
 
   const handleEditProduct = (values) => {
     const formData = new FormData();
-    console.log("values --->", values);
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("category", values.category);
@@ -224,14 +224,13 @@ export const AddProduct = () => {
 
     dispatch(editProduct(payload));
 
-    // resetForm();
+    resetForm();
   };
 
   const resetForm = () => {
     formik.resetForm();
     setTimeout(() => {
       navigate("/Seller/products");
-      window.location.reload();
     }, 2000);
   };
   /* ================================================================================================== */

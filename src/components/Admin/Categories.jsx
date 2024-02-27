@@ -63,7 +63,6 @@ export const Categories = ({ isWarning, handleWarning }) => {
       {isWarning && (
         <Warning
           message={DELETE_MESSAGE}
-          subMessage={DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY}
           handleWarning={handleWarning}
           handleAction={handleDeleteCategory}
         />

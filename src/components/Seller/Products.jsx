@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSellerProducts } from "../../store/actions/product/productActions";
+import {
+  deleteProduct,
+  fetchSellerProducts,
+} from "../../store/actions/product/productActions";
 import { Loading } from "../shared/Loading";
 import { serverUrl } from "../../API/API";
 import { formatDateAndTime } from "../../helpers/formated_date_time";
@@ -12,6 +15,11 @@ import { Pagination } from "../shared/Pagination";
 import { toast } from "react-toastify";
 
 import "./styles/Myproducts.css";
+import Warning from "../shared/Warning";
+import {
+  DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
+  DELETE_MESSAGE,
+} from "../../helpers/warningMessges";
 
 export const Products = ({ isWarning, handleWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -36,15 +44,22 @@ export const Products = ({ isWarning, handleWarning }) => {
 
   const handleDeleteProduct = () => {
     const payLoad = { productId, toast };
-    // dispatch(deleteProduct(payLoad));
+    dispatch(deleteProduct(payLoad));
     setTimeout(() => {
       handleWarning();
-      window.location.reload();
+      // window.location.reload();
     }, 2000);
   };
   // ==========================================================
   return (
     <div className="products-page">
+      {isWarning && (
+        <Warning
+          message={DELETE_MESSAGE}
+          handleWarning={handleWarning}
+          handleAction={handleDeleteProduct}
+        />
+      )}
       <h3>My products</h3>
       <div className="products-list bg-white ">
         {isLoading ? (

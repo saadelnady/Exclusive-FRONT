@@ -100,19 +100,19 @@ export const editProductFail = (payLoad) => {
   };
 };
 // ========================================================================
-export const deleteSubCategory = (payLoad) => {
+export const deleteProduct = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT,
     payLoad,
   };
 };
-export const deleteSubCategorySuccess = (payLoad) => {
+export const deleteProductSuccess = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT_SUCCESS,
     payLoad,
   };
 };
-export const deleteSubCategoryFail = (payLoad) => {
+export const deleteProductFail = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT_FAIL,
     payLoad,

@@ -6,12 +6,12 @@
   padding: 15px 20px;
 }
 @media (max-width: 768px) {
-  .burger-icon {
+  .admin-header .burger-icon {
     display: block;
   }
 }
 @media (min-width: 992px) {
-  .burger-icon {
+  .admin-header .burger-icon {
     display: none;
   }
   .admin-header {

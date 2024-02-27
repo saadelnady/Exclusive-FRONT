@@ -103,17 +103,18 @@ const productReducer = (state = initialState, action) => {
 
     case PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT_SUCCESS:
       const updatedProducts = state.products.filter(
-        (product) => product._id !== action.payLoad
+        (product) => product._id !== action?.payLoad?.data?.product?._id
       );
       return {
         ...state,
         isLoading: false,
         error: null,
-        products: updatedProducts,
+        products: [...state.products, ...updatedProducts],
+        message: action?.payLoad?.message,
       };
 
-    case PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT_FAIL:
-      return { ...state, isLoading: false, error: action.payLoad };
+    case PRODUCT_ACTIONS_TYPES?.DELETE_PRODUCT_FAIL:
+      return { ...state, isLoading: false, error: action?.payLoad };
 
     default:
       return state;

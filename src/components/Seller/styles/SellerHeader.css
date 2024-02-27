@@ -5,18 +5,16 @@
   border-bottom: 2px solid #ccc;
   padding: 15px 20px;
 }
-@media (max-width: 768px) {
-  .burger-icon {
-    display: block;
-  }
-}
-@media (min-width: 992px) {
-  .burger-icon {
+@media (min-width: 993px) {
+  .Seller-header .burger-icon {
     display: none;
   }
+}
+
+@media (min-width: 993px) {
   .Seller-header {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
   }
 }

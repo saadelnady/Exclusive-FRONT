@@ -95,7 +95,7 @@ const validate = (values) => {
         optionErrors.discountPercentage = `discountPercentage must be a number in option number ${
           index + 1
         }`;
-      } else if (option.price?.discountPercentage >= "100") {
+      } else if (+option.price?.discountPercentage >= 100) {
         optionErrors.discountPercentage = `discountPercentage should be less than 100 in option number ${
           index + 1
         }`;
