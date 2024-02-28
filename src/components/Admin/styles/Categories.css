@@ -56,17 +56,15 @@
 }
 .categories-page div table tbody td .options-wrapper {
   cursor: pointer;
-  position: relative;
   width: fit-content;
   margin: 0 auto;
 }
 .categories-page div table tbody td .options {
   flex-direction: column;
   position: absolute;
-  right: 0;
+  right: 100px;
   display: none;
   content: "";
-  z-index: 4;
   z-index: 999;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -78,6 +76,11 @@
   -moz-transform: translateY(30px);
   -ms-transform: translateY(30px);
   -o-transform: translateY(30px);
+}
+@media (max-width: 768px) {
+  .categories-page div table tbody td .options {
+    right: 42px;
+  }
 }
 .categories-page div table tbody td .options button {
   border: none;

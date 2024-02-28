@@ -36,7 +36,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         products: action.payLoad.data.products,
-        total: action.payLoad.total,
+        total: action.payLoad.data.total,
         error: null,
       };
 
@@ -80,13 +80,12 @@ const productReducer = (state = initialState, action) => {
     // ========================================================================
     case PRODUCT_ACTIONS_TYPES.PUT_PRODUCT:
       return { ...state, isLoading: true };
-
     case PRODUCT_ACTIONS_TYPES.PUT_PRODUCT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        products: [],
-        product: {},
+        products: [...state.products, action?.payLoad?.data?.product],
+        product: { ...state.product, ...action?.payLoad?.data?.product },
         error: null,
       };
 
@@ -109,7 +108,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        products: [...state.products, ...updatedProducts],
+        products: [...updatedProducts],
         message: action?.payLoad?.message,
       };
 

@@ -5,8 +5,9 @@ import "./styles/Search.css";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
 import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
+import { fetchSellerProducts } from "../../store/actions/product/productActions";
 
-export const Search = ({ type }) => {
+export const Search = ({ type, sellerId }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const handleSearch = (e) => {
@@ -17,12 +18,21 @@ export const Search = ({ type }) => {
         dispatch(fetchCategories({ limit: 10, page: 1, text: searchTerm }));
       } else if (type === "subCategories") {
         dispatch(fetchSubCategories({ limit: 10, page: 1, text: searchTerm }));
+      } else if (type === "sellerProducts") {
+        dispatch(
+          fetchSellerProducts({
+            limit: 10,
+            page: 1,
+            text: searchTerm,
+            sellerId,
+          })
+        );
       }
     }, 500);
   };
 
   return (
-    <div className="search-wrapper position-relative col-12 col-lg-7 my-2 my-lg-0">
+    <div className="search-wrapper position-relative col-12 col-lg-4 my-2 my-lg-0">
       <input
         type="text"
         className="form-control bg-light search"

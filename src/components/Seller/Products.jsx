@@ -16,10 +16,8 @@ import { toast } from "react-toastify";
 
 import "./styles/Myproducts.css";
 import Warning from "../shared/Warning";
-import {
-  DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
-  DELETE_MESSAGE,
-} from "../../helpers/warningMessges";
+import { DELETE_MESSAGE } from "../../helpers/warningMessges";
+import { Search } from "../shared/Search";
 
 export const Products = ({ isWarning, handleWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -30,13 +28,17 @@ export const Products = ({ isWarning, handleWarning }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const dispatch = useDispatch();
-  console.log("products ---->", products);
   useEffect(() => {
     if (seller && seller._id) {
-      dispatch(fetchSellerProducts(seller?._id));
+      dispatch(
+        fetchSellerProducts({
+          limit,
+          page: currentPage,
+          sellerId: seller?._id,
+        })
+      );
     }
-  }, [seller, dispatch]);
-
+  }, [seller, dispatch, currentPage]);
   // ==========================================================
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -60,7 +62,12 @@ export const Products = ({ isWarning, handleWarning }) => {
           handleAction={handleDeleteProduct}
         />
       )}
-      <h3>My products</h3>
+      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
+        <h1 className="fw-bold col-12 col-lg-5">My Products </h1>
+
+        <Search type={"sellerProducts"} sellerId={seller?._id} />
+      </div>
+
       <div className="products-list bg-white ">
         {isLoading ? (
           <Loading />

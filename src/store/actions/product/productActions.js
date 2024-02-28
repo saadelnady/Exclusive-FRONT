@@ -15,13 +15,30 @@ export const fetchProducts = () => {
 };
 /* ================================================================================================== */
 
-export const fetchSellerProducts = (sellerId) => {
+export const fetchSellerProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+  sellerId = "",
+} = {}) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getSellerProducts(sellerId));
     try {
-      const response = await getData(
-        `/api/products/sellerProducts?sellerId=${sellerId}`
-      );
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/sellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}&text=${text}`
+        );
+      } else if (limit && page) {
+        response = await getData(
+          `/api/products/sellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/sellerProducts?sellerId=${sellerId}`
+        );
+      }
+
       dispatch(actionsCreators.getSellerProductsSuccess(response));
     } catch (error) {
       dispatch(actionsCreators.getSellerProductsFail(error));

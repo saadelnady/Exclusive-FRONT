@@ -38,7 +38,6 @@ export const Categories = ({ isWarning, handleWarning }) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   // ==========================================================
 
   useEffect(() => {
@@ -64,6 +63,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
         <Warning
           message={DELETE_MESSAGE}
           handleWarning={handleWarning}
+          subMessage={DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY}
           handleAction={handleDeleteCategory}
         />
       )}
@@ -91,7 +91,6 @@ export const Categories = ({ isWarning, handleWarning }) => {
               {categories.map((category, index) => (
                 <tr key={index} className=" ">
                   <td className="border-end">
-                    {" "}
                     {(currentPage - 1) * limit + index + 1}
                   </td>
                   <td>

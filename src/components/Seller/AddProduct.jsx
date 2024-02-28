@@ -64,8 +64,7 @@ export const AddProduct = () => {
   }, [categories, product, productId]);
 
   useEffect(() => {
-    console.log("seller?._id ------------->", seller?._id);
-    formik.setFieldValue("productOwner", seller?._id);
+    formik.setFieldValue("productOwner", seller._id);
   }, [seller]);
 
   useEffect(() => {
@@ -73,6 +72,7 @@ export const AddProduct = () => {
       dispatch(fetchProduct(productId));
     } else {
       formik.setValues({
+        ...formik.values,
         title: "",
         description: "",
         images: [],
@@ -164,7 +164,9 @@ export const AddProduct = () => {
     formData.append("description", values?.description);
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
-    formData.append("productOwner", values?.productOwner);
+    // Set productOwner value programmatically
+    const productOwnerId = seller?._id; // Assuming seller is available
+    formData.append("productOwner", productOwnerId);
 
     values.images.forEach((image) => {
       formData.append(`images`, image); // Append each file with the same key 'images'
@@ -198,8 +200,9 @@ export const AddProduct = () => {
     formData.append("description", values.description);
     formData.append("category", values.category);
     formData.append("subCategory", values.subCategory);
-    formData.append("productOwner", values.productOwner);
-
+    // Set productOwner value programmatically
+    const productOwnerId = seller?._id; // Assuming seller is available
+    formData.append("productOwner", productOwnerId);
     // Append the existing images
     values.images.forEach((image) => {
       formData.append("images", image);
@@ -377,7 +380,9 @@ export const AddProduct = () => {
       // Both percentage and discount provided, consider only percentage
       return ""; // Return empty string or handle error
     }
-
+    if (isNaN(price)) {
+      return "";
+    }
     if (price === "0" || (percentage !== "" && percentage === "0")) {
       return price.toFixed(2); // Return price if zero or invalid percentage
     }
@@ -621,7 +626,7 @@ export const AddProduct = () => {
               </thead>
 
               <tbody>
-                {formik.values.options.map((row, index) => (
+                {formik?.values?.options?.map((row, index) => (
                   <tr key={index} className="option-row">
                     <td>
                       {formik.values.options.length > 1 && (

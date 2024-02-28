@@ -28,6 +28,8 @@ const validate = (values) => {
   // Validate product images
   if (values?.images?.length === 0) {
     errors.images = "Product images are required";
+  } else if (values?.images?.length > 10) {
+    errors.images = "You shouldn't add more than 10 images";
   }
 
   // Validate product title
@@ -79,7 +81,7 @@ const validate = (values) => {
         optionErrors.priceBeforeDiscount = `Product price before discount  must be a number in option number ${
           index + 1
         }`;
-      } else if (option.price?.priceBeforeDiscount <= "0") {
+      } else if (+option.price?.priceBeforeDiscount <= 0) {
         optionErrors.priceBeforeDiscount = `Product price before discount mustn't be less than or equal 0 in option number ${
           index + 1
         }`;
@@ -99,7 +101,7 @@ const validate = (values) => {
         optionErrors.discountPercentage = `discountPercentage should be less than 100 in option number ${
           index + 1
         }`;
-      } else if (option.price?.discountPercentage < "0") {
+      } else if (+option.price?.discountPercentage < 0) {
         optionErrors.discountPercentage = `discount Percentage mustn't be less than 0 in option number ${
           index + 1
         }`;
@@ -110,7 +112,7 @@ const validate = (values) => {
         optionErrors.discountValue = `discount Value must be a number in option number ${
           index + 1
         }`;
-      } else if (option.price?.discountValue < "0") {
+      } else if (+option.price?.discountValue < 0) {
         optionErrors.discountValue = `discount value mustn't be less than 0 in option number ${
           index + 1
         }`;
@@ -132,7 +134,7 @@ const validate = (values) => {
       // =================================================================================
 
       // Validate stockCount
-      if (!option.stockCount || option.stockCount === "0") {
+      if (!option.stockCount || +option.stockCount === 0) {
         optionErrors.stockCount = `Product stockCount shouldn't be 0 in option number ${
           index + 1
         }`;

@@ -80,7 +80,7 @@ export const AddSubCategory = () => {
     dispatch(fetchCategories());
     formik.setValues({
       ...formik.values,
-      category: categories[0]._id,
+      category: categories[0]?._id,
     });
   }, []);
 
@@ -223,7 +223,7 @@ export const AddSubCategory = () => {
           >
             {categories?.map((category, index) => {
               return (
-                <option key={index} value={category._id}>
+                <option key={index} value={category?._id}>
                   {category.title}
                 </option>
               );
