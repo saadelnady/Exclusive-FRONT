@@ -1,4 +1,5 @@
 import { isObjectNotEmpty } from "../../../helpers/checkers";
+import moment from "moment";
 
 const initialValues = {
   title: "",
@@ -21,7 +22,7 @@ const initialValues = {
     },
   ],
   isFlashSale: false,
-  flashSaleExpirationDate: null,
+  flashSaleExpirationDate: "",
   isAccepted: false,
 };
 
@@ -53,10 +54,29 @@ const validate = (values) => {
     errors.description =
       "Product description must be between 10 and 500 characters";
   }
-  const flashSaleExpirationDate = new Date(values.flashSaleExpirationDate);
-  console.log(flashSaleExpirationDate);
-  if (values.flashSaleExpirationDate < Date.now()) {
+  const flashSaleExpirationMoment = moment(values.flashSaleExpirationDate);
+  const currentMoment = moment();
+  const maximumDuration = moment.duration(30, "days");
+
+  if (values.flashSaleExpirationDate === null && values.isFlashSale) {
+    errors.flashSaleExpirationDate = "Choose the expire date , please";
+  } else if (
+    !moment(values.flashSaleExpirationDate, "YYYY-MM-DD", true).isValid() &&
+    values.isFlashSale
+  ) {
+    errors.flashSaleExpirationDate = "Please provide a valid date";
+  } else if (
+    moment(values.flashSaleExpirationDate).isBefore(moment(), "day") &&
+    values.isFlashSale
+  ) {
     errors.flashSaleExpirationDate = "the date you provide is expired ";
+  } else if (
+    flashSaleExpirationMoment.diff(currentMoment, "days") >
+      maximumDuration.asDays() &&
+    values.isFlashSale
+  ) {
+    errors.flashSaleExpirationDate =
+      "The date must be less than or equal to 30 days from now";
   }
 
   // Validate options
