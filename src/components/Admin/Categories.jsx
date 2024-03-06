@@ -50,10 +50,8 @@ export const Categories = ({ isWarning, handleWarning }) => {
   const handleDeleteCategory = () => {
     const payLoad = { categoryId, toast };
     dispatch(deleteCategory(payLoad));
-    setTimeout(() => {
-      handleWarning();
-      window.location.reload();
-    }, 2000);
+
+    handleWarning();
   };
   // ==========================================================
 

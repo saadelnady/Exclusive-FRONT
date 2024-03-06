@@ -74,6 +74,7 @@ const categoryReducer = (state = initialState, action) => {
         isLoading: false,
         categories: [],
         category: {},
+        message: action?.payLoad?.message,
       };
 
     case CATEGORY_ACTIONS_TYPES.PUT_CATEGORY_FAIL:
@@ -85,14 +86,17 @@ const categoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true, error: null };
 
     case CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_SUCCESS:
+      console.log("...action.payLoad.data.category =====>", action.payLoad);
+
       const updatedCategories = state.categories.filter(
-        (category) => category._id !== action?.payLoad
+        (category) => category?._id !== action?.payLoad?.data?.category?._id
       );
       return {
         ...state,
         isLoading: false,
         error: null,
-        categories: updatedCategories,
+        categories: [...updatedCategories],
+        message: action?.payLoad?.message,
       };
 
     case CATEGORY_ACTIONS_TYPES.DELETE_CATEGORY_FAIL:

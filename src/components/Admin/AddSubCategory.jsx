@@ -54,24 +54,26 @@ export const AddSubCategory = () => {
         title: "",
         image: "",
         previewImage: "",
-        category: "",
+        category: categories[0]?._id,
       });
     }
-  }, [dispatch]);
+  }, [dispatch, categories]);
 
   useEffect(() => {
     if (subCategory && subCategoryId) {
+      console.log("subcat ===>", subCategory);
       formik.setValues({
         title: subCategory.title,
         image: subCategory.image,
         previewImage: `${serverUrl}/${subCategory.image}`,
+        category: subCategory?.category?._id,
       });
     } else {
       formik.setValues({
         title: "",
         image: "",
         previewImage: "",
-        category: "",
+        category: categories[0]?._id,
       });
     }
   }, [subCategory, subCategoryId]);
@@ -115,7 +117,6 @@ export const AddSubCategory = () => {
     document.getElementById("categoryTitle").value = "";
     setTimeout(() => {
       navigate("/admin/subCategories");
-      window.location.reload();
     }, 2000);
   };
 

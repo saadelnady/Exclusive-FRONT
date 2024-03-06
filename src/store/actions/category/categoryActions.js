@@ -60,7 +60,8 @@ export const editCategory = ({ categoryId, formData, toast }) => {
 
     try {
       const response = await putData(`/api/categories/${categoryId}`, formData);
-      dispatch(actionsCreators.editCategorySuccess(response?.data));
+      console.log("response ---->", response);
+      dispatch(actionsCreators.editCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.editCategoryFail(error));
@@ -76,7 +77,8 @@ export const deleteCategory = ({ categoryId, toast }) => {
 
     try {
       const response = await deleteData(`/api/categories/${categoryId}`);
-      dispatch(actionsCreators.deleteCategorySuccess(response.data));
+      console.log("delete Data from category page ===>", response);
+      dispatch(actionsCreators.deleteCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.deleteCategoryFail(error));

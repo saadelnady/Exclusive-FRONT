@@ -100,7 +100,7 @@ export const deleteProduct = ({ productId, toast }) => {
       const response = await deleteData(`/api/products/${productId}`);
 
       dispatch(actionsCreators.deleteProductSuccess(response));
-      showToast(toast, response?.data?.message, "success");
+      showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(
         actionsCreators.deleteProductFail(error?.response?.data?.message)

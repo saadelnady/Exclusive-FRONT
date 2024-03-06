@@ -49,10 +49,8 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
   const handleDeleteSubCategory = () => {
     const payLoad = { subCategoryId, toast };
     dispatch(deleteSubCategory(payLoad));
-    setTimeout(() => {
-      handleWarning();
-      window.location.reload();
-    }, 2000);
+
+    handleWarning();
   };
   // ==========================================================
 

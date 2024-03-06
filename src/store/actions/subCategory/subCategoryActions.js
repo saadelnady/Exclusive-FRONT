@@ -64,10 +64,7 @@ export const editSubCategory = ({ subCategoryId, formData, toast }) => {
         `/api/subCategories/${subCategoryId}`,
         formData
       );
-
-      dispatch(
-        actionsCreators.editSubCategorySuccess(response?.data?.subCategory)
-      );
+      dispatch(actionsCreators.editSubCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.editSubCategoryFail(error));
@@ -83,7 +80,7 @@ export const deleteSubCategory = ({ subCategoryId, toast }) => {
 
     try {
       const response = await deleteData(`/api/subCategories/${subCategoryId}`);
-      dispatch(actionsCreators.deleteSubCategorySuccess(response.data));
+      dispatch(actionsCreators.deleteSubCategorySuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.deleteSubCategoryFail(error));

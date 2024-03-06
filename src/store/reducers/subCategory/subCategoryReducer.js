@@ -75,11 +75,11 @@ const subCategoryReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        subCategory: {
-          ...state,
-
-          message: action.payLoad,
-        },
+        subCategories: [
+          ...state.subCategories,
+          action?.payLoad?.data?.subCategory,
+        ],
+        message: action?.payLoad?.message,
       };
     case SUBCATEGORY_ACTIONS_TYPES.PUT_SUBCATEGORY_FAIL:
       return {
@@ -93,13 +93,15 @@ const subCategoryReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     case SUBCATEGORY_ACTIONS_TYPES.DELETE_SUBCATEGORY_SUCCESS:
       const updatedSubCategories = state.subCategories.filter(
-        (subCategory) => subCategory.id !== action.payLoad
+        (subCategory) =>
+          subCategory?._id !== action?.payLoad?.data?.SubCategory?._id
       );
       return {
         ...state,
         isLoading: false,
         error: null,
         subCategories: updatedSubCategories,
+        message: action?.payLoad?.message,
       };
     case SUBCATEGORY_ACTIONS_TYPES.DELETE_SUBCATEGORY_FAIL:
       return {

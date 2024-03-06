@@ -18,6 +18,7 @@ import {
 } from "../../store/actions/product/productActions";
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
+import { formatDateAndTime } from "../../helpers/formated_date_time";
 
 export const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
@@ -53,6 +54,9 @@ export const AddProduct = () => {
       const initialCategory = categories[0] || {};
       formik.setValues({
         ...formik.values,
+        isFlashSale: false,
+        flashSaleExpirationDate: null,
+        isAccepted: false,
         category: initialCategory._id,
         subCategory:
           initialCategory?.subCategories?.length > 0
@@ -61,11 +65,11 @@ export const AddProduct = () => {
       });
       setSubCategories(initialCategory.subCategories);
     }
-  }, [categories, product, productId]);
+  }, [categories, product, productId, dispatch]);
 
   useEffect(() => {
     formik.setFieldValue("productOwner", seller._id);
-  }, [seller]);
+  }, [seller, seller._id, dispatch]);
 
   useEffect(() => {
     if (productId) {
@@ -73,12 +77,13 @@ export const AddProduct = () => {
     } else {
       formik.setValues({
         ...formik.values,
+
         title: "",
         description: "",
         images: [],
-        category: "",
-        subCategory: "",
-        productOwner: "",
+        isFlashSale: false,
+        flashSaleExpirationDate: null,
+        isAccepted: false,
         options: [
           {
             size: "",
@@ -95,7 +100,7 @@ export const AddProduct = () => {
       });
       setImages([]);
     }
-  }, [productId, dispatch]);
+  }, [productId, categories, dispatch]);
 
   useEffect(() => {
     if (isObjectNotEmpty(product) && productId) {
@@ -123,13 +128,21 @@ export const AddProduct = () => {
           : [],
       });
     } else {
+      const initialCategory = categories[0] || {};
+
       formik.setValues({
         title: "",
         description: "",
         images: [],
-        category: "",
-        subCategory: "",
-        productOwner: "",
+        productOwner: seller._id,
+        category: initialCategory._id,
+        subCategory:
+          initialCategory?.subCategories?.length > 0
+            ? initialCategory?.subCategories[0]?._id
+            : null,
+        isFlashSale: false,
+        flashSaleExpirationDate: null,
+        isAccepted: false,
         options: [
           {
             size: "",
@@ -145,7 +158,7 @@ export const AddProduct = () => {
         ],
       });
     }
-  }, [productId, product]);
+  }, [categories, productId, product, dispatch]);
 
   /* ================================================================================================== */
 
@@ -190,8 +203,8 @@ export const AddProduct = () => {
     });
 
     const payload = { formData, toast };
-    dispatch(addProduct(payload));
-    resetForm();
+    // dispatch(addProduct(payload));
+    // resetForm();
   };
 
   const handleEditProduct = (values) => {
@@ -295,6 +308,25 @@ export const AddProduct = () => {
     formik.setFieldValue(name, value);
   };
 
+  /* ================================================================================================== */
+
+  const handleIsFlashSale = (e) => {
+    const isChecked = e.target.checked;
+    formik.setValues({
+      ...formik.values,
+      isFlashSale: isChecked,
+    });
+  };
+  const handleIsFlashSaleExpireDate = (e) => {
+    formik.setValues({
+      ...formik.values,
+      flashSaleExpirationDate: e.target.value,
+    });
+    console.log(e.target.value);
+  };
+
+  // values.flashSaleExpirationDate < Date.now()
+  // console.log(formatDateAndTime(Date.now()));
   /* ================================================================================================== */
 
   const removeProductOption = (index) => {
@@ -488,7 +520,13 @@ export const AddProduct = () => {
               onBlur={formik.handleBlur}
               multiple
             />
-            <div className="d-flex justify-content-evenly align-items-center flex-wrap">
+            {formik.touched.images && formik.errors.images ? (
+              <p className="text-sm-end">
+                <MdError className="fs-3 me-2" />
+                {formik.errors.images}
+              </p>
+            ) : null}
+            <div className="d-flex justify-content-end align-items-center flex-wrap ">
               {images &&
                 images.map((imgItem, index) => (
                   <div
@@ -512,13 +550,6 @@ export const AddProduct = () => {
                   </div>
                 ))}
             </div>
-
-            {formik.touched.images && formik.errors.images ? (
-              <p className="text-sm-end">
-                <MdError className="fs-3 me-2" />
-                {formik.errors.images}
-              </p>
-            ) : null}
           </div>
           {/* ================================================================================================== */}
           <div className="add-title item">
@@ -528,7 +559,7 @@ export const AddProduct = () => {
             <input
               type="text"
               name="title"
-              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
               value={formik.values.title}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -589,7 +620,7 @@ export const AddProduct = () => {
             <select
               name="subCategory"
               id="subCategory"
-              className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
+              className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
               onChange={handleSubCategoryChange}
               value={formik?.values?.subCategory} //
             >
@@ -600,7 +631,27 @@ export const AddProduct = () => {
               ))}
             </select>
           </div>
+          {/* ================================================================================================== */}
+          <div className="flash-Sale item">
+            <label htmlFor="flashSale" className="fw-bold fs-4">
+              Flash sale:
+              <input
+                type="checkbox"
+                id="flashSale"
+                className="toggle-checkbox active"
+                value={formik?.values?.isFlashSale}
+                onChange={handleIsFlashSale}
+              />
+            </label>
 
+            {formik.values.isFlashSale && (
+              <input
+                type="date"
+                className="col-12 col-sm-7 col-lg-8 py-2 px-3 fs-3 special-input"
+                onChange={handleIsFlashSaleExpireDate}
+              />
+            )}
+          </div>
           {/* ================================================================================================== */}
           <h3 className="text-center fw-bold my-3">Product options</h3>
           {/* ================================================================================================== */}

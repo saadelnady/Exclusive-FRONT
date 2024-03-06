@@ -108,3 +108,74 @@
 .add-product .options-table .add-option {
   top: 40px;
 }
+.add-product .flash-Sale {
+  display: flex;
+}
+
+.add-product .flash-Sale label {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .add-product .flash-Sale label {
+    margin-bottom: 20px;
+  }
+}
+.add-product .flash-Sale .toggle-checkbox {
+  appearance: none;
+  position: relative;
+  margin-left: 10px;
+}
+
+.add-product .flash-Sale .toggle-checkbox::before {
+  position: absolute;
+  content: "";
+  background-color: rgba(255, 0, 0, 0.342);
+  width: 75px;
+  height: 30px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.add-product .flash-Sale .toggle-checkbox:checked::before {
+  box-shadow: 0 0.5rem 1rem var(--red-color);
+  background-color: var(--red-color);
+}
+.add-product .flash-Sale .toggle-checkbox::after {
+  position: absolute;
+  content: "X";
+  color: #fff;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  top: 2px;
+}
+.add-product .flash-Sale .toggle-checkbox:checked::after {
+  transform: translateX(180%);
+  -webkit-transform: translateX(180%);
+  -moz-transform: translateX(180%);
+  -ms-transform: translateX(180%);
+  -o-transform: translateX(180%);
+  content: "";
+}

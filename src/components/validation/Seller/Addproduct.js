@@ -20,6 +20,9 @@ const initialValues = {
       },
     },
   ],
+  isFlashSale: false,
+  flashSaleExpirationDate: null,
+  isAccepted: false,
 };
 
 const validate = (values) => {
@@ -29,6 +32,7 @@ const validate = (values) => {
   if (values?.images?.length === 0) {
     errors.images = "Product images are required";
   } else if (values?.images?.length > 10) {
+    console.log("values?.images?.length------>", typeof values?.images?.length);
     errors.images = "You shouldn't add more than 10 images";
   }
 
@@ -43,11 +47,16 @@ const validate = (values) => {
   if (!values?.description) {
     errors.description = "Product description is required";
   } else if (
-    values?.description?.length < 3 ||
+    values?.description?.length < 10 ||
     values?.description?.length > 500
   ) {
     errors.description =
-      "Product description must be between 3 and 500 characters";
+      "Product description must be between 10 and 500 characters";
+  }
+  const flashSaleExpirationDate = new Date(values.flashSaleExpirationDate);
+  console.log(flashSaleExpirationDate);
+  if (values.flashSaleExpirationDate < Date.now()) {
+    errors.flashSaleExpirationDate = "the date you provide is expired ";
   }
 
   // Validate options

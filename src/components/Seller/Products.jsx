@@ -47,10 +47,8 @@ export const Products = ({ isWarning, handleWarning }) => {
   const handleDeleteProduct = () => {
     const payLoad = { productId, toast };
     dispatch(deleteProduct(payLoad));
-    setTimeout(() => {
-      handleWarning();
-      // window.location.reload();
-    }, 2000);
+
+    handleWarning();
   };
   // ==========================================================
   return (

@@ -1,5 +1,4 @@
 .categories-page {
-  position: relative;
   padding: 20px 0 60px 0;
   height: 100%;
 }
@@ -77,11 +76,12 @@
   -ms-transform: translateY(30px);
   -o-transform: translateY(30px);
 }
-@media (max-width: 768px) {
+@media (max-width: 1500px) {
   .categories-page div table tbody td .options {
     right: 42px;
   }
 }
+
 .categories-page div table tbody td .options button {
   border: none;
   margin-bottom: 2px;

@@ -99,7 +99,6 @@ export const AddCategory = () => {
     document.getElementById("categoryTitle").value = "";
     setTimeout(() => {
       navigate("/admin/Categories");
-      window.location.reload();
     }, 2000);
   };
   // ================================================================================
