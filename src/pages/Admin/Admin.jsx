@@ -6,8 +6,9 @@ import { Route, Routes } from "react-router-dom";
 import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
 import { AdminHeader } from "../../components/Admin/shared/AdminHeader";
 import { AdminDashboard } from "../../components/Admin/AdminDashBoard";
-import { JoinRequests } from "../../components/Admin/JoinRequests";
+import { ProductsAddRequests } from "../../components/Admin/ProductsRequests";
 import { Categories } from "../../components/Admin/Categories";
+import { Product } from "../../components/Admin/Product.jsx";
 import { AddSubCategory } from "../../components/Admin/AddSubCategory";
 import { SubCategories } from "../../components/Admin/SubCategories";
 import { AddCategory } from "../../components/Admin/AddCategory";
@@ -16,6 +17,7 @@ import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
 import "../../components/Admin/styles/Admin.css";
+import { fetchProductsAddRequests } from "../../store/actions/product/productActions";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -30,6 +32,7 @@ export const Admin = ({ isWarning, handleWarning }) => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
+      dispatch(fetchProductsAddRequests());
     }
   }, [dispatch]);
   return (
@@ -43,7 +46,16 @@ export const Admin = ({ isWarning, handleWarning }) => {
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/joinRequests" element={<JoinRequests />} />
+          <Route
+            path="/productsAddRequests"
+            element={
+              <ProductsAddRequests
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+              />
+            }
+          />
+          <Route path="/productsAddRequests/:productId" element={<Product />} />
           <Route
             path="/Categories"
             element={

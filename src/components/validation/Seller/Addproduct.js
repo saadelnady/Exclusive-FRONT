@@ -23,7 +23,7 @@ const initialValues = {
   ],
   isFlashSale: false,
   flashSaleExpirationDate: "",
-  isAccepted: false,
+  status: "PENDING",
 };
 
 const validate = (values) => {

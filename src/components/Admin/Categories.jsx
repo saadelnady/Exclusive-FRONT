@@ -104,7 +104,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
 
                   <td>
                     <div className="options-wrapper">
-                      <HiDotsVertical className=" " />
+                      <HiDotsVertical className="dotsIcon" />
                       <div className="options">
                         <NavLink
                           to={`/admin/Categories/editCategory/${category?._id}`}

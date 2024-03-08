@@ -124,6 +124,7 @@
 }
 .add-product .flash-Sale .toggle-checkbox {
   appearance: none;
+
   position: relative;
   margin-left: 10px;
 }
@@ -151,7 +152,7 @@
 }
 .add-product .flash-Sale .toggle-checkbox::after {
   position: absolute;
-  content: "X";
+  content: "";
   color: #fff;
   height: 25px;
   width: 25px;

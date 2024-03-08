@@ -56,7 +56,7 @@ export const AddProduct = () => {
         ...formik.values,
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        isAccepted: false,
+        status: "PENDING",
         category: initialCategory._id,
         subCategory:
           initialCategory?.subCategories?.length > 0
@@ -83,7 +83,7 @@ export const AddProduct = () => {
         images: [],
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        isAccepted: false,
+        status: "PENDING",
         options: [
           {
             size: "",
@@ -104,6 +104,7 @@ export const AddProduct = () => {
 
   useEffect(() => {
     if (isObjectNotEmpty(product) && productId) {
+      console.log("product ----", product);
       const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
       setImages(imagesPaths);
       formik.setValues({
@@ -113,6 +114,9 @@ export const AddProduct = () => {
         category: product.category,
         subCategory: product.subCategory,
         productOwner: product.productOwner,
+        isFlashSale: product.isFlashSale,
+        flashSaleExpirationDate: product.flashSaleExpirationDate,
+        status: product.status,
         options: product.options
           ? product.options.map((option) => ({
               size: option.size,
@@ -142,7 +146,7 @@ export const AddProduct = () => {
             : null,
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        isAccepted: false,
+        status: "PENDING",
         options: [
           {
             size: "",
@@ -180,7 +184,7 @@ export const AddProduct = () => {
 
     formData.append("isFlashSale", values?.isFlashSale);
     formData.append("flashSaleExpirationDate", values?.flashSaleExpirationDate);
-    formData.append("isAccepted", values?.isAccepted);
+    formData.append("status", values?.status);
 
     // Set productOwner value programmatically
     const productOwnerId = seller?._id; // Assuming seller is available
@@ -208,12 +212,14 @@ export const AddProduct = () => {
     });
 
     const payload = { formData, toast };
-    // dispatch(addProduct(payload));
-    // resetForm();
+    dispatch(addProduct(payload));
+    resetForm();
   };
 
   const handleEditProduct = (values) => {
     const formData = new FormData();
+    console.log("edit values", values);
+
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("category", values.category);
@@ -221,6 +227,10 @@ export const AddProduct = () => {
     // Set productOwner value programmatically
     const productOwnerId = seller?._id; // Assuming seller is available
     formData.append("productOwner", productOwnerId);
+
+    formData.append("isFlashSale", values?.isFlashSale);
+    formData.append("flashSaleExpirationDate", values?.flashSaleExpirationDate);
+    formData.append("status", "pending");
     // Append the existing images
     values.images.forEach((image) => {
       formData.append("images", image);
@@ -321,9 +331,12 @@ export const AddProduct = () => {
       ...formik.values,
       isFlashSale: isChecked,
     });
+    if (!isChecked) {
+      formik.setFieldValue("flashSaleExpirationDate", "");
+    }
   };
 
-  const handleIsFlashSaleExpireDate = (e) => {
+  const handleFlashSaleExpireDate = (e) => {
     formik.setValues({
       ...formik.values,
       flashSaleExpirationDate: e.target.value,
@@ -562,6 +575,7 @@ export const AddProduct = () => {
             <input
               type="text"
               name="title"
+              id="title"
               className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
               value={formik.values.title}
               onChange={formik.handleChange}
@@ -641,9 +655,11 @@ export const AddProduct = () => {
               <input
                 type="checkbox"
                 id="flashSale"
-                className="toggle-checkbox active"
+                name="isFlashSale"
+                className="toggle-checkbox"
                 value={formik?.values?.isFlashSale}
                 onChange={handleIsFlashSale}
+                checked={formik.values.isFlashSale}
               />
             </label>
 
@@ -653,12 +669,14 @@ export const AddProduct = () => {
                 onBlur={formik.handleBlur}
                 type="date"
                 className="col-12 col-sm-7 col-lg-8 py-2 px-3 fs-3 special-input"
-                onChange={handleIsFlashSaleExpireDate}
+                onChange={handleFlashSaleExpireDate}
+                value={formik?.values?.flashSaleExpirationDate}
               />
             )}
           </div>
           {formik.touched.flashSaleExpirationDate &&
-            formik.errors.flashSaleExpirationDate && (
+            formik.errors.flashSaleExpirationDate &&
+            formik.values.isFlashSale && (
               <p className="text-sm-end">
                 <MdError className="fs-3 me-2" />
                 {formik.errors.flashSaleExpirationDate}

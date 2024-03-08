@@ -40,7 +40,7 @@ const productReducer = (state = initialState, action) => {
         error: null,
       };
 
-    case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS__FAIL:
+    case PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
 
     // ========================================================================
@@ -114,6 +114,22 @@ const productReducer = (state = initialState, action) => {
 
     case PRODUCT_ACTIONS_TYPES?.DELETE_PRODUCT_FAIL:
       return { ...state, isLoading: false, error: action?.payLoad };
+    // ========================================================================
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        products: action?.payLoad?.data?.products,
+        // total: action?.payLoad?.data?.total,
+        error: null,
+      };
+    }
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL: {
+      return { ...state, isLoading: false, error: action?.payLoad };
+    }
 
     default:
       return state;

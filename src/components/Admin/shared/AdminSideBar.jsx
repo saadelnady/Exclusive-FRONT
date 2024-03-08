@@ -49,7 +49,9 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
             <NavLink to="/admin/profile">Profile</NavLink>
           </li>
           <li className="fs-5">
-            <NavLink to="/admin/joinRequests">Join requests</NavLink>
+            <NavLink to="/admin/productsAddRequests">
+              Products Add Requests
+            </NavLink>
           </li>
           <li
             className="fs-5 d-flex justify-content-between align-items-center"

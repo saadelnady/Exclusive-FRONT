@@ -109,3 +109,18 @@ export const deleteProduct = ({ productId, toast }) => {
     }
   };
 };
+
+/* ================================================================================================== */
+export const fetchProductsAddRequests = () => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getProductsAddRequests());
+    try {
+      const response = await getData(`/api/products/productsAddRequests`);
+      console.log("response ----->", response);
+      dispatch(actionsCreators.getProductsAddRequestsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getProductsAddRequestsFail(error));
+    }
+  };
+};
+/* ================================================================================================== */

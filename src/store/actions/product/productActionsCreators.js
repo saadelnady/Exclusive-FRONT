@@ -19,6 +19,26 @@ export const getProductsFail = (payLoad) => {
 };
 
 // ==================================================================================
+
+export const getProductsAddRequests = () => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS,
+  };
+};
+export const getProductsAddRequestsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_SUCCESS,
+    payLoad,
+  };
+};
+export const getProductsAddRequestsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL,
+    payLoad,
+  };
+};
+
+// ==================================================================================
 export const getProduct = () => {
   return {
     type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
