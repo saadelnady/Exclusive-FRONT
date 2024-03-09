@@ -5,7 +5,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
   z-index: 600;
   background-color: rgba(0, 0, 0, 0.425);
@@ -22,7 +22,7 @@
 .warning-layout .warning .warning-icon {
   font-size: 100px;
 }
-.warning-layout .warning .warning-messge {
+.warning-layout .warning .warning-message {
   color: white;
 }
 .warning-layout .warning .warning-sub-messge {

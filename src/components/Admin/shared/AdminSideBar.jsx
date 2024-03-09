@@ -53,6 +53,9 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
               Products Add Requests
             </NavLink>
           </li>
+          <li className="fs-5">
+            <NavLink to="/admin/blockedProducts">Blocked products</NavLink>
+          </li>
           <li
             className="fs-5 d-flex justify-content-between align-items-center"
             onClick={() => {

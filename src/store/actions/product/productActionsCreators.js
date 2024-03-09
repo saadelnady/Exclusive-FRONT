@@ -1,8 +1,9 @@
 import { PRODUCT_ACTIONS_TYPES, PRODUCTS_ACTIONS_TYPES } from "../actionTypes";
 
-export const getProducts = () => {
+export const getProducts = (payLoad) => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS,
+    payLoad,
   };
 };
 export const getProductsSuccess = (payLoad) => {
@@ -34,6 +35,26 @@ export const getProductsAddRequestsSuccess = (payLoad) => {
 export const getProductsAddRequestsFail = (payLoad) => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL,
+    payLoad,
+  };
+};
+
+// ==================================================================================
+export const getBlockedProducts = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS,
+    payLoad,
+  };
+};
+export const getBlockedProductsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_SUCCESS,
+    payLoad,
+  };
+};
+export const getBlockedProductsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_FAIL,
     payLoad,
   };
 };
@@ -116,6 +137,44 @@ export const editProductSuccess = (payLoad) => {
 export const editProductFail = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.PUT_PRODUCT_FAIL,
+    payLoad,
+  };
+};
+// ========================================================================
+export const acceptProduct = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT,
+    payLoad,
+  };
+};
+export const acceptProductSuccess = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT_SUCCESS,
+    payLoad,
+  };
+};
+export const acceptProductFail = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT_FAIL,
+    payLoad,
+  };
+};
+// ========================================================================
+export const blockProduct = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT,
+    payLoad,
+  };
+};
+export const blockProductSuccess = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT_SUCCESS,
+    payLoad,
+  };
+};
+export const blockProductFail = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT_FAIL,
     payLoad,
   };
 };

@@ -27,7 +27,12 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
     (state) => state.subCategoryReducer
   );
 
-  const [subCategoryId, setSubCategoryId] = useState("");
+  const [action, setAction] = useState({
+    type: "",
+    message: "",
+    subMessage: "",
+    actionHandler: null,
+  });
   const dispatch = useDispatch();
 
   // ==========================================================
@@ -46,7 +51,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
   }, [currentPage, dispatch]);
   // ==========================================================
 
-  const handleDeleteSubCategory = () => {
+  const handleDeleteSubCategory = (subCategoryId) => {
     const payLoad = { subCategoryId, toast };
     dispatch(deleteSubCategory(payLoad));
 
@@ -56,14 +61,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
 
   return (
     <div className="subCategories-page">
-      {isWarning && (
-        <Warning
-          message={DELETE_MESSAGE}
-          subMessage={DELETE_ALL_PRODUCT_RELATED_TO_SUBCATEGORY}
-          handleWarning={handleWarning}
-          handleAction={handleDeleteSubCategory}
-        />
-      )}
+      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-lg-5">All SubCategories </h1>
         <Search type={"subCategories"} />
@@ -115,7 +113,16 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
                         <button
                           onClick={() => {
                             handleWarning();
-                            setSubCategoryId(subCategory?._id);
+                            setAction({
+                              ...action,
+                              type: "Delete",
+                              message: DELETE_MESSAGE,
+                              subMessage:
+                                DELETE_ALL_PRODUCT_RELATED_TO_SUBCATEGORY,
+                              actionHandler: () => {
+                                handleDeleteSubCategory(subCategory?._id);
+                              },
+                            });
                           }}
                         >
                           <RiDeleteBin6Line /> delete

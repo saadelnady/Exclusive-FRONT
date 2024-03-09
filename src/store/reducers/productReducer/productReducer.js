@@ -130,7 +130,72 @@ const productReducer = (state = initialState, action) => {
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL: {
       return { ...state, isLoading: false, error: action?.payLoad };
     }
-
+    // ========================================================================
+    case PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT_SUCCESS: {
+      const updatedProducts = state.products.filter(
+        (product) => product._id !== action?.payLoad?.data?.product?._id
+      );
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        products: [...updatedProducts],
+        message: action?.payLoad?.message,
+      };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_ACCEPT_PRODUCT_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action?.payLoad,
+      };
+    }
+    // ========================================================================
+    case PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT_SUCCESS: {
+      const updatedProducts = state.products.filter(
+        (product) => product._id !== action?.payLoad?.data?.product?._id
+      );
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        products: [...updatedProducts],
+        message: action?.payLoad?.message,
+      };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action?.payLoad,
+      };
+    }
+    // ========================================================================
+    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS: {
+      return { ...state, isLoading: true, error: null };
+    }
+    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        products: action?.payLoad?.data?.products,
+        message: action?.payLoad?.message,
+      };
+    }
+    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action?.payLoad,
+      };
+    }
     default:
       return state;
   }

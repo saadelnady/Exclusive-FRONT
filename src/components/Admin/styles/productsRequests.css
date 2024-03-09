@@ -64,7 +64,6 @@
   right: 100px;
   display: none;
   content: "";
-  z-index: 999;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;

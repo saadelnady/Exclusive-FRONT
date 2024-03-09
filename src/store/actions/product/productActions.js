@@ -80,7 +80,6 @@ export const editProduct = ({ formData, toast, productId }) => {
     dispatch(actionsCreators.editProduct(formData));
     try {
       const response = await putData(`/api/products/${productId}`, formData);
-      console.log("response edit ========>", response);
 
       dispatch(actionsCreators.editProductSuccess(response));
       showToast(toast, response.message, "success");
@@ -116,7 +115,6 @@ export const fetchProductsAddRequests = () => {
     dispatch(actionsCreators.getProductsAddRequests());
     try {
       const response = await getData(`/api/products/productsAddRequests`);
-      console.log("response ----->", response);
       dispatch(actionsCreators.getProductsAddRequestsSuccess(response));
     } catch (error) {
       dispatch(actionsCreators.getProductsAddRequestsFail(error));
@@ -124,3 +122,44 @@ export const fetchProductsAddRequests = () => {
   };
 };
 /* ================================================================================================== */
+export const acceptProduct = ({ productId, toast }) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.acceptProduct());
+    try {
+      const response = await putData(
+        `/api/products/acceptProduct/${productId}`
+      );
+       dispatch(actionsCreators.acceptProductSuccess(response));
+      showToast(toast, response?.message, "success");
+    } catch (error) {
+      dispatch(actionsCreators.acceptProductFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+/* ================================================================================================== */
+export const blockProduct = ({ productId, toast }) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.blockProduct());
+    try {
+      const response = await putData(`/api/products/blockProduct/${productId}`);
+       dispatch(actionsCreators.blockProductSuccess(response));
+      showToast(toast, response?.message, "success");
+    } catch (error) {
+      dispatch(actionsCreators.blockProductFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+/* ================================================================================================== */
+export const fetchBlockedProducts = () => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getBlockedProducts());
+    try {
+      const response = await getData(`/api/products/blockedProducts`);
+       dispatch(actionsCreators.getBlockedProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getBlockedProductsFail(error));
+    }
+  };
+};

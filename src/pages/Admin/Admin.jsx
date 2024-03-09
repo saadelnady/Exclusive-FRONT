@@ -12,12 +12,12 @@ import { Product } from "../../components/Admin/Product.jsx";
 import { AddSubCategory } from "../../components/Admin/AddSubCategory";
 import { SubCategories } from "../../components/Admin/SubCategories";
 import { AddCategory } from "../../components/Admin/AddCategory";
+import { BlockedProducts } from "../../components/Admin/BlockedProducts";
 
 import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
 import "../../components/Admin/styles/Admin.css";
-import { fetchProductsAddRequests } from "../../store/actions/product/productActions";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -32,7 +32,6 @@ export const Admin = ({ isWarning, handleWarning }) => {
       dispatch(fetchUser());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
-      dispatch(fetchProductsAddRequests());
     }
   }, [dispatch]);
   return (
@@ -56,6 +55,15 @@ export const Admin = ({ isWarning, handleWarning }) => {
             }
           />
           <Route path="/productsAddRequests/:productId" element={<Product />} />
+          <Route
+            path="/blockedProducts"
+            element={
+              <BlockedProducts
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+              />
+            }
+          />
           <Route
             path="/Categories"
             element={

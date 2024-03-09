@@ -61,8 +61,7 @@ export const AddSubCategory = () => {
 
   useEffect(() => {
     if (subCategory && subCategoryId) {
-      console.log("subcat ===>", subCategory);
-      formik.setValues({
+       formik.setValues({
         title: subCategory.title,
         image: subCategory.image,
         previewImage: `${serverUrl}/${subCategory.image}`,

@@ -10,7 +10,6 @@ import { serverUrl } from "../../../API/API";
 export const Search = () => {
   const { products } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
-  console.log("products ----->", products);
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);

@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 import "./styles/Myproducts.css";
 import Warning from "../shared/Warning";
-import { DELETE_MESSAGE } from "../../helpers/warningMessges";
+
 import { Search } from "../shared/Search";
 
 export const Products = ({ isWarning, handleWarning }) => {
@@ -24,7 +24,12 @@ export const Products = ({ isWarning, handleWarning }) => {
   const { products, isLoading, total } = useSelector(
     (state) => state?.productReducer
   );
-  const [productId, setProductId] = useState("");
+  const [action, setAction] = useState({
+    type: "",
+    message: "",
+    subMessage: "",
+    actionHandler: null,
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const dispatch = useDispatch();
@@ -44,22 +49,15 @@ export const Products = ({ isWarning, handleWarning }) => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDeleteProduct = () => {
+  const handleDeleteProduct = (productId) => {
     const payLoad = { productId, toast };
     dispatch(deleteProduct(payLoad));
-
     handleWarning();
   };
   // ==========================================================
   return (
     <div className="products-page">
-      {isWarning && (
-        <Warning
-          message={DELETE_MESSAGE}
-          handleWarning={handleWarning}
-          handleAction={handleDeleteProduct}
-        />
-      )}
+      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-lg-5">My Products </h1>
 
@@ -125,7 +123,13 @@ export const Products = ({ isWarning, handleWarning }) => {
                         <button
                           onClick={() => {
                             handleWarning();
-                            setProductId(product?._id);
+                            setAction({
+                              type: "Delete",
+                              message: "Are you sure to delete this product ?",
+                              actionHandler: () => {
+                                handleDeleteProduct(product?._id);
+                              },
+                            });
                           }}
                         >
                           <RiDeleteBin6Line /> Delete

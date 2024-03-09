@@ -104,8 +104,7 @@ export const AddProduct = () => {
 
   useEffect(() => {
     if (isObjectNotEmpty(product) && productId) {
-      console.log("product ----", product);
-      const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
+       const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
       setImages(imagesPaths);
       formik.setValues({
         title: product.title,
@@ -176,8 +175,7 @@ export const AddProduct = () => {
 
   const handleAddProduct = (values) => {
     const formData = new FormData();
-    console.log("addd values", values);
-    formData.append("title", values?.title);
+     formData.append("title", values?.title);
     formData.append("description", values?.description);
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
@@ -218,8 +216,7 @@ export const AddProduct = () => {
 
   const handleEditProduct = (values) => {
     const formData = new FormData();
-    console.log("edit values", values);
-
+ 
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("category", values.category);

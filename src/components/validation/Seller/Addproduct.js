@@ -33,7 +33,6 @@ const validate = (values) => {
   if (values?.images?.length === 0) {
     errors.images = "Product images are required";
   } else if (values?.images?.length > 10) {
-    console.log("values?.images?.length------>", typeof values?.images?.length);
     errors.images = "You shouldn't add more than 10 images";
   }
 

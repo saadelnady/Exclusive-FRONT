@@ -18,7 +18,6 @@ export const sellerLogin = ({ values, toast, navigate }) => {
     dispatch(actionCreators.postSellerLogin(values));
     try {
       const response = await postData(`/api/sellers/login`, values);
-      console.log("response login ---->", response);
       dispatch(actionCreators.postSellerLoginSuccess(response?.data));
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");

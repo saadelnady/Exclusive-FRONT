@@ -27,8 +27,12 @@ export const Categories = ({ isWarning, handleWarning }) => {
     (state) => state.categoryReducer
   );
 
-  const [categoryId, setCategoryId] = useState("");
-
+  const [action, setAction] = useState({
+    type: "",
+    message: "",
+    subMessage: "",
+    actionHandler: null,
+  });
   const dispatch = useDispatch();
 
   // ==========================================================
@@ -47,7 +51,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
   }, [currentPage, dispatch]);
 
   // ==========================================================
-  const handleDeleteCategory = () => {
+  const handleDeleteCategory = (categoryId) => {
     const payLoad = { categoryId, toast };
     dispatch(deleteCategory(payLoad));
 
@@ -57,14 +61,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
 
   return (
     <div className="categories-page ">
-      {isWarning && (
-        <Warning
-          message={DELETE_MESSAGE}
-          handleWarning={handleWarning}
-          subMessage={DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY}
-          handleAction={handleDeleteCategory}
-        />
-      )}
+      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-lg-5">All Categories </h1>
 
@@ -116,7 +113,16 @@ export const Categories = ({ isWarning, handleWarning }) => {
                         <button
                           onClick={() => {
                             handleWarning();
-                            setCategoryId(category?._id);
+                            setAction({
+                              ...action,
+                              type: "Delete",
+                              message: DELETE_MESSAGE,
+                              subMessage:
+                                DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
+                              actionHandler: () => {
+                                handleDeleteCategory(category?._id);
+                              },
+                            });
                           }}
                         >
                           <RiDeleteBin6Line /> Delete
