@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { serverUrl } from "../../API/API";
-import { formatDateAndTime } from "../../helpers/formated_date_time";
+import { serverUrl } from "../../../API/API";
+import { formatDateAndTime } from "../../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -12,15 +12,15 @@ import { toast } from "react-toastify";
 import {
   deleteSubCategory,
   fetchSubCategories,
-} from "../../store/actions/subCategory/subCategoryActions";
-import { Pagination } from "../shared/Pagination";
-import { Loading } from "../shared/Loading";
-import Warning from "../shared/Warning";
+} from "../../../store/actions/subCategory/subCategoryActions";
+import { Pagination } from "../../shared/Pagination";
+import { Loading } from "../../shared/Loading";
+import Warning from "../../shared/Warning";
 import {
   DELETE_ALL_PRODUCT_RELATED_TO_SUBCATEGORY,
   DELETE_MESSAGE,
-} from "../../helpers/warningMessges";
-import { Search } from "../shared/Search";
+} from "../../../helpers/warningMessges";
+import { Search } from "../../shared/Search";
 
 export const SubCategories = ({ isWarning, handleWarning }) => {
   const { isLoading, subCategories, total } = useSelector(

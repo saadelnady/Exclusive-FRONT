@@ -3,7 +3,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { CgMenuRight } from "react-icons/cg";
-import "../styles/AdminHeader.css";
+import "./styles/AdminHeader.css";
 
 export const AdminHeader = ({ handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);

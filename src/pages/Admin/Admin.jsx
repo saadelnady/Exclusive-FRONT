@@ -5,19 +5,19 @@ import { Route, Routes } from "react-router-dom";
 
 import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
 import { AdminHeader } from "../../components/Admin/shared/AdminHeader";
-import { AdminDashboard } from "../../components/Admin/AdminDashBoard";
-import { ProductsAddRequests } from "../../components/Admin/ProductsRequests";
-import { Categories } from "../../components/Admin/Categories";
-import { Product } from "../../components/Admin/Product.jsx";
-import { AddSubCategory } from "../../components/Admin/AddSubCategory";
-import { SubCategories } from "../../components/Admin/SubCategories";
-import { AddCategory } from "../../components/Admin/AddCategory";
-import { BlockedProducts } from "../../components/Admin/BlockedProducts";
+import { AdminDashboard } from "../../components/Admin/DashBoard/DashBoard.jsx";
+import { ProductsAddRequests } from "../../components/Admin/ProductsRequests/ProductsRequests";
+import { Categories } from "../../components/Admin/Categories/Categories.jsx";
+import { Product } from "../../components/Admin/Product/Product.jsx";
+import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCategory.jsx";
+import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
+import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
+import { BlockedProducts } from "../../components/Admin/BlockedProducts/BlockedProducts";
 
 import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
-import "../../components/Admin/styles/Admin.css";
+import "./styles/Admin.css";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -40,7 +40,7 @@ export const Admin = ({ isWarning, handleWarning }) => {
         isActive={isActive}
         handleSidebarActivation={handleSidebarActivation}
       />
-      <div className="d-flex flex-column w-100 ">
+      <div className="d-flex flex-column w-100">
         <AdminHeader handleSidebarActivation={handleSidebarActivation} />
         <Routes>
           <Route path="/" element={<AdminDashboard />} />

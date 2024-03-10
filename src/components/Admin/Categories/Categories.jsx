@@ -1,26 +1,26 @@
-import { serverUrl } from "../../API/API";
+import { serverUrl } from "../../../API/API";
 import { useDispatch, useSelector } from "react-redux";
-import { formatDateAndTime } from "../../helpers/formated_date_time";
+import { formatDateAndTime } from "../../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 import "./styles/Categories.css";
 import { NavLink } from "react-router-dom";
-import Warning from "../shared/Warning";
+import Warning from "../../shared/Warning";
 import {
   DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
   DELETE_MESSAGE,
-} from "../../helpers/warningMessges";
+} from "../../../helpers/warningMessges";
 import {
   deleteCategory,
   fetchCategories,
-} from "../../store/actions/category/categoryActions";
+} from "../../../store/actions/category/categoryActions";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Loading } from "../shared/Loading";
-import { Search } from "../shared/Search";
-import { Pagination } from "../shared/Pagination";
+import { Loading } from "../../shared/Loading";
+import { Search } from "../../shared/Search";
+import { Pagination } from "../../shared/Pagination";
 
 export const Categories = ({ isWarning, handleWarning }) => {
   const { categories, isLoading, total } = useSelector(

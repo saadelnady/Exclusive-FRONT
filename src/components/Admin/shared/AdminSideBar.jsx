@@ -8,7 +8,7 @@ import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { userLogout } from "../../../store/actions/user/userActions";
 
-import "../styles/AdminSideBar.css";
+import "./styles/AdminSideBar.css";
 export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
   const [toggleStates, setToggleStates] = useState({

@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchBlockedProducts } from "../../store/actions/product/productActions";
-import { serverUrl } from "../../API/API";
-import { formatDateAndTime } from "../../helpers/formated_date_time";
-import { HiDotsVertical } from "react-icons/hi";
-import { NavLink } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { Search } from "../../shared/Search";
+import "./styles/productsRequests.css";
+import { Loading } from "../../shared/Loading";
+import { serverUrl } from "../../../API/API";
 import { MdBlock } from "react-icons/md";
-import Warning from "../shared/Warning";
-import { Search } from "../shared/Search";
-import { Loading } from "../shared/Loading";
 
-export const BlockedProducts = ({ isWarning, handleWarning }) => {
+import { toast } from "react-toastify";
+
+import { NavLink } from "react-router-dom";
+import { HiDotsVertical } from "react-icons/hi";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { FaEye } from "react-icons/fa";
+
+import { formatDateAndTime } from "../../../helpers/formated_date_time";
+
+import { useDispatch, useSelector } from "react-redux";
+import Warning from "../../shared/Warning";
+import {
+  acceptProduct,
+  blockProduct,
+  fetchProductsAddRequests,
+} from "../../../store/actions/product/productActions";
+
+export const ProductsAddRequests = ({ isWarning, handleWarning }) => {
   const { products, isLoading } = useSelector((state) => state.productReducer);
   const [action, setAction] = useState({
     id: "",
@@ -24,16 +34,25 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
 
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchBlockedProducts());
+      dispatch(fetchProductsAddRequests());
     }
   }, [dispatch]);
+
+  // =================================================================================
+  const handleAceeptProduct = (productId) => {
+    const payLoad = { productId, toast, handleWarning };
+    dispatch(acceptProduct(payLoad));
+  };
+  const handleBlockProduct = (productId) => {
+    const payLoad = { productId, toast };
+    dispatch(blockProduct(payLoad));
+  };
   return (
     <div className="productsRequests-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-lg-5">All blocked products </h1>
-
+        <h1 className="fw-bold col-12 col-sm-5">All products Requests </h1>
         <Search type={"products"} />
       </div>
       <div className="categories-list bg-white ">
@@ -91,7 +110,7 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
                               type: "Accept",
                               message: "Are you sure to accept this product ?",
                               actionHandler: () => {
-                                // handleAceeptProduct(product?._id);
+                                handleAceeptProduct(product?._id);
                               },
                             });
                           }}
@@ -102,19 +121,18 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
 
                         <button
                           onClick={() => {
-                            // handleWarning();
-                            // setAction({
-                            //   id: product?._id,
-                            //   type: "Block",
-                            //   message: "Are you sure to Block this product ?",
-                            //   actionHandler: () => {
-                            //     handleBlockProduct(product?._id);
-                            //   },
-                            // });
+                            handleWarning();
+                            setAction({
+                              type: "Block",
+                              message: "Are you sure to Block this product ?",
+                              actionHandler: () => {
+                                handleBlockProduct(product?._id);
+                              },
+                            });
                           }}
                         >
                           <MdBlock />
-                          Unblock
+                          Block
                         </button>
                       </div>
                     </div>
@@ -128,11 +146,11 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
         )}
       </div>
       {/* <Pagination
-    itemsPerPage={limit}
-    paginate={handlePageChange}
-    currentPage={currentPage}
-    totalItems={total}
-  />  */}
+        itemsPerPage={limit}
+        paginate={handlePageChange}
+        currentPage={currentPage}
+        totalItems={total}
+      />  */}
     </div>
   );
 };
