@@ -21,20 +21,20 @@ export const getProductsFail = (payLoad) => {
 
 // ==================================================================================
 
-export const getProductsAddRequests = () => {
+export const getPendingProducts = () => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS,
   };
 };
-export const getProductsAddRequestsSuccess = (payLoad) => {
+export const getPendingProductsSuccess = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_SUCCESS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_SUCCESS,
     payLoad,
   };
 };
-export const getProductsAddRequestsFail = (payLoad) => {
+export const getPendingProductsFail = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL,
+    type: PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_FAIL,
     payLoad,
   };
 };

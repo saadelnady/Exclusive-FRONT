@@ -110,14 +110,28 @@ export const deleteProduct = ({ productId, toast }) => {
 };
 
 /* ================================================================================================== */
-export const fetchProductsAddRequests = () => {
+export const fetchPendingProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
   return async (dispatch) => {
-    dispatch(actionsCreators.getProductsAddRequests());
+    dispatch(actionsCreators.getPendingProducts());
     try {
-      const response = await getData(`/api/products/productsAddRequests`);
-      dispatch(actionsCreators.getProductsAddRequestsSuccess(response));
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/pendingProducts?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/pendingProducts?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getPendingProductsSuccess(response));
     } catch (error) {
-      dispatch(actionsCreators.getProductsAddRequestsFail(error));
+      dispatch(actionsCreators.getPendingProductsFail(error));
     }
   };
 };
@@ -129,7 +143,7 @@ export const acceptProduct = ({ productId, toast }) => {
       const response = await putData(
         `/api/products/acceptProduct/${productId}`
       );
-       dispatch(actionsCreators.acceptProductSuccess(response));
+      dispatch(actionsCreators.acceptProductSuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.acceptProductFail(error));
@@ -143,7 +157,7 @@ export const blockProduct = ({ productId, toast }) => {
     dispatch(actionsCreators.blockProduct());
     try {
       const response = await putData(`/api/products/blockProduct/${productId}`);
-       dispatch(actionsCreators.blockProductSuccess(response));
+      dispatch(actionsCreators.blockProductSuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionsCreators.blockProductFail(error));
@@ -152,12 +166,26 @@ export const blockProduct = ({ productId, toast }) => {
   };
 };
 /* ================================================================================================== */
-export const fetchBlockedProducts = () => {
+export const fetchBlockedProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getBlockedProducts());
     try {
-      const response = await getData(`/api/products/blockedProducts`);
-       dispatch(actionsCreators.getBlockedProductsSuccess(response));
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getBlockedProductsSuccess(response));
     } catch (error) {
       dispatch(actionsCreators.getBlockedProductsFail(error));
     }

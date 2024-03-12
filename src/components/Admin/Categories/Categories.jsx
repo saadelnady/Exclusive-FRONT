@@ -63,7 +63,7 @@ export const Categories = ({ isWarning, handleWarning }) => {
     <div className="categories-page ">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-lg-5">All Categories </h1>
+        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All Categories </h1>
 
         <Search type={"categories"} />
       </div>

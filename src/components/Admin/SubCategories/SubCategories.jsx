@@ -63,7 +63,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
     <div className="subCategories-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-lg-5">All SubCategories </h1>
+        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All SubCategories </h1>
         <Search type={"subCategories"} />
       </div>
       <div className="subCategories-list bg-white ">
@@ -83,7 +83,7 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
               </tr>
             </thead>
             <tbody>
-              {subCategories.map((subCategory, index) => (
+              {subCategories?.map((subCategory, index) => (
                 <tr key={index} className=" ">
                   <td className="border-end">
                     {(currentPage - 1) * limit + index + 1}

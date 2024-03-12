@@ -11,9 +11,12 @@ import { MdBlock } from "react-icons/md";
 import Warning from "../../shared/Warning";
 import { Search } from "../../shared/Search";
 import { Loading } from "../../shared/Loading";
+import { Pagination } from "../../shared/Pagination";
 
 export const BlockedProducts = ({ isWarning, handleWarning }) => {
-  const { products, isLoading } = useSelector((state) => state.productReducer);
+  const { products, isLoading, total } = useSelector(
+    (state) => state.productReducer
+  );
   const [action, setAction] = useState({
     id: "",
     type: "",
@@ -21,22 +24,37 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
     actionHandler: null,
   });
   const dispatch = useDispatch();
+  // =================================================================================
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  // =================================================================================
 
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchBlockedProducts());
+      dispatch(
+        fetchBlockedProducts({
+          limit: limit,
+          page: currentPage,
+        })
+      );
     }
-  }, [dispatch]);
+  }, [dispatch, currentPage]);
   return (
     <div className="productsRequests-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-lg-5">All blocked products </h1>
+        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
+          All blocked products
+        </h1>
 
-        <Search type={"products"} />
+        <Search type={"blockedProducts"} />
       </div>
-      <div className="categories-list bg-white ">
+      <div className="productsRequests-list bg-white ">
         {isLoading ? (
           <Loading />
         ) : products?.length > 0 ? (
@@ -55,13 +73,13 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
               {products.map((product, index) => (
                 <tr key={index} className=" ">
                   <td className="border-end">
-                    {/* {(currentPage - 1) * limit + index + 1} */}
+                    {(currentPage - 1) * limit + index + 1}
                   </td>
                   <td>
                     <img
                       src={`${serverUrl}/${product?.images[0]}`}
-                      alt="categoryImage"
-                      className="category-image"
+                      alt="productImage"
+                      className="product-image"
                     />
                   </td>
                   <td>{product?.title}</td>
@@ -72,9 +90,7 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
                     <div className="options-wrapper">
                       <HiDotsVertical className="dotsIcon" />
                       <div className="options">
-                        <NavLink
-                          to={`/admin/productsAddRequests/${product?._id}`}
-                        >
+                        <NavLink to={`/admin/products/${product?._id}`}>
                           <button className="view">
                             <FaEye />
                             view product
@@ -127,12 +143,12 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
           <p>there 's no categories to show</p>
         )}
       </div>
-      {/* <Pagination
-    itemsPerPage={limit}
-    paginate={handlePageChange}
-    currentPage={currentPage}
-    totalItems={total}
-  />  */}
+      <Pagination
+        itemsPerPage={limit}
+        paginate={handlePageChange}
+        currentPage={currentPage}
+        totalItems={total}
+      />
     </div>
   );
 };

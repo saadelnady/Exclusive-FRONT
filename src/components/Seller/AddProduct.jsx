@@ -18,7 +18,6 @@ import {
 } from "../../store/actions/product/productActions";
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
-import { formatDateAndTime } from "../../helpers/formated_date_time";
 
 export const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
@@ -104,7 +103,7 @@ export const AddProduct = () => {
 
   useEffect(() => {
     if (isObjectNotEmpty(product) && productId) {
-       const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
+      const imagesPaths = product.images.map((img) => `${serverUrl}/${img}`);
       setImages(imagesPaths);
       formik.setValues({
         title: product.title,
@@ -175,7 +174,7 @@ export const AddProduct = () => {
 
   const handleAddProduct = (values) => {
     const formData = new FormData();
-     formData.append("title", values?.title);
+    formData.append("title", values?.title);
     formData.append("description", values?.description);
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
@@ -216,7 +215,7 @@ export const AddProduct = () => {
 
   const handleEditProduct = (values) => {
     const formData = new FormData();
- 
+
     formData.append("title", values.title);
     formData.append("description", values.description);
     formData.append("category", values.category);

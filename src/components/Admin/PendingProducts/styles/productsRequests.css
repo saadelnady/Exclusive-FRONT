@@ -16,16 +16,16 @@
   }
 }
 @media (min-width: 1200px) {
-  .productsRequests-page .categories-list {
+  .productsRequests-page .productsRequests-list {
     width: 90%;
     margin: 0 auto;
   }
 }
-.productsRequests-page .categories-list {
+.productsRequests-page .productsRequests-list {
   width: 95%;
   margin: 40px auto;
 }
-.productsRequests-page div table .category-image {
+.productsRequests-page div table .product-image {
   width: 60px;
   height: 60px;
   margin: 20px 0;

@@ -6,9 +6,9 @@ import { Route, Routes } from "react-router-dom";
 import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
 import { AdminHeader } from "../../components/Admin/shared/AdminHeader";
 import { AdminDashboard } from "../../components/Admin/DashBoard/DashBoard.jsx";
-import { ProductsAddRequests } from "../../components/Admin/ProductsRequests/ProductsRequests";
+import { PendingProducts } from "../../components/Admin/PendingProducts/PendingProducts.jsx";
 import { Categories } from "../../components/Admin/Categories/Categories.jsx";
-import { Product } from "../../components/Admin/Product/Product.jsx";
+import Product from "../../components/Admin/Product/Index.jsx";
 import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCategory.jsx";
 import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
 import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
@@ -46,15 +46,20 @@ export const Admin = ({ isWarning, handleWarning }) => {
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route
-            path="/productsAddRequests"
+            path="/pendingProducts"
             element={
-              <ProductsAddRequests
+              <PendingProducts
                 isWarning={isWarning}
                 handleWarning={handleWarning}
               />
             }
           />
-          <Route path="/productsAddRequests/:productId" element={<Product />} />
+          <Route
+            path="/products/:productId"
+            element={
+              <Product isWarning={isWarning} handleWarning={handleWarning} />
+            }
+          />
           <Route
             path="/blockedProducts"
             element={

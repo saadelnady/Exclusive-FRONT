@@ -4,10 +4,10 @@ import { RelatedItem } from "../shared/RelatedItem";
 
 const Index = () => {
   return (
-    <div>
+    <>
       <ProductDetails />
       <RelatedItem />
-    </div>
+    </>
   );
 };
 

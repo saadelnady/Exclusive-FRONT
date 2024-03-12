@@ -5,7 +5,11 @@ import "./styles/Search.css";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
 import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
-import { fetchSellerProducts } from "../../store/actions/product/productActions";
+import {
+  fetchBlockedProducts,
+  fetchPendingProducts,
+  fetchSellerProducts,
+} from "../../store/actions/product/productActions";
 
 export const Search = ({ type, sellerId }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +30,14 @@ export const Search = ({ type, sellerId }) => {
             text: searchTerm,
             sellerId,
           })
+        );
+      } else if (type === "pendingProducts") {
+        dispatch(
+          fetchPendingProducts({ limit: 10, page: 1, text: searchTerm })
+        );
+      } else if (type === "blockedProducts") {
+        dispatch(
+          fetchBlockedProducts({ limit: 10, page: 1, text: searchTerm })
         );
       }
     }, 500);

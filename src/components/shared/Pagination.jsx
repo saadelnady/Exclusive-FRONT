@@ -17,39 +17,29 @@ export const Pagination = ({
   }
 
   return (
-    <nav>
-      <ul className="pagination">
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <button
-            className="page-link"
-            onClick={() => paginate(currentPage - 1)}
-          >
-            Previous
-          </button>
-        </li>
-        {pageNumbers.map((number) => (
-          <li
-            key={number}
-            className={`page-item ${currentPage === number ? "active" : ""}`}
-            onClick={() => paginate(number)}
-          >
-            <button className="page-link">{number}</button>
-          </li>
-        ))}
-
+    <ul className="pagination">
+      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+        <button className="page-link" onClick={() => paginate(currentPage - 1)}>
+          Previous
+        </button>
+      </li>
+      {pageNumbers.map((number) => (
         <li
-          className={`page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`}
+          key={number}
+          className={`page-item ${currentPage === number ? "active" : ""}`}
+          onClick={() => paginate(number)}
         >
-          <button
-            className="page-link"
-            onClick={() => paginate(currentPage + 1)}
-          >
-            Next
-          </button>
+          <button className="page-link">{number}</button>
         </li>
-      </ul>
-    </nav>
+      ))}
+
+      <li
+        className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+      >
+        <button className="page-link" onClick={() => paginate(currentPage + 1)}>
+          Next
+        </button>
+      </li>
+    </ul>
   );
 };

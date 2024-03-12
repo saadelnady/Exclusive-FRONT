@@ -115,19 +115,19 @@ const productReducer = (state = initialState, action) => {
     case PRODUCT_ACTIONS_TYPES?.DELETE_PRODUCT_FAIL:
       return { ...state, isLoading: false, error: action?.payLoad };
     // ========================================================================
-    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS: {
+    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS: {
       return { ...state, isLoading: true, error: null };
     }
-    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_SUCCESS: {
+    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         products: action?.payLoad?.data?.products,
-        // total: action?.payLoad?.data?.total,
+        total: action?.payLoad?.data?.total,
         error: null,
       };
     }
-    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_ADD_REQUESTS_FAIL: {
+    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_FAIL: {
       return { ...state, isLoading: false, error: action?.payLoad };
     }
     // ========================================================================
@@ -187,6 +187,7 @@ const productReducer = (state = initialState, action) => {
         error: null,
         products: action?.payLoad?.data?.products,
         message: action?.payLoad?.message,
+        total: action?.payLoad?.data?.total,
       };
     }
     case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_FAIL: {
