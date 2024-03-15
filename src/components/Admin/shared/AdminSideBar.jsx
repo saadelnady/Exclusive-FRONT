@@ -67,7 +67,10 @@ export const AdminSideBar = ({ isActive, handleSidebarActivation }) => {
               HandleToggle("isProductsActive");
             }}
           >
-            <NavLink to="/admin/products" className="d-flex align-items-center">
+            <NavLink
+              to="/admin/acceptedProducts"
+              className="d-flex align-items-center"
+            >
               <FaProductHunt className="me-2 fs-4" />
               Products
             </NavLink>

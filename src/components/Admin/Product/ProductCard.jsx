@@ -58,7 +58,7 @@ export const ProductCard = ({ product, handleWarning, setAction, action }) => {
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={10}
-        slidesPerView={4}
+        slidesPerView={4.5}
         navigation
         pagination={{ clickable: true }}
       >

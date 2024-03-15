@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "../styles/Search.css";
-import { fetchProducts } from "../../../store/actions/product/productActions";
+import { fetchAcceptedProducts } from "../../../store/actions/product/productActions";
 import { serverUrl } from "../../../API/API";
 
 export const Search = () => {
   const { products } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchAcceptedProducts());
   }, [dispatch]);
 
   const [searchTerm, setSearchTerm] = useState("");

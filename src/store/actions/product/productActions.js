@@ -2,14 +2,29 @@ import { deleteData, getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionsCreators from "./productActionsCreators";
 
-export const fetchProducts = () => {
+export const fetchAcceptedProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
   return async (dispatch) => {
-    dispatch(actionsCreators.getProducts());
+    dispatch(actionsCreators.getAcceptedProducts());
     try {
-      const response = await getData(`/api/products`);
-      dispatch(actionsCreators.getProductsSuccess(response.data.products));
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else if (limit && page) {
+        response = await getData(`/api/products?limit=${limit}&page=${page}`);
+      } else {
+        response = await getData(`/api/products`);
+      }
+
+      dispatch(actionsCreators.getAcceptedProductsSuccess(response.data));
     } catch (error) {
-      dispatch(actionsCreators.getProductsFail(error));
+      dispatch(actionsCreators.getAcceptedProductsFail(error));
+      console.log("error --->", error);
     }
   };
 };

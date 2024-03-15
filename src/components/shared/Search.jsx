@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/actions/category/categoryActions";
 import { fetchSubCategories } from "../../store/actions/subCategory/subCategoryActions";
 import {
+  fetchAcceptedProducts,
   fetchBlockedProducts,
   fetchPendingProducts,
   fetchSellerProducts,
@@ -38,6 +39,11 @@ export const Search = ({ type, sellerId }) => {
       } else if (type === "blockedProducts") {
         dispatch(
           fetchBlockedProducts({ limit: 10, page: 1, text: searchTerm })
+        );
+      } else if (type === "acceptedProducts") {
+        console.log("searchTerm --->", searchTerm);
+        dispatch(
+          fetchAcceptedProducts({ limit: 10, page: 1, text: searchTerm })
         );
       }
     }, 500);

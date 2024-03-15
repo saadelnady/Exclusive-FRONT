@@ -1,20 +1,20 @@
 import { PRODUCT_ACTIONS_TYPES, PRODUCTS_ACTIONS_TYPES } from "../actionTypes";
 
-export const getProducts = (payLoad) => {
+export const getAcceptedProducts = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS,
     payLoad,
   };
 };
-export const getProductsSuccess = (payLoad) => {
+export const getAcceptedProductsSuccess = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_SUCCESS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS_SUCCESS,
     payLoad,
   };
 };
-export const getProductsFail = (payLoad) => {
+export const getAcceptedProductsFail = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS_FAIL,
     payLoad,
   };
 };
