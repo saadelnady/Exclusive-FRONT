@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-import { fetchSeller } from "../../store/actions/seller/sellerActions";
+import { fetchSellerProfile } from "../../store/actions/seller/sellerActions";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { SellerSideBar } from "../../components/Seller/shared/SellerSideBar";
@@ -12,7 +12,6 @@ import { Products } from "../../components/Seller/Products.jsx";
 import "../../components/Seller/styles/seller.css";
 import Profile from "../../components/Profile/Index";
 import { fetchCategories } from "../../store/actions/category/categoryActions.js";
-import { fetchSellerProducts } from "../../store/actions/product/productActions.js";
 
 export const Seller = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +24,7 @@ export const Seller = ({ isWarning, handleWarning }) => {
 
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchSeller());
+      dispatch(fetchSellerProfile());
       dispatch(fetchCategories());
     } else {
       navigate("/seller/login");

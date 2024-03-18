@@ -2,14 +2,29 @@ import { getData, postData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionCreators from "./sellerActionsCreators";
 
-export const fetchSeller = () => {
+export const fetchSeller = (sellerId) => {
   return async (dispatch) => {
-    dispatch(actionCreators.getSeller());
+    dispatch(actionCreators.getSeller(sellerId));
     try {
-      const response = await getData(`/api/sellers/getSellerProfile`);
+      const response = await getData(`/api/sellers/${sellerId}`);
+      console.log("response ---->", response);
       dispatch(actionCreators.getSellerSuccess(response?.data?.seller));
     } catch (error) {
       dispatch(actionCreators.getSellerFail(error));
+      console.log("errrrrrrror ", error);
+    }
+  };
+};
+export const fetchSellerProfile = () => {
+  return async (dispatch) => {
+    dispatch(actionCreators.getSellerProfile());
+    try {
+      const response = await getData(`/api/sellers/getSellerProfile`);
+      console.log("response ---->", response);
+      dispatch(actionCreators.getSellerProfileSuccess(response?.data?.seller));
+    } catch (error) {
+      dispatch(actionCreators.getSellerProfileFail(error));
+      console.log("errrrrrrror ", error);
     }
   };
 };

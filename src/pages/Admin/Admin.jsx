@@ -7,12 +7,15 @@ import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar";
 import { AdminHeader } from "../../components/Admin/shared/AdminHeader";
 import { AdminDashboard } from "../../components/Admin/DashBoard/DashBoard.jsx";
 
+import { toast } from "react-toastify";
+
 import { AcceptedProducts } from "../../components/Admin/Products/AcceptedProducts.jsx";
 import { BlockedProducts } from "../../components/Admin/Products/BlockedProducts";
 import { PendingProducts } from "../../components/Admin/Products/PendingProducts.jsx";
 
 import { Categories } from "../../components/Admin/Categories/Categories.jsx";
 import Product from "../../components/Admin/Product/Index.jsx";
+import Seller from "../../components/Admin/Seller/Index.jsx";
 import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCategory.jsx";
 import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
 import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
@@ -21,6 +24,11 @@ import Profile from "../../components/Profile/Index";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions";
 import "./styles/Admin.css";
+import {
+  acceptProduct,
+  blockProduct,
+  unBlockProduct,
+} from "../../store/actions/product/productActions.js";
 
 export const Admin = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -37,6 +45,32 @@ export const Admin = ({ isWarning, handleWarning }) => {
       dispatch(fetchSellers());
     }
   }, [dispatch]);
+  // =================================================================================
+
+  const [action, setAction] = useState({
+    id: "",
+    type: "",
+    message: "",
+    subMessage: "",
+    actionHandler: null,
+  });
+  // =================================================================================
+  const handleBlockProduct = (productId) => {
+    const payLoad = { productId, toast };
+    dispatch(blockProduct(payLoad));
+  };
+  const handleUnBlockProduct = (productId) => {
+    const payLoad = { productId, toast };
+    dispatch(unBlockProduct(payLoad));
+  };
+
+  const handleAceeptProduct = (productId) => {
+    const payLoad = { productId, toast, handleWarning };
+    dispatch(acceptProduct(payLoad));
+  };
+
+  // =================================================================================
+
   return (
     <div className="admin-layout">
       <AdminSideBar
@@ -54,13 +88,25 @@ export const Admin = ({ isWarning, handleWarning }) => {
               <PendingProducts
                 isWarning={isWarning}
                 handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+                handleBlockProduct={handleBlockProduct}
+                handleAceeptProduct={handleAceeptProduct}
               />
             }
           />
           <Route
             path="/products/:productId"
             element={
-              <Product isWarning={isWarning} handleWarning={handleWarning} />
+              <Product
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+                handleBlockProduct={handleBlockProduct}
+                handleAceeptProduct={handleAceeptProduct}
+                handleUnBlockProduct={handleUnBlockProduct}
+              />
             }
           />
           <Route
@@ -69,6 +115,9 @@ export const Admin = ({ isWarning, handleWarning }) => {
               <AcceptedProducts
                 isWarning={isWarning}
                 handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+                handleBlockProduct={handleBlockProduct}
               />
             }
           />
@@ -78,13 +127,21 @@ export const Admin = ({ isWarning, handleWarning }) => {
               <BlockedProducts
                 isWarning={isWarning}
                 handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+                handleUnBlockProduct={handleUnBlockProduct}
               />
             }
           />
           <Route
             path="/Categories"
             element={
-              <Categories isWarning={isWarning} handleWarning={handleWarning} />
+              <Categories
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+              />
             }
           />
           <Route path="/addCategory" element={<AddCategory />} />
@@ -102,10 +159,13 @@ export const Admin = ({ isWarning, handleWarning }) => {
               <SubCategories
                 isWarning={isWarning}
                 handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
               />
             }
           />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
+          <Route path="/seller/:sellerId" element={<Seller />} />
         </Routes>
       </div>
     </div>

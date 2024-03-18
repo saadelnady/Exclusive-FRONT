@@ -143,6 +143,7 @@ const productReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         products: [...updatedProducts],
+        product: { ...action?.payLoad?.data?.product },
         message: action?.payLoad?.message,
       };
     }
@@ -153,6 +154,36 @@ const productReducer = (state = initialState, action) => {
         error: action?.payLoad,
       };
     }
+
+    // ========================================================================
+    case PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT: {
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT_SUCCESS: {
+      const updatedProducts = state.products.filter(
+        (product) => product._id !== action?.payLoad?.data?.product?._id
+      );
+      return {
+        ...state,
+        isLoading: false,
+        products: [...updatedProducts],
+        product: { ...action?.payLoad?.data?.product },
+        message: action?.payLoad?.data?.message,
+        error: null,
+      };
+    }
+    case PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT_FAIL: {
+      return {
+        ...state,
+        isLoading: false,
+        error: action?.payLoad,
+      };
+    }
+
     // ========================================================================
     case PRODUCT_ACTIONS_TYPES.PUT_BLOCK_PRODUCT: {
       return { ...state, isLoading: true, error: null };
@@ -166,6 +197,7 @@ const productReducer = (state = initialState, action) => {
         isLoading: false,
         error: null,
         products: [...updatedProducts],
+        product: { ...action?.payLoad?.data?.product },
         message: action?.payLoad?.message,
       };
     }

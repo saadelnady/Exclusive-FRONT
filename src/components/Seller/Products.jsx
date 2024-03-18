@@ -18,6 +18,8 @@ import "./styles/Myproducts.css";
 import Warning from "../shared/Warning";
 
 import { Search } from "../shared/Search";
+import { OptionButton } from "../Admin/shared/OptionButton";
+import { productDeleteAction } from "../../helpers/options";
 
 export const Products = ({ isWarning, handleWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -120,20 +122,14 @@ export const Products = ({ isWarning, handleWarning }) => {
                             <FaRegEdit /> Edit
                           </button>
                         </NavLink>
-                        <button
-                          onClick={() => {
-                            handleWarning();
-                            setAction({
-                              type: "Delete",
-                              message: "Are you sure to delete this product ?",
-                              actionHandler: () => {
-                                handleDeleteProduct(product?._id);
-                              },
-                            });
-                          }}
-                        >
-                          <RiDeleteBin6Line /> Delete
-                        </button>
+
+                        <OptionButton
+                          handleWarning={handleWarning}
+                          action={productDeleteAction}
+                          setAction={setAction}
+                          id={product?._id}
+                          actionHandler={handleDeleteProduct}
+                        />
                       </div>
                     </div>
                   </td>

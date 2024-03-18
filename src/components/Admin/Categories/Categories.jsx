@@ -3,15 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { formatDateAndTime } from "../../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
 
 import "./styles/Categories.css";
 import { NavLink } from "react-router-dom";
 import Warning from "../../shared/Warning";
-import {
-  DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
-  DELETE_MESSAGE,
-} from "../../../helpers/warningMessges";
+
 import {
   deleteCategory,
   fetchCategories,
@@ -21,18 +17,14 @@ import { toast } from "react-toastify";
 import { Loading } from "../../shared/Loading";
 import { Search } from "../../shared/Search";
 import { Pagination } from "../../shared/Pagination";
+import { OptionButton } from "../shared/OptionButton";
+import { categoryDeleteAction } from "../../../helpers/options";
 
-export const Categories = ({ isWarning, handleWarning }) => {
+export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
   const { categories, isLoading, total } = useSelector(
     (state) => state.categoryReducer
   );
 
-  const [action, setAction] = useState({
-    type: "",
-    message: "",
-    subMessage: "",
-    actionHandler: null,
-  });
   const dispatch = useDispatch();
 
   // ==========================================================
@@ -110,23 +102,13 @@ export const Categories = ({ isWarning, handleWarning }) => {
                             <FaRegEdit /> Edit
                           </button>
                         </NavLink>
-                        <button
-                          onClick={() => {
-                            handleWarning();
-                            setAction({
-                              ...action,
-                              type: "Delete",
-                              message: DELETE_MESSAGE,
-                              subMessage:
-                                DELETE_ALL_PRODUCT_RELATED_TO_CATEGORY,
-                              actionHandler: () => {
-                                handleDeleteCategory(category?._id);
-                              },
-                            });
-                          }}
-                        >
-                          <RiDeleteBin6Line /> Delete
-                        </button>
+                        <OptionButton
+                          action={categoryDeleteAction}
+                          handleWarning={handleWarning}
+                          setAction={setAction}
+                          id={category?._id}
+                          actionHandler={handleDeleteCategory}
+                        />
                       </div>
                     </div>
                   </td>

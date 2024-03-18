@@ -10,16 +10,18 @@ import { Pagination } from "../../shared/Pagination";
 import { ProductsTable } from "../shared/ProductsTable";
 import { fetchPendingProducts } from "../../../store/actions/product/productActions";
 
-export const PendingProducts = ({ isWarning, handleWarning }) => {
+export const PendingProducts = ({
+  isWarning,
+  handleWarning,
+  action,
+  setAction,
+  handleBlockProduct,
+  handleAceeptProduct,
+}) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
-  const [action, setAction] = useState({
-    id: "",
-    type: "",
-    message: "",
-    actionHandler: null,
-  });
+
   const dispatch = useDispatch();
   // =================================================================================
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,17 +43,19 @@ export const PendingProducts = ({ isWarning, handleWarning }) => {
     }
   }, [dispatch, currentPage]);
 
+  // =================================================================================
+
   return (
     <div className="productsRequests-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
-          All Pending products{" "}
+          All Pending products
         </h1>
         <Search type={"pendingProducts"} />
       </div>
-      <div className="productsRequests-list bg-white ">
+      <div className="productsRequests-list bg-white">
         {isLoading ? (
           <Loading />
         ) : products?.length > 0 ? (
@@ -59,20 +63,23 @@ export const PendingProducts = ({ isWarning, handleWarning }) => {
             products={products}
             limit={limit}
             currentPage={currentPage}
-            action={action}
             setAction={setAction}
             handleWarning={handleWarning}
+            handleAceeptProduct={handleAceeptProduct}
+            handleBlockProduct={handleBlockProduct}
           />
         ) : (
           <p>there 's no products to show</p>
         )}
       </div>
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {products?.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

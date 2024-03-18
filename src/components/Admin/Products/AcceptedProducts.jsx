@@ -8,7 +8,13 @@ import { Loading } from "../../shared/Loading";
 
 import { ProductsTable } from "../shared/ProductsTable";
 
-export const AcceptedProducts = ({ isWarning, handleWarning }) => {
+export const AcceptedProducts = ({
+  isWarning,
+  handleWarning,
+  action,
+  setAction,
+  handleBlockProduct,
+}) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
@@ -20,13 +26,8 @@ export const AcceptedProducts = ({ isWarning, handleWarning }) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  // =================================================================================
 
-  const [action, setAction] = useState({
-    id: "",
-    type: "",
-    message: "",
-    actionHandler: null,
-  });
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchAcceptedProducts({ limit, page: currentPage }));
@@ -51,20 +52,22 @@ export const AcceptedProducts = ({ isWarning, handleWarning }) => {
             products={products}
             limit={limit}
             currentPage={currentPage}
-            action={action}
             setAction={setAction}
             handleWarning={handleWarning}
+            handleBlockProduct={handleBlockProduct}
           />
         ) : (
           <p>there 's no Products to show</p>
         )}
       </div>
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {products?.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

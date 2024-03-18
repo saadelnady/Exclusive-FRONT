@@ -8,16 +8,17 @@ import { Loading } from "../../shared/Loading";
 import { Pagination } from "../../shared/Pagination";
 import { ProductsTable } from "../shared/ProductsTable";
 
-export const BlockedProducts = ({ isWarning, handleWarning }) => {
+export const BlockedProducts = ({
+  isWarning,
+  handleWarning,
+  action,
+  setAction,
+  handleUnBlockProduct,
+}) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
-  const [action, setAction] = useState({
-    id: "",
-    type: "",
-    message: "",
-    actionHandler: null,
-  });
+
   const dispatch = useDispatch();
   // =================================================================================
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +39,7 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
       );
     }
   }, [dispatch, currentPage]);
+
   return (
     <div className="productsRequests-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
@@ -57,20 +59,22 @@ export const BlockedProducts = ({ isWarning, handleWarning }) => {
             products={products}
             limit={limit}
             currentPage={currentPage}
-            action={action}
             setAction={setAction}
             handleWarning={handleWarning}
+            handleUnBlockProduct={handleUnBlockProduct}
           />
         ) : (
           <p>there 's no products to show</p>
         )}
       </div>
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {products?.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

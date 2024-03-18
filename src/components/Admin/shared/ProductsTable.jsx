@@ -2,38 +2,26 @@ import { serverUrl } from "../../../API/API";
 import { formatDateAndTime } from "../../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import { MdBlock } from "react-icons/md";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-
-import { toast } from "react-toastify";
 
 import {
-  acceptProduct,
-  blockProduct,
-} from "../../../store/actions/product/productActions";
-import { useDispatch } from "react-redux";
+  productAcceptAction,
+  productBlockAction,
+  productStatus,
+  productUnBlockAction,
+  productViewAction,
+} from "../../../helpers/options";
+import { OptionButton } from "./OptionButton";
 
 export const ProductsTable = ({
   products,
   currentPage,
   limit,
-  action,
   setAction,
   handleWarning,
+  handleUnBlockProduct,
+  handleAceeptProduct,
+  handleBlockProduct,
 }) => {
-  const dispatch = useDispatch();
-  // =================================================================================
-  const handleAceeptProduct = (productId) => {
-    const payLoad = { productId, toast, handleWarning };
-    dispatch(acceptProduct(payLoad));
-  };
-  const handleBlockProduct = (productId) => {
-    const payLoad = { productId, toast };
-    dispatch(blockProduct(payLoad));
-  };
-  // =================================================================================
-
   return (
     <table className="w-100 rounded text-center">
       <thead>
@@ -68,66 +56,35 @@ export const ProductsTable = ({
                 <HiDotsVertical className="dotsIcon" />
                 <div className="options">
                   <NavLink to={`/admin/products/${product?._id}`}>
-                    <button className="view">
-                      <FaEye />
-                      view product
-                    </button>
+                    <OptionButton action={productViewAction} />
                   </NavLink>
-                  {product?.status === "PENDING" ||
-                  product?.status === "ACCEPTED" ? (
-                    <button
-                      onClick={() => {
-                        handleWarning();
-                        setAction({
-                          type: "Block",
-                          message: "Are you sure to Block this product ?",
-                          actionHandler: () => {
-                            handleBlockProduct(product?._id);
-                          },
-                        });
-                      }}
-                    >
-                      <MdBlock />
-                      Block
-                    </button>
+                  {product?.status === productStatus.PENDING ||
+                  product?.status === productStatus.ACCEPTED ? (
+                    <OptionButton
+                      action={productBlockAction}
+                      handleWarning={handleWarning}
+                      setAction={setAction}
+                      id={product?._id}
+                      actionHandler={handleBlockProduct}
+                    />
                   ) : null}
-                  {product?.status === "PENDING" ? (
-                    <button
-                      className="accept"
-                      onClick={() => {
-                        handleWarning();
-                        setAction({
-                          ...action,
-                          id: product?._id,
-                          type: "Accept",
-                          message: "Are you sure to accept this product ?",
-                          actionHandler: () => {
-                            handleAceeptProduct(product?._id);
-                          },
-                        });
-                      }}
-                    >
-                      <AiOutlineCheckCircle />
-                      Accept
-                    </button>
-                  ) : null}
-                  {product?.status === "BLOCKED" && (
-                    <button
-                      onClick={() => {
-                        handleWarning();
-                        setAction({
-                          id: product?._id,
-                          type: "Block",
-                          message: "Are you sure to Block this product ?",
-                          actionHandler: () => {
-                            handleBlockProduct(product?._id);
-                          },
-                        });
-                      }}
-                    >
-                      <MdBlock />
-                      Unblock
-                    </button>
+                  {product?.status === productStatus.PENDING && (
+                    <OptionButton
+                      action={productAcceptAction}
+                      handleWarning={handleWarning}
+                      setAction={setAction}
+                      id={product?._id}
+                      actionHandler={handleAceeptProduct}
+                    />
+                  )}
+                  {product?.status === productStatus.BLOCKED && (
+                    <OptionButton
+                      action={productUnBlockAction}
+                      handleWarning={handleWarning}
+                      setAction={setAction}
+                      id={product?._id}
+                      actionHandler={handleUnBlockProduct}
+                    />
                   )}
                 </div>
               </div>

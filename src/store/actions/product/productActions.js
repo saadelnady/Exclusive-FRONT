@@ -29,7 +29,6 @@ export const fetchAcceptedProducts = ({
   };
 };
 /* ================================================================================================== */
-
 export const fetchSellerProducts = ({
   limit = "",
   page = "",
@@ -61,7 +60,6 @@ export const fetchSellerProducts = ({
   };
 };
 /* ================================================================================================== */
-
 export const fetchProduct = (productId) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getProduct(productId));
@@ -74,7 +72,6 @@ export const fetchProduct = (productId) => {
   };
 };
 /* ================================================================================================== */
-
 export const addProduct = ({ formData, toast }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.addProduct(formData));
@@ -89,7 +86,6 @@ export const addProduct = ({ formData, toast }) => {
   };
 };
 /* ================================================================================================== */
-
 export const editProduct = ({ formData, toast, productId }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.editProduct(formData));
@@ -104,9 +100,7 @@ export const editProduct = ({ formData, toast, productId }) => {
     }
   };
 };
-
 /* ================================================================================================== */
-
 export const deleteProduct = ({ productId, toast }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.deleteProduct(productId));
@@ -123,7 +117,6 @@ export const deleteProduct = ({ productId, toast }) => {
     }
   };
 };
-
 /* ================================================================================================== */
 export const fetchPendingProducts = ({
   limit = "",
@@ -147,6 +140,32 @@ export const fetchPendingProducts = ({
       dispatch(actionsCreators.getPendingProductsSuccess(response));
     } catch (error) {
       dispatch(actionsCreators.getPendingProductsFail(error));
+    }
+  };
+};
+/* ================================================================================================== */
+export const fetchBlockedProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getBlockedProducts());
+    try {
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getBlockedProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getBlockedProductsFail(error));
     }
   };
 };
@@ -181,28 +200,18 @@ export const blockProduct = ({ productId, toast }) => {
   };
 };
 /* ================================================================================================== */
-export const fetchBlockedProducts = ({
-  limit = "",
-  page = "",
-  text = "",
-} = {}) => {
+export const unBlockProduct = ({ productId, toast }) => {
   return async (dispatch) => {
-    dispatch(actionsCreators.getBlockedProducts());
+    dispatch(actionsCreators.unBlockProduct());
     try {
-      let response = "";
-      if (text) {
-        response = await getData(
-          `/api/products/blockedProducts?limit=${limit}&page=${page}&text=${text}`
-        );
-      } else {
-        response = await getData(
-          `/api/products/blockedProducts?limit=${limit}&page=${page}`
-        );
-      }
-
-      dispatch(actionsCreators.getBlockedProductsSuccess(response));
+      const response = await putData(
+        `/api/products/unblockProduct/${productId}`
+      );
+      dispatch(actionsCreators.unBlockProductSuccess(response));
+      showToast(toast, response?.message, "success");
     } catch (error) {
-      dispatch(actionsCreators.getBlockedProductsFail(error));
+      dispatch(actionsCreators.unBlockProductFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
     }
   };
 };

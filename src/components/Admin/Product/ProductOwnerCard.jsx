@@ -1,6 +1,7 @@
 import React from "react";
 import { serverUrl } from "../../../API/API";
 import { formatDateAndTime } from "../../../helpers/formated_date_time";
+import { NavLink } from "react-router-dom";
 
 export const ProductOwnerCard = ({ productOwner }) => {
   return (
@@ -29,6 +30,9 @@ export const ProductOwnerCard = ({ productOwner }) => {
         <p className="fw-bold">Mobile Phone :</p>
         <p className="fw-bold fs-5">{`${productOwner?.mobilePhone}`} </p>
       </div>
+      <NavLink to={`/admin/seller/${productOwner?._id}`}>
+        <button className="btn btn-danger">More details</button>
+      </NavLink>
     </div>
   );
 };

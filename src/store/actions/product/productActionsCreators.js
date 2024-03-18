@@ -179,6 +179,26 @@ export const blockProductFail = (payLoad) => {
   };
 };
 // ========================================================================
+export const unBlockProduct = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT,
+    payLoad,
+  };
+};
+export const unBlockProductSuccess = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT_SUCCESS,
+    payLoad,
+  };
+};
+export const unBlockProductFail = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.PUT_UNBLOCK_PRODUCT_FAIL,
+    payLoad,
+  };
+};
+
+// ========================================================================
 export const deleteProduct = (payLoad) => {
   return {
     type: PRODUCT_ACTIONS_TYPES.DELETE_PRODUCT,

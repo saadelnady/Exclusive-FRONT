@@ -1,27 +1,25 @@
 import React from "react";
 import { CiWarning } from "react-icons/ci";
 import "./styles/Warning.css";
-const Warning = ({
-  handleWarning,
+const Warning = ({ handleWarning, action }) => {
+  const { Icon, message, subMessage, actionHandler, id } = action;
+  console.log("action = = =", action);
 
-  action,
-}) => {
   return (
     <div className="warning-layout">
       <div className="warning">
         <CiWarning className="warning-icon" />
-        <h1 className="warning-message">{action.message}</h1>
-        {action?.subMessage && (
-          <p className="warning-sub-messge">{action?.subMessage}</p>
-        )}
+        <h1 className="warning-message">{message?.EN}</h1>
+        {subMessage && <p className="warning-sub-messge">{subMessage?.EN}</p>}
         <div className="actions">
           <button
             onClick={() => {
-              action.actionHandler();
+              actionHandler(id);
               handleWarning();
             }}
           >
-            {action.type}
+            {Icon}
+            {action?.type?.EN}
           </button>
           <button onClick={handleWarning}>Cancel</button>
         </div>

@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../../shared/Loading";
+import Warning from "../../shared/Warning";
 
 import { ProductOwnerCard } from "./ProductOwnerCard";
 import { ProductCard } from "./ProductCard";
 import { fetchProduct } from "../../../store/actions/product/productActions";
 
 import "./styles/Product.css";
-import Warning from "../../shared/Warning";
-const Index = ({ isWarning, handleWarning }) => {
+
+const Index = ({
+  isWarning,
+  handleWarning,
+  action,
+  setAction,
+  handleBlockProduct,
+  handleAceeptProduct,
+  handleUnBlockProduct,
+}) => {
   const { product, isLoading } = useSelector((state) => state.productReducer);
   const { productOwner } = product;
   const { productId } = useParams();
@@ -20,12 +29,6 @@ const Index = ({ isWarning, handleWarning }) => {
     }
   }, [dispatch, productId]);
 
-  const [action, setAction] = useState({
-    id: "",
-    type: "",
-    message: "",
-    actionHandler: null,
-  });
   return (
     <>
       {isLoading ? (
@@ -40,7 +43,9 @@ const Index = ({ isWarning, handleWarning }) => {
             product={product}
             handleWarning={handleWarning}
             setAction={setAction}
-            action={action}
+            handleBlockProduct={handleBlockProduct}
+            handleAceeptProduct={handleAceeptProduct}
+            handleUnBlockProduct={handleUnBlockProduct}
           />
         </div>
       )}

@@ -21,11 +21,26 @@ const sellerReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        seller: action.payLoad,
+        seller: { ...action.payLoad },
         error: null,
       };
 
     case SELLER_ACTIONS_TYPES.GET_SELLER_FAIL:
+      return { ...state, error: action.payLoad, isLoggedIn: false };
+    // ======================================================================================
+    case SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE:
+      return { ...state, isLoading: true };
+
+    case SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        isLoading: false,
+        seller: { ...action.payLoad },
+        error: null,
+      };
+
+    case SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_FAIL:
       return { ...state, error: action.payLoad, isLoggedIn: false };
     // ======================================================================================
 

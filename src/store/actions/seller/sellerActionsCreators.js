@@ -1,8 +1,9 @@
 import { SELLER_ACTIONS_TYPES, SELLERS_ACTIONS_TYPES } from "../actionTypes";
 
-export const getSeller = () => {
+export const getSeller = (payLoad) => {
   return {
     type: SELLER_ACTIONS_TYPES.GET_SELLER,
+    payLoad,
   };
 };
 export const getSellerSuccess = (payLoad) => {
@@ -77,6 +78,26 @@ export const postSellerLogoutFail = (payLoad) => {
   };
 };
 
+// // =================================================================
+
+export const getSellerProfile = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE,
+    payLoad,
+  };
+};
+export const getSellerProfileSuccess = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_SUCCESS,
+    payLoad,
+  };
+};
+export const getSellerProfileFail = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_FAIL,
+    payLoad,
+  };
+};
 // // =================================================================
 
 export const getSellers = () => {

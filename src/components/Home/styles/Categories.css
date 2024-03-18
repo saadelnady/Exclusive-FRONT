@@ -3,9 +3,6 @@
     display: flex;
     flex-wrap: wrap;
   }
-  .arrow-right {
-    display: none;
-  }
 }
 @media (min-width: 992px) {
   .categouries-links {

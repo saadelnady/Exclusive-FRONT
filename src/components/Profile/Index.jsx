@@ -1,29 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { CiCamera } from "react-icons/ci";
 
 import "./styles/Profile.css";
-import { fetchUser } from "../../store/actions/user/userActions";
-import { fetchSeller } from "../../store/actions/seller/sellerActions";
 import { serverUrl } from "../../API/API";
+import { useSelector } from "react-redux";
 
 export const Index = () => {
   const navigete = useNavigate();
   const { user } = useSelector((state) => state.userReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
-      if (!user) {
-        dispatch(fetchUser());
-      } else {
-        dispatch(fetchSeller());
-      }
-    }
-  }, [dispatch, user]);
   const handleCancel = () => {
     navigete("/");
   };

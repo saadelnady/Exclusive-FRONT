@@ -3,7 +3,7 @@ import { serverUrl } from "../../../API/API";
 import { formatDateAndTime } from "../../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
+
 import { NavLink } from "react-router-dom";
 import "./styles/subCategories.css";
 import { useEffect, useState } from "react";
@@ -16,23 +16,21 @@ import {
 import { Pagination } from "../../shared/Pagination";
 import { Loading } from "../../shared/Loading";
 import Warning from "../../shared/Warning";
-import {
-  DELETE_ALL_PRODUCT_RELATED_TO_SUBCATEGORY,
-  DELETE_MESSAGE,
-} from "../../../helpers/warningMessges";
-import { Search } from "../../shared/Search";
 
-export const SubCategories = ({ isWarning, handleWarning }) => {
+import { Search } from "../../shared/Search";
+import { OptionButton } from "../shared/OptionButton";
+import { subCategoryDeleteAction } from "../../../helpers/options";
+
+export const SubCategories = ({
+  isWarning,
+  handleWarning,
+  action,
+  setAction,
+}) => {
   const { isLoading, subCategories, total } = useSelector(
     (state) => state.subCategoryReducer
   );
 
-  const [action, setAction] = useState({
-    type: "",
-    message: "",
-    subMessage: "",
-    actionHandler: null,
-  });
   const dispatch = useDispatch();
 
   // ==========================================================
@@ -110,23 +108,13 @@ export const SubCategories = ({ isWarning, handleWarning }) => {
                             <FaRegEdit /> Edit
                           </button>
                         </NavLink>
-                        <button
-                          onClick={() => {
-                            handleWarning();
-                            setAction({
-                              ...action,
-                              type: "Delete",
-                              message: DELETE_MESSAGE,
-                              subMessage:
-                                DELETE_ALL_PRODUCT_RELATED_TO_SUBCATEGORY,
-                              actionHandler: () => {
-                                handleDeleteSubCategory(subCategory?._id);
-                              },
-                            });
-                          }}
-                        >
-                          <RiDeleteBin6Line /> delete
-                        </button>
+                        <OptionButton
+                          action={subCategoryDeleteAction}
+                          handleWarning={handleWarning}
+                          setAction={setAction}
+                          id={subCategory?._id}
+                          actionHandler={handleDeleteSubCategory}
+                        />
                       </div>
                     </div>
                   </td>
