@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../../shared/Loading";
 import Warning from "../../shared/Warning";
 
-import { ProductOwnerCard } from "./ProductOwnerCard";
+import { ProductOwnerCard } from "../shared/ProductOwnerCard";
 import { ProductCard } from "./ProductCard";
 import { fetchProduct } from "../../../store/actions/product/productActions";
 

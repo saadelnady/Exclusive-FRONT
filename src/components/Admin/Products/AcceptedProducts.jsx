@@ -35,31 +35,31 @@ export const AcceptedProducts = ({
   }, [dispatch, currentPage]);
 
   return (
-    <div className="productsRequests-page">
+    <div>
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
+      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-6">
           All Accepted products
         </h1>
         <Search type={"acceptedProducts"} />
       </div>
-      <div className="productsRequests-list bg-white ">
-        {isLoading ? (
-          <Loading />
-        ) : products?.length > 0 ? (
-          <ProductsTable
-            products={products}
-            limit={limit}
-            currentPage={currentPage}
-            setAction={setAction}
-            handleWarning={handleWarning}
-            handleBlockProduct={handleBlockProduct}
-          />
-        ) : (
-          <p>there 's no Products to show</p>
-        )}
-      </div>
+
+      {isLoading ? (
+        <Loading />
+      ) : products?.length > 0 ? (
+        <ProductsTable
+          products={products}
+          limit={limit}
+          currentPage={currentPage}
+          setAction={setAction}
+          handleWarning={handleWarning}
+          handleBlockProduct={handleBlockProduct}
+        />
+      ) : (
+        <p className="m-4">there 's no Products to show</p>
+      )}
+
       {products?.length > 0 && (
         <Pagination
           itemsPerPage={limit}

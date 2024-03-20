@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteProduct,
-  fetchSellerProducts,
+  fetchAcceptedSellerProducts,
 } from "../../store/actions/product/productActions";
 import { Loading } from "../shared/Loading";
 import { serverUrl } from "../../API/API";
@@ -10,7 +10,7 @@ import { formatDateAndTime } from "../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
+
 import { Pagination } from "../shared/Pagination";
 import { toast } from "react-toastify";
 
@@ -38,7 +38,7 @@ export const Products = ({ isWarning, handleWarning }) => {
   useEffect(() => {
     if (seller && seller._id) {
       dispatch(
-        fetchSellerProducts({
+        fetchAcceptedSellerProducts({
           limit,
           page: currentPage,
           sellerId: seller?._id,

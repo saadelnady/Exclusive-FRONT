@@ -17,7 +17,7 @@ export const Pagination = ({
   }
 
   return (
-    <ul className="pagination">
+    <ul className="pagination ">
       <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
         <button className="page-link" onClick={() => paginate(currentPage - 1)}>
           Previous

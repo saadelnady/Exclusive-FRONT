@@ -16,7 +16,7 @@ export const ProductActionsButtons = ({
   handleUnBlockProduct,
 }) => {
   return (
-    <div className="product-buttons">
+    <div className="options">
       {product?.status === productStatus.PENDING && (
         <div className="d-flex justify-content-end mx-4">
           <OptionButton
@@ -25,6 +25,7 @@ export const ProductActionsButtons = ({
             setAction={setAction}
             id={product?._id}
             actionHandler={handleAceeptProduct}
+            buttonStyle="accept"
           />
           <OptionButton
             action={productBlockAction}
@@ -32,6 +33,7 @@ export const ProductActionsButtons = ({
             setAction={setAction}
             id={product?._id}
             actionHandler={handleBlockProduct}
+            buttonStyle="block"
           />
         </div>
       )}
@@ -42,6 +44,7 @@ export const ProductActionsButtons = ({
           setAction={setAction}
           id={product?._id}
           actionHandler={handleBlockProduct}
+          buttonStyle="block"
         />
       )}
       {product?.status === productStatus.BLOCKED && (
@@ -51,6 +54,7 @@ export const ProductActionsButtons = ({
           setAction={setAction}
           id={product?._id}
           actionHandler={handleUnBlockProduct}
+          buttonStyle="block"
         />
       )}
     </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Search } from "../../shared/Search";
-import "./styles/Products.css";
 import { Loading } from "../../shared/Loading";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -46,32 +45,32 @@ export const PendingProducts = ({
   // =================================================================================
 
   return (
-    <div className="productsRequests-page">
+    <div  >
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
+      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
           All Pending products
         </h1>
         <Search type={"pendingProducts"} />
       </div>
-      <div className="productsRequests-list bg-white">
-        {isLoading ? (
-          <Loading />
-        ) : products?.length > 0 ? (
-          <ProductsTable
-            products={products}
-            limit={limit}
-            currentPage={currentPage}
-            setAction={setAction}
-            handleWarning={handleWarning}
-            handleAceeptProduct={handleAceeptProduct}
-            handleBlockProduct={handleBlockProduct}
-          />
-        ) : (
-          <p>there 's no products to show</p>
-        )}
-      </div>
+
+      {isLoading ? (
+        <Loading />
+      ) : products?.length > 0 ? (
+        <ProductsTable
+          products={products}
+          limit={limit}
+          currentPage={currentPage}
+          setAction={setAction}
+          handleWarning={handleWarning}
+          handleAceeptProduct={handleAceeptProduct}
+          handleBlockProduct={handleBlockProduct}
+        />
+      ) : (
+        <p className="m-4">there 's no products to show</p>
+      )}
+
       {products?.length > 0 && (
         <Pagination
           itemsPerPage={limit}

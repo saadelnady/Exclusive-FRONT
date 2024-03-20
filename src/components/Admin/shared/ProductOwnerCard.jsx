@@ -1,12 +1,13 @@
 import React from "react";
 import { serverUrl } from "../../../API/API";
 import { formatDateAndTime } from "../../../helpers/formated_date_time";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 export const ProductOwnerCard = ({ productOwner }) => {
+  const { sellerId } = useParams();
   return (
-    <div className="col-12 col-md-5 col-lg-3 bg-light rounded mb-3 mb-md-0">
-      <h1 className="py-3 px-4">Product Owner</h1>
+    <div className="col-12 col-md-4 col-lg-3 bg-light rounded mb-3 mb-md-0 shadow">
+      <h2 className="py-3 px-4 fw-bold">Product Owner</h2>
       <img
         src={`${serverUrl}/${productOwner?.image}`}
         alt="ownerImg"
@@ -23,16 +24,18 @@ export const ProductOwnerCard = ({ productOwner }) => {
       <div className="d-flex align-items-center ps-3 pb-4">
         <p className="fw-bold">Date of join :</p>
         <p className="fw-bold fs-5">
-          {`${formatDateAndTime(productOwner?.createdAt)}`}{" "}
+          {`${formatDateAndTime(productOwner?.createdAt)}`}
         </p>
       </div>
       <div className="d-flex align-items-center ps-3 pb-4">
         <p className="fw-bold">Mobile Phone :</p>
         <p className="fw-bold fs-5">{`${productOwner?.mobilePhone}`} </p>
       </div>
-      <NavLink to={`/admin/seller/${productOwner?._id}`}>
-        <button className="btn btn-danger">More details</button>
-      </NavLink>
+      {!sellerId && (
+        <NavLink to={`/admin/seller/${productOwner?._id}`}>
+          <button className="btn btn-danger mx-auto ">More details</button>
+        </NavLink>
+      )}
     </div>
   );
 };

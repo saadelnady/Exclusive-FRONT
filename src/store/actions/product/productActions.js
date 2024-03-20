@@ -29,31 +29,98 @@ export const fetchAcceptedProducts = ({
   };
 };
 /* ================================================================================================== */
-export const fetchSellerProducts = ({
+export const fetchPendingProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getPendingProducts());
+    try {
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/pendingProducts?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/pendingProducts?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getPendingProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getPendingProductsFail(error));
+    }
+  };
+};
+/* ================================================================================================== */
+export const fetchBlockedProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getBlockedProducts());
+    try {
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else {
+        response = await getData(
+          `/api/products/blockedProducts?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getBlockedProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getBlockedProductsFail(error));
+    }
+  };
+};
+/* =================================================================================================== */
+export const fetchAcceptedSellerProducts = ({
   limit = "",
   page = "",
   text = "",
   sellerId = "",
 } = {}) => {
   return async (dispatch) => {
-    dispatch(actionsCreators.getSellerProducts(sellerId));
+    dispatch(actionsCreators.getAcceptedSellerProducts(sellerId));
     try {
       let response = "";
       if (text) {
         response = await getData(
-          `/api/products/sellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}&text=${text}`
+          `/api/products/acceptedSellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}&text=${text}`
         );
       } else if (limit && page) {
         response = await getData(
-          `/api/products/sellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}`
+          `/api/products/acceptedSellerProducts?sellerId=${sellerId}&limit=${limit}&page=${page}`
         );
       } else {
         response = await getData(
-          `/api/products/sellerProducts?sellerId=${sellerId}`
+          `/api/products/acceptedSellerProducts?sellerId=${sellerId}`
         );
       }
 
+      dispatch(actionsCreators.getAcceptedSellerProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getAcceptedSellerProductsFail(error));
+    }
+  };
+};
+/* =================================================================================================== */
+export const fetchSellerProducts = ({ sellerId, status }) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getSellerProducts(sellerId));
+    try {
+      const response = await getData(
+        `/api/sellers/getSellerProducts?sellerId=${sellerId}&status=${status}`
+      );
       dispatch(actionsCreators.getSellerProductsSuccess(response));
+      console.log("response ------>", response);
     } catch (error) {
       dispatch(actionsCreators.getSellerProductsFail(error));
     }
@@ -114,58 +181,6 @@ export const deleteProduct = ({ productId, toast }) => {
         actionsCreators.deleteProductFail(error?.response?.data?.message)
       );
       showToast(toast, error?.response?.data?.message, "error");
-    }
-  };
-};
-/* ================================================================================================== */
-export const fetchPendingProducts = ({
-  limit = "",
-  page = "",
-  text = "",
-} = {}) => {
-  return async (dispatch) => {
-    dispatch(actionsCreators.getPendingProducts());
-    try {
-      let response = "";
-      if (text) {
-        response = await getData(
-          `/api/products/pendingProducts?limit=${limit}&page=${page}&text=${text}`
-        );
-      } else {
-        response = await getData(
-          `/api/products/pendingProducts?limit=${limit}&page=${page}`
-        );
-      }
-
-      dispatch(actionsCreators.getPendingProductsSuccess(response));
-    } catch (error) {
-      dispatch(actionsCreators.getPendingProductsFail(error));
-    }
-  };
-};
-/* ================================================================================================== */
-export const fetchBlockedProducts = ({
-  limit = "",
-  page = "",
-  text = "",
-} = {}) => {
-  return async (dispatch) => {
-    dispatch(actionsCreators.getBlockedProducts());
-    try {
-      let response = "";
-      if (text) {
-        response = await getData(
-          `/api/products/blockedProducts?limit=${limit}&page=${page}&text=${text}`
-        );
-      } else {
-        response = await getData(
-          `/api/products/blockedProducts?limit=${limit}&page=${page}`
-        );
-      }
-
-      dispatch(actionsCreators.getBlockedProductsSuccess(response));
-    } catch (error) {
-      dispatch(actionsCreators.getBlockedProductsFail(error));
     }
   };
 };

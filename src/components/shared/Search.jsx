@@ -9,7 +9,7 @@ import {
   fetchAcceptedProducts,
   fetchBlockedProducts,
   fetchPendingProducts,
-  fetchSellerProducts,
+  fetchAcceptedSellerProducts,
 } from "../../store/actions/product/productActions";
 
 export const Search = ({ type, sellerId }) => {
@@ -25,7 +25,7 @@ export const Search = ({ type, sellerId }) => {
         dispatch(fetchSubCategories({ limit: 10, page: 1, text: searchTerm }));
       } else if (type === "sellerProducts") {
         dispatch(
-          fetchSellerProducts({
+          fetchAcceptedSellerProducts({
             limit: 10,
             page: 1,
             text: searchTerm,

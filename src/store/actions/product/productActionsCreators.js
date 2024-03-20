@@ -20,7 +20,6 @@ export const getAcceptedProductsFail = (payLoad) => {
 };
 
 // ==================================================================================
-
 export const getPendingProducts = () => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS,
@@ -60,6 +59,26 @@ export const getBlockedProductsFail = (payLoad) => {
 };
 
 // ==================================================================================
+export const getSellerProducts = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS,
+    payLoad,
+  };
+};
+export const getSellerProductsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_SUCCESS,
+    payLoad,
+  };
+};
+export const getSellerProductsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_FAIL,
+    payLoad,
+  };
+};
+
+// ==================================================================================
 export const getProduct = () => {
   return {
     type: PRODUCT_ACTIONS_TYPES.GET_PRODUCT,
@@ -80,22 +99,22 @@ export const getProductFail = (payLoad) => {
   };
 };
 // ==================================================================================
-export const getSellerProducts = () => {
+export const getAcceptedSellerProducts = () => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_SELLER_PRODUCTS,
   };
 };
 
-export const getSellerProductsSuccess = (payLoad) => {
+export const getAcceptedSellerProductsSuccess = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS_SUCCESS,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_SELLER_PRODUCTS_SUCCESS,
     payLoad,
   };
 };
 
-export const getSellerProductsFail = (payLoad) => {
+export const getAcceptedSellerProductsFail = (payLoad) => {
   return {
-    type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS__FAIL,
+    type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_SELLER_PRODUCTS_FAIL,
     payLoad,
   };
 };
