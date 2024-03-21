@@ -12,10 +12,10 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS:
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS:
       return { ...state, isLoading: true };
 
-    case PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS_SUCCESS:
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -24,48 +24,10 @@ const productReducer = (state = initialState, action) => {
         error: null,
       };
 
-    case PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_PRODUCTS_FAIL:
+    case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
 
     // ========================================================================
-    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS: {
-      return { ...state, isLoading: true, error: null };
-    }
-    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-        products: action?.payLoad?.data?.products,
-        message: action?.payLoad?.message,
-        total: action?.payLoad?.data?.total,
-      };
-    }
-    case PRODUCTS_ACTIONS_TYPES.GET_BLOCKED_PRODUCTS_FAIL: {
-      return {
-        ...state,
-        isLoading: false,
-        error: action?.payLoad,
-      };
-    }
-    // ========================================================================
-    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS: {
-      return { ...state, isLoading: true, error: null };
-    }
-    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        products: action?.payLoad?.data?.products,
-        total: action?.payLoad?.data?.total,
-        error: null,
-      };
-    }
-    case PRODUCTS_ACTIONS_TYPES.GET_PENDING_PRODUCTS_FAIL: {
-      return { ...state, isLoading: false, error: action?.payLoad };
-    }
-    // ========================================================================
-
     case PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_SELLER_PRODUCTS:
       return { ...state, isLoading: true };
 

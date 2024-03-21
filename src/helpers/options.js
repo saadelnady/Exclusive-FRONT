@@ -2,6 +2,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FaEye } from "react-icons/fa";
 import { MdBlock } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdOutlinePendingActions } from "react-icons/md";
 
 export const productStatus = {
   PENDING: "PENDING",
@@ -80,4 +81,21 @@ export const subCategoryDeleteAction = {
     EN: "You will delete every products related to this subCategory too",
   },
   Icon: <RiDeleteBin6Line />,
+};
+// ===============================================
+
+export const pendingProducts = {
+  type: { AR: "المنتجات المعلقة", EN: "Pending products" },
+
+  Icon: <MdOutlinePendingActions />,
+};
+export const acceptedProducts = {
+  type: { AR: "المنتجات المقبولة", EN: "Accepted products" },
+
+  Icon: <AiOutlineCheckCircle />,
+};
+export const blockedProducts = {
+  type: { AR: "المنتجات المحظورة", EN: "Blocked products" },
+
+  Icon: <MdBlock />,
 };

@@ -69,8 +69,6 @@ export const Admin = ({ isWarning, handleWarning }) => {
     dispatch(acceptProduct(payLoad));
   };
 
-  // =================================================================================
-
   return (
     <div className="admin-layout">
       <AdminSideBar
@@ -165,7 +163,20 @@ export const Admin = ({ isWarning, handleWarning }) => {
             }
           />
           <Route path="/addSubCategory" element={<AddSubCategory />} />
-          <Route path="/seller/:sellerId" element={<Seller />} />
+          <Route
+            path="/seller/:sellerId"
+            element={
+              <Seller
+                isWarning={isWarning}
+                handleWarning={handleWarning}
+                action={action}
+                setAction={setAction}
+                handleAceeptProduct={handleAceeptProduct}
+                handleUnBlockProduct={handleUnBlockProduct}
+                handleBlockProduct={handleBlockProduct}
+              />
+            }
+          />
         </Routes>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAcceptedProducts } from "../../../store/actions/product/productActions";
+import { fetchProducts } from "../../../store/actions/product/productActions";
 import { Pagination } from "../../shared/Pagination";
 import Warning from "../../shared/Warning";
 import { Search } from "../../shared/Search";
 import { Loading } from "../../shared/Loading";
 
 import { ProductsTable } from "../shared/ProductsTable";
+import { productStatus } from "../../../helpers/options";
 
 export const AcceptedProducts = ({
   isWarning,
@@ -30,9 +31,26 @@ export const AcceptedProducts = ({
 
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchAcceptedProducts({ limit, page: currentPage }));
+      dispatch(
+        fetchProducts({
+          limit,
+          page: currentPage,
+          status: productStatus.ACCEPTED,
+        })
+      );
     }
   }, [dispatch, currentPage]);
+
+  const handleSearchAcceptedProducts = (text) => {
+    dispatch(
+      fetchProducts({
+        limit,
+        page: currentPage,
+        text,
+        status: productStatus.ACCEPTED,
+      })
+    );
+  };
 
   return (
     <div>
@@ -42,7 +60,7 @@ export const AcceptedProducts = ({
         <h1 className="fw-bold col-12 col-sm-6 col-lg-6">
           All Accepted products
         </h1>
-        <Search type={"acceptedProducts"} />
+        <Search action={handleSearchAcceptedProducts} />
       </div>
 
       {isLoading ? (
@@ -57,7 +75,7 @@ export const AcceptedProducts = ({
           handleBlockProduct={handleBlockProduct}
         />
       ) : (
-        <p className="m-4">there 's no Products to show</p>
+        <p className="m-4 text-center fw-bold">there 's no Products to show</p>
       )}
 
       {products?.length > 0 && (

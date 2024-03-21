@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlockedProducts } from "../../../store/actions/product/productActions";
+import { fetchProducts } from "../../../store/actions/product/productActions";
 
 import Warning from "../../shared/Warning";
 import { Search } from "../../shared/Search";
 import { Loading } from "../../shared/Loading";
 import { Pagination } from "../../shared/Pagination";
 import { ProductsTable } from "../shared/ProductsTable";
+import { productStatus } from "../../../helpers/options";
 
 export const BlockedProducts = ({
   isWarning,
@@ -32,14 +33,25 @@ export const BlockedProducts = ({
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(
-        fetchBlockedProducts({
+        fetchProducts({
           limit: limit,
           page: currentPage,
+          status: productStatus.BLOCKED,
         })
       );
     }
   }, [dispatch, currentPage]);
 
+  const handleSearchBlockedProducts = (text) => {
+    dispatch(
+      fetchProducts({
+        limit,
+        page: currentPage,
+        text,
+        status: productStatus.BLOCKED,
+      })
+    );
+  };
   return (
     <div>
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
@@ -49,7 +61,7 @@ export const BlockedProducts = ({
           All blocked products
         </h1>
 
-        <Search type={"blockedProducts"} />
+        <Search action={handleSearchBlockedProducts} />
       </div>
 
       {isLoading ? (
@@ -64,7 +76,7 @@ export const BlockedProducts = ({
           handleUnBlockProduct={handleUnBlockProduct}
         />
       ) : (
-        <p className="m-4">there 's no products to show</p>
+        <p className="m-4 text-center fw-bold">there 's no products to show</p>
       )}
 
       {products?.length > 0 && (

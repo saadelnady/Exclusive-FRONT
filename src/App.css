@@ -95,6 +95,7 @@ h6 {
 }
 .special-input {
   outline: none;
+  border: none;
   border: 1px solid var(--red-color);
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -108,5 +109,6 @@ h6 {
   -o-transition: 0.5s;
 }
 .special-input:focus {
+  border: 1px solid var(--red-color);
   box-shadow: 0 0.5rem 1rem var(--red-color);
 }

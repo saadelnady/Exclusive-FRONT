@@ -51,13 +51,17 @@ export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
   };
   // ==========================================================
 
+  const handleSearchCategory = (text) => {
+    dispatch(fetchCategories({ limit, page: currentPage, text }));
+  };
+
   return (
     <div className="categories-page ">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All Categories </h1>
 
-        <Search type={"categories"} />
+        <Search action={handleSearchCategory} />
       </div>
       <div className="categories-list bg-white ">
         {isLoading ? (
@@ -117,7 +121,9 @@ export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
             </tbody>
           </table>
         ) : (
-          <p>there 's no categories to show</p>
+          <p className="m-4 text-center fw-bold">
+            there 's no categories to show
+          </p>
         )}
       </div>
       <Pagination

@@ -57,12 +57,16 @@ export const SubCategories = ({
   };
   // ==========================================================
 
+  const handleSearchSubCategory = (text) => {
+    dispatch(fetchSubCategories({ limit, page: currentPage, text }));
+  };
+
   return (
     <div className="subCategories-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All SubCategories </h1>
-        <Search type={"subCategories"} />
+        <Search action={handleSearchSubCategory} />
       </div>
       <div className="subCategories-list bg-white ">
         {isLoading ? (
@@ -123,7 +127,9 @@ export const SubCategories = ({
             </tbody>
           </table>
         ) : (
-          <p className="text-center">there 's no subCategories to show</p>
+          <p className="m-4 text-center fw-bold">
+            there 's no subCategories to show
+          </p>
         )}
       </div>
 

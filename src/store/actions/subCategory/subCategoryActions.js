@@ -1,7 +1,11 @@
 import { deleteData, getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionsCreators from "./subCategoriesActionsCreator";
-export const fetchSubCategories = ({ page, limit, text }) => {
+export const fetchSubCategories = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getSubCategories());
     try {
@@ -10,10 +14,12 @@ export const fetchSubCategories = ({ page, limit, text }) => {
         response = await getData(
           `/api/subCategories?limit=${limit}&page=${page}&text=${text}`
         );
-      } else {
+      } else if (limit && page) {
         response = await getData(
           `/api/subCategories?limit=${limit}&page=${page}`
         );
+      } else {
+        response = await getData(`/api/subCategories`);
       }
 
       dispatch(actionsCreators.getSubCategoriesSuccess(response.data));

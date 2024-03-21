@@ -3,21 +3,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { MdError } from "react-icons/md";
 import { CiCamera } from "react-icons/ci";
-
 import { Loading } from "../../shared/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { serverUrl } from "../../../API/API";
+import { fetchCategories } from "../../../store/actions/category/categoryActions";
+
 import {
   initialValues,
   validate,
 } from "../../validation/Admin/SubCategoryValidation";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+
 import {
   addSubCategory,
   editSubCategory,
   fetchSubCategory,
 } from "../../../store/actions/subCategory/subCategoryActions";
-import { serverUrl } from "../../../API/API";
-import { fetchCategories } from "../../../store/actions/category/categoryActions";
 
 export const AddSubCategory = () => {
   const { categories } = useSelector((state) => state.categoryReducer);

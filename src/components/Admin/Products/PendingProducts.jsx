@@ -7,7 +7,8 @@ import Warning from "../../shared/Warning";
 
 import { Pagination } from "../../shared/Pagination";
 import { ProductsTable } from "../shared/ProductsTable";
-import { fetchPendingProducts } from "../../../store/actions/product/productActions";
+import { fetchProducts } from "../../../store/actions/product/productActions";
+import { productStatus } from "../../../helpers/options";
 
 export const PendingProducts = ({
   isWarning,
@@ -34,25 +35,35 @@ export const PendingProducts = ({
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(
-        fetchPendingProducts({
+        fetchProducts({
           limit,
           page: currentPage,
+          status: productStatus.PENDING,
         })
       );
     }
   }, [dispatch, currentPage]);
 
   // =================================================================================
-
+  const handleSearchPendingProducts = (text) => {
+    dispatch(
+      fetchProducts({
+        limit,
+        page: currentPage,
+        text,
+        status: productStatus.PENDING,
+      })
+    );
+  };
   return (
-    <div  >
+    <div>
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
           All Pending products
         </h1>
-        <Search type={"pendingProducts"} />
+        <Search action={handleSearchPendingProducts} />
       </div>
 
       {isLoading ? (
@@ -68,7 +79,7 @@ export const PendingProducts = ({
           handleBlockProduct={handleBlockProduct}
         />
       ) : (
-        <p className="m-4">there 's no products to show</p>
+        <p className="m-4 text-center fw-bold">there 's no products to show</p>
       )}
 
       {products?.length > 0 && (

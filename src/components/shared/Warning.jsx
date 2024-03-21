@@ -3,7 +3,6 @@ import { CiWarning } from "react-icons/ci";
 import "./styles/Warning.css";
 const Warning = ({ handleWarning, action }) => {
   const { Icon, message, subMessage, actionHandler, id } = action;
-  console.log("action = = =", action);
 
   return (
     <div className="warning-layout">
