@@ -143,7 +143,7 @@ const Index = () => {
           </button>
           <p className="text-center mt-4 fs-5">
             Already have account ?
-            <NavLink to="/userLogin" className="login-btn text-dark p-2">
+            <NavLink to="/user/login" className="login-btn text-dark p-2">
               Log in
             </NavLink>
           </p>
