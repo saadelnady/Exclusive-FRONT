@@ -1,4 +1,4 @@
-import { getData, postData } from "../../../API/API";
+import { getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 
 import * as actionCreators from "./userActionsCreators";
@@ -83,6 +83,20 @@ export const userRegister = ({ values, toast, navigate }) => {
       dispatch(actionCreators.postUserRegisterSuccess(response?.data));
     } catch (error) {
       dispatch(actionCreators.postUserRegisterFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+// ========================================================================================
+export const editUserProfile = ({ userId, values, toast }) => {
+  return async (dispatch) => {
+    dispatch(actionCreators.putUserProfile());
+    try {
+      const response = await putData(`/api/users/${userId}`, values);
+      dispatch(actionCreators.putUserProfileSuccess(response));
+      showToast(toast, response?.data?.message, "success");
+    } catch (error) {
+      dispatch(actionCreators.putUserProfileFail(error));
       showToast(toast, error?.response?.data?.message, "error");
     }
   };

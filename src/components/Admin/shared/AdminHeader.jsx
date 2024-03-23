@@ -21,7 +21,7 @@ export const AdminHeader = ({ handleSidebarActivation }) => {
         <img
           src={`${serverUrl}/${user.image}`}
           alt="AdminImage"
-          className="admin-image"
+          className="admin-image rounded-pill"
         />
       </div>
     </div>

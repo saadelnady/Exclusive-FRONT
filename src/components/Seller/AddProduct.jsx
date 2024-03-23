@@ -62,7 +62,7 @@ export const AddProduct = () => {
             ? initialCategory?.subCategories[0]?._id
             : null,
       });
-      setSubCategories(initialCategory.subCategories);
+      setSubCategories(initialCategory?.subCategories);
     }
   }, [categories, product, productId, dispatch]);
 

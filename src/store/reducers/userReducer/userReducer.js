@@ -7,6 +7,7 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   error: null,
+  message: "",
   user: {},
   users: [],
 };
@@ -115,7 +116,26 @@ const userReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payLoad,
       };
+    // ====================================================================================================
+    case USER_ACTIONS_TYPES.PUT_USER_PROFILE:
+      return { ...state, isLoading: true };
 
+    case USER_ACTIONS_TYPES.PUT_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        user: action?.payLoad?.data?.user,
+        message: action?.payLoad?.data?.message,
+        error: null,
+      };
+
+    case USER_ACTIONS_TYPES.PUT_USER_PROFILE_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payLoad,
+        message: action.payLoad,
+      };
     default:
       return state;
   }

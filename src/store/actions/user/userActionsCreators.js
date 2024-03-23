@@ -3,9 +3,10 @@ import { USERS_ACTIONS_TYPES, USER_ACTIONS_TYPES } from "../actionTypes";
 // USER
 // ===========================================================================
 
-export const getUser = () => {
+export const getUser = (payLoad) => {
   return {
     type: USER_ACTIONS_TYPES.GET_USER,
+    payLoad,
   };
 };
 export const getUserSuccess = (payLoad) => {
@@ -80,7 +81,25 @@ export const postUserRegisterFail = (payLoad) => {
     payLoad,
   };
 };
-
+// ===========================================================================
+export const putUserProfile = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.PUT_USER_PROFILE,
+    payLoad,
+  };
+};
+export const putUserProfileSuccess = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.PUT_USER_PROFILE_SUCCESS,
+    payLoad,
+  };
+};
+export const putUserProfileFail = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.PUT_USER_PROFILE_FAIL,
+    payLoad,
+  };
+};
 //============================================================================
 // ===========================================================================
 // USERS

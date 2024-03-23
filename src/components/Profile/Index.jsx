@@ -1,7 +1,7 @@
 import "./styles/Profile.css";
 
-import ProfileDetails from "./ProfileDetailsContainer.jsx";
-import ProfileHeader from "./ProfileHeader.jsx";
+import ProfileDetails from "./ProfileDetailsContainer";
+import ProfileHeader from "./ProfileHeader";
 
 import { useSelector } from "react-redux";
 
