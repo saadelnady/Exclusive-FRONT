@@ -18,7 +18,9 @@
 .login .form-control:focus {
   border: none;
 }
-
+.register .mobile-Image {
+  object-fit: cover;
+}
 .register .google-signup {
   border: 1px solid var(--red-color);
   background-color: white;

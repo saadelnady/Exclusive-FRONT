@@ -21,7 +21,7 @@ import { Search } from "../shared/Search";
 import { OptionButton } from "../Admin/shared/OptionButton";
 import { productDeleteAction } from "../../helpers/options";
 
-export const Products = ({ isWarning, handleWarning }) => {
+const Products = ({ isWarning, handleWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
   const { products, isLoading, total } = useSelector(
     (state) => state?.productReducer
@@ -150,3 +150,4 @@ export const Products = ({ isWarning, handleWarning }) => {
     </div>
   );
 };
+export default Products;

@@ -34,7 +34,7 @@ export const User = () => {
       {isLoggedIn && (
         <div className="dropdown text-center">
           <button
-            className="user-logo rounded-circle dropdown-toggle"
+            className="user-logo rounded-pill dropdown-toggle"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -42,7 +42,7 @@ export const User = () => {
             <img
               src={`${serverUrl}/${user.image}`}
               alt="user-logo"
-              className="w-100"
+              className="w-100 h-100"
             />
           </button>
           <ul className="dropdown-menu bg-dark p-3">
@@ -88,7 +88,7 @@ export const User = () => {
       )}
 
       {!isLoggedIn && (
-        <NavLink className="btn submit" to="/seller/login">
+        <NavLink className="btn submit" to="/sellerLogin">
           login as a Seller
         </NavLink>
       )}

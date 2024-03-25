@@ -54,7 +54,7 @@ export const sellerLogout = ({ toast, navigate }) => {
       showToast(toast, "You have logged out successfully", "success");
 
       setTimeout(() => {
-        navigate("/seller/login");
+        navigate("/sellerLogin");
         window.location.reload();
       }, 2500);
     } catch (error) {

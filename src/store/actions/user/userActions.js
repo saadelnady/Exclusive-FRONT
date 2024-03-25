@@ -4,12 +4,12 @@ import { showToast } from "../../../helpers/toast_helper";
 import * as actionCreators from "./userActionsCreators";
 // ========================================================================================
 
-export const fetchUser = () => {
+export const fetchUserProfile = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getUser());
     try {
       const response = await getData(`/api/users/getUserProfile`);
-      dispatch(actionCreators.getUserSuccess(response.data.user));
+      dispatch(actionCreators.getUserSuccess(response?.data?.user));
     } catch (error) {
       dispatch(actionCreators.getUserFail(error));
     }

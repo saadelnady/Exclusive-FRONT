@@ -5,7 +5,8 @@ import { CiHeart } from "react-icons/ci";
 import icStar from "../../assets/images/pngs/ic_stars.png";
 import productImg from "../../assets/images/pngs/Gamepad-6.png";
 import { NavLink } from "react-router-dom";
-export const Card = () => {
+
+const Card = () => {
   return (
     <div className="product-card mb-4">
       <div className="header py-5 rounded">
@@ -40,3 +41,4 @@ export const Card = () => {
     </div>
   );
 };
+export default Card;

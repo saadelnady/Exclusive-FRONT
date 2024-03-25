@@ -5,7 +5,8 @@ import { CgMenuRight } from "react-icons/cg";
 import "../styles/SellerHeader.css";
 import { serverUrl } from "../../../API/API";
 import { Loading } from "../../shared/Loading";
-export const SellerHeader = ({ handleSidebarActivation }) => {
+
+const SellerHeader = ({ handleSidebarActivation }) => {
   const { seller, isLoading } = useSelector((state) => state.sellerReducer);
 
   return (
@@ -32,3 +33,4 @@ export const SellerHeader = ({ handleSidebarActivation }) => {
     </div>
   );
 };
+export default SellerHeader;

@@ -1,22 +1,26 @@
-import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
+import mobileImage from "../../../assets/images/pngs/mobile.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
+
 import { toast } from "react-toastify";
 
-import { initialValues, validate } from "../validation/loginValidation";
-
-import "../Auth.css";
+import { initialValues, validate } from "../../validation/loginValidation";
+import "../../Auth.css";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { sellerLogin } from "../../store/actions/seller/sellerActions";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../../../store/actions/user/userActions";
+import { Loading } from "../../shared/Loading";
 
-const SellerLogin = () => {
+const Index = () => {
+  const { isLoading } = useSelector((state) => state.userReducer);
+
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -26,16 +30,17 @@ const SellerLogin = () => {
   });
 
   const handleLogin = (values) => {
-    const payLoad = { values, toast, navigate };
-    dispatch(sellerLogin(payLoad));
+    const payload = { values, toast, navigate };
+    dispatch(userLogin(payload));
   };
+
   return (
     <div className="login row align-items-center">
-      <div className="col-12 col-md-4">
-        <img src={sellerImage} alt="mobileImage" className="w-100 " />
+      <div className="col-12 col-md-6">
+        <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
       </div>
-      <div className="col-10 mx-auto offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
-        <h1 className="fs-1">Wellcome to seller panel</h1>
+      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
+        <h1 className="fs-1">Login to Exclusive</h1>
         <p className="fs-5 fw-normal mt-4">Enter your details below</p>
         <form onSubmit={formik.handleSubmit} className="mt-5">
           <input
@@ -99,8 +104,12 @@ const SellerLogin = () => {
             </label>
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <button className="btn p-3 fs-4 submit " type="sbmit">
+            <button
+              className="btn p-3 fs-4 submit d-flex justify-content-between align-items-center"
+              type="sbmit"
+            >
               Login
+              {isLoading && <Loading />}
             </button>
             <NavLink className="forget-password p-3 fs-5">
               Forget Password ?
@@ -110,10 +119,10 @@ const SellerLogin = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/sellerRegister"
+              to="/user/register"
               className="ms-4 register-btn text-dark p-2"
             >
-              SignUp as seller
+              SignUp
             </NavLink>
           </p>
         </form>
@@ -121,4 +130,4 @@ const SellerLogin = () => {
     </div>
   );
 };
-export default SellerLogin;
+export default Index;

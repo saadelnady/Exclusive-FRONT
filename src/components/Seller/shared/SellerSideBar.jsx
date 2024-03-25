@@ -8,7 +8,7 @@ import { sellerLogout } from "../../../store/actions/seller/sellerActions";
 import "../styles/sellerSideBar.css";
 import { FaChevronRight, FaXmark } from "react-icons/fa6";
 
-export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
+const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,10 +42,10 @@ export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
       <div className="Seller-links d-flex justify-content-between flex-column">
         <ul className="main-links">
           <li className="fs-5">
-            <NavLink to="/Seller">Dashboard</NavLink>
+            <NavLink to="/seller">Dashboard</NavLink>
           </li>
           <li className="fs-5">
-            <NavLink to="/Seller/profile">Profile</NavLink>
+            <NavLink to="/seller/profile">Profile</NavLink>
           </li>
 
           <li
@@ -54,7 +54,7 @@ export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
               HandleToggle("isProductsActive");
             }}
           >
-            <NavLink to="/Seller/products"> My products</NavLink>
+            <NavLink to="/seller/products"> My products</NavLink>
             <span>
               <FaChevronRight
                 className={`text-light arrow-right ${
@@ -66,7 +66,7 @@ export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
           {toggleStates.isProductsActive && (
             <ul>
               <li>
-                <NavLink to="/Seller/addproduct" className="btn btn-danger">
+                <NavLink to="/seller/addproduct" className="btn btn-danger">
                   Add product
                 </NavLink>
               </li>
@@ -85,3 +85,4 @@ export const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
     </div>
   );
 };
+export default SellerSideBar;

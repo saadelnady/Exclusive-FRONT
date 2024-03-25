@@ -19,7 +19,7 @@ import {
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
 
-export const AddProduct = () => {
+const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
   const { product } = useSelector((state) => state.productReducer);
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -859,3 +859,4 @@ export const AddProduct = () => {
     </div>
   );
 };
+export default AddProduct;

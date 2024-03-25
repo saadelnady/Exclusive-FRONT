@@ -1,42 +1,47 @@
-import googleIcon from "../../assets/images/pngs/ic-Google.png";
-import "../Auth.css";
+import mobileImage from "../../../assets/images/pngs/mobile.png";
+import googleIcon from "../../../assets/images/pngs/ic-Google.png";
+import "../../Auth.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 import { toast } from "react-toastify";
 
-import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useFormik } from "formik";
-import { initialValues, validate } from "../validation/registerValidation.js";
+import {
+  initialValues,
+  validate,
+} from "../../validation/registerValidation.js";
 import { useDispatch } from "react-redux";
-import { sellerRegister } from "../../store/actions/seller/sellerActions.js";
+import { userRegister } from "../../../store/actions/user/userActions.js";
 
-const SellerRegister = () => {
+const Index = () => {
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      handleRegister(values);
+      handleRegistration(values);
     },
     validate,
   });
-  const handleRegister = (values) => {
+  const handleRegistration = (values) => {
     const payLoad = { values, toast, navigate };
-    dispatch(sellerRegister(payLoad));
+    dispatch(userRegister(payLoad));
   };
-
   return (
-    <div className="register row align-items-center">
-      <div className="col-12 col-md-4">
-        <img src={sellerImage} alt="mobileImage" className="w-100 " />
+    <div className="register row">
+      <div className="col-12 col-md-6">
+        <img
+          src={mobileImage}
+          alt="mobileImage"
+          className="w-100 h-100 mobile-Image"
+        />
       </div>
       <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
-        <h1 className="fs-1">Create a seller account</h1>
+        <h1 className="fs-1">Create an account</h1>
         <p className="fs-5 fw-normal">Enter your details below</p>
         <form onSubmit={formik.handleSubmit} action="POST" className="mt-5">
           <input
@@ -77,7 +82,7 @@ const SellerRegister = () => {
             type="text"
             placeholder="mobile phone"
             className="form-control mb-3 fs-4"
-          />
+          />{" "}
           {formik.touched.mobilePhone && formik.errors.mobilePhone ? (
             <p>
               <MdError className="fs-3 me-2" />
@@ -145,7 +150,7 @@ const SellerRegister = () => {
           </button>
           <p className="text-center mt-4 fs-5">
             Already have account ?
-            <NavLink to="/sellerLogin" className="login-btn text-dark p-2">
+            <NavLink to="/user/login" className="login-btn text-dark p-2">
               Log in
             </NavLink>
           </p>
@@ -154,4 +159,4 @@ const SellerRegister = () => {
     </div>
   );
 };
-export default SellerRegister;
+export default Index;

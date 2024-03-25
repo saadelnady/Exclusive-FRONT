@@ -9,7 +9,7 @@ import icFacebook from "../../../assets/images/pngs/ic-Facebook.png";
 import icInstagram from "../../../assets/images/pngs/ic-instagram.png";
 import icLinkedin from "../../../assets/images/pngs/ic-Linkedin.png";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <div className=" bg-black text-light pt-5 justify-content-between ">
       <div className="container">
@@ -115,3 +115,4 @@ export const Footer = () => {
     </div>
   );
 };
+export default Footer;

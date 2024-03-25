@@ -5,7 +5,7 @@ import { NavBar } from "./NavBar";
 import { User } from "./User";
 import { Search } from "./Search";
 
-export const Header = () => {
+const Header = () => {
   return (
     <div className="border-bottom ">
       <Announce />
@@ -40,3 +40,4 @@ export const Header = () => {
     </div>
   );
 };
+export default Header;

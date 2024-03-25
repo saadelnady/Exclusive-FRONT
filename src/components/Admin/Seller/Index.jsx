@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchSeller } from "../../../store/actions/seller/sellerActions";
 import { ProductsTable } from "../shared/ProductsTable";
 import { ProductOwnerCard } from "../shared/ProductOwnerCard";
 import { SellerProductsActions } from "./SellerProducts";
+import { fetchSeller } from "../../../store/actions/seller/sellerActions";
 import { fetchSellerProducts } from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
 
