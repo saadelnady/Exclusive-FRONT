@@ -17,11 +17,11 @@ export const User = () => {
   const { isLoggedIn, user, isLoading } = useSelector(
     (state) => state.userReducer
   );
-
+  console.log("isLoggedIn", isLoggedIn);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLogOut = () => {
-    const payLoad = { toast, navigate };
+    const payLoad = { toast, navigate, role: user.role };
     dispatch(userLogout(payLoad));
   };
 

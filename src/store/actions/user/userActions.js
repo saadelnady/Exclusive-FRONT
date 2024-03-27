@@ -6,12 +6,12 @@ import * as actionCreators from "./userActionsCreators";
 
 export const fetchUserProfile = () => {
   return async (dispatch) => {
-    dispatch(actionCreators.getUser());
+    dispatch(actionCreators.getUserProfile());
     try {
       const response = await getData(`/api/users/getUserProfile`);
-      dispatch(actionCreators.getUserSuccess(response?.data?.user));
+      dispatch(actionCreators.getUserProfileSuccess(response?.data?.user));
     } catch (error) {
-      dispatch(actionCreators.getUserFail(error));
+      dispatch(actionCreators.getUserProfileFail(error));
     }
   };
 };
@@ -27,12 +27,14 @@ export const userLogin = ({ values, toast, navigate }) => {
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {
-        if (role === "ADMIN") {
-          navigate("/admin");
-        } else {
-          navigate("/");
+        if (localStorage.getItem("TOKEN")) {
+          if (role === "ADMIN") {
+            navigate("/admin");
+          }
+          if (role === "USER") {
+            navigate("/");
+          }
         }
-        window.location.reload();
       }, 2500);
     } catch (error) {
       dispatch(actionCreators.postUserLoginFail(error));
@@ -54,11 +56,10 @@ export const userLogout = ({ toast, navigate, role }) => {
       setTimeout(() => {
         if (role === "ADMIN") {
           navigate("/user/login");
-        } else {
+        }
+        if (role === "USER") {
           navigate("/");
         }
-
-        window.location.reload();
       }, 2500);
     } catch (error) {
       dispatch(actionCreators.postUserLogoutFail());
@@ -77,8 +78,9 @@ export const userRegister = ({ values, toast, navigate }) => {
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {
-        navigate("/");
-        window.location.reload();
+        if (localStorage.getItem("TOKEN")) {
+          navigate("/");
+        }
       });
       dispatch(actionCreators.postUserRegisterSuccess(response?.data));
     } catch (error) {

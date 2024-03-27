@@ -34,13 +34,13 @@ import {
 } from "../../store/actions/product/productActions.js";
 
 const Admin = ({ isWarning, handleWarning }) => {
+  const dispatch = useDispatch();
+  // =================================================================================
   const [isActive, setIsActive] = useState(false);
-
   const handleSidebarActivation = () => {
     setIsActive(!isActive);
   };
-  const dispatch = useDispatch();
-
+  // =================================================================================
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());
@@ -49,7 +49,6 @@ const Admin = ({ isWarning, handleWarning }) => {
     }
   }, [dispatch]);
   // =================================================================================
-
   const [action, setAction] = useState({
     id: "",
     type: "",
@@ -66,12 +65,11 @@ const Admin = ({ isWarning, handleWarning }) => {
     const payLoad = { productId, toast };
     dispatch(unBlockProduct(payLoad));
   };
-
   const handleAceeptProduct = (productId) => {
     const payLoad = { productId, toast, handleWarning };
     dispatch(acceptProduct(payLoad));
   };
-
+  // =================================================================================
   return (
     <div className="admin-layout">
       <AdminSideBar

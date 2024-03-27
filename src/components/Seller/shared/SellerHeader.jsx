@@ -26,7 +26,7 @@ const SellerHeader = ({ handleSidebarActivation }) => {
           <img
             src={`${serverUrl}/${seller.image}`}
             alt="Seller-img"
-            className="Seller-image"
+            className="Seller-image rounded-pill ms-3"
           />
         )}
       </div>

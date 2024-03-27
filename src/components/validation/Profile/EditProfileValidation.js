@@ -112,7 +112,6 @@ const validate = (values) => {
   if (values?.newPassword !== values?.newPasswordConfirmed) {
     errors.newPasswordConfirmed = "Not matched password !";
   }
-  console.log("errors ====>", errors);
   return errors;
 };
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 // import { ActivationPage } from "./components/shared/Activation.jsx";
 
@@ -21,14 +21,17 @@ import Footer from "../../components/shared/Footer/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import NotFoundPage from "../../components/shared/Header/NotFoundPage.jsx";
+import { isObjectNotEmpty } from "../../helpers/checkers.js";
 
 const User = () => {
-  const { user } = useSelector((state) => state.userReducer);
+  const { user, isLoggedIn } = useSelector((state) => state.userReducer);
+
   console.log("user ===>", user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchUserProfile());
   }, [dispatch]);
+
   return (
     <div>
       <Header />
@@ -37,23 +40,29 @@ const User = () => {
           path="/activation/:activationToken"
           element={<ActivationPage />}
         /> */}
+        {/* {(isObjectNotEmpty(user) && user?.role === "USER") ||
+          (!isLoggedIn && (
+            <> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/products/:productId" element={<Product />} />
+        {/* </>
+          ))} */}
 
-        {user.role === "User" && (
+        {!isLoggedIn && (
           <>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/products/:productId" element={<Product />} />
+            <Route path="/user/login" element={<UserLogin />} />
+            <Route path="/user/register" element={<UserRegister />} />
           </>
         )}
 
-        <Route path="/user/login" element={<UserLogin />} />
-        <Route path="/user/register" element={<UserRegister />} />
         <Route path="/sellerLogin" element={<SellerLogin />} />
         <Route path="/sellerRegister" element={<SellerRegister />} />
-        <Route path="*" element={<NotFoundPage />} />
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
+
       <Footer />
     </div>
   );

@@ -34,6 +34,28 @@ const userReducer = (state = initialState, action) => {
         error: action.payLoad,
       };
     // ====================================================================================================
+
+    case USER_ACTIONS_TYPES.GET_USER_PROFILE:
+      return { ...state, isLoading: true };
+
+    case USER_ACTIONS_TYPES.GET_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: true,
+        user: action.payLoad,
+        error: null,
+      };
+
+    case USER_ACTIONS_TYPES.GET_USER_PROFILE_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        error: action.payLoad,
+      };
+
+    // ====================================================================================================
     case USER_ACTIONS_TYPES.POST_USER_LOGIN:
       return {
         ...state,
@@ -44,7 +66,6 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        user: action.payLoad,
         error: null,
       };
     case USER_ACTIONS_TYPES.POST_USER_LOGIN_FAIL:
@@ -136,6 +157,8 @@ const userReducer = (state = initialState, action) => {
         error: action.payLoad,
         message: action.payLoad,
       };
+    // ====================================================================================================
+
     default:
       return state;
   }

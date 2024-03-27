@@ -9,31 +9,31 @@ const initialValues = {
 const validate = (values) => {
   const errors = {};
 
-  if (!values.firstName) {
+  if (!values?.firstName) {
     errors.firstName = "First Name is required";
-  } else if (values.firstName.length < 3) {
+  } else if (values?.firstName?.trim()?.length < 3) {
     errors.firstName = "First Name must be at least 3 characters";
-  } else if (values.firstName.length > 20) {
+  } else if (values?.firstName?.trim()?.length > 20) {
     errors.firstName = "First Name must be less than 20 characters";
   }
 
-  if (!values.lastName) {
+  if (!values?.lastName) {
     errors.lastName = "Last Name is required";
-  } else if (values.lastName.length < 3) {
+  } else if (values?.lastName?.trim()?.length < 3) {
     errors.lastName = "Last Name must be at least 3 characters";
-  } else if (values.lastName.length > 20) {
+  } else if (values?.lastName?.trim()?.length > 20) {
     errors.lastName = "Last Name must be less than 20 characters";
   }
 
-  if (!values.mobilePhone) {
+  if (!values?.mobilePhone) {
     errors.mobilePhone = "Mobile Phone is required";
-  } else if (!/^\d{11}$/.test(values.mobilePhone)) {
+  } else if (!/^\d{11}$/.test(values?.mobilePhone?.trim())) {
     errors.mobilePhone = "Invalid phone number";
   }
 
-  if (!values.email) {
+  if (!values?.email) {
     errors.email = "Email is required";
-  } else if (!/^\S+@\S+\.\S+$/.test(values.email)) {
+  } else if (!/^\S+@\S+\.\S+$/.test(values?.email.trim())) {
     errors.email = "Invalid email address";
   }
 

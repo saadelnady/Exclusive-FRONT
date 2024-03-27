@@ -21,6 +21,26 @@ export const getUserFail = (payLoad) => {
     payLoad,
   };
 };
+// ===========================================================================
+
+export const getUserProfile = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.GET_USER_PROFILE,
+    payLoad,
+  };
+};
+export const getUserProfileSuccess = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.GET_USER_PROFILE_SUCCESS,
+    payLoad,
+  };
+};
+export const getUserProfileFail = (payLoad) => {
+  return {
+    type: USER_ACTIONS_TYPES.GET_USER_PROFILE_FAIL,
+    payLoad,
+  };
+};
 
 // ===========================================================================
 export const postUserLogin = (payLoad) => {

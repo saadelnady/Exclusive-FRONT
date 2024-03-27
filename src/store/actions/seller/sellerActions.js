@@ -1,4 +1,4 @@
-import { getData, postData } from "../../../API/API";
+import { getData, postData, putData } from "../../../API/API";
 import { showToast } from "../../../helpers/toast_helper";
 import * as actionCreators from "./sellerActionsCreators";
 
@@ -13,6 +13,8 @@ export const fetchSeller = (sellerId) => {
     }
   };
 };
+// ========================================================================================
+
 export const fetchSellerProfile = () => {
   return async (dispatch) => {
     dispatch(actionCreators.getSellerProfile());
@@ -24,17 +26,35 @@ export const fetchSellerProfile = () => {
     }
   };
 };
+// ========================================================================================
+export const editSellerProfile = ({ sellerId, values, toast }) => {
+  return async (dispatch) => {
+    dispatch(actionCreators.putSellerProfile());
+    try {
+      const response = await putData(`/api/sellers/${sellerId}`, values);
+      dispatch(actionCreators.putSellerProfileSuccess(response));
+      showToast(toast, response?.data?.message, "success");
+    } catch (error) {
+      dispatch(actionCreators.putSellerProfileFail(error));
+      showToast(toast, error?.response?.data?.message, "error");
+    }
+  };
+};
+// ========================================================================================
+
 export const sellerLogin = ({ values, toast, navigate }) => {
   return async (dispatch) => {
     dispatch(actionCreators.postSellerLogin(values));
     try {
       const response = await postData(`/api/sellers/login`, values);
+      console.log(" response ---->", response);
       dispatch(actionCreators.postSellerLoginSuccess(response?.data));
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {
-        navigate("/Seller");
-        window.location.reload();
+        if (localStorage.getItem("TOKEN")) {
+          navigate("/seller");
+        }
       }, 2500);
     } catch (error) {
       dispatch(actionCreators.postSellerLoginFail(error));
@@ -55,7 +75,6 @@ export const sellerLogout = ({ toast, navigate }) => {
 
       setTimeout(() => {
         navigate("/sellerLogin");
-        window.location.reload();
       }, 2500);
     } catch (error) {
       dispatch(actionCreators.postSellerLogoutFail());
@@ -70,7 +89,6 @@ export const sellerRegister = ({ values, toast, navigate }) => {
 
     try {
       const response = await postData("/api/sellers/register", values);
-
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {

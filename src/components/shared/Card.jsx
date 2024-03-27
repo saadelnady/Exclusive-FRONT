@@ -3,14 +3,19 @@ import { IoEyeOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 
 import icStar from "../../assets/images/pngs/ic_stars.png";
-import productImg from "../../assets/images/pngs/Gamepad-6.png";
+// import productImg from "../../assets/images/pngs/Gamepad-6.png";
 import { NavLink } from "react-router-dom";
+import { serverUrl } from "../../API/API";
 
-const Card = () => {
+const Card = ({ product }) => {
   return (
     <div className="product-card mb-4">
-      <div className="header py-5 rounded">
-        <img src={productImg} alt="" />
+      <div className="header rounded">
+        <img
+          src={`${serverUrl}/${product?.images[0]}`}
+          alt="product-img"
+          className="w-100 h-100"
+        />
         <button className="addToCart bg-black">Add To Cart</button>
       </div>
       <p className="discountPercentage">

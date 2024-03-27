@@ -13,11 +13,14 @@ import { useDispatch } from "react-redux";
 import { editUserProfile } from "../../../store/actions/user/userActions";
 import { useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { isObjectNotEmpty } from "../../../helpers/checkers";
+import { editSellerProfile } from "../../../store/actions/seller/sellerActions";
 
 const ProfileDetails = ({ user, seller }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // =======================================================================================
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -25,14 +28,17 @@ const ProfileDetails = ({ user, seller }) => {
     },
     validate,
   });
+  // =======================================================================================
 
   const handleSubmit = (values) => {
-    if (user) {
+    if (isObjectNotEmpty(user)) {
+      console.log("user ", user);
       handleEditUser(values);
-    } else {
+    } else if (isObjectNotEmpty(seller)) {
       handleEditSeller(values);
     }
   };
+  // =======================================================================================
 
   useEffect(() => {
     if (user || seller) {
@@ -49,6 +55,7 @@ const ProfileDetails = ({ user, seller }) => {
       });
     }
   }, [user, seller]);
+  // =======================================================================================
 
   const handleImageChange = (event) => {
     const file = event.target.files[0]; // Get the first file from the input
@@ -59,8 +66,9 @@ const ProfileDetails = ({ user, seller }) => {
       URL.createObjectURL(file);
     }
   };
+  // =======================================================================================
 
-  const handleEditUser = (values) => {
+  const getFormData = (values) => {
     const formData = new FormData();
 
     formData.append("image", values?.image);
@@ -76,19 +84,33 @@ const ProfileDetails = ({ user, seller }) => {
       formData.append("currentPassword", values?.currentPassword);
       formData.append("newPassword", values?.newPassword);
     }
+    return formData;
+  };
 
-    const payLoad = { userId: user?._id, values: formData, toast };
+  const handleEditUser = (values) => {
+    const payLoad = { userId: user?._id, values: getFormData(values), toast };
     dispatch(editUserProfile(payLoad));
   };
+  // =======================================================================================
+
   const handleEditSeller = (values) => {
     console.log("selller");
     console.log("values", values);
+    const payLoad = {
+      sellerId: seller?._id,
+      values: getFormData(values),
+      toast,
+    };
+    dispatch(editSellerProfile(payLoad));
   };
+  // =======================================================================================
+
   const [isVisible, setIsVisible] = useState({
     currentPassword: true,
     newPassword: true,
     newPasswordConfirmed: true,
   });
+  // =======================================================================================
   return (
     <div className="col-12 col-sm-8 offset-sm-1 shadow p-5 rounded">
       <h3 className="edit">Edit Your Profile</h3>
@@ -336,7 +358,16 @@ const ProfileDetails = ({ user, seller }) => {
           <button
             className="btn text-center"
             onClick={() => {
-              navigate("/admin");
+              if (user) {
+                if (user.role === "ADMIN") {
+                  navigate("/admin");
+                } else {
+                  navigate("/");
+                }
+              }
+              if (seller) {
+                navigate("/seller");
+              }
             }}
           >
             Cancel

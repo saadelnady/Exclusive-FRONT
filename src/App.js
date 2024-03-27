@@ -21,14 +21,14 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/*" element={<User />} />
-        {user.role === "ADMIN" && (
-          <Route
-            path="/admin/*"
-            element={
-              <Admin isWarning={isWarning} handleWarning={handleWarning} />
-            }
-          />
-        )}
+
+        <Route
+          path="/admin/*"
+          element={
+            <Admin isWarning={isWarning} handleWarning={handleWarning} />
+          }
+        />
+
         <Route
           path="/seller/*"
           element={

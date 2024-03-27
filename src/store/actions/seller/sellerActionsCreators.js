@@ -100,6 +100,26 @@ export const getSellerProfileFail = (payLoad) => {
 };
 // // =================================================================
 
+export const putSellerProfile = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.PUT_SELLER_PROFILE,
+    payLoad,
+  };
+};
+export const putSellerProfileSuccess = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.PUT_SELLER_PROFILE_SUCCESS,
+    payLoad,
+  };
+};
+export const putSellerProfileFail = (payLoad) => {
+  return {
+    type: SELLER_ACTIONS_TYPES.PUT_SELLER_PROFILE_FAIL,
+    payLoad,
+  };
+};
+// // =================================================================
+
 export const getSellers = () => {
   return { type: SELLERS_ACTIONS_TYPES.GET_SELLERS };
 };

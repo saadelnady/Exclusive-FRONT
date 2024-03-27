@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { fetchSellerProfile } from "../../store/actions/seller/sellerActions.js";
@@ -15,6 +15,7 @@ import Profile from "../../components/shared/Profile/Index.jsx";
 import "../../components/Seller/styles/seller.css";
 
 const Seller = ({ isWarning, handleWarning }) => {
+  // const { isLoggedIn } = useSelector((state) => state.sellerReducer);
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {

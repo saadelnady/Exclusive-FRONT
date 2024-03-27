@@ -26,7 +26,15 @@ const SellerRegister = () => {
     validate,
   });
   const handleRegister = (values) => {
-    const payLoad = { values, toast, navigate };
+    const trimedValues = {
+      firstName: values?.firstName?.trim(),
+      lastName: values?.lastName?.trim(),
+      email: values?.email?.trim(),
+      mobilePhone: values?.mobilePhone?.trim(),
+      password: values?.password,
+    };
+
+    const payLoad = { values: trimedValues, toast, navigate };
     dispatch(sellerRegister(payLoad));
   };
 

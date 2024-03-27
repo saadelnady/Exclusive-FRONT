@@ -2,7 +2,8 @@ import arrow_left from "../../../assets/images/pngs/ic-arrow-left.png";
 import arrow_right from "../../../assets/images/pngs/ic-arrow-right.png";
 import Card from "../../shared/Card";
 
-const OurProducts = () => {
+const OurProducts = ({ products }) => {
+  console.log(products);
   return (
     <div className="border-bottom py-5 mb-5">
       <h5 className="special-header ps-5 py-2 mb-5">Our Products</h5>
@@ -25,14 +26,9 @@ const OurProducts = () => {
         </div>
       </div>
       <div className="d-flex justify-content-center justify-content-md-between  flex-wrap">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {products?.map((product, index) => {
+          return <Card key={index} product={product} />;
+        })}
       </div>
       <div className="text-center">
         <button className="btn submit py-3 px-5 fs-6">View All Products</button>
