@@ -20,7 +20,7 @@ export const Search = ({ action }) => {
     <div className="search-wrapper position-relative col-12 col-sm-5 col-lg-4 my-2 my-lg-0 ">
       <input
         type="text"
-        className="form-control bg-light    special-input"
+        className="form-control bg-light special-input"
         placeholder="what are you looking for ?"
         onChange={handleSearch}
         value={searchTerm}

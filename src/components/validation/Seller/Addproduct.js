@@ -166,6 +166,11 @@ const validate = (values) => {
         optionErrors.stockCount = `Product stockCount shouldn't be 0 in option number ${
           index + 1
         }`;
+      } else if (isNaN(option.stockCount)) {
+        // Handle invalid stockCount input
+        optionErrors.stockCount = `Stock count must be a valid number in option number ${
+          index + 1
+        }`;
       }
 
       if (isObjectNotEmpty(optionErrors)) {

@@ -57,13 +57,23 @@ const Products = ({ isWarning, handleWarning }) => {
     handleWarning();
   };
   // ==========================================================
+  const handleSearchProducts = (text) => {
+    dispatch(
+      fetchAcceptedSellerProducts({
+        limit,
+        page: currentPage,
+        text,
+        sellerId: seller?._id,
+      })
+    );
+  };
+  // ==========================================================
   return (
     <div className="products-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">My Products </h1>
-
-        <Search type={"sellerProducts"} sellerId={seller?._id} />
+        <Search action={handleSearchProducts} />
       </div>
 
       <div className="products-list bg-white ">

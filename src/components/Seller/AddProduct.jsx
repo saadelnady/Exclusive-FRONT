@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 import "./styles/AddProduct.css";
 
-import { MdError } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import ToolTip from "../shared/toolTip";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,6 +17,7 @@ import {
 } from "../../store/actions/product/productActions";
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
+import ErrorMessage from "../shared/ErrorMessage";
 
 const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
@@ -46,9 +46,9 @@ const AddProduct = () => {
   useEffect(() => {
     if (isObjectNotEmpty(product) && productId && categories.length > 0) {
       const targetCategory = categories.find(
-        (cat) => cat._id === product?.category
+        (cat) => cat._id === product?.category?._id
       );
-      setSubCategories(targetCategory.subCategories);
+      setSubCategories(targetCategory?.subCategories);
     } else {
       const initialCategory = categories[0] || {};
       formik.setValues({
@@ -56,7 +56,7 @@ const AddProduct = () => {
         isFlashSale: false,
         flashSaleExpirationDate: "",
         status: "PENDING",
-        category: initialCategory._id,
+        category: initialCategory?._id,
         subCategory:
           initialCategory?.subCategories?.length > 0
             ? initialCategory?.subCategories[0]?._id
@@ -109,8 +109,8 @@ const AddProduct = () => {
         title: product.title,
         description: product.description,
         images: product.images,
-        category: product.category,
-        subCategory: product.subCategory,
+        category: product.category?._id,
+        subCategory: product?.subCategory?._id,
         productOwner: product.productOwner,
         isFlashSale: product.isFlashSale,
         flashSaleExpirationDate: product.flashSaleExpirationDate,
@@ -173,6 +173,7 @@ const AddProduct = () => {
   };
 
   const handleAddProduct = (values) => {
+    console.log("values ===========>", values);
     const formData = new FormData();
     formData.append("title", values?.title);
     formData.append("description", values?.description);
@@ -257,7 +258,7 @@ const AddProduct = () => {
   const resetForm = () => {
     formik.resetForm();
     setTimeout(() => {
-      navigate("/Seller/products");
+      navigate("/seller/products");
     }, 2000);
   };
   /* ================================================================================================== */
@@ -390,25 +391,56 @@ const AddProduct = () => {
     const newOptions = [...formik.values.options];
     const option = newOptions[index].price;
 
-    // Update the price field
+    // Update the field with the new value
     option[field] = value;
 
+    // Calculate discount value if discount percentage is provided
+    if (field === "discountPercentage") {
+      const priceBeforeDiscount = parseFloat(option.priceBeforeDiscount);
+      const discountPercentage = parseFloat(value);
+
+      if (!isNaN(priceBeforeDiscount) && !isNaN(discountPercentage)) {
+        option.discountValue = priceBeforeDiscount * (discountPercentage / 100);
+      } else {
+        option.discountValue = ""; // Reset discount value if either input is invalid
+      }
+    }
+
+    // Calculate discount percentage if discount value is provided
     if (field === "discountValue") {
-      option.discountPercentage =
-        value !== "" ? (value / option.priceBeforeDiscount) * 100 : "";
-    } else if (field === "discountPercentage") {
-      option.discountValue =
-        value !== "" ? option.priceBeforeDiscount * (value / 100) : "";
-    } else if (
-      field === "priceBeforeDiscount" &&
-      option.discountPercentage === "" &&
-      option.discountValue === ""
-    ) {
-      option.finalPrice = value;
+      const priceBeforeDiscount = parseFloat(option.priceBeforeDiscount);
+      const discountValue = parseFloat(value);
+
+      if (
+        !isNaN(priceBeforeDiscount) &&
+        !isNaN(discountValue) &&
+        discountValue !== 0
+      ) {
+        option.discountPercentage = (discountValue / priceBeforeDiscount) * 100;
+      } else {
+        option.discountPercentage = ""; // Reset discount percentage if either input is invalid or discountValue is 0
+      }
+    }
+
+    // Calculate final price based on updated values
+    const priceBeforeDiscount = parseFloat(option.priceBeforeDiscount);
+    const discountValue = parseFloat(option.discountValue);
+
+    if (!isNaN(priceBeforeDiscount)) {
+      if (!isNaN(discountValue)) {
+        option.finalPrice = (priceBeforeDiscount - discountValue).toFixed(2);
+      } else {
+        option.finalPrice = priceBeforeDiscount.toFixed(2); // Final price same as priceBeforeDiscount if discountValue is not valid
+      }
+    } else {
+      option.finalPrice = ""; // Reset final price if priceBeforeDiscount is invalid
     }
 
     // Set the updated values
-    formik.setValues({ ...formik.values, options: newOptions });
+    formik.setValues({
+      ...formik.values,
+      options: newOptions,
+    });
   };
 
   const calculateFinalPrice = (
@@ -417,38 +449,30 @@ const AddProduct = () => {
     discountValue
   ) => {
     const price = parseFloat(priceBeforeDiscount);
-    let percentage = parseFloat(discountPercentage);
+    const percentage = parseFloat(discountPercentage);
     const discount = parseFloat(discountValue);
 
-    if (percentage === "" && discount === "") {
-      // Both percentage and discount provided, consider only percentage
-      return ""; // Return empty string or handle error
-    }
     if (isNaN(price)) {
-      return "";
-    }
-    if (price === "0" || (percentage !== "" && percentage === "0")) {
-      return price.toFixed(2); // Return price if zero or invalid percentage
+      return ""; // Handle invalid price input
     }
 
-    if (
-      price &&
-      (!percentage || percentage === 0) &&
-      (!discount || discount === 0)
-    ) {
-      return price.toFixed(2); // Return price if zero or invalid percentage
-    }
-    if (percentage === Infinity) {
-      percentage = "";
-      return 0;
-    }
-    if (!isNaN(percentage)) {
+    // Handle cases where both percentage and discount are provided
+    if (!isNaN(percentage) && !isNaN(discount)) {
+      // Consider only percentage and calculate final price
       return price * ((100 - percentage) / 100);
-    } else if (!isNaN(discount)) {
-      return (price - discount).toFixed(2);
     }
 
-    return ""; // Default case, should not occur
+    // Handle cases where only discount percentage is provided
+    if (!isNaN(percentage) && !isNaN(price) && percentage !== 0) {
+      return price - (price * percentage) / 100;
+    }
+
+    // Handle cases where only discount value is provided
+    if (!isNaN(discount) && !isNaN(price)) {
+      return price - discount;
+    }
+
+    return price.toFixed(2); // Default case, return price before discount
   };
 
   /* ================================================================================================== */
@@ -532,12 +556,11 @@ const AddProduct = () => {
               onBlur={formik.handleBlur}
               multiple
             />
-            {formik.touched.images && formik.errors.images ? (
-              <p className="text-sm-end">
-                <MdError className="fs-3 me-2" />
-                {formik.errors.images}
-              </p>
-            ) : null}
+            <ErrorMessage
+              touched={formik.touched}
+              errors={formik.errors}
+              fieldName="images"
+            />
             <div className="d-flex justify-content-end align-items-center flex-wrap ">
               {images &&
                 images.map((imgItem, index) => (
@@ -578,13 +601,11 @@ const AddProduct = () => {
               onBlur={formik.handleBlur}
             />
           </div>
-          {formik.touched.title && formik.errors.title ? (
-            <p className="text-sm-end">
-              <MdError className="fs-3 me-2" />
-              {formik.errors.title}
-            </p>
-          ) : null}
-
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="title"
+          />
           {/* =================================================================================== */}
           <div className="add-description item">
             <label htmlFor="description" className="fw-bold fs-4">
@@ -599,12 +620,7 @@ const AddProduct = () => {
               value={formik.values.description}
             ></textarea>
           </div>
-          {formik.touched.description && formik.errors.description && (
-            <p className="text-sm-end">
-              <MdError className="fs-3 me-2" />
-              {formik.errors.description}
-            </p>
-          )}
+
           {/* ================================================================================================== */}
           <div className="select-category item">
             <label htmlFor="category" className="fw-bold fs-4">
@@ -670,14 +686,13 @@ const AddProduct = () => {
               />
             )}
           </div>
-          {formik.touched.flashSaleExpirationDate &&
-            formik.errors.flashSaleExpirationDate &&
-            formik.values.isFlashSale && (
-              <p className="text-sm-end">
-                <MdError className="fs-3 me-2" />
-                {formik.errors.flashSaleExpirationDate}
-              </p>
-            )}
+
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="flashSaleExpirationDate"
+            condition={formik.values.isFlashSale}
+          />
           {/* ================================================================================================== */}
           <h3 className="text-center fw-bold my-3">Product options</h3>
           {/* ================================================================================================== */}
@@ -817,6 +832,15 @@ const AddProduct = () => {
                         )}
                       </span>
                       L.E
+                      {/* <input
+                          type="text"
+                          className="fs-3 special-input col-12 text-center"
+                          name="finalPrice"
+                          value={
+                            formik?.values?.options[index]?.price?.finalPrice
+                          }
+                          readOnly // Make the input read-only to prevent user input
+                        /> */}
                     </td>
                     <td className="counter ">
                       <div className="d-flex justify-content-center">
