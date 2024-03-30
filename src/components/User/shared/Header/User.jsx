@@ -1,17 +1,17 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import DefaultUserImage from "../../../assets/images/pngs/user-logo.png";
-import iconCancel from "../../../assets/images/pngs/ic-cancel.png";
-import iconLogout from "../../../assets/images/pngs/ic-logout.png";
-import iconMallBag from "../../../assets/images/pngs/ic-mallbag.png";
-import iconReviews from "../../../assets/images/pngs/ic-Reviews.png";
-import "../styles/User.css";
+import DefaultUserImage from "../../../../assets/images/pngs/user-logo.png";
+import iconCancel from "../../../../assets/images/pngs/ic-cancel.png";
+import iconLogout from "../../../../assets/images/pngs/ic-logout.png";
+import iconMallBag from "../../../../assets/images/pngs/ic-mallbag.png";
+import iconReviews from "../../../../assets/images/pngs/ic-Reviews.png";
+import "./styles/User.css";
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { serverUrl } from "../../../API/API";
-import { Loading } from "../Loading";
-import { userLogout } from "../../../store/actions/user/userActions";
+import { serverUrl } from "../../../../API/API";
+import { Loading } from "../../../shared/Loading";
+import { userLogout } from "../../../../store/actions/user/userActions";
 
 export const User = () => {
   const { isLoggedIn, user, isLoading } = useSelector(

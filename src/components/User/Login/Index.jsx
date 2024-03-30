@@ -3,7 +3,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { MdError } from "react-icons/md";
 
 import { toast } from "react-toastify";
 
@@ -13,6 +12,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../store/actions/user/userActions";
 import { Loading } from "../../shared/Loading";
+import ErrorMessage from "../../shared/ErrorMessage";
 
 const Index = () => {
   const { isLoading } = useSelector((state) => state.userReducer);
@@ -39,7 +39,7 @@ const Index = () => {
       <div className="col-12 col-md-6">
         <img src={mobileImage} alt="mobileImage" className="w-100 h-100" />
       </div>
-      <div className="col-10 mx-auto  offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
+      <div className="col-10 mx-auto offset-md-2 col-md-5 col-lg-4 text-center text-md-start fw-bold py-5">
         <h1 className="fs-1">Login to Exclusive</h1>
         <p className="fs-5 fw-normal mt-4">Enter your details below</p>
         <form onSubmit={formik.handleSubmit} className="mt-5">
@@ -51,14 +51,13 @@ const Index = () => {
             value={formik.values.email}
             onBlur={formik.handleBlur}
             placeholder="E-mail"
-            className="form-control mb-3 fs-4"
+            className="form-control mb-4 fs-4 special-input"
           />
-          {formik.touched.email && formik.errors.email ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.email}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="email"
+          />
           <div className="position-relative">
             <input
               type={visible ? "password" : "text"}
@@ -67,7 +66,7 @@ const Index = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Password"
-              className="form-control mb-3 fs-4"
+              className="form-control my-3 fs-4 special-input"
               autoComplete="password"
             />
             {visible ? (
@@ -86,12 +85,11 @@ const Index = () => {
               />
             )}
           </div>
-          {formik.touched.password && formik.errors.password ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.password}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="password"
+          />
           <div className="d-flex align-items-center mb-4">
             <input
               type="checkbox"

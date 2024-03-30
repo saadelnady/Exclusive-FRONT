@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-export const NavBar = () => {
+const Links = () => {
   const { isLoggedIn } = useSelector((state) => state.userReducer);
   const [active, setIsActive] = useState(null);
   const activeHandler = (listItem) => {
@@ -71,3 +71,4 @@ export const NavBar = () => {
     </ul>
   );
 };
+export default Links;

@@ -12,6 +12,7 @@ import "../Auth.css";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { sellerLogin } from "../../store/actions/seller/sellerActions";
+import ErrorMessage from "../shared/ErrorMessage";
 
 const SellerLogin = () => {
   const [visible, setVisible] = useState(true);
@@ -46,14 +47,13 @@ const SellerLogin = () => {
             value={formik.values.email}
             onBlur={formik.handleBlur}
             placeholder="E-mail"
-            className="form-control mb-3 fs-4"
+            className="form-control mb-3 fs-4 special-input"
           />
-          {formik.touched.email && formik.errors.email ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.email}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="email"
+          />
           <div className="position-relative">
             <input
               type={visible ? "password" : "text"}
@@ -62,7 +62,7 @@ const SellerLogin = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Password"
-              className="form-control mb-3 fs-4"
+              className="form-control mb-3 fs-4 special-input"
               autoComplete="password"
             />
             {visible ? (
@@ -81,12 +81,11 @@ const SellerLogin = () => {
               />
             )}
           </div>
-          {formik.touched.password && formik.errors.password ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.password}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="password"
+          />
           <div className="d-flex align-items-center mb-4">
             <input
               type="checkbox"

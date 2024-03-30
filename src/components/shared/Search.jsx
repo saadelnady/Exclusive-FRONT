@@ -17,7 +17,7 @@ export const Search = ({ action }) => {
   };
 
   return (
-    <div className="search-wrapper position-relative col-12 col-sm-5 col-lg-4 my-2 my-lg-0 ">
+    <div className="search-wrapper position-relative col-12 col-md-6 col-lg-5 my-2 my-lg-0 ">
       <input
         type="text"
         className="form-control bg-light special-input"

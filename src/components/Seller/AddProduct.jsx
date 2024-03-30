@@ -18,6 +18,7 @@ import {
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
 import ErrorMessage from "../shared/ErrorMessage";
+import { productStatus } from "../../helpers/options";
 
 const AddProduct = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
@@ -55,7 +56,7 @@ const AddProduct = () => {
         ...formik.values,
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        status: "PENDING",
+        status: productStatus.PENDING,
         category: initialCategory?._id,
         subCategory:
           initialCategory?.subCategories?.length > 0
@@ -82,7 +83,7 @@ const AddProduct = () => {
         images: [],
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        status: "PENDING",
+        status: productStatus.PENDING,
         options: [
           {
             size: "",
@@ -144,7 +145,7 @@ const AddProduct = () => {
             : null,
         isFlashSale: false,
         flashSaleExpirationDate: "",
-        status: "PENDING",
+        status: productStatus.PENDING,
         options: [
           {
             size: "",
@@ -224,10 +225,9 @@ const AddProduct = () => {
     // Set productOwner value programmatically
     const productOwnerId = seller?._id; // Assuming seller is available
     formData.append("productOwner", productOwnerId);
-
     formData.append("isFlashSale", values?.isFlashSale);
     formData.append("flashSaleExpirationDate", values?.flashSaleExpirationDate);
-    formData.append("status", "pending");
+    formData.append("status", productStatus.PENDING);
     // Append the existing images
     values.images.forEach((image) => {
       formData.append("images", image);

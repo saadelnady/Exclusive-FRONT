@@ -15,6 +15,7 @@ import {
 } from "../../validation/registerValidation.js";
 import { useDispatch } from "react-redux";
 import { userRegister } from "../../../store/actions/user/userActions.js";
+import ErrorMessage from "../../shared/ErrorMessage.jsx";
 
 const Index = () => {
   const [visible, setVisible] = useState(true);
@@ -58,14 +59,13 @@ const Index = () => {
             onBlur={formik.handleBlur}
             type="text"
             placeholder="first Name"
-            className="form-control mb-3 fs-4"
+            className="form-control mb-3 fs-4 special-input"
           />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.firstName}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="firstName"
+          />
           <input
             name="lastName"
             onChange={formik.handleChange}
@@ -73,14 +73,13 @@ const Index = () => {
             onBlur={formik.handleBlur}
             type="text"
             placeholder="last Name"
-            className="form-control mb-3 fs-4"
+            className="form-control mb-3 fs-4 special-input"
           />
-          {formik.touched.lastName && formik.errors.lastName ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.lastName}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="lastName"
+          />
           <input
             name="mobilePhone"
             onChange={formik.handleChange}
@@ -88,14 +87,13 @@ const Index = () => {
             onBlur={formik.handleBlur}
             type="text"
             placeholder="mobile phone"
-            className="form-control mb-3 fs-4"
-          />{" "}
-          {formik.touched.mobilePhone && formik.errors.mobilePhone ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.mobilePhone}
-            </p>
-          ) : null}
+            className="form-control mb-3 fs-4 special-input"
+          />
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="mobilePhone"
+          />
           <input
             name="email"
             onChange={formik.handleChange}
@@ -103,14 +101,13 @@ const Index = () => {
             onBlur={formik.handleBlur}
             type="email"
             placeholder="E-mail"
-            className="form-control mb-3 fs-4"
+            className="form-control mb-3 fs-4 special-input"
           />
-          {formik.touched.email && formik.errors.email ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.email}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="email"
+          />
           <div className="position-relative">
             <input
               name="password"
@@ -119,7 +116,7 @@ const Index = () => {
               onBlur={formik.handleBlur}
               type={visible ? "password" : "text"}
               placeholder="Password"
-              className="form-control mb-3 fs-4"
+              className="form-control mb-3 fs-4 special-input"
               autoComplete="password"
             />
 
@@ -139,12 +136,11 @@ const Index = () => {
               />
             )}
           </div>
-          {formik.touched.password && formik.errors.password ? (
-            <p>
-              <MdError className="fs-3 me-2" />
-              {formik.errors.password}
-            </p>
-          ) : null}
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="password"
+          />
           <button
             className="btn d-block w-100 p-3 fs-4 submit my-4"
             type="submit"

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 // import { ActivationPage } from "./components/shared/Activation.jsx";
 
@@ -16,8 +16,8 @@ import SellerRegister from "../../components/Seller/Register.jsx";
 import UserLogin from "../../components/User/Login/Index.jsx";
 import UserRegister from "../../components/User/Register/Index.jsx";
 
-import Header from "../../components/shared/Header/Header.jsx";
-import Footer from "../../components/shared/Footer/Footer.jsx";
+import Header from "../../components/User/shared/Header/Header.jsx";
+import Footer from "../../components/User/shared/Footer/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import NotFoundPage from "../../components/shared/Header/NotFoundPage.jsx";

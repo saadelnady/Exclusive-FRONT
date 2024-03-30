@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import "../styles/Header.css";
+import "./styles/Header.css";
 
-export const Announce = () => {
+const Announce = () => {
   return (
     <div className="bg-black py-1">
       <div className="container text-light  d-flex justify-content-evenly align-center flex-wrap">
@@ -63,3 +63,4 @@ export const Announce = () => {
     </div>
   );
 };
+export default Announce;
