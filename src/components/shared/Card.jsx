@@ -25,7 +25,10 @@ const Card = ({ product }) => {
       )}
 
       <div className="product-icons d-flex flex-column">
-        <NavLink className="fs-4 text-center mb-2 rounded-pill">
+        <NavLink
+          className="fs-4 text-center mb-2 rounded-pill"
+          to={`/products/${product?._id}`}
+        >
           <IoEyeOutline />
         </NavLink>
         <NavLink className="fs-4 text-center  rounded-pill ">

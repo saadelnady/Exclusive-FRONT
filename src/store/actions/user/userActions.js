@@ -23,15 +23,16 @@ export const userLogin = ({ values, toast, navigate }) => {
     try {
       const response = await postData(`/api/users/login`, values);
       const role = response?.data?.role;
-      dispatch(actionCreators.postUserLoginSuccess(response?.data));
+      console.log("data-------------?", response.data);
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      dispatch(actionCreators.postUserLoginSuccess(response?.data));
       showToast(toast, response?.message, "success");
+      dispatch(fetchUserProfile());
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {
           if (role === "ADMIN") {
             navigate("/admin");
-          }
-          if (role === "USER") {
+          } else {
             navigate("/");
           }
         }
@@ -76,13 +77,15 @@ export const userRegister = ({ values, toast, navigate }) => {
       const response = await postData("/api/users/register", values);
 
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      dispatch(actionCreators.postUserRegisterSuccess(response));
       showToast(toast, response?.message, "success");
+      dispatch(fetchUserProfile());
+
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {
           navigate("/");
         }
       });
-      dispatch(actionCreators.postUserRegisterSuccess(response?.data));
     } catch (error) {
       dispatch(actionCreators.postUserRegisterFail(error));
       showToast(toast, error?.response?.data?.message, "error");
@@ -96,7 +99,7 @@ export const editUserProfile = ({ userId, values, toast }) => {
     try {
       const response = await putData(`/api/users/${userId}`, values);
       dispatch(actionCreators.putUserProfileSuccess(response));
-      showToast(toast, response?.data?.message, "success");
+      showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionCreators.putUserProfileFail(error));
       showToast(toast, error?.response?.data?.message, "error");

@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const serverUrl = process.env.REACT_APP_SERVER_URL;
 
-const headers = {
-  token: JSON.parse(localStorage.getItem("TOKEN")),
-};
-
 const handleRequest = async (method, URL, data = null) => {
+  const headers = {
+    token: JSON.parse(localStorage.getItem("TOKEN")),
+  };
+
   const response = await axios({
     method,
     url: `${serverUrl}${URL}`,

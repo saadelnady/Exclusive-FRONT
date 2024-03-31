@@ -32,8 +32,9 @@ export const editSellerProfile = ({ sellerId, values, toast }) => {
     dispatch(actionCreators.putSellerProfile());
     try {
       const response = await putData(`/api/sellers/${sellerId}`, values);
+      console.log("response  === >", response);
       dispatch(actionCreators.putSellerProfileSuccess(response));
-      showToast(toast, response?.data?.message, "success");
+      showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionCreators.putSellerProfileFail(error));
       showToast(toast, error?.response?.data?.message, "error");
@@ -47,10 +48,11 @@ export const sellerLogin = ({ values, toast, navigate }) => {
     dispatch(actionCreators.postSellerLogin(values));
     try {
       const response = await postData(`/api/sellers/login`, values);
-      console.log(" response ---->", response);
+      console.log("seller login ===> ", response);
       dispatch(actionCreators.postSellerLoginSuccess(response?.data));
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
+      dispatch(fetchSellerProfile());
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {
           navigate("/seller");
@@ -89,13 +91,14 @@ export const sellerRegister = ({ values, toast, navigate }) => {
 
     try {
       const response = await postData("/api/sellers/register", values);
+      dispatch(actionCreators.postSellerRegisterSuccess(response));
       localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
       showToast(toast, response?.message, "success");
       setTimeout(() => {
-        navigate("/Seller");
-        window.location.reload();
-      });
-      dispatch(actionCreators.postSellerRegisterSuccess(response?.data));
+        if (localStorage.getItem("TOKEN")) {
+          navigate("/seller");
+        }
+      }, 2500);
     } catch (error) {
       dispatch(actionCreators.postSellerRegisterFail(error));
       showToast(toast, error?.response?.data?.message, "error");

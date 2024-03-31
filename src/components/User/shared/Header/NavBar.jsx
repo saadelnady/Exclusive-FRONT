@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import { User } from "./User";
 import { Search } from "../../../../components/shared/Search";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "../../../../store/actions/product/productActions";
+import { productStatus } from "../../../../helpers/options";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 10;
+  const handleSearchAcceptedProducts = (text) => {
+    dispatch(
+      fetchProducts({
+        limit,
+        page: currentPage,
+        text,
+        status: productStatus.ACCEPTED,
+      })
+    );
+  };
   return (
     <nav className="navbar navbar-expand-lg ">
       <div className="container d-flex justify-content-between align-items-center">
@@ -28,7 +45,7 @@ const NavBar = () => {
         >
           <div className="navbar-nav d-flex w-100 justify-content-between align-items-center">
             <Links />
-            <Search />
+            <Search action={handleSearchAcceptedProducts} />
           </div>
           <User />
         </div>

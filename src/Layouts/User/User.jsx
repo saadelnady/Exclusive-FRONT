@@ -16,21 +16,21 @@ import SellerRegister from "../../components/Seller/Register.jsx";
 import UserLogin from "../../components/User/Login/Index.jsx";
 import UserRegister from "../../components/User/Register/Index.jsx";
 
-import Header from "../../components/User/shared/Header/Header.jsx";
+import Header from "../../components/User/shared/Header/Index.jsx";
 import Footer from "../../components/User/shared/Footer/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
-import NotFoundPage from "../../components/shared/Header/NotFoundPage.jsx";
-import { isObjectNotEmpty } from "../../helpers/checkers.js";
+import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
 
 const User = () => {
-  const { user, isLoggedIn } = useSelector((state) => state.userReducer);
+  const { isLoggedIn, token } = useSelector((state) => state.userReducer);
 
-  console.log("user ===>", user);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, [dispatch]);
+    if (token) {
+      dispatch(fetchUserProfile());
+    }
+  }, [dispatch, token, isLoggedIn]);
 
   return (
     <div>
@@ -40,26 +40,22 @@ const User = () => {
           path="/activation/:activationToken"
           element={<ActivationPage />}
         /> */}
-        {/* {(isObjectNotEmpty(user) && user?.role === "USER") ||
-          (!isLoggedIn && (
-            <> */}
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/products/:productId" element={<Product />} />
-        {/* </>
-          ))} */}
 
         {!isLoggedIn && (
           <>
             <Route path="/user/login" element={<UserLogin />} />
-            <Route path="/user/register" element={<UserRegister />} />
+            <Route path="/user/register" element={<UserRegister />} />{" "}
+            <Route path="/sellerLogin" element={<SellerLogin />} />
+            <Route path="/sellerRegister" element={<SellerRegister />} />
           </>
         )}
 
-        <Route path="/sellerLogin" element={<SellerLogin />} />
-        <Route path="/sellerRegister" element={<SellerRegister />} />
         {/* <Route path="*" element={<NotFoundPage />} /> */}
       </Routes>
 

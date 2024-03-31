@@ -126,12 +126,14 @@ export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
           </p>
         )}
       </div>
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {categories?.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

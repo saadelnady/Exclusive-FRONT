@@ -132,13 +132,14 @@ export const SubCategories = ({
           </p>
         )}
       </div>
-
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {subCategories?.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

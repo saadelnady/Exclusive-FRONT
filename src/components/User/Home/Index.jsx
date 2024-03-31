@@ -14,7 +14,6 @@ import Categories from "./Categories";
 
 import bgAnnounce2 from "../../../assets/images/pngs/bg-announce-2.png";
 
-import { fetchUserProfile } from "../../../store/actions/user/userActions";
 import { fetchCategories } from "../../../store/actions/category/categoryActions";
 import { fetchProducts } from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
@@ -23,9 +22,6 @@ const Index = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.productReducer);
   useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
-      dispatch(fetchUserProfile());
-    }
     dispatch(fetchCategories({ limit: 7, page: 1 }));
     dispatch(
       fetchProducts({ limit: 8, page: 1, status: productStatus.ACCEPTED })

@@ -27,8 +27,7 @@ export const fetchProducts = ({
       dispatch(actionsCreators.getProductsSuccess(response.data));
     } catch (error) {
       dispatch(actionsCreators.getProductsFail(error));
-      console.log("error --->", error);
-    }
+     }
   };
 };
 /* =================================================================================================== */

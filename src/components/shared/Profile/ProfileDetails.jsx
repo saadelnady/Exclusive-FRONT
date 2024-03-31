@@ -32,8 +32,7 @@ const ProfileDetails = ({ user, seller }) => {
 
   const handleSubmit = (values) => {
     if (isObjectNotEmpty(user)) {
-      console.log("user ", user);
-      handleEditUser(values);
+       handleEditUser(values);
     } else if (isObjectNotEmpty(seller)) {
       handleEditSeller(values);
     }
@@ -94,8 +93,7 @@ const ProfileDetails = ({ user, seller }) => {
   // =======================================================================================
 
   const handleEditSeller = (values) => {
-    console.log("selller");
-    console.log("values", values);
+    
     const payLoad = {
       sellerId: seller?._id,
       values: getFormData(values),

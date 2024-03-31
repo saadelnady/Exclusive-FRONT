@@ -9,6 +9,9 @@ const initialState = {
   error: null,
   seller: {},
   sellers: [],
+  message: "",
+  role: "",
+  token: JSON.parse(localStorage.getItem("TOKEN")) || "",
 };
 
 const sellerReducer = (state = initialState, action) => {
@@ -21,7 +24,7 @@ const sellerReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        seller: { ...action.payLoad },
+        seller: action.payLoad,
         error: null,
       };
 
@@ -34,14 +37,20 @@ const sellerReducer = (state = initialState, action) => {
     case SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
         isLoading: false,
-        seller: { ...action.payLoad },
+        isLoggedIn: true,
+        seller: action?.payLoad,
+        role: action?.payLoad?.role,
         error: null,
       };
 
     case SELLER_ACTIONS_TYPES.GET_SELLER_PROFILE_FAIL:
-      return { ...state, error: action.payLoad, isLoggedIn: false };
+      return {
+        ...state,
+        isLoading: false,
+        isLoggedIn: false,
+        error: action?.payLoad,
+      };
     // ======================================================================================
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGIN:
       return { ...state, isLoading: true };
@@ -52,6 +61,8 @@ const sellerReducer = (state = initialState, action) => {
         isLoggedIn: true,
         isLoading: false,
         error: null,
+        token: action?.payLoad?.token,
+        role: action?.payLoad?.role,
       };
 
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGIN_FAIL:
@@ -59,7 +70,7 @@ const sellerReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isLoggedIn: false,
-        error: action.payLoad,
+        error: action?.payLoad,
       };
     // ======================================================================================
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGOUT:
@@ -74,13 +85,14 @@ const sellerReducer = (state = initialState, action) => {
         isLoading: false,
         seller: {},
         error: null,
+        token: "",
       };
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGOUT_FAIL:
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        error: action.payLoad,
+        error: action?.payLoad,
       };
     // ======================================================================================
     case SELLER_ACTIONS_TYPES.POST_SELLER_REGISTER:
@@ -93,7 +105,9 @@ const sellerReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        seller: action.payLoad,
+        token: action?.payLoad?.data?.token,
+        role: action?.payLoad?.data?.role,
+        message: action?.payLoad?.message,
         error: null,
       };
 
@@ -127,11 +141,12 @@ const sellerReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case SELLER_ACTIONS_TYPES.PUT_SELLER_PROFILE_SUCCESS:
+      console.log("actionPayLoad", action?.payLoad);
       return {
         ...state,
         isLoading: false,
         seller: action?.payLoad?.data?.seller,
-        message: action?.payLoad?.data?.message,
+        message: action?.payLoad?.message,
         error: null,
       };
 

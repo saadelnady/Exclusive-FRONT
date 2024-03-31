@@ -17,8 +17,9 @@ export const User = () => {
   const { isLoggedIn, user, isLoading } = useSelector(
     (state) => state.userReducer
   );
-  console.log("isLoggedIn", isLoggedIn);
+
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const handleLogOut = () => {
     const payLoad = { toast, navigate, role: user.role };
@@ -28,7 +29,6 @@ export const User = () => {
   return (
     <div className="user d-flex col-12  col-lg-4 justify-content-evenly align-items-center">
       <CiHeart className="fs-2 cursor-pointer" />
-
       <BsCart3 className="fs-2 cart" />
       {isLoading && <Loading />}
       {isLoggedIn && (

@@ -7,9 +7,11 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   error: null,
-  message: "",
   user: {},
   users: [],
+  message: "",
+  role: "",
+  token: JSON.parse(localStorage.getItem("TOKEN")) || "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -43,7 +45,8 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        user: action.payLoad,
+        user: action?.payLoad,
+        role: action?.payLoad?.role,
         error: null,
       };
 
@@ -67,13 +70,15 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: true,
         isLoading: false,
         error: null,
+        token: action?.payLoad?.token,
+        role: action?.payLoad?.role,
       };
     case USER_ACTIONS_TYPES.POST_USER_LOGIN_FAIL:
       return {
         ...state,
         isLoading: false,
         isLoggedIn: false,
-        error: action.payLoad,
+        error: action?.payLoad,
       };
     // ====================================================================================================
     case USER_ACTIONS_TYPES.POST_USER_LOGOUT:
@@ -87,14 +92,17 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: false,
         isLoading: false,
         user: {},
+        users: [],
         error: null,
+        token: "",
+        role: "",
       };
     case USER_ACTIONS_TYPES.POST_USER_LOGOUT_FAIL:
       return {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        error: action.payLoad,
+        error: action?.payLoad,
       };
 
     // ====================================================================================================
@@ -108,7 +116,9 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        user: action.payLoad,
+        token: action?.payLoad?.data?.token,
+        role: action?.payLoad?.data?.role,
+        message: action?.payLoad?.message,
         error: null,
       };
 
@@ -146,7 +156,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         user: action?.payLoad?.data?.user,
-        message: action?.payLoad?.data?.message,
+        message: action?.payLoad?.message,
         error: null,
       };
 

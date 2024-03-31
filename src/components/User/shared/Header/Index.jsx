@@ -1,7 +1,7 @@
 import Announce from "./Announce";
 import NavBar from "./NavBar";
 
-const Header = () => {
+const Index = () => {
   return (
     <div className="border-bottom ">
       <Announce />
@@ -9,4 +9,4 @@ const Header = () => {
     </div>
   );
 };
-export default Header;
+export default Index;

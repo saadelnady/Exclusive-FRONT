@@ -32,8 +32,12 @@ import {
   blockProduct,
   unBlockProduct,
 } from "../../store/actions/product/productActions.js";
+import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
 
 const Admin = ({ isWarning, handleWarning }) => {
+  const { token } = useSelector((state) => state.userReducer);
+
+  // =================================================================================
   const dispatch = useDispatch();
   // =================================================================================
   const [isActive, setIsActive] = useState(false);
@@ -42,7 +46,7 @@ const Admin = ({ isWarning, handleWarning }) => {
   };
   // =================================================================================
   useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
+    if (token) {
       dispatch(fetchUserProfile());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
@@ -178,6 +182,7 @@ const Admin = ({ isWarning, handleWarning }) => {
               />
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </div>

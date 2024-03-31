@@ -3,7 +3,6 @@ import arrow_right from "../../../assets/images/pngs/ic-arrow-right.png";
 import Card from "../../shared/Card";
 
 const OurProducts = ({ products }) => {
-  console.log(products);
   return (
     <div className="border-bottom py-5 mb-5">
       <h5 className="special-header ps-5 py-2 mb-5">Our Products</h5>

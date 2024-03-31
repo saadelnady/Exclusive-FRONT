@@ -15,7 +15,7 @@ import Profile from "../../components/shared/Profile/Index.jsx";
 import "../../components/Seller/styles/seller.css";
 
 const Seller = ({ isWarning, handleWarning }) => {
-  // const { isLoggedIn } = useSelector((state) => state.sellerReducer);
+  const { token } = useSelector((state) => state.sellerReducer);
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
@@ -24,11 +24,11 @@ const Seller = ({ isWarning, handleWarning }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
+    if (token) {
       dispatch(fetchSellerProfile());
       dispatch(fetchCategories());
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
   return (
     <div className="seller-layout">
       <SellerSideBar
