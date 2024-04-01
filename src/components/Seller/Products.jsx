@@ -148,15 +148,19 @@ const Products = ({ isWarning, handleWarning }) => {
             </tbody>
           </table>
         ) : (
-          <p>there 's no Products to show</p>
+          <p className="p-3 text-center fw-bold">
+            there 's no Products to show
+          </p>
         )}
       </div>
-      <Pagination
-        itemsPerPage={limit}
-        paginate={handlePageChange}
-        currentPage={currentPage}
-        totalItems={total}
-      />
+      {products.length > 0 && (
+        <Pagination
+          itemsPerPage={limit}
+          paginate={handlePageChange}
+          currentPage={currentPage}
+          totalItems={total}
+        />
+      )}
     </div>
   );
 };

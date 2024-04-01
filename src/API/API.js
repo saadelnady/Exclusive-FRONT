@@ -4,7 +4,7 @@ export const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const handleRequest = async (method, URL, data = null) => {
   const headers = {
-    token: JSON.parse(localStorage.getItem("TOKEN")),
+    token: localStorage.getItem("TOKEN"),
   };
 
   const response = await axios({

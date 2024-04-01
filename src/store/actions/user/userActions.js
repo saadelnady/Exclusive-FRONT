@@ -1,4 +1,5 @@
 import { getData, postData, putData } from "../../../API/API";
+import { decodeToken } from "../../../helpers/decodeToken";
 import { showToast } from "../../../helpers/toast_helper";
 
 import * as actionCreators from "./userActionsCreators";
@@ -22,19 +23,16 @@ export const userLogin = ({ values, toast, navigate }) => {
     dispatch(actionCreators.postUserLogin(values));
     try {
       const response = await postData(`/api/users/login`, values);
-      const role = response?.data?.role;
-      console.log("data-------------?", response.data);
-      localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+
+      localStorage.setItem("TOKEN", response?.data?.token);
       dispatch(actionCreators.postUserLoginSuccess(response?.data));
       showToast(toast, response?.message, "success");
       dispatch(fetchUserProfile());
       setTimeout(() => {
-        if (localStorage.getItem("TOKEN")) {
-          if (role === "ADMIN") {
-            navigate("/admin");
-          } else {
-            navigate("/");
-          }
+        if (decodeToken().role === "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/");
         }
       }, 2500);
     } catch (error) {
@@ -76,10 +74,9 @@ export const userRegister = ({ values, toast, navigate }) => {
     try {
       const response = await postData("/api/users/register", values);
 
-      localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      localStorage.setItem("TOKEN", response?.data?.token);
       dispatch(actionCreators.postUserRegisterSuccess(response));
       showToast(toast, response?.message, "success");
-      dispatch(fetchUserProfile());
 
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {

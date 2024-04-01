@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   fetchUserProfile,
   fetchUsers,
@@ -35,8 +35,6 @@ import {
 import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
 
 const Admin = ({ isWarning, handleWarning }) => {
-  const { token } = useSelector((state) => state.userReducer);
-
   // =================================================================================
   const dispatch = useDispatch();
   // =================================================================================
@@ -46,7 +44,7 @@ const Admin = ({ isWarning, handleWarning }) => {
   };
   // =================================================================================
   useEffect(() => {
-    if (token) {
+    if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
@@ -182,7 +180,7 @@ const Admin = ({ isWarning, handleWarning }) => {
               />
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </div>
     </div>

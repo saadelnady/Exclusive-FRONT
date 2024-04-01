@@ -48,11 +48,10 @@ export const sellerLogin = ({ values, toast, navigate }) => {
     dispatch(actionCreators.postSellerLogin(values));
     try {
       const response = await postData(`/api/sellers/login`, values);
-      console.log("seller login ===> ", response);
+
       dispatch(actionCreators.postSellerLoginSuccess(response?.data));
-      localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      localStorage.setItem("TOKEN", response?.data?.token);
       showToast(toast, response?.message, "success");
-      dispatch(fetchSellerProfile());
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {
           navigate("/seller");
@@ -92,7 +91,7 @@ export const sellerRegister = ({ values, toast, navigate }) => {
     try {
       const response = await postData("/api/sellers/register", values);
       dispatch(actionCreators.postSellerRegisterSuccess(response));
-      localStorage.setItem("TOKEN", JSON.stringify(response?.data?.token));
+      localStorage.setItem("TOKEN", response?.data?.token);
       showToast(toast, response?.message, "success");
       setTimeout(() => {
         if (localStorage.getItem("TOKEN")) {

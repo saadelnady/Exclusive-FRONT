@@ -1,22 +1,22 @@
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
-
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 import Admin from "./Layouts/Admin/Admin.jsx";
 import Seller from "./Layouts/Seller/Seller.jsx";
 import User from "./Layouts/User/User.jsx";
-import { useSelector } from "react-redux";
 import NotFoundPage from "./components/shared/NotFoundPage.jsx";
+
+import {
+  ProtectedAdminRoute,
+  ProtectedSellerRoute,
+} from "./components/shared/ProtectedRoute.jsx";
 
 function App() {
   const [isWarning, setIsWarning] = useState(false);
-  const user = useSelector((state) => state.userReducer);
-  const seller = useSelector((state) => state.sellerReducer);
 
-  console.log("seller ===> ", seller);
   const handleWarning = () => {
     setIsWarning(!isWarning);
   };
@@ -24,23 +24,23 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {(user.role !== "ADMIN" || seller.role !== "SELLER") && (
-          <Route path="/*" element={<User />} />
-        )}
+        <Route path="/*" element={<User />} />
 
-        {user.role === "ADMIN" && (
-          <Route
-            path="/admin/*"
-            element={
+        <Route
+          path="/admin/*"
+          element={
+            <ProtectedAdminRoute>
               <Admin isWarning={isWarning} handleWarning={handleWarning} />
-            }
-          />
-        )}
+            </ProtectedAdminRoute>
+          }
+        />
 
         <Route
           path="/seller/*"
           element={
-            <Seller isWarning={isWarning} handleWarning={handleWarning} />
+            <ProtectedSellerRoute>
+              <Seller isWarning={isWarning} handleWarning={handleWarning} />
+            </ProtectedSellerRoute>
           }
         />
 

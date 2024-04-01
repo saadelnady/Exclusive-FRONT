@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { fetchSellerProfile } from "../../store/actions/seller/sellerActions.js";
@@ -13,9 +13,9 @@ import Products from "../../components/Seller/Products.jsx";
 import Profile from "../../components/shared/Profile/Index.jsx";
 
 import "../../components/Seller/styles/seller.css";
+import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
 
 const Seller = ({ isWarning, handleWarning }) => {
-  const { token } = useSelector((state) => state.sellerReducer);
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
@@ -24,11 +24,11 @@ const Seller = ({ isWarning, handleWarning }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (token) {
+    if (localStorage.getItem("TOKEN")) {
       dispatch(fetchSellerProfile());
       dispatch(fetchCategories());
     }
-  }, [dispatch, token]);
+  }, [dispatch]);
   return (
     <div className="seller-layout">
       <SellerSideBar
@@ -51,6 +51,7 @@ const Seller = ({ isWarning, handleWarning }) => {
               <Products isWarning={isWarning} handleWarning={handleWarning} />
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </div>

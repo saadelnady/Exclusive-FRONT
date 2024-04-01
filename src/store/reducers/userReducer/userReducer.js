@@ -10,8 +10,6 @@ const initialState = {
   user: {},
   users: [],
   message: "",
-  role: "",
-  token: JSON.parse(localStorage.getItem("TOKEN")) || "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -46,7 +44,6 @@ const userReducer = (state = initialState, action) => {
         isLoading: false,
         isLoggedIn: true,
         user: action?.payLoad,
-        role: action?.payLoad?.role,
         error: null,
       };
 
@@ -70,8 +67,6 @@ const userReducer = (state = initialState, action) => {
         isLoggedIn: true,
         isLoading: false,
         error: null,
-        token: action?.payLoad?.token,
-        role: action?.payLoad?.role,
       };
     case USER_ACTIONS_TYPES.POST_USER_LOGIN_FAIL:
       return {
@@ -94,8 +89,6 @@ const userReducer = (state = initialState, action) => {
         user: {},
         users: [],
         error: null,
-        token: "",
-        role: "",
       };
     case USER_ACTIONS_TYPES.POST_USER_LOGOUT_FAIL:
       return {
@@ -116,8 +109,6 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        token: action?.payLoad?.data?.token,
-        role: action?.payLoad?.data?.role,
         message: action?.payLoad?.message,
         error: null,
       };

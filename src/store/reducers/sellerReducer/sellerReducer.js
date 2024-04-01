@@ -10,8 +10,6 @@ const initialState = {
   seller: {},
   sellers: [],
   message: "",
-  role: "",
-  token: JSON.parse(localStorage.getItem("TOKEN")) || "",
 };
 
 const sellerReducer = (state = initialState, action) => {
@@ -40,7 +38,6 @@ const sellerReducer = (state = initialState, action) => {
         isLoading: false,
         isLoggedIn: true,
         seller: action?.payLoad,
-        role: action?.payLoad?.role,
         error: null,
       };
 
@@ -61,8 +58,6 @@ const sellerReducer = (state = initialState, action) => {
         isLoggedIn: true,
         isLoading: false,
         error: null,
-        token: action?.payLoad?.token,
-        role: action?.payLoad?.role,
       };
 
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGIN_FAIL:
@@ -85,7 +80,6 @@ const sellerReducer = (state = initialState, action) => {
         isLoading: false,
         seller: {},
         error: null,
-        token: "",
       };
     case SELLER_ACTIONS_TYPES.POST_SELLER_LOGOUT_FAIL:
       return {
@@ -105,8 +99,6 @@ const sellerReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isLoading: false,
-        token: action?.payLoad?.data?.token,
-        role: action?.payLoad?.data?.role,
         message: action?.payLoad?.message,
         error: null,
       };

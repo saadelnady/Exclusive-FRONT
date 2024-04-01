@@ -23,18 +23,19 @@ import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
 
 const User = () => {
-  const { isLoggedIn, token } = useSelector((state) => state.userReducer);
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (token) {
+    if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());
     }
-  }, [dispatch, token, isLoggedIn]);
+  }, [dispatch]);
 
   return (
     <div>
       <Header />
+
       <Routes>
         {/* <Route
           path="/activation/:activationToken"
@@ -50,15 +51,14 @@ const User = () => {
         {!isLoggedIn && (
           <>
             <Route path="/user/login" element={<UserLogin />} />
-            <Route path="/user/register" element={<UserRegister />} />{" "}
+            <Route path="/user/register" element={<UserRegister />} />
             <Route path="/sellerLogin" element={<SellerLogin />} />
             <Route path="/sellerRegister" element={<SellerRegister />} />
           </>
         )}
 
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
       <Footer />
     </div>
   );
