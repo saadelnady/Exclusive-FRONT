@@ -13,12 +13,12 @@ import {
   deleteSubCategory,
   fetchSubCategories,
 } from "../../../store/actions/subCategory/subCategoryActions";
-import { Pagination } from "../../shared/Pagination";
-import { Loading } from "../../shared/Loading";
-import Warning from "../../shared/Warning";
+import { Pagination } from "../../Shared/Pagination";
+import  Loading  from "../../Shared/Loading";
+import Warning from "../../Shared/Warning";
 
-import { Search } from "../../shared/Search";
-import { OptionButton } from "../shared/OptionButton";
+import { Search } from "../../Shared/Search";
+import { OptionButton } from "../Shared/OptionButton";
 import { subCategoryDeleteAction } from "../../../helpers/options";
 
 export const SubCategories = ({

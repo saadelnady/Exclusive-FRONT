@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import { User } from "./User";
-import { Search } from "../../../../components/shared/Search";
+import { Search } from "../../../../components/Shared/Search";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";

@@ -27,7 +27,7 @@ export const fetchProducts = ({
       dispatch(actionsCreators.getProductsSuccess(response.data));
     } catch (error) {
       dispatch(actionsCreators.getProductsFail(error));
-     }
+    }
   };
 };
 /* =================================================================================================== */
@@ -58,6 +58,32 @@ export const fetchAcceptedSellerProducts = ({
       dispatch(actionsCreators.getAcceptedSellerProductsSuccess(response));
     } catch (error) {
       dispatch(actionsCreators.getAcceptedSellerProductsFail(error));
+    }
+  };
+};
+/* =================================================================================================== */
+export const fetchFlashSalesProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+} = {}) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getFlashSalesProducts());
+    try {
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products/flashSales?limit=${limit}&page=${page}&text=${text}`
+        );
+      } else if (limit && page) {
+        response = await getData(
+          `/api/products/flashSales?limit=${limit}&page=${page}`
+        );
+      }
+
+      dispatch(actionsCreators.getFlashSalesProductsSuccess(response));
+    } catch (error) {
+      dispatch(actionsCreators.getFlashSalesProductsFail(error));
     }
   };
 };

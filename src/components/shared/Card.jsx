@@ -3,18 +3,19 @@ import { IoEyeOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 
 import icStar from "../../assets/images/pngs/ic_stars.png";
-// import productImg from "../../assets/images/pngs/Gamepad-6.png";
 import { NavLink } from "react-router-dom";
 import { serverUrl } from "../../API/API";
+import FlashSaleCounter from "../User/Home/FlashSale/FlashSaleCounter";
 
 const Card = ({ product }) => {
   return (
     <div className="product-card mb-4">
-      <div className="header rounded">
+      <div className="header rounded ">
+        {product?.isFlashSale && <FlashSaleCounter />}
         <img
           src={`${serverUrl}/${product?.images[0]}`}
           alt="product-img"
-          className="w-100 h-100"
+          className="w-100 product-img"
         />
         <button className="addToCart bg-black">Add To Cart</button>
       </div>
@@ -23,7 +24,6 @@ const Card = ({ product }) => {
           <span> {product?.options[0].price?.discountPercentage}%</span>
         </p>
       )}
-
       <div className="product-icons d-flex flex-column">
         <NavLink
           className="fs-4 text-center mb-2 rounded-pill"
@@ -35,6 +35,7 @@ const Card = ({ product }) => {
           <CiHeart />
         </NavLink>
       </div>
+
       <div className="content py-3">
         <h4 className="fw-bold">{product?.title}</h4>
         <div className="d-flex mb-2 ">

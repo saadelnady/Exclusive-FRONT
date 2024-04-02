@@ -63,7 +63,7 @@ const Links = () => {
             activeHandler("Login");
           }}
         >
-          <NavLink aria-current="page" to="/user/login" className="text-dark ">
+          <NavLink aria-current="page" to="/login/user" className="text-dark ">
             Login
           </NavLink>
         </li>

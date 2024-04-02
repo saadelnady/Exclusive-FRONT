@@ -1,18 +1,18 @@
-import sellerImage from "../../assets/images/pngs/bg-seller.jpg";
+import sellerImage from "../../../../assets/images/pngs/bg-seller.jpg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { MdError } from "react-icons/md";
 import { toast } from "react-toastify";
 
-import { initialValues, validate } from "../validation/loginValidation";
+import { initialValues, validate } from "../../../Validation/loginValidation";
 
-import "../Auth.css";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { sellerLogin } from "../../store/actions/seller/sellerActions";
-import ErrorMessage from "../shared/ErrorMessage";
+
+import ErrorMessage from "../../../Shared/ErrorMessage";
+import "../../Styles/Auth.css";
+import { sellerLogin } from "../../../../store/actions/seller/sellerActions";
 
 const SellerLogin = () => {
   const [visible, setVisible] = useState(true);
@@ -109,7 +109,7 @@ const SellerLogin = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/sellerRegister"
+              to="/register/seller"
               className="ms-4 register-btn text-dark p-2"
             >
               SignUp as seller

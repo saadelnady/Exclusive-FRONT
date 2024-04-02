@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductDetails } from "./ProductDetails";
-import { RelatedItem } from "../../shared/RelatedItem";
+import { RelatedItem } from "../../Shared/RelatedItem";
 import { fetchProduct } from "../../../store/actions/product/productActions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

@@ -1,4 +1,4 @@
-import mobileImage from "../../../assets/images/pngs/mobile.png";
+import mobileImage from "../../../../assets/images/pngs/mobile.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
@@ -6,14 +6,14 @@ import { IoEyeOffOutline } from "react-icons/io5";
 
 import { toast } from "react-toastify";
 
-import { initialValues, validate } from "../../validation/loginValidation";
-import "../../Auth.css";
+import { initialValues, validate } from "../../../Validation/loginValidation";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../../store/actions/user/userActions";
-import { Loading } from "../../shared/Loading";
-import ErrorMessage from "../../shared/ErrorMessage";
+import { userLogin } from "../../../../store/actions/user/userActions";
+import Loading from "../../../Shared/Loading";
+import ErrorMessage from "../../../Shared/ErrorMessage";
 
+import "../../Styles/Auth.css";
 const Index = () => {
   const { isLoading } = useSelector((state) => state.userReducer);
 
@@ -117,7 +117,7 @@ const Index = () => {
             Don't have an account ?
             <NavLink
               aria-current="page"
-              to="/user/register"
+              to="/register/user"
               className="ms-4 register-btn text-dark p-2"
             >
               SignUp

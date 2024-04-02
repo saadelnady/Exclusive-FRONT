@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import Links from "./Links";
 import Details from "./Details";
-import { Loading } from "../../shared/Loading";
+import Loading  from "../../Shared/Loading";
 
 export const ProductDetails = () => {
   const { product, isLoading } = useSelector((state) => state.productReducer);

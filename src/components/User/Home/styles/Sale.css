@@ -1,3 +1,6 @@
 .sale-counter span {
   color: var(--red-color);
 }
+.sale-counter {
+  font-size: 12px;
+}

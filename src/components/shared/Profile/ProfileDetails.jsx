@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import {
   initialValues,
   validate,
-} from "../../../components/validation/Profile/EditProfileValidation";
+} from "../../../components/Validation/Profile/EditProfileValidation";
 import { MdError } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { editUserProfile } from "../../../store/actions/user/userActions";
@@ -32,7 +32,7 @@ const ProfileDetails = ({ user, seller }) => {
 
   const handleSubmit = (values) => {
     if (isObjectNotEmpty(user)) {
-       handleEditUser(values);
+      handleEditUser(values);
     } else if (isObjectNotEmpty(seller)) {
       handleEditSeller(values);
     }
@@ -93,7 +93,6 @@ const ProfileDetails = ({ user, seller }) => {
   // =======================================================================================
 
   const handleEditSeller = (values) => {
-    
     const payLoad = {
       sellerId: seller?._id,
       values: getFormData(values),

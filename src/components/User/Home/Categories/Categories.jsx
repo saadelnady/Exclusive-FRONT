@@ -1,9 +1,8 @@
 import { NavLink } from "react-router-dom";
-
-import { serverUrl } from "../../../API/API";
+import { serverUrl } from "../../../../API/API";
 import { SubCategories } from "./SubCategories";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import "./styles/Categories.css";
+import "../styles/Categories.css";
 import { useSelector } from "react-redux";
 
 const Categories = () => {

@@ -5,15 +5,15 @@ import { useEffect, useState } from "react";
 import { fetchSellerProfile } from "../../store/actions/seller/sellerActions.js";
 import { fetchCategories } from "../../store/actions/category/categoryActions.js";
 
-import SellerSideBar from "../../components/Seller/shared/SellerSideBar.jsx";
-import SellerHeader from "../../components/Seller/shared/SellerHeader.jsx";
+import SellerSideBar from "../../components/Seller/Shared/SellerSideBar.jsx";
+import SellerHeader from "../../components/Seller/Shared/SellerHeader.jsx";
 import SellerDashboard from "../../components/Seller/SellerDashboard.jsx";
 import AddProduct from "../../components/Seller/AddProduct.jsx";
 import Products from "../../components/Seller/Products.jsx";
-import Profile from "../../components/shared/Profile/Index.jsx";
+import Profile from "../../components/Shared/Profile/Index.jsx";
 
 import "../../components/Seller/styles/seller.css";
-import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
+import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
 const Seller = ({ isWarning, handleWarning }) => {
   const [isActive, setIsActive] = useState(false);
@@ -51,7 +51,7 @@ const Seller = ({ isWarning, handleWarning }) => {
               <Products isWarning={isWarning} handleWarning={handleWarning} />
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage navigateTo="/seller" />} />
         </Routes>
       </div>
     </div>

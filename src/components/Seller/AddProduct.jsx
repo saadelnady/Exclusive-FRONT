@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { CiSquareRemove } from "react-icons/ci";
-import { initialValues, validate } from "../validation/Seller/Addproduct";
+import { initialValues, validate } from "../Validation/Seller/Addproduct";
 import { toast } from "react-toastify";
 
 import "./styles/AddProduct.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import ToolTip from "../shared/toolTip";
+import ToolTip from "../Shared/toolTip";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addProduct,
@@ -17,7 +17,7 @@ import {
 } from "../../store/actions/product/productActions";
 import { isObjectNotEmpty } from "../../helpers/checkers";
 import { serverUrl } from "../../API/API";
-import ErrorMessage from "../shared/ErrorMessage";
+import ErrorMessage from "../Shared/ErrorMessage";
 import { productStatus } from "../../helpers/options";
 
 const AddProduct = () => {
@@ -174,7 +174,7 @@ const AddProduct = () => {
   };
 
   const handleAddProduct = (values) => {
-     const formData = new FormData();
+    const formData = new FormData();
     formData.append("title", values?.title);
     formData.append("description", values?.description);
     formData.append("category", values?.category);

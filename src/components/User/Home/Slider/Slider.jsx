@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import bgAnnounce1 from "../../../assets/images/pngs/bg-announce-1.png";
-import "./styles/Slider.css";
+import bgAnnounce1 from "../../../../assets/images/pngs/bg-announce-1.png";
+import "../styles/Slider.css";
 
 const Slider = () => {
   return (

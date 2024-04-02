@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Loading } from "../../shared/Loading";
-import Warning from "../../shared/Warning";
+import Loading from "../../Shared/Loading";
+import Warning from "../../Shared/Warning";
 
-import { ProductOwnerCard } from "../shared/ProductOwnerCard";
+import { ProductOwnerCard } from "../Shared/ProductOwnerCard";
 import { ProductCard } from "./ProductCard";
 import { fetchProduct } from "../../../store/actions/product/productActions";
 

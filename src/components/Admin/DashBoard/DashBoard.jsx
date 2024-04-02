@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { Statstics } from "../shared/Statstics";
+import { Statstics } from "../Shared/Statstics";
 import "./styles/AdminDashboard.css";
 import { useSelector } from "react-redux";
-import { List } from "../shared/List";
+import { List } from "../Shared/List";
 export const AdminDashboard = () => {
   const [isUsers, setIsUsers] = useState(true);
   const userReducer = useSelector((state) => state.userReducer);

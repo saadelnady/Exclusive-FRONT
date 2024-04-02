@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { ProductsTable } from "../shared/ProductsTable";
-import { ProductOwnerCard } from "../shared/ProductOwnerCard";
+import { ProductsTable } from "../Shared/ProductsTable";
+import { ProductOwnerCard } from "../Shared/ProductOwnerCard";
 import { SellerProductsActions } from "./SellerProducts";
 import { fetchSeller } from "../../../store/actions/seller/sellerActions";
 import { fetchSellerProducts } from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
 
-import Warning from "../../shared/Warning";
-import { Loading } from "../../shared/Loading";
+import Warning from "../../Shared/Warning";
+import Loading from "../../Shared/Loading";
 
-import { Pagination } from "../../shared/Pagination";
+import { Pagination } from "../../Shared/Pagination";
 
 const Index = ({
   isWarning,

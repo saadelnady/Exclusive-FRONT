@@ -5,6 +5,10 @@ const initialState = {
   isLoading: false,
   product: {},
   products: [],
+  flashSalesProducts: [],
+  bestSellingProducts: [],
+  newArrivalProducts: [],
+  searchedProducts: [],
   error: null,
   message: "",
   total: 0,
@@ -25,6 +29,22 @@ const productReducer = (state = initialState, action) => {
       };
 
     case PRODUCTS_ACTIONS_TYPES.GET_PRODUCTS_FAIL:
+      return { ...state, isLoading: false, error: action.payLoad };
+
+    // ========================================================================
+    case PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS:
+      return { ...state, isLoading: true };
+
+    case PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        flashSalesProducts: action.payLoad.data.products,
+        total: action.payLoad.data.total,
+        error: null,
+      };
+
+    case PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS_FAIL:
       return { ...state, isLoading: false, error: action.payLoad };
 
     // ========================================================================

@@ -5,7 +5,7 @@ import {
   productStatus,
   productUnBlockAction,
 } from "../../../helpers/options";
-import { OptionButton } from "../shared/OptionButton";
+import { OptionButton } from "../Shared/OptionButton";
 
 export const ProductActionsButtons = ({
   product,

@@ -4,15 +4,17 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-import Admin from "./Layouts/Admin/Admin.jsx";
-import Seller from "./Layouts/Seller/Seller.jsx";
-import User from "./Layouts/User/User.jsx";
-import NotFoundPage from "./components/shared/NotFoundPage.jsx";
+import Admin from "./layouts/Admin/Admin.jsx";
+import Seller from "./layouts/Seller/Seller.jsx";
+import Login from "./layouts/Login/Login.jsx";
+import User from "./layouts/User/User.jsx";
+import Register from "./layouts/Register/Register.jsx";
 
 import {
   ProtectedAdminRoute,
   ProtectedSellerRoute,
-} from "./components/shared/ProtectedRoute.jsx";
+  ProtectedUserRoute,
+} from "./components/Shared/ProtectedRoute.jsx";
 
 function App() {
   const [isWarning, setIsWarning] = useState(false);
@@ -24,8 +26,17 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/*" element={<User />} />
+        <Route path="/login/*" element={<Login />} />
+        <Route path="/register/*" element={<Register />} />
 
+        <Route
+          path="/*"
+          element={
+            <ProtectedUserRoute>
+              <User />
+            </ProtectedUserRoute>
+          }
+        />
         <Route
           path="/admin/*"
           element={
@@ -43,10 +54,7 @@ function App() {
             </ProtectedSellerRoute>
           }
         />
-
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
       <ToastContainer
         position="top-center"
         autoClose={5000}

@@ -3,19 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 
-import CategoriesBrowse from "./CategoriesBrowse";
-import Slider from "./Slider";
-import BestSelling from "./BestSelling";
-import FlashSale from "./FlashSale";
-import OurProducts from "./OurProducts";
-import NewArrival from "./NewArrival";
+import CategoriesBrowse from "./CategoriesBrowse/CategoriesBrowse";
+import Slider from "./Slider/Slider";
+import BestSelling from "./BestSelling/BestSelling";
+import FlashSale from "./FlashSale/FlashSale";
+import OurProducts from "./OurProducts/OurProducts";
+import NewArrival from "./NewArrival/NewArrival";
 import AboutUs from "../../User/About/AboutUs";
-import Categories from "./Categories";
+import Categories from "./Categories/Categories";
 
 import bgAnnounce2 from "../../../assets/images/pngs/bg-announce-2.png";
 
 import { fetchCategories } from "../../../store/actions/category/categoryActions";
-import { fetchProducts } from "../../../store/actions/product/productActions";
+import {
+  fetchFlashSalesProducts,
+  fetchProducts,
+} from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
 
 const Index = () => {
@@ -23,9 +26,11 @@ const Index = () => {
   const { products } = useSelector((state) => state.productReducer);
   useEffect(() => {
     dispatch(fetchCategories({ limit: 7, page: 1 }));
+
     dispatch(
       fetchProducts({ limit: 8, page: 1, status: productStatus.ACCEPTED })
     );
+    dispatch(fetchFlashSalesProducts({ limit: 10, page: 1 }));
   }, [dispatch]);
   return (
     <div className="container">
@@ -33,15 +38,12 @@ const Index = () => {
         <Categories />
         <Slider />
       </div>
-
       <FlashSale />
       <CategoriesBrowse />
       <BestSelling />
-
       <NavLink>
         <img src={bgAnnounce2} alt="" className="w-100" />
       </NavLink>
-
       <OurProducts products={products} />
       <NewArrival />
       <AboutUs />

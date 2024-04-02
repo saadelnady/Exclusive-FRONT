@@ -2,25 +2,19 @@ import React, { useEffect } from "react";
 
 import { Route, Routes } from "react-router-dom";
 
-// import { ActivationPage } from "./components/shared/Activation.jsx";
+// import { ActivationPage } from "./components/Shared/Activation.jsx";
 
 import Home from "../../components/User/Home/Index.jsx";
 import Product from "../../components/User/Product/Index.jsx";
 import About from "../../components//User/About/Index.jsx";
 import Contact from "../../components/User/Contact/Index.jsx";
-import Profile from "../../components/shared/Profile/Index.jsx";
+import Profile from "../../components/Shared/Profile/Index.jsx";
 
-import SellerLogin from "../../components/Seller/Login.jsx";
-import SellerRegister from "../../components/Seller/Register.jsx";
-
-import UserLogin from "../../components/User/Login/Index.jsx";
-import UserRegister from "../../components/User/Register/Index.jsx";
-
-import Header from "../../components/User/shared/Header/Index.jsx";
-import Footer from "../../components/User/shared/Footer/Footer.jsx";
+import Header from "../../components/User/Shared/Header/Index.jsx";
+import Footer from "../../components/User/Shared/Footer/Footer.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
-import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
+import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
 const User = () => {
   const { isLoggedIn } = useSelector((state) => state.userReducer);
@@ -48,16 +42,7 @@ const User = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products/:productId" element={<Product />} />
 
-        {!isLoggedIn && (
-          <>
-            <Route path="/user/login" element={<UserLogin />} />
-            <Route path="/user/register" element={<UserRegister />} />
-            <Route path="/sellerLogin" element={<SellerLogin />} />
-            <Route path="/sellerRegister" element={<SellerRegister />} />
-          </>
-        )}
-
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage navigateTo="/" />} />
       </Routes>
       <Footer />
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { serverUrl } from "../../../API/API";
+import { serverUrl } from "../../../../API/API";
 
 export const SubCategories = ({ category }) => {
   return (

@@ -4,21 +4,21 @@ import {
   deleteProduct,
   fetchAcceptedSellerProducts,
 } from "../../store/actions/product/productActions";
-import { Loading } from "../shared/Loading";
+import  Loading  from "../Shared/Loading";
 import { serverUrl } from "../../API/API";
 import { formatDateAndTime } from "../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 
-import { Pagination } from "../shared/Pagination";
+import { Pagination } from "../Shared/Pagination";
 import { toast } from "react-toastify";
 
 import "./styles/Myproducts.css";
-import Warning from "../shared/Warning";
+import Warning from "../Shared/Warning";
 
-import { Search } from "../shared/Search";
-import { OptionButton } from "../Admin/shared/OptionButton";
+import { Search } from "../Shared/Search";
+import { OptionButton } from "../Admin/Shared/OptionButton";
 import { productDeleteAction } from "../../helpers/options";
 
 const Products = ({ isWarning, handleWarning }) => {

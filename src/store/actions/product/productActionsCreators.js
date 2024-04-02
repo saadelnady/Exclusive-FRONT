@@ -197,3 +197,23 @@ export const deleteProductFail = (payLoad) => {
     payLoad,
   };
 };
+
+// ========================================================================
+export const getFlashSalesProducts = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS,
+    payLoad,
+  };
+};
+export const getFlashSalesProductsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS_SUCCESS,
+    payLoad,
+  };
+};
+export const getFlashSalesProductsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS_FAIL,
+    payLoad,
+  };
+};

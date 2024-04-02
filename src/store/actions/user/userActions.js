@@ -54,7 +54,7 @@ export const userLogout = ({ toast, navigate, role }) => {
 
       setTimeout(() => {
         if (role === "ADMIN") {
-          navigate("/user/login");
+          navigate("/login/user");
         }
         if (role === "USER") {
           navigate("/");

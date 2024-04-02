@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Search } from "../../shared/Search";
-import { Loading } from "../../shared/Loading";
+import { Search } from "../../Shared/Search";
+import Loading from "../../Shared/Loading";
 
 import { useDispatch, useSelector } from "react-redux";
-import Warning from "../../shared/Warning";
+import Warning from "../../Shared/Warning";
 
-import { Pagination } from "../../shared/Pagination";
-import { ProductsTable } from "../shared/ProductsTable";
+import { Pagination } from "../../Shared/Pagination";
+import { ProductsTable } from "../Shared/ProductsTable";
 import { fetchProducts } from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
 

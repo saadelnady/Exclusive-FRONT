@@ -5,38 +5,43 @@ import NotFoundPage from "./NotFoundPage";
 
 const ProtectedAdminRoute = (props) => {
   if (localStorage.getItem("TOKEN") === null) {
-    return <Navigate to={"/user/login"} />;
+    return <Navigate to={"/login/user"} />;
   }
   if (decodeToken().role === "ADMIN") {
     return props.children;
   } else {
-    return NotFoundPage;
+    return <NotFoundPage navigateTo="/login/user" />;
   }
 };
 // ==============================================================
 const ProtectedSellerRoute = (props) => {
   if (localStorage.getItem("TOKEN") === null) {
-    return <Navigate to={"/user/login"} />;
+    return <Navigate to={"/login/user"} />;
   }
   if (decodeToken().role === "SELLER") {
     return props.children;
   } else {
-    return NotFoundPage;
+    return <NotFoundPage navigateTo="/login/user" />;
   }
 };
 // ==============================================================
 
 const ProtectedUserRoute = (props) => {
-  if (localStorage.getItem("TOKEN") === null) {
-    return <Navigate to={"/user/login"} />;
-  }
+  // if (localStorage.getItem("TOKEN") === null) {
+  //   return <Navigate to={"/"} />;
+  // }
 
-  if (localStorage.getItem("TOKEN")) {
-    if (decodeToken()?.role === "USER") {
-      return props.children;
-    } else {
-      return NotFoundPage;
+  if (
+    localStorage.getItem("TOKEN") &&
+    (decodeToken()?.role === "ADMIN" || decodeToken().role === "SELLER")
+  ) {
+    if (decodeToken()?.role === "ADMIN") {
+      return <NotFoundPage navigateTo="/admin" />;
+    } else if (decodeToken()?.role === "SELLER") {
+      return <NotFoundPage navigateTo="/seller" />;
     }
+  } else {
+    return props.children;
   }
 };
 

@@ -10,7 +10,7 @@ import { BsCart3 } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { serverUrl } from "../../../../API/API";
-import { Loading } from "../../../shared/Loading";
+import Loading from "../../../Shared/Loading";
 import { userLogout } from "../../../../store/actions/user/userActions";
 
 export const User = () => {
@@ -88,7 +88,7 @@ export const User = () => {
       )}
 
       {!isLoggedIn && (
-        <NavLink className="btn submit" to="/sellerLogin">
+        <NavLink className="btn submit" to="/login/seller">
           login as a Seller
         </NavLink>
       )}

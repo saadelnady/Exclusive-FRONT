@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { CgMenuRight } from "react-icons/cg";
 import "../styles/SellerHeader.css";
 import { serverUrl } from "../../../API/API";
-import { Loading } from "../../shared/Loading";
+import Loading from "../../Shared/Loading";
 
 const SellerHeader = ({ handleSidebarActivation }) => {
   const { seller, isLoading } = useSelector((state) => state.sellerReducer);

@@ -6,7 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 
 import "./styles/Categories.css";
 import { NavLink } from "react-router-dom";
-import Warning from "../../shared/Warning";
+import Warning from "../../Shared/Warning";
 
 import {
   deleteCategory,
@@ -14,10 +14,10 @@ import {
 } from "../../../store/actions/category/categoryActions";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Loading } from "../../shared/Loading";
-import { Search } from "../../shared/Search";
-import { Pagination } from "../../shared/Pagination";
-import { OptionButton } from "../shared/OptionButton";
+import Loading from "../../Shared/Loading";
+import { Search } from "../../Shared/Search";
+import { Pagination } from "../../Shared/Pagination";
+import { OptionButton } from "../Shared/OptionButton";
 import { categoryDeleteAction } from "../../../helpers/options";
 
 export const Categories = ({ isWarning, handleWarning, action, setAction }) => {

@@ -6,8 +6,8 @@ import {
 } from "../../store/actions/user/userActions.js";
 import { Route, Routes } from "react-router-dom";
 
-import { AdminSideBar } from "../../components/Admin/shared/AdminSideBar.jsx";
-import { AdminHeader } from "../../components/Admin/shared/AdminHeader.jsx";
+import { AdminSideBar } from "../../components/Admin/Shared/AdminSideBar.jsx";
+import { AdminHeader } from "../../components/Admin/Shared/AdminHeader.jsx";
 import { AdminDashboard } from "../../components/Admin/DashBoard/DashBoard.jsx";
 
 import { toast } from "react-toastify";
@@ -23,7 +23,7 @@ import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCate
 import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
 import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
 
-import Profile from "../../components/shared/Profile/Index.jsx";
+import Profile from "../../components/Shared/Profile/Index.jsx";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions.js";
 import "./styles/Admin.css";
@@ -32,7 +32,7 @@ import {
   blockProduct,
   unBlockProduct,
 } from "../../store/actions/product/productActions.js";
-import NotFoundPage from "../../components/shared/NotFoundPage.jsx";
+import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
 const Admin = ({ isWarning, handleWarning }) => {
   // =================================================================================
@@ -180,7 +180,7 @@ const Admin = ({ isWarning, handleWarning }) => {
               />
             }
           />
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="*" element={<NotFoundPage navigateTo="/admin" />} />
         </Routes>
       </div>
     </div>

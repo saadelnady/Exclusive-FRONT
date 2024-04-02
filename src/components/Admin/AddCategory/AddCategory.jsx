@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import {
   initialValues,
   validate,
-} from "../../validation/Admin/CategoryValidation";
+} from "../../Validation/Admin/CategoryValidation";
 import { toast } from "react-toastify";
 
 import { MdError } from "react-icons/md";
@@ -16,9 +16,9 @@ import {
   fetchCategory,
 } from "../../../store/actions/category/categoryActions";
 import { useDispatch, useSelector } from "react-redux";
-import { Loading } from "../../shared/Loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { serverUrl } from "../../../API/API";
+import Loading from "../../Shared/Loading";
 
 export const AddCategory = () => {
   const { isLoading, category } = useSelector((state) => state.categoryReducer);

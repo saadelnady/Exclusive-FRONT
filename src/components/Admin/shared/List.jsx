@@ -5,7 +5,7 @@ import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Loading } from "../../shared/Loading";
+import Loading  from "../../Shared/Loading";
 
 export const List = ({ data, isLoading }) => {
   return (
