@@ -32,6 +32,22 @@ const productReducer = (state = initialState, action) => {
       return { ...state, isLoading: false, error: action.payLoad };
 
     // ========================================================================
+    case PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS:
+      return { ...state, isLoading: true };
+
+    case PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        searchedProducts: action.payLoad.products,
+        total: action.payLoad.total,
+        error: null,
+      };
+
+    case PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS_FAIL:
+      return { ...state, isLoading: false, error: action.payLoad };
+
+    // ========================================================================
     case PRODUCTS_ACTIONS_TYPES.GET_FLASH_SALES_PRODUCTS:
       return { ...state, isLoading: true };
 

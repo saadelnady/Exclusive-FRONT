@@ -12,13 +12,12 @@ import Profile from "../../components/Shared/Profile/Index.jsx";
 
 import Header from "../../components/User/Shared/Header/Index.jsx";
 import Footer from "../../components/User/Shared/Footer/Footer.jsx";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
+import FlashSales from "../../components/User/FlashSales/FlashSales.jsx";
 
 const User = () => {
-  const { isLoggedIn } = useSelector((state) => state.userReducer);
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
@@ -40,6 +39,7 @@ const User = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/products/flashsales" element={<FlashSales />} />
         <Route path="/products/:productId" element={<Product />} />
 
         <Route path="*" element={<NotFoundPage navigateTo="/" />} />

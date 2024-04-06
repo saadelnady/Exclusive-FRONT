@@ -17,9 +17,12 @@ export const Pagination = ({
   }
 
   return (
-    <ul className="pagination ">
+    <ul className="pagination">
       <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-        <button className="page-link" onClick={() => paginate(currentPage - 1)}>
+        <button
+          className="page-link  "
+          onClick={() => paginate(currentPage - 1)}
+        >
           Previous
         </button>
       </li>
@@ -29,14 +32,17 @@ export const Pagination = ({
           className={`page-item ${currentPage === number ? "active" : ""}`}
           onClick={() => paginate(number)}
         >
-          <button className="page-link">{number}</button>
+          <button className="page-link pagination-btn">{number}</button>
         </li>
       ))}
 
       <li
         className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
       >
-        <button className="page-link" onClick={() => paginate(currentPage + 1)}>
+        <button
+          className="page-link  "
+          onClick={() => paginate(currentPage + 1)}
+        >
           Next
         </button>
       </li>

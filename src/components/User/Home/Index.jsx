@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { NavLink } from "react-router-dom";
 
 import CategoriesBrowse from "./CategoriesBrowse/CategoriesBrowse";
@@ -11,7 +10,6 @@ import OurProducts from "./OurProducts/OurProducts";
 import NewArrival from "./NewArrival/NewArrival";
 import AboutUs from "../../User/About/AboutUs";
 import Categories from "./Categories/Categories";
-
 import bgAnnounce2 from "../../../assets/images/pngs/bg-announce-2.png";
 
 import { fetchCategories } from "../../../store/actions/category/categoryActions";
@@ -28,9 +26,22 @@ const Index = () => {
     dispatch(fetchCategories({ limit: 7, page: 1 }));
 
     dispatch(
-      fetchProducts({ limit: 8, page: 1, status: productStatus.ACCEPTED })
+      fetchProducts({
+        limit: 8,
+        page: 1,
+        status: productStatus.ACCEPTED,
+        type: "notFlashSale",
+      })
     );
-    dispatch(fetchFlashSalesProducts({ limit: 10, page: 1 }));
+
+    dispatch(
+      fetchFlashSalesProducts({
+        limit: 8,
+        page: 1,
+        status: productStatus.ACCEPTED,
+        type: "FlashSale",
+      })
+    );
   }, [dispatch]);
   return (
     <div className="container">

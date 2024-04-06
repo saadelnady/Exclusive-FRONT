@@ -1,5 +1,5 @@
+import Products from "../../Shared/ProductsSlider/ProductsSlider";
 import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
-import BestSellingProducts from "./BestSellingProducts";
 
 const BestSelling = () => {
   return (
@@ -8,7 +8,7 @@ const BestSelling = () => {
         Heading="This Month"
         SectionTitle="Best Selling Products"
       />
-      <BestSellingProducts />
+      <Products />
     </div>
   );
 };

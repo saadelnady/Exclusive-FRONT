@@ -4,7 +4,10 @@ import Links from "./Links";
 import { User } from "./User";
 import { Search } from "../../../../components/Shared/Search";
 import { useDispatch } from "react-redux";
-import { fetchProducts } from "../../../../store/actions/product/productActions";
+import {
+  fetchProducts,
+  fetchSearchedProducts,
+} from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";
 
 const NavBar = () => {
@@ -14,7 +17,7 @@ const NavBar = () => {
   const limit = 10;
   const handleSearchAcceptedProducts = (text) => {
     dispatch(
-      fetchProducts({
+      fetchSearchedProducts({
         limit,
         page: currentPage,
         text,
@@ -43,7 +46,7 @@ const NavBar = () => {
           className="collapse navbar-collapse col-12 col-md-10"
           id="navbarNavAltMarkup"
         >
-          <div className="navbar-nav d-flex w-100 justify-content-between align-items-center">
+          <div className="navbar-nav d-flex w-100 justify-content-between align-items-center ">
             <Links />
             <Search action={handleSearchAcceptedProducts} />
           </div>

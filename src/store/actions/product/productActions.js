@@ -7,9 +7,38 @@ export const fetchProducts = ({
   page = "",
   text = "",
   status = "",
+  type = "",
 } = {}) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getProducts());
+    try {
+      let response = "";
+      if (text) {
+        response = await getData(
+          `/api/products?limit=${limit}&page=${page}&text=${text}&status=${status}&type=${type}`
+        );
+      } else if (limit && page) {
+        response = await getData(
+          `/api/products?limit=${limit}&page=${page}&status=${status}&type=${type}`
+        );
+      } else {
+        response = await getData(`/api/products`);
+      }
+
+      dispatch(actionsCreators.getProductsSuccess(response?.data));
+    } catch (error) {
+      dispatch(actionsCreators.getProductsFail(error));
+    }
+  };
+};
+export const fetchSearchedProducts = ({
+  limit = "",
+  page = "",
+  text = "",
+  status = "",
+} = {}) => {
+  return async (dispatch) => {
+    dispatch(actionsCreators.getSearchedProducts());
     try {
       let response = "";
       if (text) {
@@ -24,9 +53,9 @@ export const fetchProducts = ({
         response = await getData(`/api/products`);
       }
 
-      dispatch(actionsCreators.getProductsSuccess(response.data));
+      dispatch(actionsCreators.getSearchedProductsSuccess(response?.data));
     } catch (error) {
-      dispatch(actionsCreators.getProductsFail(error));
+      dispatch(actionsCreators.getSearchedProductsFail(error));
     }
   };
 };
@@ -66,6 +95,8 @@ export const fetchFlashSalesProducts = ({
   limit = "",
   page = "",
   text = "",
+  status = "",
+  type = "",
 } = {}) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getFlashSalesProducts());
@@ -73,11 +104,11 @@ export const fetchFlashSalesProducts = ({
       let response = "";
       if (text) {
         response = await getData(
-          `/api/products/flashSales?limit=${limit}&page=${page}&text=${text}`
+          `/api/products?limit=${limit}&page=${page}&text=${text}&status=${status}&type=${type}`
         );
       } else if (limit && page) {
         response = await getData(
-          `/api/products/flashSales?limit=${limit}&page=${page}`
+          `/api/products?limit=${limit}&page=${page}&status=${status}&type=${type}`
         );
       }
 

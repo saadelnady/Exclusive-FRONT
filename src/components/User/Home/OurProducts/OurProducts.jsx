@@ -1,23 +1,32 @@
-import Card from "../../../Shared/Card";
+import React from "react";
+import { useSelector } from "react-redux";
 import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
+import Loading from "../../../Shared/Loading";
+import ProductsSlider from "../../Shared/ProductsSlider/ProductsSlider";
 
-const OurProducts = ({ products }) => {
+const OurProducts = () => {
+  const { isLoading, products } = useSelector((state) => state.productReducer);
+
   return (
-    <div className="border-bottom py-5 mb-5">
-      <SpecialHeading
-        Heading="Our Products"
-        SectionTitle="Explore Our Products"
-      />
-
-      <div className="d-flex justify-content-center justify-content-md-between  flex-wrap">
-        {products?.map((product, index) => {
-          return <Card key={index} product={product} />;
-        })}
-      </div>
-      <div className="text-center">
-        <button className="btn submit py-3 px-5 fs-6">View All Products</button>
-      </div>
-    </div>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="border-bottom py-5 mb-5">
+          <SpecialHeading
+            Heading="Our Products"
+            SectionTitle="Explore Our Products"
+          />
+          <ProductsSlider products={products} />
+          <div className="text-center">
+            <button className="btn submit py-3 px-5 fs-6">
+              View All Products
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
+
 export default OurProducts;

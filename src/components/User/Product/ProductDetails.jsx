@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import Links from "./Links";
 import Details from "./Details";
-import Loading  from "../../Shared/Loading";
+import Loading from "../../Shared/Loading";
 
 export const ProductDetails = () => {
   const { product, isLoading } = useSelector((state) => state.productReducer);
@@ -17,9 +17,7 @@ export const ProductDetails = () => {
     <div className="container mb-5">
       <Links product={product} /> {/* Rendering links related to the product */}
       <div className="details row">
-        <ProductSlider images={images} />{" "}
-        {/* Rendering a product image slider */}
-        <Details product={product} /> {/* Rendering product details */}
+        <ProductSlider images={images} /> <Details product={product} />
       </div>
     </div>
   );

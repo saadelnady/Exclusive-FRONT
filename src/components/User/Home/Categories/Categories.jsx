@@ -12,24 +12,22 @@ const Categories = () => {
     <ul className="categouries-links pt-4 fs-5 border-end ">
       {categories.map((category, index) => {
         return (
-          <>
-            <li key={index}>
-              <NavLink to={`/category/${category.title}`} className="text-dark">
-                <div>
-                  <img src={`${serverUrl}/${category.image}`} alt="" />
-                  <p>
-                    {category?.title}
-                    {category?.subCategories?.length > 0 && (
-                      <MdOutlineKeyboardArrowRight className="arrow-right" />
-                    )}
-                  </p>
-                </div>
-              </NavLink>
-              {category?.subCategories?.length > 0 && (
-                <SubCategories category={category} />
-              )}
-            </li>
-          </>
+          <li key={index}>
+            <NavLink to={`/category/${category.title}`} className="text-dark">
+              <div>
+                <img src={`${serverUrl}/${category.image}`} alt="" />
+                <p>
+                  {category?.title}
+                  {category?.subCategories?.length > 0 && (
+                    <MdOutlineKeyboardArrowRight className="arrow-right" />
+                  )}
+                </p>
+              </div>
+            </NavLink>
+            {category?.subCategories?.length > 0 && (
+              <SubCategories category={category} />
+            )}
+          </li>
         );
       })}
     </ul>

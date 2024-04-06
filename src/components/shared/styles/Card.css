@@ -1,22 +1,23 @@
 .product-card {
   position: relative;
-  width: 300px;
-  max-width: 100%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
+
 .product-card .header {
   position: relative;
   background-color: var(--bg-light);
   overflow: hidden;
   text-align: center;
 }
-.product-card .header .product-img {
-  height: 400px;
-}
 .product-card .discountPercentage {
   position: absolute;
   background-color: var(--red-color);
-  top: 80px;
-  left: 20px;
+  top: 130px;
+  left: 40px;
   padding: 5px 10px;
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -27,8 +28,8 @@
 }
 .product-card .product-icons {
   position: absolute;
-  top: 80px;
-  right: 20px;
+  top: 130px;
+  right: 40px;
 }
 .product-card .product-icons a {
   color: black;
@@ -70,4 +71,8 @@
 }
 .product-card .content .price-before-discount {
   color: rgba(0, 0, 0, 1);
+}
+
+.product-card .product-img {
+  pointer-events: none;
 }

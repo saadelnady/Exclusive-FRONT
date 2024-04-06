@@ -20,6 +20,26 @@ export const getProductsFail = (payLoad) => {
 };
 
 // ==================================================================================
+export const getSearchedProducts = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS,
+    payLoad,
+  };
+};
+export const getSearchedProductsSuccess = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS_SUCCESS,
+    payLoad,
+  };
+};
+export const getSearchedProductsFail = (payLoad) => {
+  return {
+    type: PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS_FAIL,
+    payLoad,
+  };
+};
+
+// ==================================================================================
 export const getSellerProducts = (payLoad) => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_SELLER_PRODUCTS,

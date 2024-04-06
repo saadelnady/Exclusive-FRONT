@@ -1,21 +1,24 @@
-import "./styles/Card.css";
 import { IoEyeOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 
 import icStar from "../../assets/images/pngs/ic_stars.png";
 import { NavLink } from "react-router-dom";
 import { serverUrl } from "../../API/API";
-import FlashSaleCounter from "../User/Home/FlashSale/FlashSaleCounter";
+import FlashSaleCounter from "../User/Shared/FlashSaleCounter/FlashSaleCounter";
+import { motion } from "framer-motion";
+import "./styles/Card.css";
 
 const Card = ({ product }) => {
   return (
-    <div className="product-card mb-4">
-      <div className="header rounded ">
-        {product?.isFlashSale && <FlashSaleCounter />}
+    <motion.div className="product-card item">
+      <div className="header rounded">
+        {product?.isFlashSale && (
+          <FlashSaleCounter duration={product?.flashSaleExpirationDate} />
+        )}
         <img
           src={`${serverUrl}/${product?.images[0]}`}
           alt="product-img"
-          className="w-100 product-img"
+          className="product-img"
         />
         <button className="addToCart bg-black">Add To Cart</button>
       </div>
@@ -37,7 +40,7 @@ const Card = ({ product }) => {
       </div>
 
       <div className="content py-3">
-        <h4 className="fw-bold">{product?.title}</h4>
+        <h4 className="fw-bold">{product?.title.split("", 20)}.. </h4>
         <div className="d-flex mb-2 ">
           <div className="final-price fw-bold me-4  fs-5">
             $ <span>{product?.options[0].price?.finalPrice}</span>
@@ -53,7 +56,7 @@ const Card = ({ product }) => {
           <img src={icStar} alt="" />(<span>75</span>)
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Card;
