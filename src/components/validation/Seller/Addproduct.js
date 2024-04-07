@@ -117,7 +117,7 @@ const validate = (values) => {
       // =================================================================================
 
       // Validate discountPercentage
-      if (!option.price?.discountPercentage) {
+      if (!option.price?.discountPercentage && option?.price?.discountValue) {
         optionErrors.discountPercentage = `Product discountPercentage is required in option number ${
           index + 1
         }`;

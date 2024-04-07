@@ -1,10 +1,9 @@
-import "../styles/FlashSale.css";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
 import Loading from "../../../Shared/Loading";
-import { useSelector } from "react-redux";
 import ProductsSlider from "../../Shared/ProductsSlider/ProductsSlider";
-import { useState } from "react";
 import AllProductsButton from "../../Shared/AllProductsButton/AllProductsButton";
 
 const FlashSale = () => {
@@ -40,9 +39,7 @@ const FlashSale = () => {
             products={flashSalesProducts}
             currentSlideIndex={currentSlideIndex}
           />
-          <div className="text-center">
-            <AllProductsButton navigateTo={"/products/flashsales"} />
-          </div>
+          <AllProductsButton navigateTo="/products/flashsales" />
         </div>
       )}
     </>

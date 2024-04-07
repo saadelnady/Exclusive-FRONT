@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 import FlashSales from "../../components/User/FlashSales/FlashSales.jsx";
+import Products from "../../components/User/Products/Products.jsx";
 
 const User = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const User = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products/flashsales" element={<FlashSales />} />
         <Route path="/products/:productId" element={<Product />} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="*" element={<NotFoundPage navigateTo="/" />} />
       </Routes>

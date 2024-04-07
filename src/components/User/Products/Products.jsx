@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchFlashSalesProducts } from "../../../store/actions/product/productActions";
+import { fetchProducts } from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
 import Card from "../../Shared/Card";
 import { Pagination } from "../../Shared/Pagination";
 import Loading from "../../Shared/Loading";
-
-const FlashSales = () => {
+const Products = () => {
   const dispatch = useDispatch();
-  const { flashSalesProducts, total, isLoading } = useSelector(
+  const { products, total, isLoading } = useSelector(
     (state) => state.productReducer
   );
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,11 +17,11 @@ const FlashSales = () => {
   };
   useEffect(() => {
     dispatch(
-      fetchFlashSalesProducts({
+      fetchProducts({
         limit: 10,
         page: currentPage,
         status: productStatus.ACCEPTED,
-        type: "flashSale",
+        type: "notFlashSale",
       })
     );
   }, [dispatch, currentPage]);
@@ -32,17 +31,17 @@ const FlashSales = () => {
         <Loading />
       ) : (
         <div className="container py-3">
-          <h5 className="special-header ps-5 py-2 mb-5"> Flash Sales</h5>
+          <h5 className="special-header ps-5 py-2 mb-5"> Our Products</h5>
           <div className="d-flex flex-wrap justify-content-center justify-content-md-evenly align-items-center">
-            {flashSalesProducts && flashSalesProducts.length > 0 ? (
-              flashSalesProducts.map((product, index) => (
+            {products && products.length > 0 ? (
+              products.map((product, index) => (
                 <Card product={product} key={index} />
               ))
             ) : (
               <>There is no products to show</>
             )}
           </div>
-          {flashSalesProducts?.length > 0 && (
+          {products?.length > 0 && (
             <Pagination
               itemsPerPage={limit}
               paginate={handlePageChange}
@@ -56,4 +55,4 @@ const FlashSales = () => {
   );
 };
 
-export default FlashSales;
+export default Products;

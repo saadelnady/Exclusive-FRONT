@@ -5,12 +5,11 @@ import icStar from "../../assets/images/pngs/ic_stars.png";
 import { NavLink } from "react-router-dom";
 import { serverUrl } from "../../API/API";
 import FlashSaleCounter from "../User/Shared/FlashSaleCounter/FlashSaleCounter";
-import { motion } from "framer-motion";
 import "./styles/Card.css";
 
 const Card = ({ product }) => {
   return (
-    <motion.div className="product-card item">
+    <div className="product-card">
       <div className="header rounded">
         {product?.isFlashSale && (
           <FlashSaleCounter duration={product?.flashSaleExpirationDate} />
@@ -18,7 +17,7 @@ const Card = ({ product }) => {
         <img
           src={`${serverUrl}/${product?.images[0]}`}
           alt="product-img"
-          className="product-img"
+          className="product-img "
         />
         <button className="addToCart bg-black">Add To Cart</button>
       </div>
@@ -56,7 +55,7 @@ const Card = ({ product }) => {
           <img src={icStar} alt="" />(<span>75</span>)
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 export default Card;

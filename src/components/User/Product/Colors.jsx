@@ -1,26 +1,23 @@
-import { useState } from "react";
+import React from "react";
 
-const Colors = ({ options }) => {
-  const [activeColor, setActiveColor] = useState(null);
-  const handleColorActive = (color) => {
-    setActiveColor(color);
-  };
+const Colors = ({ options, activeColor, handleColorActive }) => {
+  // Get unique colors from the options array
+  const uniqueColors = Array.from(
+    new Set(options.map((option) => option.color))
+  );
 
   return (
     <div className="colors d-flex align-items-center mb-4">
-      <p className="me-4 fs-4">Colors :</p>
+      <p className="me-4 fs-4">Colors:</p>
       <ul className="productColors d-flex justify-content-evenly flex-wrap w-50">
-        {options?.map((option) => (
+        {uniqueColors.map((color) => (
           <li
-            key={option.color}
-            data-src={option.color}
-            style={{ backgroundColor: `${option.color}` }}
+            key={color}
+            style={{ backgroundColor: `${color}` }}
             className={
-              activeColor === option.color
-                ? "active cursor-pointer"
-                : "cursor-pointer"
+              activeColor === color ? "active cursor-pointer" : "cursor-pointer"
             }
-            onClick={() => handleColorActive(option.color)}
+            onClick={() => handleColorActive(color)}
           ></li>
         ))}
       </ul>

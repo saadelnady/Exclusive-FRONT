@@ -26,13 +26,13 @@ const ProductsSlider = ({ products, currentSlideIndex }) => {
   }, [products]);
 
   return (
-    <motion.div className="carousel products-slider">
+    <motion.div className="carousel">
       <AnimatePresence>
         {products && products.length > 0 && (
-          <motion.div ref={carouselRef} className="carousel products-slider">
+          <motion.div ref={carouselRef} className="carousel">
             <motion.div
               drag="x"
-              className="inner-carousel d-flex"
+              className="inner-carousel d-flex  "
               style={{
                 "--num-slides": products.length,
                 "--current-slide": currentSlideIndex,

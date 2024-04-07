@@ -21,9 +21,17 @@ import { productStatus } from "../../../helpers/options";
 
 const Index = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.productReducer);
   useEffect(() => {
     dispatch(fetchCategories({ limit: 7, page: 1 }));
+
+    dispatch(
+      fetchFlashSalesProducts({
+        limit: 8,
+        page: 1,
+        status: productStatus.ACCEPTED,
+        type: "flashSale",
+      })
+    );
 
     dispatch(
       fetchProducts({
@@ -31,15 +39,6 @@ const Index = () => {
         page: 1,
         status: productStatus.ACCEPTED,
         type: "notFlashSale",
-      })
-    );
-
-    dispatch(
-      fetchFlashSalesProducts({
-        limit: 8,
-        page: 1,
-        status: productStatus.ACCEPTED,
-        type: "FlashSale",
       })
     );
   }, [dispatch]);
@@ -55,7 +54,7 @@ const Index = () => {
       <NavLink>
         <img src={bgAnnounce2} alt="" className="w-100" />
       </NavLink>
-      <OurProducts products={products} />
+      <OurProducts />
       <NewArrival />
       <AboutUs />
     </div>

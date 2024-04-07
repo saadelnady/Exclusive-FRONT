@@ -198,10 +198,24 @@ const AddProduct = () => {
         // If the current value is an object (like 'price'), iterate over its properties
         if (typeof value === "object") {
           Object.entries(value).forEach(([nestedKey, nestedValue]) => {
-            formData.append(
-              `options[${index}][${key}][${nestedKey}]`,
-              nestedValue
-            );
+            // Check if the nested key is 'discountPercentage' or 'finalPrice'
+            if (
+              nestedKey === "discountPercentage" ||
+              nestedKey === "finalPrice"
+            ) {
+              // Check if the value exists and is not null or undefined
+              if (nestedValue !== null && nestedValue !== undefined) {
+                formData.append(
+                  `options[${index}][${key}][${nestedKey}]`,
+                  nestedValue
+                );
+              }
+            } else {
+              formData.append(
+                `options[${index}][${key}][${nestedKey}]`,
+                nestedValue
+              );
+            }
           });
         } else {
           formData.append(`options[${index}][${key}]`, value);
@@ -210,6 +224,7 @@ const AddProduct = () => {
     });
 
     const payload = { formData, toast };
+    console.log("values ==== >", values);
     dispatch(addProduct(payload));
     resetForm();
   };
@@ -619,7 +634,11 @@ const AddProduct = () => {
               value={formik.values.description}
             ></textarea>
           </div>
-
+          <ErrorMessage
+            touched={formik.touched}
+            errors={formik.errors}
+            fieldName="description"
+          />
           {/* ================================================================================================== */}
           <div className="select-category item">
             <label htmlFor="category" className="fw-bold fs-4">

@@ -8,8 +8,6 @@ import Loading from "../../Shared/Loading";
 
 export const ProductDetails = () => {
   const { product, isLoading } = useSelector((state) => state.productReducer);
-  console.log("product ===", product);
-  const images = product?.images;
 
   return isLoading ? (
     <Loading />
@@ -17,7 +15,7 @@ export const ProductDetails = () => {
     <div className="container mb-5">
       <Links product={product} /> {/* Rendering links related to the product */}
       <div className="details row">
-        <ProductSlider images={images} /> <Details product={product} />
+        <ProductSlider product={product} /> <Details product={product} />
       </div>
     </div>
   );

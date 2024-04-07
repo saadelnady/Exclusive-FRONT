@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { TfiTimer } from "react-icons/tfi";
-
+import "./styles/FlashSaleCounter.css";
 const FlashSaleCounter = ({ duration }) => {
   const targetDate = moment(duration);
   const [countdown, setCountdown] = useState(

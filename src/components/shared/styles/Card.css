@@ -5,8 +5,14 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+  min-height: 25rem;
+  min-width: 20rem;
+  margin-right: 5px;
 }
-
+.product-card .product-img {
+  width: 20rem;
+  height: 25rem;
+}
 .product-card .header {
   position: relative;
   background-color: var(--bg-light);

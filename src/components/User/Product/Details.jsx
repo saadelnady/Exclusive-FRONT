@@ -4,8 +4,22 @@ import Delivery from "./Delivery";
 import Colors from "./Colors";
 import Size from "./Size";
 import Counter from "./Counter";
+import { useState } from "react";
 
 const Details = ({ product }) => {
+  const [activeColor, setActiveColor] = useState(null);
+
+  const handleColorActive = (color) => {
+    setActiveColor(color);
+  };
+
+  const filteredOptions = product.options.filter(
+    (option) => option.color === activeColor
+  );
+  if (!product || !product.images || product.images.length === 0) {
+    return null;
+  }
+  console.log("product ===>", product);
   return (
     <div className="product-details col-12 col-lg-4 offset-lg-1 mt-4 mt-lg-0">
       <h2 className="product-name fw-bold mb-3">{product?.title}</h2>
@@ -21,14 +35,18 @@ const Details = ({ product }) => {
       <div className="price fs-4 fw-bold mb-4">
         <span>$</span>
         <span className="price-amount">
-          {/* {product?.options[0].price?.finalPrice} */}
+          {product?.options[0].price?.finalPrice}
         </span>
       </div>
       <p className="description border-bottom fs-5 pb-4 mb-4">
         {product?.description}
       </p>
-      <Colors options={product?.options} />
-      <Size options={product?.options} />
+      <Colors
+        options={product?.options}
+        activeColor={activeColor}
+        handleColorActive={handleColorActive}
+      />
+      <Size options={filteredOptions} />
       <div className="d-flex align-items-center justify-content-between product-buttons">
         <Counter />
         <button className="buy-now">Buy Now</button>
