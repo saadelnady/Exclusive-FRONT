@@ -12,12 +12,14 @@ import {
   initialValues,
   validate,
 } from "../../../Validation/registerValidation.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorMessage from "../../../Shared/ErrorMessage.jsx";
 import "../../Styles/Auth.css";
 import { sellerRegister } from "../../../../store/actions/seller/sellerActions.js";
+import Loading from "../../../Shared/Loading.jsx";
 
 const SellerRegister = () => {
+  const { isLoading } = useSelector((state) => state.sellerReducer);
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -143,7 +145,7 @@ const SellerRegister = () => {
             className="btn d-block w-100 p-3 fs-4 submit my-4"
             type="submit"
           >
-            Create Account
+            {isLoading ? <Loading /> : "Create Account"}
           </button>
           <button className=" d-block btn  text-center w-100 p-3 fs-4 google-signup">
             <img src={googleIcon} alt="google-Icon" className="me-2" />

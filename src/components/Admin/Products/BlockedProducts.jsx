@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../store/actions/product/productActions";
 
 import Warning from "../../Shared/Warning";
-import { Search } from "../../Shared/Search";
+import Search from "../../Shared/Search";
 import Loading from "../../Shared/Loading";
 import { Pagination } from "../../Shared/Pagination";
 import { ProductsTable } from "../Shared/ProductsTable";

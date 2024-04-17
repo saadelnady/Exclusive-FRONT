@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { serverUrl } from "../../API/API";
 
-export const ActivationPage = () => {
+const ActivationPage = () => {
   const { activationToken } = useParams();
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
@@ -19,10 +20,11 @@ export const ActivationPage = () => {
               activationToken,
             }
           );
-
-          setFirstName(response.data.currentUser.firstName);
+          console.log("data", response);
+          setFirstName(response?.data?.data?.currentUser?.firstName);
         } catch (error) {
           setError(true);
+          setErrorMessage(error?.response?.data?.message);
           console.error("Activation email error:", error);
         }
       };
@@ -34,7 +36,9 @@ export const ActivationPage = () => {
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 fs-5">
       {error ? (
-        <p>Your token is expired</p>
+        <>
+          <p>{errorMessage}</p>
+        </>
       ) : (
         <p>
           hello {firstName}
@@ -45,3 +49,4 @@ export const ActivationPage = () => {
     </div>
   );
 };
+export default ActivationPage;

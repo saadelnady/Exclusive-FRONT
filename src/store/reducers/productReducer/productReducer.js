@@ -33,12 +33,12 @@ const productReducer = (state = initialState, action) => {
 
     // ========================================================================
     case PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS:
-      return { ...state, isLoading: true };
+      return { ...state };
 
     case PRODUCTS_ACTIONS_TYPES.GET_SEARCHED_PRODUCTS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+
         searchedProducts: action.payLoad.products,
         total: action.payLoad.total,
         error: null,

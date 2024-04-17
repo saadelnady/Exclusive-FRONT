@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../Shared/Loading";
-import { Search } from "../../Shared/Search";
+import  Search  from "../../Shared/Search";
 import { Pagination } from "../../Shared/Pagination";
 import { OptionButton } from "../Shared/OptionButton";
 import { categoryDeleteAction } from "../../../helpers/options";

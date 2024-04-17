@@ -1,74 +1,51 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Links = () => {
   const { isLoggedIn } = useSelector((state) => state.userReducer);
-  const [active, setIsActive] = useState(null);
-  const activeHandler = (listItem) => {
-    setIsActive(listItem);
+  const [active, setActive] = useState(null);
+  const location = useLocation();
+
+  const handleNavLinkClick = (navItem) => {
+    setActive(navItem);
   };
+
+  // Conditionally include "Login" item based on isLoggedIn
+  const navItems = [
+    { label: "Home", path: "/", key: "home" },
+    { label: "Contact", path: "/contact", key: "contact" },
+    { label: "About", path: "/about", key: "about" },
+    ...(isLoggedIn
+      ? []
+      : [
+          {
+            label: "Login",
+            path: "/login/user",
+            key: "login",
+          },
+        ]),
+  ];
+
   return (
-    <ul className="nav d-flex justify-content-between links align-items-center">
-      <li
-        className={
-          active === "home"
-            ? "nav-item  me-2 fs-5 text-dark active"
-            : "nav-item  me-2 fs-5 text-dark "
-        }
-        onClick={() => {
-          activeHandler("home");
-        }}
-      >
-        <NavLink aria-current="page" to="/" className="text-dark">
-          Home
-        </NavLink>
-      </li>
-      <li
-        className={
-          active === "contact"
-            ? "nav-item  me-2 fs-5 text-dark active"
-            : "nav-item  me-2 fs-5 text-dark"
-        }
-        onClick={() => {
-          activeHandler("contact");
-        }}
-      >
-        <NavLink aria-current="page" to="/contact" className="text-dark ">
-          Contact
-        </NavLink>
-      </li>
-      <li
-        className={
-          active === "About"
-            ? "nav-item  me-2 fs-5 text-dark active"
-            : "nav-item  me-2 fs-5 text-dark"
-        }
-        onClick={() => {
-          activeHandler("About");
-        }}
-      >
-        <NavLink aria-current="page" to="/about" className=" text-dark">
-          About
-        </NavLink>
-      </li>
-      {!isLoggedIn && (
+    <ul className="d-flex links col-12 col-sm-7">
+      {navItems.map((item) => (
         <li
-          className={
-            active === "Login"
-              ? "nav-item  me-2 fs-5 text-dark active"
-              : "nav-item  me-2 fs-5 text-dark"
-          }
-          onClick={() => {
-            activeHandler("Login");
-          }}
+          key={item.key}
+          className={`fs-5 ${
+            active === item.key || location.pathname === item.path
+              ? "active"
+              : ""
+          }`}
+          onClick={() => handleNavLinkClick(item.key)}
         >
-          <NavLink aria-current="page" to="/login/user" className="text-dark ">
-            Login
+          <NavLink to={item.path} onClick={() => handleNavLinkClick(item.key)}>
+            {item.label}
           </NavLink>
         </li>
-      )}
+      ))}
     </ul>
   );
 };
+
 export default Links;

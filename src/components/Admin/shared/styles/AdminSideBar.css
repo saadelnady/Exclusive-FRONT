@@ -16,7 +16,7 @@
     background-color: var(--blue-color);
     position: fixed;
     height: 100%;
-    width: 200px;
+    width: 250px;
     transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);

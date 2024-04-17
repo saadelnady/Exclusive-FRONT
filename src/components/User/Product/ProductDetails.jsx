@@ -13,9 +13,10 @@ export const ProductDetails = () => {
     <Loading />
   ) : (
     <div className="container mb-5">
-      <Links product={product} /> {/* Rendering links related to the product */}
+      <Links product={product} />
       <div className="details row">
-        <ProductSlider product={product} /> <Details product={product} />
+        <ProductSlider product={product} />
+        <Details product={product} />
       </div>
     </div>
   );

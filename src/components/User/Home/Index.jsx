@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import CategoriesBrowse from "./CategoriesBrowse/CategoriesBrowse";
@@ -43,7 +43,7 @@ const Index = () => {
     );
   }, [dispatch]);
   return (
-    <div className="container">
+    <div className="container ">
       <div className="row justify-content-between align-items-between">
         <Categories />
         <Slider />

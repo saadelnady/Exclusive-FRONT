@@ -13,14 +13,13 @@ const Details = ({ product }) => {
     setActiveColor(color);
   };
 
-  const filteredOptions = product.options.filter(
+  const filteredOptions = product?.options?.filter(
     (option) => option.color === activeColor
   );
   if (!product || !product.images || product.images.length === 0) {
     return null;
   }
-  console.log("product ===>", product);
-  return (
+   return (
     <div className="product-details col-12 col-lg-4 offset-lg-1 mt-4 mt-lg-0">
       <h2 className="product-name fw-bold mb-3">{product?.title}</h2>
       <div className="d-flex align-items-center flex-wrap mb-4">

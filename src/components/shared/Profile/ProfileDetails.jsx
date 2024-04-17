@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { isObjectNotEmpty } from "../../../helpers/checkers";
 import { editSellerProfile } from "../../../store/actions/seller/sellerActions";
+import { decodeToken } from "../../../helpers/decodeToken";
 
 const ProfileDetails = ({ user, seller }) => {
   const dispatch = useDispatch();
@@ -355,14 +356,11 @@ const ProfileDetails = ({ user, seller }) => {
           <button
             className="btn text-center"
             onClick={() => {
-              if (user) {
-                if (user.role === "ADMIN") {
-                  navigate("/admin");
-                } else {
-                  navigate("/");
-                }
-              }
-              if (seller) {
+              if (decodeToken().role === "ADMIN") {
+                navigate("/admin");
+              } else if (decodeToken().role === "USER") {
+                navigate("/");
+              } else {
                 navigate("/seller");
               }
             }}

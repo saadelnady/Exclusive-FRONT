@@ -1,97 +1,40 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import DefaultUserImage from "../../../../assets/images/pngs/user-logo.png";
-import iconCancel from "../../../../assets/images/pngs/ic-cancel.png";
-import iconLogout from "../../../../assets/images/pngs/ic-logout.png";
-import iconMallBag from "../../../../assets/images/pngs/ic-mallbag.png";
-import iconReviews from "../../../../assets/images/pngs/ic-Reviews.png";
-import "./styles/User.css";
+import { NavLink } from "react-router-dom";
+
 import { CiHeart } from "react-icons/ci";
 import { BsCart3 } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { serverUrl } from "../../../../API/API";
+
 import Loading from "../../../Shared/Loading";
-import { userLogout } from "../../../../store/actions/user/userActions";
+import { RxHamburgerMenu } from "react-icons/rx";
+import UserDropDown from "./UserDropDown";
+import { useSelector } from "react-redux";
 
-export const User = () => {
-  const { isLoggedIn, user, isLoading } = useSelector(
-    (state) => state.userReducer
-  );
-
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const handleLogOut = () => {
-    const payLoad = { toast, navigate, role: user.role };
-    dispatch(userLogout(payLoad));
-  };
+import "./styles/User.css";
+const User = ({ handleActiveNavBar }) => {
+  const { isLoading, isLoggedIn } = useSelector((state) => state.userReducer);
 
   return (
-    <div className="user d-flex col-12  col-lg-4 justify-content-evenly align-items-center">
-      <CiHeart className="fs-2 cursor-pointer" />
-      <BsCart3 className="fs-2 cart" />
+    <div className="user d-flex col-8 col-lg-3 justify-content-evenly align-items-center">
+      <NavLink to="/wishList">
+        <CiHeart className="fs-2 cursor-pointer" />
+      </NavLink>
+      <NavLink to="/cart">
+        <BsCart3 className="fs-2 cart" />
+      </NavLink>
       {isLoading && <Loading />}
-      {isLoggedIn && (
-        <div className="dropdown text-center">
-          <button
-            className="user-logo rounded-pill dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              src={`${serverUrl}/${user.image}`}
-              alt="user-logo"
-              className="w-100 h-100"
-            />
-          </button>
-          <ul className="dropdown-menu bg-dark p-3">
-            <li className="d-flex justify-content-between align-items-center mb-2">
-              <img src={DefaultUserImage} alt="user-logo" />
-              <NavLink
-                className="dropdown-item bg-transparent text-light"
-                to={`/profile`}
-              >
-                Manage my account(
-                {user.firstName || "user name"})
-              </NavLink>
-            </li>
-            <li className="d-flex justify-content-between align-items-center mb-2">
-              <img src={iconMallBag} alt="bag-img" />
-              <NavLink className="dropdown-item bg-transparent text-light">
-                My Orders
-              </NavLink>
-            </li>
-            <li className="d-flex justify-content-between align-items-center mb-2">
-              <img src={iconCancel} alt="cancel-img" />
-              <NavLink className="dropdown-item bg-transparent text-light">
-                My Cancellations
-              </NavLink>
-            </li>
-            <li className="d-flex justify-content-between align-items-center mb-2">
-              <img src={iconReviews} alt="reviews" />
-              <NavLink className="dropdown-item bg-transparent text-light">
-                My Reviews
-              </NavLink>
-            </li>
-            <li className="d-flex justify-content-between align-items-center mb-2">
-              <img src={iconLogout} alt="icon-logout" />
-              <NavLink
-                className="dropdown-item bg-transparent text-light"
-                onClick={handleLogOut}
-              >
-                Logout
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      )}
+      {isLoggedIn && <UserDropDown />}
 
       {!isLoggedIn && (
         <NavLink className="btn submit" to="/login/seller">
           login as a Seller
         </NavLink>
       )}
+      <RxHamburgerMenu
+        className="burger-icon fs-1 cursor-pointer"
+        onClick={() => {
+          handleActiveNavBar();
+        }}
+      />
     </div>
   );
 };
+export default User;

@@ -9,11 +9,11 @@ export const SubCategories = ({ category }) => {
         {category?.subCategories?.map((subCategory, index) => (
           <li key={index}>
             <NavLink
-              to={`${serverUrl}/categories/${category?.title}/${subCategory?.title}`}
+              to={`/categories/${category?.title}/${subCategory?.title}`}
             >
               <img src={`${serverUrl}/${subCategory?.image}`} alt="" />
+              <span>{subCategory?.title}</span>
             </NavLink>
-            <span>{subCategory?.title}</span>
           </li>
         ))}
       </ul>

@@ -1,5 +1,6 @@
 import Announce from "./Announce";
 import NavBar from "./NavBar";
+import "./styles/Header.css";
 
 const Index = () => {
   return (

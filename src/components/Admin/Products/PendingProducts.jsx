@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Search } from "../../Shared/Search";
+import Search from "../../Shared/Search";
 import Loading from "../../Shared/Loading";
 
 import { useDispatch, useSelector } from "react-redux";

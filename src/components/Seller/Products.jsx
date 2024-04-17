@@ -4,7 +4,7 @@ import {
   deleteProduct,
   fetchAcceptedSellerProducts,
 } from "../../store/actions/product/productActions";
-import  Loading  from "../Shared/Loading";
+import Loading from "../Shared/Loading";
 import { serverUrl } from "../../API/API";
 import { formatDateAndTime } from "../../helpers/formated_date_time";
 import { HiDotsVertical } from "react-icons/hi";
@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import "./styles/Myproducts.css";
 import Warning from "../Shared/Warning";
 
-import { Search } from "../Shared/Search";
+import Search from "../Shared/Search";
 import { OptionButton } from "../Admin/Shared/OptionButton";
 import { productDeleteAction } from "../../helpers/options";
 

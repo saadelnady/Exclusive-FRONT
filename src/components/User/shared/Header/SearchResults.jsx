@@ -2,9 +2,9 @@ import React from "react";
 import { serverUrl } from "../../../../API/API";
 import { NavLink } from "react-router-dom";
 
-const SearchResults = ({ products }) => {
+const SearchResults = ({ products, onProductClick }) => {
   return (
-    <div className="position-absolute bg-light col-12 rounded zindex-dropdown">
+    <div className="position-absolute bg-light col-12 rounded p-3 search-result">
       {products?.map((product, index) => {
         return (
           <NavLink to={`/products/${product._id}`}>
@@ -12,7 +12,7 @@ const SearchResults = ({ products }) => {
               <img
                 src={`${serverUrl}/${product?.images[0]}`}
                 alt=""
-                className="rounded-pill col-3 object-fit-cover  "
+                className="rounded-pill object-fit-cover search-img "
               />
               <p className="col-8">{product?.title}</p>
             </div>

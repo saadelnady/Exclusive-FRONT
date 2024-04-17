@@ -8,13 +8,15 @@ import { toast } from "react-toastify";
 import { initialValues, validate } from "../../../Validation/loginValidation";
 
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ErrorMessage from "../../../Shared/ErrorMessage";
 import "../../Styles/Auth.css";
 import { sellerLogin } from "../../../../store/actions/seller/sellerActions";
+import Loading from "../../../Shared/Loading";
 
 const SellerLogin = () => {
+  const { isLoading } = useSelector((state) => state.sellerReducer);
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -99,7 +101,7 @@ const SellerLogin = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <button className="btn p-3 fs-4 submit " type="sbmit">
-              Login
+              {isLoading ? <Loading /> : "Login"}
             </button>
             <NavLink className="forget-password p-3 fs-5">
               Forget Password ?

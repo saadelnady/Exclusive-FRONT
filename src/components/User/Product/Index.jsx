@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const Index = () => {
-  const { product, isLoading } = useSelector((state) => state.productReducer);
+  const { product } = useSelector((state) => state.productReducer);
   console.log("product =>", product);
   const { productId } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchProduct(productId));
   }, [dispatch]);

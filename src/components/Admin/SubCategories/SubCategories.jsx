@@ -14,10 +14,10 @@ import {
   fetchSubCategories,
 } from "../../../store/actions/subCategory/subCategoryActions";
 import { Pagination } from "../../Shared/Pagination";
-import  Loading  from "../../Shared/Loading";
+import Loading from "../../Shared/Loading";
 import Warning from "../../Shared/Warning";
 
-import { Search } from "../../Shared/Search";
+import Search from "../../Shared/Search";
 import { OptionButton } from "../Shared/OptionButton";
 import { subCategoryDeleteAction } from "../../../helpers/options";
 

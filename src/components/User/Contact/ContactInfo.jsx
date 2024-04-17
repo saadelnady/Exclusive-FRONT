@@ -1,5 +1,3 @@
-import React from "react";
-
 import icPhone from "../../../assets/images/pngs/ic-phone.png";
 import icMail from "../../../assets/images/pngs/ic-mail.png";
 

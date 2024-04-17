@@ -2,14 +2,14 @@ import { NavLink } from "react-router-dom";
 import { serverUrl } from "../../../../API/API";
 import { SubCategories } from "./SubCategories";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import "../styles/Categories.css";
 import { useSelector } from "react-redux";
+import "../styles/Categories.css";
 
 const Categories = () => {
   const { categories } = useSelector((state) => state.categoryReducer);
 
   return (
-    <ul className="categouries-links pt-4 fs-5 border-end ">
+    <ul className="categouries-links pt-4 fs-5 border-end">
       {categories.map((category, index) => {
         return (
           <li key={index}>

@@ -5,7 +5,7 @@ import { ContactForm } from "./ContactForm.jsx";
 const Index = () => {
   return (
     <div className="container contact py-5">
-      <div className=" mb-5 links  ">
+      <div className="mb-5 links">
         <NavLink to={"/"} className="fs-5 me-2">
           Home
         </NavLink>

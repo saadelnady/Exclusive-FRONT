@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Links from "./Links";
-import { User } from "./User";
-import { Search } from "../../../../components/Shared/Search";
+import User from "./User";
+import Search from "../../../../components/Shared/Search";
 import { useDispatch } from "react-redux";
-import {
-  fetchProducts,
-  fetchSearchedProducts,
-} from "../../../../store/actions/product/productActions";
+import { fetchSearchedProducts } from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";
+import { FaXmark } from "react-icons/fa6";
+import CategoriesDropDown from "../../Shared/CategoriesDropDown/CategoriesDropDown";
 
 const NavBar = () => {
   const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const limit = 10;
   const handleSearchAcceptedProducts = (text) => {
     dispatch(
@@ -25,35 +24,40 @@ const NavBar = () => {
       })
     );
   };
+  // ==========================================================
+  const [activeNavBar, setActiveNavBar] = useState(false);
+  const handleActiveNavBar = () => {
+    setActiveNavBar(!activeNavBar);
+  };
   return (
-    <nav className="navbar navbar-expand-lg ">
-      <div className="container d-flex justify-content-between align-items-center">
-        <NavLink to="/" className="fs-3 text-dark fw-bold">
-          Exclusive
-        </NavLink>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div
-          className="collapse navbar-collapse col-12 col-md-10"
-          id="navbarNavAltMarkup"
-        >
-          <div className="navbar-nav d-flex w-100 justify-content-between align-items-center ">
-            <Links />
-            <Search action={handleSearchAcceptedProducts} />
-          </div>
-          <User />
+    <div className="container d-flex justify-content-between align-items-center p-2">
+      <NavLink to="/" className="fs-3 fw-bold">
+        Exclusive
+      </NavLink>
+
+      <div
+        className={`links-wrapper row col-md-7 ${
+          activeNavBar ? "active" : ""
+        } `}
+      >
+        <div className="d-flex justify-content-between align-items-center mb-5 mb-lg-0">
+          <NavLink to="/" className="fs-3 fw-bold d-lg-none text-light">
+            Exclusive
+          </NavLink>
+          <FaXmark
+            onClick={() => {
+              handleActiveNavBar();
+            }}
+            className="close-Sidebar d-lg-none"
+          />
         </div>
+        <Links />
+        <CategoriesDropDown />
+        <Search action={handleSearchAcceptedProducts} />
       </div>
-    </nav>
+
+      <User handleActiveNavBar={handleActiveNavBar} />
+    </div>
   );
 };
 

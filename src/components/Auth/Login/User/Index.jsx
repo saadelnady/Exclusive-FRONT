@@ -16,7 +16,6 @@ import ErrorMessage from "../../../Shared/ErrorMessage";
 import "../../Styles/Auth.css";
 const Index = () => {
   const { isLoading } = useSelector((state) => state.userReducer);
-
   const [visible, setVisible] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -62,12 +61,12 @@ const Index = () => {
             <input
               type={visible ? "password" : "text"}
               name="password"
+              autoComplete="current-password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="Password"
               className="form-control my-3 fs-4 special-input"
-              autoComplete="password"
             />
             {visible ? (
               <IoEyeOutline
@@ -95,7 +94,7 @@ const Index = () => {
               type="checkbox"
               name="checkbox"
               id="checkbox"
-              className=" me-4 remember-me rounded-circle"
+              className="me-4 remember-me rounded-circle"
             />
             <label htmlFor="checkbox" className="fs-5 ">
               Remember me
@@ -103,13 +102,12 @@ const Index = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <button
-              className="btn p-3 fs-4 submit d-flex justify-content-between align-items-center"
+              className="btn p-2 fs-4 submit d-flex justify-content-between align-items-center"
               type="sbmit"
             >
-              Login
-              {isLoading && <Loading />}
+              {isLoading ? <Loading /> : "Login"}
             </button>
-            <NavLink className="forget-password p-3 fs-5">
+            <NavLink className="forget-password p-3 fs-5" to="forgot-password">
               Forget Password ?
             </NavLink>
           </div>
