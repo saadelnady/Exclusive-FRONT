@@ -53,7 +53,7 @@
   .links-wrapper .links {
     flex-direction: column;
     margin-bottom: 50px;
-    width: 100%;
+    align-items: flex-start;
   }
   .links-wrapper.active {
     transform: translateX(0);

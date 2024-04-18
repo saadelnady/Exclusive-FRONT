@@ -16,7 +16,7 @@ const OurProducts = () => {
   useEffect(() => {
     // Fetch products on component mount
     if (products?.length === 0 || products === null) {
-      console.log("products ====", products);
+      // console.log("products ====", products);
       dispatch(
         fetchProducts({
           limit,

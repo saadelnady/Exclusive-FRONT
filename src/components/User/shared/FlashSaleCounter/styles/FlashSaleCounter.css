@@ -1,6 +1,3 @@
-.sale-counter span {
-  color: var(--red-color);
-}
-.sale-counter {
-  font-size: 12px;
+.time {
+  font-size: 10px;
 }

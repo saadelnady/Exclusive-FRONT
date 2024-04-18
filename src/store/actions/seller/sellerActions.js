@@ -32,8 +32,7 @@ export const editSellerProfile = ({ sellerId, values, toast }) => {
     dispatch(actionCreators.putSellerProfile());
     try {
       const response = await putData(`/api/sellers/${sellerId}`, values);
-      console.log("response  === >", response);
-      dispatch(actionCreators.putSellerProfileSuccess(response));
+       dispatch(actionCreators.putSellerProfileSuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionCreators.putSellerProfileFail(error));

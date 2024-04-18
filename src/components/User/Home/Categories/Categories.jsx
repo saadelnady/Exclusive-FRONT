@@ -13,9 +13,9 @@ const Categories = () => {
       {categories.map((category, index) => {
         return (
           <li key={index}>
-            <NavLink to={`/category/${category.title}`} className="text-dark">
+            <NavLink to={`/category/${category?._id}`} className="text-dark">
               <div>
-                <img src={`${serverUrl}/${category.image}`} alt="" />
+                <img src={`${serverUrl}/${category?.image}`} alt="" />
                 <p>
                   {category?.title}
                   {category?.subCategories?.length > 0 && (

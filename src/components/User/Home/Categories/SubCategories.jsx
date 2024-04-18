@@ -7,14 +7,15 @@ export const SubCategories = ({ category }) => {
     <div className="rounded">
       <ul className="sub-categories-links">
         {category?.subCategories?.map((subCategory, index) => (
-          <li key={index}>
-            <NavLink
-              to={`/categories/${category?.title}/${subCategory?.title}`}
-            >
+          <NavLink
+            to={`/category/${category?._id}/${subCategory?._id}`}
+            key={index}
+          >
+            <li>
               <img src={`${serverUrl}/${subCategory?.image}`} alt="" />
               <span>{subCategory?.title}</span>
-            </NavLink>
-          </li>
+            </li>
+          </NavLink>
         ))}
       </ul>
     </div>

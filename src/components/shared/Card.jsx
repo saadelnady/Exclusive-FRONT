@@ -12,7 +12,7 @@ const Card = ({ product }) => {
     <div className="product-card">
       <div className="header rounded">
         {product?.isFlashSale && (
-          <FlashSaleCounter duration={product?.flashSaleExpirationDate} />
+          <FlashSaleCounter date={product?.flashSaleExpirationDate} />
         )}
         <img
           src={`${serverUrl}/${product?.images[0]}`}

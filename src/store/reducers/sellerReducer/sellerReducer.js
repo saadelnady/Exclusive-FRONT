@@ -133,7 +133,6 @@ const sellerReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
 
     case SELLER_ACTIONS_TYPES.PUT_SELLER_PROFILE_SUCCESS:
-      console.log("actionPayLoad", action?.payLoad);
       return {
         ...state,
         isLoading: false,
