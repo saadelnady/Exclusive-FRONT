@@ -33,7 +33,7 @@ const Links = () => {
         <li
           key={item.key}
           className={`fs-5 ${
-            active === item.key || location.pathname === item.path
+            active === item.key && location.pathname === item.path
               ? "active"
               : ""
           }`}

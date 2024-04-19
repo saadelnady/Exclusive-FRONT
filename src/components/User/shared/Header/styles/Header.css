@@ -9,8 +9,8 @@
   -o-transition: border 0.5s linear;
 }
 
-.links li.active {
-  border-bottom: 1px solid var(--red-color);
+.links li a.active {
+  border-bottom: 2px solid var(--red-color);
 }
 .links-wrapper .links li a {
   color: black;

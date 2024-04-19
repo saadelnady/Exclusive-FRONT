@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import SellerLogin from "../../components/Auth/Login/Seller/Index";
 import UserLogin from "../../components/Auth/Login/User/Index";

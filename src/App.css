@@ -17,7 +17,10 @@ a {
 :root {
   --red-color: #db4444;
   --bg-light: #eeeeee3b;
+  --text-light: #eeeeeeee;
   --blue-color: #1d1d42;
+  --color: #999;
+  --checked-color: #ff5722;
 }
 .row {
   --bs-gutter-x: 0;
@@ -39,7 +42,7 @@ h4 {
 }
 
 .links a {
-  color: var(--bg-light);
+  color: var(--text-light);
 }
 textarea {
   resize: none;
@@ -53,6 +56,15 @@ textarea {
   color: var(--red-color);
   background-color: transparent;
   border: 1px solid var(--red-color);
+}
+.submit-reverse {
+  color: var(--red-color);
+  background-color: transparent;
+  border: 1px solid var(--red-color);
+}
+.submit-reverse:hover {
+  background-color: var(--red-color);
+  color: #fff;
 }
 .bg-black {
   background-color: black;
@@ -87,12 +99,12 @@ h6 {
 .special-input {
   outline: none;
   border: none;
-  border: 1px solid var(--red-color);
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
+  border: 1.5px solid var(--red-color);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
   transition: 0.5s;
   -webkit-transition: 0.5s;
   -moz-transition: 0.5s;
@@ -102,4 +114,119 @@ h6 {
 .special-input:focus {
   border: 1px solid var(--red-color);
   box-shadow: 0 0.5rem 1rem var(--red-color);
+}
+/* Checkbox styling */
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #333;
+  border-radius: 0.3rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  -webkit-border-radius: 0.3rem;
+  -moz-border-radius: 0.3rem;
+  -ms-border-radius: 0.3rem;
+  -o-border-radius: 0.3rem;
+  -webkit-transition: background-color 0.3s ease, border-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease, border-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease, border-color 0.3s ease;
+  -o-transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.custom-checkbox:checked {
+  background-color: var(--red-color);
+  border-color: #5cb85c;
+}
+
+/* Checkmark animation */
+.custom-checkbox::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 0.6rem;
+  height: 1rem;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+  -moz-transform: translate(-50%, -50%) scale(0);
+  -ms-transform: translate(-50%, -50%) scale(0);
+  -o-transform: translate(-50%, -50%) scale(0);
+  -webkit-transition: transform 0.3s ease, opacity 0.2s ease;
+  -moz-transition: transform 0.3s ease, opacity 0.2s ease;
+  -ms-transition: transform 0.3s ease, opacity 0.2s ease;
+  -o-transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.custom-checkbox:checked::before {
+  transform: translate(-50%, -50%) scale(1) rotate(45deg);
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) scale(1) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) scale(1) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) scale(1) rotate(45deg);
+  -o-transform: translate(-50%, -50%) scale(1) rotate(45deg);
+}
+
+/* Label styles */
+.label-text {
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  color: #333;
+  font-size: 1rem;
+}
+
+@keyframes outline-checked {
+  0% {
+    outline-offset: 0;
+  }
+
+  100% {
+    outline-offset: -0.2rem;
+  }
+}
+
+.custom-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: 1px solid var(--checked-color);
+  border: 0.2rem solid #fff;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+/* keyboard navigation focus appearance */
+.custom-radio:focus-visible {
+  outline-offset: 0;
+}
+
+.outline {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.outline:hover {
+  outline-color: var(--checked-color);
+}
+
+.outline:checked {
+  outline-color: var(--checked-color);
+  accent-color: var(--checked-color);
+  background-color: var(--red-color);
+  animation: outline-checked;
+  animation-duration: 0.1s;
+  animation-iteration-count: 4;
+  animation-direction: alternate;
+  animation-timing-function: linear;
 }

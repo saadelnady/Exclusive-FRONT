@@ -3,13 +3,14 @@ import { NavLink } from "react-router-dom";
 import Links from "./Links";
 import User from "./User";
 import Search from "../../../../components/Shared/Search";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchSearchedProducts } from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";
 import { FaXmark } from "react-icons/fa6";
 import CategoriesDropDown from "../../Shared/CategoriesDropDown/CategoriesDropDown";
 
 const NavBar = () => {
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const [currentPage] = useState(1);
@@ -29,6 +30,8 @@ const NavBar = () => {
   const handleActiveNavBar = () => {
     setActiveNavBar(!activeNavBar);
   };
+  // ==========================================================
+
   return (
     <div className="container d-flex justify-content-between align-items-center p-2">
       <NavLink to="/" className="fs-3 fw-bold">
@@ -52,6 +55,14 @@ const NavBar = () => {
           />
         </div>
         <Links />
+        {!isLoggedIn && (
+          <NavLink
+            className="btn submit d-block d-lg-none mb-3"
+            to="/login/seller"
+          >
+            login as a Seller
+          </NavLink>
+        )}
         <CategoriesDropDown />
         <Search action={handleSearchAcceptedProducts} />
       </div>

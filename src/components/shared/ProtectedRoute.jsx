@@ -16,7 +16,7 @@ const ProtectedAdminRoute = (props) => {
 // ==============================================================
 const ProtectedSellerRoute = (props) => {
   if (localStorage.getItem("TOKEN") === null) {
-    return <Navigate to={"/login/user"} />;
+    return <Navigate to={"/login/seller"} />;
   }
   if (decodeToken().role === "SELLER") {
     return props.children;

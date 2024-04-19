@@ -94,7 +94,7 @@ const Index = () => {
               type="checkbox"
               name="checkbox"
               id="checkbox"
-              className="me-4 remember-me rounded-circle"
+              className="me-4 custom-checkbox"
             />
             <label htmlFor="checkbox" className="fs-5 ">
               Remember me

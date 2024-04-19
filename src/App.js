@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +22,6 @@ function App() {
   const handleWarning = () => {
     setIsWarning(!isWarning);
   };
-
   return (
     <div className="App">
       <Routes>

@@ -24,7 +24,7 @@ const User = ({ handleActiveNavBar }) => {
       {isLoggedIn && <UserDropDown />}
 
       {!isLoggedIn && (
-        <NavLink className="btn submit" to="/login/seller">
+        <NavLink className="btn submit d-none d-lg-block" to="/login/seller">
           login as a Seller
         </NavLink>
       )}

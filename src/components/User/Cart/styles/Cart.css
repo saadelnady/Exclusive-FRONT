@@ -1,0 +1,21 @@
+.cart-table img {
+  width: 80px;
+  height: 80px;
+}
+
+.cart-table {
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+.cart-table input {
+  width: 80px;
+}
+.cart-buttons button {
+  border: 1px solid var(--red-color);
+}
+.cart-total {
+  border: 2px solid var(--red-color);
+}
+.cart-total div:not(:last-of-type) {
+  border-bottom: 1.5px solid var(--red-color);
+}
