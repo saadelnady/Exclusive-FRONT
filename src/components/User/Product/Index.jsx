@@ -1,6 +1,7 @@
 import React from "react";
-import { ProductDetails } from "./ProductDetails";
-import { RelatedItem } from "../../Shared/RelatedItem";
+import ProductDetails from "./ProductDetails";
+import RelatedItems from "../../Shared/RelatedItems";
+
 import { fetchProduct } from "../../../store/actions/product/productActions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +17,13 @@ const Index = () => {
     dispatch(fetchProduct(productId));
   }, [dispatch]);
   return (
-    <>
+    <div className="container mb-5">
       <ProductDetails />
-      <RelatedItem />
-    </>
+      <RelatedItems
+        categoryId={product?.category?._id}
+        subCategoryId={product?.subCategory?._id}
+      />
+    </div>
   );
 };
 

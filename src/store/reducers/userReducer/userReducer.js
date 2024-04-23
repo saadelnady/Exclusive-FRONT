@@ -102,13 +102,11 @@ const userReducer = (state = initialState, action) => {
     case USER_ACTIONS_TYPES.POST_USER_REGISTER:
       return {
         ...state,
-        isLoading: true,
       };
     case USER_ACTIONS_TYPES.POST_USER_REGISTER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        isLoading: false,
         message: action?.payLoad?.message,
         error: null,
       };

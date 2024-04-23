@@ -18,12 +18,13 @@ import { PendingProducts } from "../../components/Admin/Products/PendingProducts
 
 import { Categories } from "../../components/Admin/Categories/Categories.jsx";
 import Product from "../../components/Admin/Product/Index.jsx";
+import AdminProfile from "../../components/Admin/AdminProfile/Index.jsx";
 import Seller from "../../components/Admin/Seller/Index.jsx";
 import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCategory.jsx";
 import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
 import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
 
-import Profile from "../../components/Shared/Profile/Index.jsx";
+// import Profile from "../../components/Shared/Profile/Index.jsx";
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions.js";
 import "./styles/Admin.css";
@@ -82,7 +83,7 @@ const Admin = ({ isWarning, handleWarning }) => {
         <AdminHeader handleSidebarActivation={handleSidebarActivation} />
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<AdminProfile />} />
           <Route
             path="/pendingProducts"
             element={

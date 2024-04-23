@@ -5,12 +5,19 @@ import Colors from "./Colors";
 import Size from "./Size";
 import Counter from "./Counter";
 import { useState } from "react";
+import { BiMessageRoundedDetail } from "react-icons/bi";
+import { NavLink, useNavigate } from "react-router-dom";
+import { serverUrl } from "../../../API/API";
 
 const Details = ({ product }) => {
   const [activeColor, setActiveColor] = useState(null);
-
+  const navigate = useNavigate();
   const handleColorActive = (color) => {
     setActiveColor(color);
+  };
+
+  const handleMessageSubmit = () => {
+    navigate("/messages");
   };
 
   const filteredOptions = product?.options?.filter(
@@ -19,7 +26,7 @@ const Details = ({ product }) => {
   if (!product || !product.images || product.images.length === 0) {
     return null;
   }
-   return (
+  return (
     <div className="product-details col-12 col-lg-4 offset-lg-1 mt-4 mt-lg-0">
       <h2 className="product-name fw-bold mb-3">{product?.title}</h2>
       <div className="d-flex align-items-center flex-wrap mb-4">
@@ -46,10 +53,29 @@ const Details = ({ product }) => {
         handleColorActive={handleColorActive}
       />
       <Size options={filteredOptions} />
-      <div className="d-flex align-items-center justify-content-between product-buttons">
+      <div className="d-flex align-items-center justify-content-between product-buttons flex-wrap ">
         <Counter />
         <button className="buy-now">Buy Now</button>
         <CiHeart className="heart cursor-pointer" />
+        <div className="d-flex align-items-center justify-content-between mt-3 col-12">
+          <button
+            className="btn btn-danger submit"
+            onClick={handleMessageSubmit}
+          >
+            Send message
+            <BiMessageRoundedDetail className="fs-2" />
+          </button>
+          <NavLink to={`/sellerpage/${product?.productOwner?._id}`}>
+            <button className="btn submit-reverse">
+              <img
+                src={`${serverUrl}/${product?.productOwner?.image}`}
+                alt="seller-img"
+                className="rounded-pill seller-img"
+              />
+              view seller
+            </button>
+          </NavLink>
+        </div>
       </div>
       <Delivery />
     </div>

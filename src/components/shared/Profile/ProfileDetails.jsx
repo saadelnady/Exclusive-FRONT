@@ -9,7 +9,7 @@ import {
   validate,
 } from "../../../components/Validation/Profile/EditProfileValidation";
 import { MdError } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editUserProfile } from "../../../store/actions/user/userActions";
 import { useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
@@ -17,7 +17,10 @@ import { isObjectNotEmpty } from "../../../helpers/checkers";
 import { editSellerProfile } from "../../../store/actions/seller/sellerActions";
 import { decodeToken } from "../../../helpers/decodeToken";
 
-const ProfileDetails = ({ user, seller }) => {
+const ProfileDetails = () => {
+  const { user } = useSelector((state) => state.userReducer);
+  const { seller } = useSelector((state) => state.sellerReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -110,7 +113,11 @@ const ProfileDetails = ({ user, seller }) => {
   });
   // =======================================================================================
   return (
-    <div className="col-12 col-sm-8 offset-sm-1 shadow p-5 rounded">
+    <div
+      className={`col-12 ${
+        user.role === "USER" ? "col-md-8" : ""
+      } shadow p-5 rounded`}
+    >
       <h3 className="edit">Edit Your Profile</h3>
       <form onSubmit={formik.handleSubmit} action="POST">
         <div className="rounded-pill profile-img-container">

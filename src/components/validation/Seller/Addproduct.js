@@ -1,5 +1,4 @@
 import { isObjectNotEmpty } from "../../../helpers/checkers";
-import moment from "moment";
 
 const initialValues = {
   title: "",
@@ -22,7 +21,9 @@ const initialValues = {
     },
   ],
   isFlashSale: false,
-  flashSaleExpirationDate: "",
+  flashSaleStatus: "",
+  flashSaleStartDate: "",
+  flashSaleEndDate: "",
   status: "PENDING",
 };
 
@@ -53,31 +54,9 @@ const validate = (values) => {
     errors.description =
       "Product description must be between 10 and 500 characters";
   }
-  const flashSaleExpirationMoment = moment(values.flashSaleExpirationDate);
-  const currentMoment = moment();
-  const maximumDuration = moment.duration(30, "days");
 
-  if (values.flashSaleExpirationDate === null && values.isFlashSale) {
-    errors.flashSaleExpirationDate = "Choose the expire date , please";
-  } else if (
-    !moment(values.flashSaleExpirationDate, "YYYY-MM-DD", true).isValid() &&
-    values.isFlashSale
-  ) {
-    errors.flashSaleExpirationDate = "Please provide a valid date";
-  } else if (
-    moment(values.flashSaleExpirationDate).isBefore(moment(), "day") &&
-    values.isFlashSale
-  ) {
-    errors.flashSaleExpirationDate = "the date you provide is expired ";
-  } else if (
-    flashSaleExpirationMoment.diff(currentMoment, "days") >
-      maximumDuration.asDays() &&
-    values.isFlashSale
-  ) {
-    errors.flashSaleExpirationDate =
-      "The date must be less than or equal to 30 days from now";
-  }
-
+  console.log("start date === >", values.flashSaleStartDate);
+  console.log("end date === >", values.flashSaleEndDate);
   // Validate options
   const optionsErrors = values.options
     .map((option, index) => {
@@ -114,6 +93,18 @@ const validate = (values) => {
           index + 1
         }`;
       }
+      // =================================================================================
+      // Validate isFlashSale and discount relationship
+      if (values.isFlashSale === true && !option.price?.discountPercentage) {
+        optionErrors.discountPercentage = `Product discountPercentage is required in option number ${
+          index + 1
+        }`;
+      } else if (values.isFlashSale === true && !option.price?.discountValue) {
+        optionErrors.discountValue = `discount Value must be a number is required in option number ${
+          index + 1
+        }`;
+      }
+
       // =================================================================================
 
       // Validate discountPercentage

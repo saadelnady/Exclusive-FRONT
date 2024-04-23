@@ -74,15 +74,15 @@ export const userRegister = ({ values, toast, navigate }) => {
     try {
       const response = await postData("/api/users/register", values);
 
-      localStorage.setItem("TOKEN", response?.data?.token);
+      // localStorage.setItem("TOKEN", response?.data?.token);
       dispatch(actionCreators.postUserRegisterSuccess(response));
       showToast(toast, response?.message, "success");
+      navigate("/login/user");
 
-      setTimeout(() => {
-        if (localStorage.getItem("TOKEN")) {
-          navigate("/");
-        }
-      });
+      // setTimeout(() => {
+      //   if (localStorage.getItem("TOKEN")) {
+      //   }
+      // });
     } catch (error) {
       dispatch(actionCreators.postUserRegisterFail(error));
       showToast(toast, error?.response?.data?.message, "error");

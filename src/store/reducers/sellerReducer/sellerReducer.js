@@ -92,13 +92,12 @@ const sellerReducer = (state = initialState, action) => {
     case SELLER_ACTIONS_TYPES.POST_SELLER_REGISTER:
       return {
         ...state,
-        isLoading: true,
       };
     case SELLER_ACTIONS_TYPES.POST_SELLER_REGISTER_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        isLoading: false,
+
         message: action?.payLoad?.message,
         error: null,
       };

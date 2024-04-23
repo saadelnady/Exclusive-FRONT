@@ -44,6 +44,9 @@ h4 {
 .links a {
   color: var(--text-light);
 }
+.links span {
+  font-size: 1rem;
+}
 textarea {
   resize: none;
   height: 220px;
@@ -79,6 +82,7 @@ h4,
 h5,
 h6 {
   color: black;
+  margin-bottom: 0;
 }
 .container {
   padding: 0;
@@ -229,4 +233,9 @@ h6 {
   animation-iteration-count: 4;
   animation-direction: alternate;
   animation-timing-function: linear;
+}
+@media (max-width: 768px) {
+  .over-flow-scroll {
+    overflow-x: scroll;
+  }
 }

@@ -7,12 +7,14 @@ import { fetchCategories } from "../../store/actions/category/categoryActions.js
 
 import SellerSideBar from "../../components/Seller/Shared/SellerSideBar.jsx";
 import SellerHeader from "../../components/Seller/Shared/SellerHeader.jsx";
-import SellerDashboard from "../../components/Seller/SellerDashboard.jsx";
-import AddProduct from "../../components/Seller/AddProduct.jsx";
-import Products from "../../components/Seller/Products.jsx";
+import SellerDashboard from "../../components/Seller/SellerDashboard/SellerDashboard.jsx";
+import AddProduct from "../../components/Seller/AddProduct/AddProduct.jsx";
+import Products from "../../components/Seller/Products/Products.jsx";
 import Profile from "../../components/Shared/Profile/Index.jsx";
+import AllOrders from "../../components/Seller/AllOrders/AllOrders.jsx";
+import Messages from "../../components/Seller/Inbox/Messages.jsx";
 
-import "../../components/Seller/styles/seller.css";
+import "../../components/Seller/Shared/styles/seller.css";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
 const Seller = ({ isWarning, handleWarning }) => {
@@ -41,6 +43,9 @@ const Seller = ({ isWarning, handleWarning }) => {
           <Route path="/" element={<SellerDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addProduct" element={<AddProduct />} />
+          <Route path="/allorders" element={<AllOrders />} />
+
+          <Route path="/messages" element={<Messages />} />
           <Route
             path="/products/editProduct/:productId"
             element={<AddProduct />}

@@ -32,7 +32,7 @@ export const editSellerProfile = ({ sellerId, values, toast }) => {
     dispatch(actionCreators.putSellerProfile());
     try {
       const response = await putData(`/api/sellers/${sellerId}`, values);
-       dispatch(actionCreators.putSellerProfileSuccess(response));
+      dispatch(actionCreators.putSellerProfileSuccess(response));
       showToast(toast, response?.message, "success");
     } catch (error) {
       dispatch(actionCreators.putSellerProfileFail(error));
@@ -90,13 +90,13 @@ export const sellerRegister = ({ values, toast, navigate }) => {
     try {
       const response = await postData("/api/sellers/register", values);
       dispatch(actionCreators.postSellerRegisterSuccess(response));
-      localStorage.setItem("TOKEN", response?.data?.token);
+      // localStorage.setItem("TOKEN", response?.data?.token);
+      navigate("/seller/login");
       showToast(toast, response?.message, "success");
-      setTimeout(() => {
-        if (localStorage.getItem("TOKEN")) {
-          navigate("/seller");
-        }
-      }, 2500);
+      // setTimeout(() => {
+      //   if (localStorage.getItem("TOKEN")) {
+      //   }
+      // }, 2500);
     } catch (error) {
       dispatch(actionCreators.postSellerRegisterFail(error));
       showToast(toast, error?.response?.data?.message, "error");

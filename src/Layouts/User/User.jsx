@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 
 import { Route, Routes } from "react-router-dom";
 
-import ActivationPage from "../../components/Shared/Activation.jsx";
+import UserActivationPage from "../../components/Shared/UserActivationPage.jsx";
+import SellerActivationPage from "../../components/Shared/SellerActivationPage.jsx";
 
 import Header from "../../components/User/Shared/Header/Index.jsx";
 import Footer from "../../components/User/Shared/Footer/Footer.jsx";
 import Home from "../../components/User/Home/Index.jsx";
 import Cart from "../../components/User/Cart/Index.jsx";
 import Product from "../../components/User/Product/Index.jsx";
+import SellerPage from "../../components/User/SellerPage/Index.jsx";
 import About from "../../components//User/About/Index.jsx";
 import Contact from "../../components/User/Contact/Index.jsx";
 import Profile from "../../components/Shared/Profile/Index.jsx";
@@ -19,7 +21,7 @@ import Checkout from "../../components/User/Checkout/Index.jsx";
 import Wishlist from "../../components/User/Wishlist/Index.jsx";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../store/actions/user/userActions.js";
 import { fetchCategories } from "../../store/actions/category/categoryActions.js";
 import {
@@ -29,15 +31,14 @@ import {
 import { productStatus } from "../../helpers/options.js";
 
 const User = () => {
+  const { isLoggedIn } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());
     }
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(fetchCategories({ limit: 7, page: 1 }));
-
     dispatch(
       fetchFlashSalesProducts({
         limit: 8,
@@ -56,14 +57,19 @@ const User = () => {
       })
     );
   }, [dispatch]);
+
   return (
     <div>
       <Header />
 
       <Routes>
         <Route
-          path="/activation/:activationToken"
-          element={<ActivationPage />}
+          path="/userActivation/:activationToken"
+          element={<UserActivationPage />}
+        />
+        <Route
+          path="/sellerActivation/:activationToken"
+          element={<SellerActivationPage />}
         />
 
         <Route path="/" element={<Home />} />
@@ -72,15 +78,17 @@ const User = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/products/flashsales" element={<FlashSales />} />
         <Route path="/products/:productId" element={<Product />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/sellerpage/:sellerId" element={<SellerPage />} />
         <Route path="/category/:categoryId" element={<Category />} />
         <Route
           path="/category/:categoryId/:subCategoryId"
           element={<Category />}
         />
+
+        {isLoggedIn && <Route path="/profile/*" element={<Profile />} />}
 
         <Route path="*" element={<NotFoundPage navigateTo="/" />} />
       </Routes>

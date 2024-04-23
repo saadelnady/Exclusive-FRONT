@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { serverUrl } from "../../API/API";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const ActivationPage = () => {
+const SellerActivationPage = () => {
   const { activationToken } = useParams();
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -15,13 +14,13 @@ const ActivationPage = () => {
       const activationEmail = async () => {
         try {
           const response = await axios.post(
-            `${serverUrl}/api/users/activation`,
+            `${serverUrl}/api/sellers/activation`,
             {
               activationToken,
             }
           );
           console.log("data", response);
-          setFirstName(response?.data?.data?.currentUser?.firstName);
+          setFirstName(response?.data?.data?.currentSeller?.firstName);
         } catch (error) {
           setError(true);
           setErrorMessage(error?.response?.data?.message);
@@ -49,4 +48,4 @@ const ActivationPage = () => {
     </div>
   );
 };
-export default ActivationPage;
+export default SellerActivationPage;

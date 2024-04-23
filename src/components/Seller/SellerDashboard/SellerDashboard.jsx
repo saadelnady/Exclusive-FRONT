@@ -1,4 +1,4 @@
 const SellerDashboard = () => {
-  return <div className="vh-100 bg-danger">SellerDashboard </div>;
+  return <div className="vh-100 ">SellerDashboard </div>;
 };
 export default SellerDashboard;

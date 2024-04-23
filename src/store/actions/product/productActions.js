@@ -119,7 +119,7 @@ export const fetchFlashSalesProducts = ({
   };
 };
 /* =================================================================================================== */
-export const fetchSellerProducts = ({ sellerId, status }) => {
+export const fetchSellerProducts = ({ sellerId, status, limit, page }) => {
   return async (dispatch) => {
     dispatch(actionsCreators.getSellerProducts(sellerId));
     try {

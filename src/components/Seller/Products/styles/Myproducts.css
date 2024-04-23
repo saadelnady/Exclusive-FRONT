@@ -1,15 +1,3 @@
-.products-page {
-  padding: 20px 0 60px 0;
-  height: 100%;
-}
-.products-page > div {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-@media (max-width: 1200px) {
-  .products-page > div {
-    overflow-x: scroll;
-  }
-}
 @media (min-width: 1200px) {
   .products-page .products-list {
     width: 90%;
@@ -23,7 +11,7 @@
 }
 .products-page .products-list {
   width: 95%;
-  margin: 40px auto;
+  margin: 20px auto;
 }
 .products-page div table .product-image {
   width: 60px;
@@ -56,7 +44,6 @@
 }
 .products-page div table tbody td .options-wrapper {
   cursor: pointer;
-
   width: fit-content;
   margin: 0 auto;
 }
@@ -66,7 +53,6 @@
   right: 60px;
   display: none;
   content: "";
-  z-index: 4;
   z-index: 999;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;

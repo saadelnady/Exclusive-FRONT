@@ -6,13 +6,13 @@ import Links from "./Links";
 import Details from "./Details";
 import Loading from "../../Shared/Loading";
 
-export const ProductDetails = () => {
+const ProductDetails = () => {
   const { product, isLoading } = useSelector((state) => state.productReducer);
 
   return isLoading ? (
     <Loading />
   ) : (
-    <div className="container mb-5">
+    <div>
       <Links product={product} />
       <div className="details row">
         <ProductSlider product={product} />
@@ -21,3 +21,4 @@ export const ProductDetails = () => {
     </div>
   );
 };
+export default ProductDetails;
