@@ -20,6 +20,7 @@ import Warning from "../../Shared/Warning";
 import Search from "../../Shared/Search";
 import { OptionButton } from "../../Admin/Shared/OptionButton";
 import { productDeleteAction } from "../../../helpers/options";
+import CreateCoupon from "../Shared/CreateCoupon";
 
 const Products = ({ isWarning, handleWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -32,6 +33,10 @@ const Products = ({ isWarning, handleWarning }) => {
     subMessage: "",
     actionHandler: null,
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const handleIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const dispatch = useDispatch();
@@ -71,11 +76,16 @@ const Products = ({ isWarning, handleWarning }) => {
   return (
     <div className="products-page">
       {isWarning && <Warning handleWarning={handleWarning} action={action} />}
-
+      {isOpen && <CreateCoupon handleIsOpen={handleIsOpen} />}
       <div className="products-list shadow pt-3   ">
         <div className="d-flex justify-content-between align-items-center flex-wrap rounded mx-3 mb-5">
           <h1 className="special-header ps-5 py-3">My Products</h1>
           <Search action={handleSearchProducts} />
+        </div>
+        <div className="d-flex justify-content-end mb-4 me-3">
+          <button className="btn submit" onClick={handleIsOpen}>
+            Add coupon code
+          </button>
         </div>
         {isLoading ? (
           <Loading />
@@ -113,14 +123,14 @@ const Products = ({ isWarning, handleWarning }) => {
                       />
                     </td>
                     <td style={{ width: `100px` }}>
-                      {product?.title.slice(4, 19) + "..."}
+                      {product?.title.slice(0, 19) + "..."}
                     </td>
 
                     <td>{product?.options[0].price.priceBeforeDiscount}</td>
                     <td>{product?.options[0].price.discountPercentage}</td>
                     <td>{product?.options[0].price.discountValue}</td>
                     <td>{product?.options[0].price.finalPrice}</td>
-                    <td>{product?.soldOut} 10</td>
+                    <td>{product?.soldOut}</td>
 
                     <td>
                       <div className="options-wrapper">

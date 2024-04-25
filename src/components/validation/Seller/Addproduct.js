@@ -1,4 +1,5 @@
 import { isObjectNotEmpty } from "../../../helpers/checkers";
+import moment from "moment";
 
 const initialValues = {
   title: "",
@@ -22,8 +23,8 @@ const initialValues = {
   ],
   isFlashSale: false,
   flashSaleStatus: "",
-  flashSaleStartDate: "",
-  flashSaleEndDate: "",
+  flashSaleStartDate: null,
+  flashSaleEndDate: null,
   status: "PENDING",
 };
 
@@ -55,8 +56,51 @@ const validate = (values) => {
       "Product description must be between 10 and 500 characters";
   }
 
-  console.log("start date === >", values.flashSaleStartDate);
-  console.log("end date === >", values.flashSaleEndDate);
+  // if (values.isFlashSale) {
+  //   if (!values.flashSaleStartDate) {
+  //     errors.flashSaleStartDate = "Product flash Sale Start Date is required";
+  //   } else if (
+  //     !moment(values.flashSaleStartDate, "YYYY-MM-DD", true).isValid()
+  //   ) {
+  //     errors.flashSaleStartDate =
+  //       "Invalid date format for flash Sale Start Date";
+  //   } else if (moment(values.flashSaleStartDate).isBefore(moment(), "day")) {
+  //     errors.flashSaleStartDate = "Start Date must be today or in the future";
+  //   }
+
+  //   if (!values.flashSaleEndDate) {
+  //     errors.flashSaleEndDate = "Product flash Sale End Date is required";
+  //   } else if (!moment(values.flashSaleEndDate, "YYYY-MM-DD", true).isValid()) {
+  //     errors.flashSaleEndDate = "Invalid date format for flash Sale End Date";
+  //   } else if (moment(values.flashSaleEndDate).isBefore(moment(), "day")) {
+  //     errors.flashSaleEndDate = "this is expired date";
+  //   } else if (
+  //     moment(values.flashSaleEndDate).isBefore(
+  //       moment(values.flashSaleStartDate).add(3, "days")
+  //     )
+  //   ) {
+  //     errors.flashSaleEndDate =
+  //       "End Date must be at least 3 days after Start Date";
+  //   }
+  // }
+
+  if (values.isFlashSale) {
+    if (!values.flashSaleStartDate) {
+      errors.flashSaleStartDate = "Product flash Sale Start Date is required";
+    } else if (
+      !moment(values.flashSaleStartDate, "YYYY-MM-DD", true).isValid()
+    ) {
+      errors.flashSaleStartDate =
+        "Invalid date format for flash Sale Start Date";
+    }
+
+    if (!values.flashSaleEndDate) {
+      errors.flashSaleEndDate = "Product flash Sale End Date is required";
+    } else if (!moment(values.flashSaleEndDate, "YYYY-MM-DD", true).isValid()) {
+      errors.flashSaleEndDate = "Invalid date format for flash Sale End Date";
+    }
+  }
+
   // Validate options
   const optionsErrors = values.options
     .map((option, index) => {

@@ -29,14 +29,19 @@ import {
   fetchProducts,
 } from "../../store/actions/product/productActions.js";
 import { productStatus } from "../../helpers/options.js";
+import { getCart } from "../../store/actions/cart/cartActions.js";
 
 const User = () => {
-  const { isLoggedIn } = useSelector((state) => state.userReducer);
+  const { isLoggedIn, user } = useSelector((state) => state.userReducer);
+  const { cart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-
+  console.log(cart);
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());
+    }
+    if (user?._id) {
+      dispatch(getCart(user._id));
     }
     dispatch(fetchCategories({ limit: 7, page: 1 }));
     dispatch(
@@ -56,7 +61,7 @@ const User = () => {
         type: "notFlashSale",
       })
     );
-  }, [dispatch]);
+  }, [dispatch, user._id]);
 
   return (
     <div>
@@ -74,9 +79,7 @@ const User = () => {
 
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/checkout" element={<Checkout />} />
+
         <Route path="/contact" element={<Contact />} />
         <Route path="/products/flashsales" element={<FlashSales />} />
         <Route path="/products/:productId" element={<Product />} />
@@ -89,6 +92,9 @@ const User = () => {
         />
 
         {isLoggedIn && <Route path="/profile/*" element={<Profile />} />}
+        {isLoggedIn && <Route path="/cart" element={<Cart />} />}
+        {isLoggedIn && <Route path="/wishlist" element={<Wishlist />} />}
+        {isLoggedIn && <Route path="/checkout" element={<Checkout />} />}
 
         <Route path="*" element={<NotFoundPage navigateTo="/" />} />
       </Routes>

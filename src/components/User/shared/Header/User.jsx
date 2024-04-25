@@ -11,15 +11,31 @@ import { useSelector } from "react-redux";
 import "./styles/User.css";
 const User = ({ handleActiveNavBar }) => {
   const { isLoading, isLoggedIn } = useSelector((state) => state.userReducer);
+  const { cart } = useSelector((state) => state.cartReducer);
 
   return (
-    <div className="user d-flex col-8 col-lg-3 justify-content-evenly align-items-center">
-      <NavLink to="/wishList">
-        <CiHeart className="fs-2 cursor-pointer" />
-      </NavLink>
-      <NavLink to="/cart">
-        <BsCart3 className="fs-2 cart" />
-      </NavLink>
+    <div
+      className={`user d-flex col-8 col-lg-3 ${
+        isLoggedIn ? "justify-content-evenly" : "justify-content-end"
+      }  align-items-center`}
+    >
+      {isLoggedIn && (
+        <NavLink to="/wishList" className="position-relative ">
+          <CiHeart className="fs-2 cursor-pointer" />
+          <span className="position-absolute top-0 start-100 px-2 py-1 rounded-circle translate-middle text-light bg-danger  ">
+            0
+          </span>
+        </NavLink>
+      )}
+      {isLoggedIn && (
+        <NavLink to="/cart" className="position-relative ">
+          <BsCart3 className="fs-2 cart cursor-pointer" />
+          <span className="position-absolute top-0 start-100 px-2 py-1 rounded-circle translate-middle text-light bg-danger  ">
+            {cart.length}
+          </span>
+        </NavLink>
+      )}
+
       {isLoading && <Loading />}
       {isLoggedIn && <UserDropDown />}
 

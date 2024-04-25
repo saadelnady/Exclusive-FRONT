@@ -106,7 +106,7 @@ const userReducer = (state = initialState, action) => {
     case USER_ACTIONS_TYPES.POST_USER_REGISTER_SUCCESS:
       return {
         ...state,
-        isLoggedIn: true,
+
         message: action?.payLoad?.message,
         error: null,
       };

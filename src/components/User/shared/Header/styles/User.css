@@ -9,7 +9,7 @@
   -o-transition: 0.5s;
 }
 @media (min-width: 992px) {
-  .user .burger-icon {
+  .burger-icon {
     display: none;
   }
 }

@@ -76,6 +76,12 @@ const SellerSideBar = ({ isActive, handleSidebarActivation }) => {
               <AiOutlineFolderAdd className="fs-3" /> Add product
             </NavLink>
           </li>
+
+          <li className="fs-5 ">
+            <NavLink to="/seller/discountcodes">
+              <AiOutlineFolderAdd className="fs-3" /> Discount codes
+            </NavLink>
+          </li>
         </ul>
         <button
           className="btn btn-danger"

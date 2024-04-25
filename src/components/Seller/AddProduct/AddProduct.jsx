@@ -54,7 +54,7 @@ const AddProduct = () => {
       formik.setValues({
         ...formik.values,
         isFlashSale: false,
-        flashSaleExpirationDate: "",
+        // flashSaleExpirationDate: "",
         status: productStatus.PENDING,
         category: initialCategory?._id,
         subCategory:
@@ -81,7 +81,7 @@ const AddProduct = () => {
         description: "",
         images: [],
         isFlashSale: false,
-        flashSaleExpirationDate: "",
+
         status: productStatus.PENDING,
         options: [
           {
@@ -110,7 +110,12 @@ const AddProduct = () => {
         subCategory: product?.subCategory?._id,
         productOwner: product.productOwner,
         isFlashSale: product.isFlashSale,
-        flashSaleExpirationDate: product.flashSaleExpirationDate,
+        flashSaleStartDate: product.flashSaleStartDate
+          ? new Date(product.flashSaleStartDate)
+          : null,
+        flashSaleEndDate: product.flashSaleEndDate
+          ? new Date(product.flashSaleEndDate)
+          : null,
         status: product.status,
         options: product.options
           ? product.options.map((option) => ({
@@ -126,6 +131,9 @@ const AddProduct = () => {
             }))
           : [],
       });
+      console.log("isFlashSale ==>", product.isFlashSale);
+      console.log("flashSaleStartDate", product.flashSaleStartDate);
+      console.log("flashSaleEndDate", product.flashSaleEndDate);
     } else {
       const initialCategory = categories[0] || {};
 
@@ -140,7 +148,9 @@ const AddProduct = () => {
             ? initialCategory?.subCategories[0]?._id
             : null,
         isFlashSale: false,
-        flashSaleExpirationDate: "",
+        // flashSaleExpirationDate: "",
+        flashSaleStartDate: null,
+        flashSaleEndDate: null,
         status: productStatus.PENDING,
         options: [
           {
@@ -176,8 +186,18 @@ const AddProduct = () => {
     formData.append("category", values?.category);
     formData.append("subCategory", values?.subCategory);
 
-    formData.append("isFlashSale", values?.isFlashSale);
-    formData.append("flashSaleExpirationDate", values?.flashSaleExpirationDate);
+    if (values?.isFlashSale === true) {
+      formData.append("isFlashSale", values?.isFlashSale);
+      formData.append(
+        "flashSaleStartDate",
+        values?.flashSaleStartDate.toISOString()
+      );
+      formData.append(
+        "flashSaleEndDate",
+        values?.flashSaleEndDate.toISOString()
+      );
+    }
+
     formData.append("status", values?.status);
 
     // Set productOwner value programmatically
@@ -235,8 +255,19 @@ const AddProduct = () => {
     // Set productOwner value programmatically
     const productOwnerId = seller?._id; // Assuming seller is available
     formData.append("productOwner", productOwnerId);
-    formData.append("isFlashSale", values?.isFlashSale);
-    formData.append("flashSaleExpirationDate", values?.flashSaleExpirationDate);
+
+    if (values?.isFlashSale === true) {
+      formData.append("isFlashSale", values?.isFlashSale);
+      formData.append(
+        "flashSaleStartDate",
+        values?.flashSaleStartDate.toISOString()
+      );
+      formData.append(
+        "flashSaleEndDate",
+        values?.flashSaleEndDate.toISOString()
+      );
+    }
+
     formData.append("status", productStatus.PENDING);
     // Append the existing images
     values.images.forEach((image) => {
@@ -341,31 +372,29 @@ const AddProduct = () => {
     }
   };
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
-  const handleStartDateChange = (e) => {
+  /* ================================================================================================== */
+  const handleFlashSaleStartDate = (e) => {
     const startDate = new Date(e.target.value);
-    const minEndDate = new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000);
-    setStartDate(startDate);
-    setEndDate(null);
-    document.getElementById("flashSaleEndDate").min =
-      minEndDate.toISOString.slice(0, 10);
+    const minEndDate = new Date(startDate?.getTime() + 3 * 24 * 60 * 60 * 1000);
+    formik.setFieldValue("flashSaleStartDate", startDate);
+    formik.setFieldValue("flashSaleEndDate", null);
+    document.getElementById("flashSaleEndDate").min = minEndDate
+      .toISOString()
+      .slice(0, 10);
   };
-
-  const handleEndDateChange = (e) => {
+  const handleFlashSaleEndDate = (e) => {
     const endDate = new Date(e.target.value);
-    setEndDate(endDate);
+    formik.setFieldValue("flashSaleEndDate", endDate);
   };
 
   const today = new Date().toISOString().slice(0, 10);
-
-  const minEndDate = startDate
-    ? new Date(startDate.getTime() + 3 * 24 * 60 * 60 * 1000)
+  const minEndDate = formik.values.flashSaleStartDate
+    ? new Date(
+        formik?.values?.flashSaleStartDate?.getTime() + 3 * 24 * 60 * 60 * 1000
+      )
         .toISOString()
         .slice(0, 10)
-    : "";
-
+    : today;
   /* ================================================================================================== */
 
   const removeProductOption = (index) => {
@@ -559,7 +588,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="shadow container rounded mt-4">
+    <div className="shadow container-fluid rounded mt-4">
       <h1 className="special-header ps-5 py-3 m-3">
         {productId ? "Edit" : "Add"} product
       </h1>
@@ -660,7 +689,7 @@ const AddProduct = () => {
             name="category"
             onChange={handleCategoryChange}
             value={formik.values.category}
-            className="col-12  col-sm-8 py-2 px-3 fs-3 special-input"
+            className="col-12 col-sm-8 py-2 px-3 fs-3 special-input"
           >
             {categories.map((cat, index) => (
               <option key={index} value={cat._id}>
@@ -704,7 +733,7 @@ const AddProduct = () => {
           </label>
         </div>
         {formik.values.isFlashSale && (
-          <div className="row">
+          <div>
             <div className="item">
               <label htmlFor="flashSaleStartDate" className="fw-bold fs-4">
                 flash Sale Start date:
@@ -713,18 +742,25 @@ const AddProduct = () => {
                 type="date"
                 name="flashSaleStartDate"
                 id="flashSaleStartDate"
-                value={endDate ? endDate.toISOString().slice(0, 10) : ""}
-                className="col-12 col-md-7  py-2 px-3 fs-3 special-input"
-                onChange={handleStartDateChange}
-                min={minEndDate}
-              />
-              <ErrorMessage
-                touched={formik.touched}
-                errors={formik.errors}
-                fieldName="flashSaleStartDate"
-                condition={formik.values.isFlashSale}
+                className="col-12 col-md-7 py-2 px-3 fs-3 special-input"
+                value={
+                  formik?.values?.flashSaleStartDate
+                    ? formik?.values?.flashSaleStartDate
+                        .toISOString()
+                        .slice(0, 10)
+                    : null
+                }
+                onChange={handleFlashSaleStartDate}
+                onBlur={formik.handleBlur}
+                min={today}
               />
             </div>
+            <ErrorMessage
+              touched={formik.touched}
+              errors={formik.errors}
+              fieldName="flashSaleStartDate"
+              condition={formik.values.isFlashSale}
+            />
             <div className="item">
               <label htmlFor="flashSaleEndDate" className="fw-bold fs-4">
                 flash Sale end date:
@@ -733,18 +769,25 @@ const AddProduct = () => {
                 type="date"
                 name="flashSaleEndDate"
                 id="flashSaleEndDate"
-                value={endDate ? endDate.toISOString().slice(0, 10) : ""}
-                className="col-12 col-md-7  py-2 px-3 fs-3 special-input"
-                onChange={handleEndDateChange}
+                className="col-12 col-md-7 py-2 px-3 fs-3 special-input"
+                value={
+                  formik?.values?.flashSaleEndDate
+                    ? formik?.values?.flashSaleEndDate
+                        .toISOString()
+                        .slice(0, 10)
+                    : null
+                }
+                onChange={handleFlashSaleEndDate}
+                onBlur={formik.handleBlur}
                 min={minEndDate}
               />
-              <ErrorMessage
-                touched={formik.touched}
-                errors={formik.errors}
-                fieldName="flashSaleEndDate"
-                condition={formik.values.isFlashSale}
-              />
             </div>
+            <ErrorMessage
+              touched={formik.touched}
+              errors={formik.errors}
+              fieldName="flashSaleEndDate"
+              condition={formik.values.isFlashSale}
+            />
           </div>
         )}
 

@@ -13,6 +13,7 @@ import Products from "../../components/Seller/Products/Products.jsx";
 import Profile from "../../components/Shared/Profile/Index.jsx";
 import AllOrders from "../../components/Seller/AllOrders/AllOrders.jsx";
 import Messages from "../../components/Seller/Inbox/Messages.jsx";
+import DiscountCodes from "../../components/Seller/DiscountCodes/Index.jsx";
 
 import "../../components/Seller/Shared/styles/seller.css";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
@@ -46,6 +47,7 @@ const Seller = ({ isWarning, handleWarning }) => {
           <Route path="/allorders" element={<AllOrders />} />
 
           <Route path="/messages" element={<Messages />} />
+          <Route path="/discountcodes" element={<DiscountCodes />} />
           <Route
             path="/products/editProduct/:productId"
             element={<AddProduct />}

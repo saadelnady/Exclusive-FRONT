@@ -4,7 +4,8 @@ import { productReducer } from "./reducers/productReducer/productReducer.js";
 import { sellerReducer } from "./reducers/sellerReducer/sellerReducer.js";
 import { categoryReducer } from "./reducers/categoryReducer/categoryReducer.js";
 import { subCategoryReducer } from "./reducers/subCategory/subCategoryReducer.js";
-
+import { couponCodeReducer } from "./reducers/couponCodeRdeucer/couponCodeReducer.js";
+import { cartReducer } from "./reducers/cartReducer/cartReducer.js";
 import { thunk } from "redux-thunk";
 
 const composeEnhancers =
@@ -19,5 +20,7 @@ const appReducers = combineReducers({
   sellerReducer,
   categoryReducer,
   subCategoryReducer,
+  couponCodeReducer,
+  cartReducer,
 });
 export const store = createStore(appReducers, enhancer);
