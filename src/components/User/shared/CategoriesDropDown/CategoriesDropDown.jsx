@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { serverUrl } from "../../../../API/API";
 import "./styles/CategoriesDropDown.css";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -10,6 +10,8 @@ const CategoriesDropDown = () => {
   const handleDropDown = () => {
     setActiveDropDown(!activeDropDown);
   };
+  const navigate = useNavigate();
+
   return (
     <div className="d-lg-none position-relative">
       <button onClick={handleDropDown} className="btn text-light col-12 border">
@@ -19,16 +21,21 @@ const CategoriesDropDown = () => {
         {activeDropDown &&
           categories?.map((category, index) => {
             return (
-              <NavLink to={`/category/${category?._id}`} key={index}>
-                <li className="d-flex mb-3 align-items-center">
-                  <img
-                    src={`${serverUrl}/${category?.image}`}
-                    alt="categoryImg"
-                    className="col-3 rounded-pill"
-                  />
-                  <p>{category?.title}</p>
-                </li>
-              </NavLink>
+              <li
+                className="d-flex mb-3 align-items-center cursor-pointer"
+                onClick={() => {
+                  navigate(`/category/${category?._id}`);
+                  handleDropDown();
+                }}
+                key={index}
+              >
+                <img
+                  src={`${serverUrl}/${category?.image}`}
+                  alt="categoryImg"
+                  className="col-3 rounded-pill"
+                />
+                <p>{category?.title}</p>
+              </li>
             );
           })}
       </ul>

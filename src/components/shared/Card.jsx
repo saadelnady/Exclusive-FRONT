@@ -15,6 +15,7 @@ import { addToCart } from "../../store/actions/cart/cartActions";
 const Card = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(""); // State for selected size
   const [selectedColor, setSelectedColor] = useState(""); // State for selected color
+  const [selectedPrice, setSelectedPrice] = useState(""); // State for selected color
 
   const { isLoggedIn, user } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Card = ({ product }) => {
     .filter((option) => option.color === selectedColor) // Filter options by selectedColor
     .map((option) => option.size); // Extract sizes from filtered options
 
-  const addToCartHandler = (productId) => {
+  const addToCartHandler = (productId, productPrice) => {
     if (!isLoggedIn) {
       showToast(toast, "You have to login first", "error");
       setTimeout(() => {
@@ -40,6 +41,7 @@ const Card = ({ product }) => {
         quantity: 1,
         size: selectedSize,
         color: selectedColor,
+        price: productPrice,
         userId: user._id,
       };
       dispatch(addToCart(data, toast));
@@ -62,7 +64,10 @@ const Card = ({ product }) => {
         <button
           className="addToCart bg-black"
           onClick={() => {
-            addToCartHandler(product._id);
+            addToCartHandler(
+              product?._id,
+              product?.options[0]?.price.finalPrice
+            );
           }}
         >
           Add To Cart
