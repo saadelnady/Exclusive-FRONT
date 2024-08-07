@@ -7,7 +7,7 @@ import AllProductsButton from "../../Shared/AllProductsButton/AllProductsButton"
 import { fetchProducts } from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";
 
-const OurProducts = () => {
+const OurProducts = ({ handleTargetProduct, handleActiveModal }) => {
   const { products, isLoading } = useSelector((state) => state.productReducer);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -82,7 +82,11 @@ const OurProducts = () => {
             onNextSlide={fetchNextProducts}
             onPrevSlide={fetchPrevProducts}
           />
-          <Products products={products} />
+          <Products
+            products={products}
+            handleTargetProduct={handleTargetProduct}
+            handleActiveModal={handleActiveModal}
+          />
           <AllProductsButton navigateTo="/products" />
         </div>
       )}

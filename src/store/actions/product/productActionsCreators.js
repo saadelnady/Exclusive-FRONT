@@ -80,6 +80,14 @@ export const getProductFail = (payLoad) => {
   };
 };
 // ==================================================================================
+export const clearProduct = (payLoad) => {
+  return {
+    type: PRODUCT_ACTIONS_TYPES.CLEAR_PRODUCT,
+    payLoad,
+  };
+};
+
+// ==================================================================================
 export const getAcceptedSellerProducts = () => {
   return {
     type: PRODUCTS_ACTIONS_TYPES.GET_ACCEPTED_SELLER_PRODUCTS,

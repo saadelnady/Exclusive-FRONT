@@ -246,6 +246,9 @@ const productReducer = (state = initialState, action) => {
         error: action?.payLoad,
       };
     }
+    // ========================================================================
+    case PRODUCT_ACTIONS_TYPES.CLEAR_PRODUCT:
+      return { ...state, product: {} };
 
     // ========================================================================
 

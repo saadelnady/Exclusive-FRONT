@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 import CategoriesBrowse from "./CategoriesBrowse/CategoriesBrowse";
 import Slider from "./Slider/Slider";
 import BestSelling from "./BestSelling/BestSelling";
@@ -8,25 +7,47 @@ import OurProducts from "./OurProducts/OurProducts";
 import NewArrival from "./NewArrival/NewArrival";
 import AboutUs from "../../User/About/AboutUs";
 import Categories from "./Categories/Categories";
-import bgAnnounce2 from "../../../assets/images/pngs/bg-announce-2.png";
+
+import { useState } from "react";
+import ProductModal from "../../Shared/ProductModal";
 
 const Index = () => {
+  const [targetProduct, setTargetProduct] = useState({});
+  const [activeModal, setActiveModal] = useState(false);
+  const handleTargetProduct = (e) => {
+    setTargetProduct(e);
+  };
+  const handleActiveModal = () => {
+    setActiveModal(!activeModal);
+  };
+  console.log("targetProduct ===>", targetProduct);
   return (
-    <div className="container ">
-      <div className="row justify-content-between align-items-between">
-        <Categories />
-        <Slider />
-      </div>
-      <FlashSale />
-      <CategoriesBrowse />
-      <BestSelling />
-      <NavLink>
+    <>
+      {activeModal && (
+        <ProductModal
+          productId={targetProduct?._id}
+          handleActiveModal={handleActiveModal}
+        />
+      )}
+      <div className="container ">
+        <div className="row justify-content-between align-items-between">
+          <Categories />
+          <Slider />
+        </div>
+        <FlashSale />
+        {/* <CategoriesBrowse /> */}
+        {/* <BestSelling /> */}
+        {/* <NavLink>
         <img src={bgAnnounce2} alt="" className="w-100" />
-      </NavLink>
-      <OurProducts />
-      <NewArrival />
-      <AboutUs />
-    </div>
+      </NavLink> */}
+        <OurProducts
+          handleTargetProduct={handleTargetProduct}
+          handleActiveModal={handleActiveModal}
+        />
+        {/* <NewArrival /> */}
+        {/* <AboutUs /> */}
+      </div>
+    </>
   );
 };
 

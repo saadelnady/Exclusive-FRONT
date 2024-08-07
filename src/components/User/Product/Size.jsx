@@ -1,11 +1,6 @@
 import { useState } from "react";
 
-const Size = ({ options }) => {
-  const [activeSize, setActiveSize] = useState(null);
-
-  const handleSizeActive = (size) => {
-    setActiveSize(size);
-  };
+const Size = ({ options, activeSize, handleSizeActive }) => {
   return (
     <div className="size d-flex align-items-center mb-4 ">
       <p className="me-4 fs-4">Size :</p>

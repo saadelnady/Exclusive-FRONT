@@ -22,8 +22,8 @@ const CartTable = () => {
               <td className="py-2 px-3">
                 <div className="position-relative">
                   <img
-                    src={`${serverUrl}/${item.product.images[0]}`}
-                    alt=""
+                    src={`${serverUrl}/${item?.product?.images[0]}`}
+                    alt="product-img"
                     className="object-fit-cover rounded-pill"
                   />
                 </div>

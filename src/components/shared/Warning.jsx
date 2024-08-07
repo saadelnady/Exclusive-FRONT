@@ -1,4 +1,3 @@
-import React from "react";
 import { CiWarning } from "react-icons/ci";
 import "./styles/Warning.css";
 const Warning = ({ handleWarning, action }) => {
