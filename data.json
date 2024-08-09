@@ -1,0 +1,89 @@
+{
+  "cartId": "ID",
+  "addressID": "ID",
+  "paymentMethod": "ID",
+  "products": [
+    {
+      "_id": "66b3a070199592e0634841b9",
+      "title": "t-shirt ",
+      "description": "Introducing our premium Men's T-Shirt, designed for those who appreciate both style and comfort. Made from 100% high-quality, breathable cotton, this t-shirt offers an exceptionally soft feel against your skin, ensuring you stay comfortable all day long. Its lightweight fabric is perfect for any season, keeping you cool in the summer and providing a great base layer during the colder months.",
+      "images": [
+        "uploads/1723048048371.webp",
+        "uploads/1723048048372.webp",
+        "uploads/1723048048376.webp",
+        "uploads/1723048048382.webp",
+        "uploads/1723048048387.webp",
+        "uploads/1723048048388.webp",
+        "uploads/1723048048389.webp"
+      ],
+      "category": {
+        "_id": "66035e46a5869fd5643642cd",
+        "title": "Mens ’s Fashion",
+        "image": "uploads/1711496773999.jpeg",
+        "subCategories": [
+          "66035ef8a5869fd5643642e7",
+          "66035f43a5869fd564364314",
+          "66035fb9a5869fd56436432a",
+          "66036066a5869fd56436434b",
+          "66051a8193c24d45a2cd494c"
+        ],
+        "createdAt": "2024-03-26T23:46:14.162Z",
+        "updatedAt": "2024-03-28T07:21:37.849Z",
+        "__v": 0
+      },
+      "subCategory": {
+        "_id": "66035f43a5869fd564364314",
+        "title": "T-shirts",
+        "image": "uploads/1711497026805.webp",
+        "category": "66035e46a5869fd5643642cd",
+        "createdAt": "2024-03-26T23:50:27.117Z",
+        "updatedAt": "2024-03-26T23:50:27.117Z",
+        "__v": 0
+      },
+      "productOwner": {
+        "_id": "6629e52df1e559807166b406",
+        "firstName": "Saad",
+        "lastName": "Elnady",
+        "image": "uploads/seller-default.png",
+        "mobilePhone": "01068230488",
+        "email": "saad.elnady.work@gmail.com",
+        "password": "$2b$10$.461lKWmGUJw4zTU7UmU3eXyBdiRBXFp3YPEnrYrm4NEl9Jpg050q",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJTYWFkIiwibGFzdE5hbWUiOiJFbG5hZHkiLCJlbWFpbCI6InNhYWQuZWxuYWR5LndvcmtAZ21haWwuY29tIiwibW9iaWxlUGhvbmUiOiIwMTA2ODIzMDQ4OCIsInBhc3N3b3JkIjoiU2FhZDEyMzQ1Njc4OSIsInJvbGUiOiJTRUxMRVIiLCJpYXQiOjE3MTQwMjE2NTUsImV4cCI6MTcxNDg4NTY1NX0.2dZ87Ye1VLa7zZk07XcTngEK5XNO-PpoFgEtGlxVLJY",
+        "role": "SELLER",
+        "products": [
+          "662a19c62969505761ca113c",
+          "66b0d29cbe31ee9a62f9a1fe",
+          "66b3a070199592e0634841b9"
+        ],
+        "createdAt": "2024-04-25T05:07:57.537Z",
+        "updatedAt": "2024-08-07T16:27:28.734Z",
+        "__v": 3
+      },
+      "option": {
+        "price": {
+          "priceBeforeDiscount": 650,
+          "discountPercentage": null,
+          "discountValue": null,
+          "finalPrice": 650
+        },
+        "size": "S",
+        "color": "#000000",
+        "stockCount": 4,
+        "soldOut": 0,
+        "_id": "66b3a070199592e0634841c0"
+      },
+      "selectedCount": "رقم",
+      "subTotal": "selectedCount * product.option.finalPrice",
+      "status": "ACCEPTED",
+      "isFlashSale": false,
+      "createdAt": "2024-08-07T16:27:28.445Z",
+      "updatedAt": "2024-08-07T16:28:18.791Z",
+      "__v": 0
+    }
+  ],
+  "coupon": null,
+  "priceBefore": "000",
+  "priceAfter": "000",
+  "discount": "000",
+  "shipping": "000"
+}

@@ -1,9 +1,7 @@
 import { CART_ACTIONS_TYPES } from "../../actions/actionTypes";
 const initialValues = {
   isLoading: false,
-  cartItem: null,
-  cart: [], // Ensure cart is initialized as an array
-  message: "",
+  cart: { products: [] },
   error: null,
 };
 
@@ -15,9 +13,8 @@ const cartReducer = (state = initialValues, action) => {
       return {
         ...state,
         isLoading: false,
-        cartItem: action.payLoad.data.cartItem,
-        cart: [...state.cart, action.payLoad.data.cartItem],
-        message: action.payLoad.data.message,
+
+        cart: { ...action?.payLoad?.data?.cart },
         error: null,
       };
     case CART_ACTIONS_TYPES.ADD_TO_CART_FAIL:
@@ -25,17 +22,15 @@ const cartReducer = (state = initialValues, action) => {
         ...state,
         isLoading: false,
         error: action.payLoad,
-        message: action.payLoad,
       };
     //   =====================================================================
     case CART_ACTIONS_TYPES.GET_CART:
       return { ...state, isLoading: true };
     case CART_ACTIONS_TYPES.GET_CART_SUCCESS:
-      console.log("res ===", action.payLoad);
       return {
         ...state,
         isLoading: false,
-        cart: action.payLoad.data.cart.items,
+        cart: action?.payLoad,
         error: null,
       };
     case CART_ACTIONS_TYPES.GET_CART_FAIL:
@@ -43,7 +38,6 @@ const cartReducer = (state = initialValues, action) => {
         ...state,
         isLoading: false,
         error: action.payLoad,
-        message: action.payLoad,
       };
     default:
       return state;

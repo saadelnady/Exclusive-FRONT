@@ -20,8 +20,7 @@ const UserActivationPage = () => {
               activationToken,
             }
           );
-          console.log("data", response);
-          setFirstName(response?.data?.data?.currentUser?.firstName);
+           setFirstName(response?.data?.data?.currentUser?.firstName);
         } catch (error) {
           setError(true);
           setErrorMessage(error?.response?.data?.message);

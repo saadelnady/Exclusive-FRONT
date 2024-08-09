@@ -1,20 +1,27 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 const CartTotal = () => {
+  const { cart } = useSelector((state) => state.cartReducer);
+
   return (
     <div className="col-12 col-lg-5 rounded py-3 px-4 cart-total text-center">
       <h3 className="text-start">CartTotal</h3>
       <div className="d-flex justify-content-between py-3">
-        <p>Subtotal</p>
-        <p>$ 1750</p>
+        <p>Total price</p>
+        <p>$ {cart?.totalPriceBeforeDiscount}</p>
+      </div>
+      <div className="d-flex justify-content-between py-3">
+        <p>Total discount </p>
+        <p>$ {cart?.totalDiscount}</p>
       </div>
       <div className="d-flex justify-content-between py-3">
         <p>Shipping</p>
         <p>Free</p>
       </div>
       <div className="d-flex justify-content-between py-3">
-        <p>Total</p>
-        <p>$ 1750</p>
+        <p>Final price</p>
+        <p>$ {cart?.totalFinalPrice}</p>
       </div>
 
       <NavLink to={"/checkout"}>

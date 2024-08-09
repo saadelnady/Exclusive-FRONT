@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NotFoundPage = ({ navigateTo }) => {
-  // console.log("navigateTo ===>", navigateTo);
   return (
     <div className="min-vh-100 d-flex justify-content-center align-items-center">
       <div>

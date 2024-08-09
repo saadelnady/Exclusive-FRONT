@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const Size = ({ options, activeSize, handleSizeActive }) => {
   return (
     <div className="size d-flex align-items-center mb-4 ">
@@ -8,11 +6,11 @@ const Size = ({ options, activeSize, handleSizeActive }) => {
         {options?.map((option) => (
           <li
             key={option}
-            className={
+            className={`me-2 ${
               activeSize === option?.size
                 ? "active cursor-pointer"
                 : "cursor-pointer"
-            }
+            }`}
             onClick={() => {
               handleSizeActive(option?.size);
             }}

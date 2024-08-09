@@ -20,8 +20,7 @@ const Index = () => {
   const handleActiveModal = () => {
     setActiveModal(!activeModal);
   };
-  console.log("targetProduct ===>", targetProduct);
-  return (
+   return (
     <>
       {activeModal && (
         <ProductModal

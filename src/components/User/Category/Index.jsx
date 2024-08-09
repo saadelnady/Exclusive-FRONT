@@ -8,8 +8,7 @@ import Tabs from "../../Shared/Tabs";
 const Index = () => {
   const { category, isLoading } = useSelector((state) => state.categoryReducer);
   const { categoryId, subCategoryId } = useParams();
-  console.log("categoryId ==>", categoryId);
-  console.log("subCategoryId ==>", subCategoryId);
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCategory(categoryId));

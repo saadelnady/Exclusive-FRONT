@@ -27,14 +27,12 @@ const CreateCoupon = ({ handleIsOpen }) => {
   });
 
   const handleAddCoupon = (values) => {
-    console.log("values ====>", values);
-    values.couponCodeOwner = seller?._id;
+     values.couponCodeOwner = seller?._id;
     const payload = { values, toast, navigate };
     dispatch(addCoupon(payload));
   };
   const handleProductChange = (e) => {
-    console.log("e--->", e.target.value);
-    formik.setFieldValue("selectedProduct", e.target.value);
+     formik.setFieldValue("selectedProduct", e.target.value);
   };
   return (
     <div className="create-coupon row justify-content-center align-items-center">

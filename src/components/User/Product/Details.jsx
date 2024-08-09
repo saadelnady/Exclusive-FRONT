@@ -3,7 +3,7 @@ import { CiHeart } from "react-icons/ci";
 import Delivery from "./Delivery";
 import Colors from "./Colors";
 import Size from "./Size";
-import Counter from "./Counter";
+import Counter from "../../Shared/Counter";
 import { useEffect, useState } from "react";
 import { BiMessageRoundedDetail } from "react-icons/bi";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -12,7 +12,19 @@ import { serverUrl } from "../../../API/API";
 const Details = ({ product }) => {
   const [activeColor, setActiveColor] = useState(null);
   const [activeSize, setActiveSize] = useState(null);
+  const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
+  const increaseHandler = () => {
+    setCounter(counter + 1);
+  };
+  const decreaseHandler = () => {
+    setCounter(counter - 1);
+    if (counter <= 0) {
+      setCounter(0);
+    } else {
+      setCounter(counter - 1);
+    }
+  };
 
   const handleSizeActive = (size) => {
     setActiveSize(size);
@@ -70,7 +82,11 @@ const Details = ({ product }) => {
         activeSize={activeSize}
       />
       <div className="d-flex align-items-center justify-content-between product-buttons flex-wrap ">
-        <Counter />
+        <Counter
+          counter={counter}
+          decreaseHandler={decreaseHandler}
+          increaseHandler={increaseHandler}
+        />
         <button className="buy-now">Add to cart</button>
         <CiHeart className="heart cursor-pointer" />
         <div className="d-flex align-items-center justify-content-between mt-3 col-12">

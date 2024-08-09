@@ -16,8 +16,7 @@ const OurProducts = ({ handleTargetProduct, handleActiveModal }) => {
   useEffect(() => {
     // Fetch products on component mount
     if (products?.length === 0 || products === null) {
-      // console.log("products ====", products);
-      dispatch(
+       dispatch(
         fetchProducts({
           limit,
           page: 1, // Start with page 1

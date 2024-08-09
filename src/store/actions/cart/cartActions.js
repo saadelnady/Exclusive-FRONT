@@ -7,10 +7,11 @@ export const addToCart = (data, toast) => {
     try {
       dispatch(actionsCreators.addToCart());
       const response = await postData(`/api/cart/add-to-cart`, data);
-      dispatch(actionsCreators.addToCartSuccess(response));
-      showToast(toast, response.message, "success");
+      if (response.status === "success") {
+        dispatch(actionsCreators.addToCartSuccess(response));
+        showToast(toast, response?.message, "success");
+      }
     } catch (error) {
-      console.log("error=== >", error);
       dispatch(actionsCreators.addToCartFail(error?.response?.data?.message));
       showToast(toast, error?.response?.data?.message, "error");
     }
@@ -23,9 +24,12 @@ export const getCart = (userId) => {
     try {
       dispatch(actionsCreators.getCart());
       const response = await getData(`/api/cart?userId=${userId}`);
-      dispatch(actionsCreators.getCartSuccess(response));
+      console.log("response", response);
+
+      if (response.status === "success") {
+        dispatch(actionsCreators.getCartSuccess(response?.data?.cart));
+      }
     } catch (error) {
-      console.log("error=== >", error);
       dispatch(actionsCreators.getCartFail(error?.response?.data?.message));
     }
   };

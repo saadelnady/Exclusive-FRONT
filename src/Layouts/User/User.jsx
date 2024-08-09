@@ -33,9 +33,7 @@ import { getCart } from "../../store/actions/cart/cartActions.js";
 
 const User = () => {
   const { isLoggedIn, user } = useSelector((state) => state.userReducer);
-  const { cart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-  console.log(cart);
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchUserProfile());

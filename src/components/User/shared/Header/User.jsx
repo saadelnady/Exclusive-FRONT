@@ -31,7 +31,7 @@ const User = ({ handleActiveNavBar }) => {
         <NavLink to="/cart" className="position-relative ">
           <BsCart3 className="fs-2 cart cursor-pointer" />
           <span className="position-absolute top-0 start-100 px-2 py-1 rounded-circle translate-middle text-light bg-danger  ">
-            {cart.length}
+            {cart?.products?.length || 0}
           </span>
         </NavLink>
       )}

@@ -131,9 +131,7 @@ const AddProduct = () => {
             }))
           : [],
       });
-      console.log("isFlashSale ==>", product.isFlashSale);
-      console.log("flashSaleStartDate", product.flashSaleStartDate);
-      console.log("flashSaleEndDate", product.flashSaleEndDate);
+   
     } else {
       const initialCategory = categories[0] || {};
 
@@ -240,8 +238,7 @@ const AddProduct = () => {
     });
 
     const payload = { formData, toast };
-    console.log("values ==== >", values);
-    dispatch(addProduct(payload));
+     dispatch(addProduct(payload));
     resetForm();
   };
 
