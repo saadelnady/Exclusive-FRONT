@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../store/actions/product/productActions";
+import {
+  blockProduct,
+  fetchProducts,
+} from "../../../store/actions/product/productActions";
 
 import Warning from "../../Shared/Warning";
 import Search from "../../Shared/Search";
@@ -8,13 +11,14 @@ import Loading from "../../Shared/Loading";
 import { Pagination } from "../../Shared/Pagination";
 import { ProductsTable } from "../Shared/ProductsTable";
 import { productStatus } from "../../../helpers/options";
+import { MdBlock } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export const BlockedProducts = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
-  handleUnBlockProduct,
 }) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
@@ -52,9 +56,23 @@ export const BlockedProducts = ({
       })
     );
   };
+  const productUnBlockAction = {
+    type: { AR: "أزالة الحجب", EN: "UnBlock" },
+    message: {
+      AR: "هل تود أزالة الحجب عن هذا المنتج ؟",
+      EN: "Are you sure to UnBlock this product ?",
+    },
+    Icon: <MdBlock />,
+    actionHandler: (productId) => {
+      const payLoad = { productId, toast };
+      dispatch(blockProduct(payLoad));
+    },
+  };
   return (
     <div>
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
@@ -72,8 +90,8 @@ export const BlockedProducts = ({
           limit={limit}
           currentPage={currentPage}
           setAction={setAction}
-          handleWarning={handleWarning}
-          handleUnBlockProduct={handleUnBlockProduct}
+          handleShowWarning={handleShowWarning}
+          handleUnBlockProduct={productUnBlockAction.actionHandler}
         />
       ) : (
         <p className="m-4 text-center fw-bold">there 's no products to show</p>

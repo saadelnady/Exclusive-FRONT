@@ -1,12 +1,12 @@
-import React from "react";
 import "./styles/OptionButton.css";
 export const OptionButton = ({
   action = {},
-  handleWarning = () => {},
+  handleShowWarning = () => {},
   setAction = () => {},
   id = "",
   actionHandler = () => {},
   buttonStyle = "",
+  styles = {},
 } = {}) => {
   const { type, Icon } = action;
 
@@ -14,9 +14,10 @@ export const OptionButton = ({
     <button
       className={`option ${buttonStyle}`}
       onClick={() => {
-        handleWarning();
+        handleShowWarning();
         setAction({ ...action, id, actionHandler });
       }}
+      styles={styles}
     >
       {Icon}
       {type?.EN}

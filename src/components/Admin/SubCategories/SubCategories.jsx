@@ -20,10 +20,11 @@ import Warning from "../../Shared/Warning";
 import Search from "../../Shared/Search";
 import { OptionButton } from "../Shared/OptionButton";
 import { subCategoryDeleteAction } from "../../../helpers/options";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 export const SubCategories = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
 }) => {
@@ -53,17 +54,38 @@ export const SubCategories = ({
     const payLoad = { subCategoryId, toast };
     dispatch(deleteSubCategory(payLoad));
 
-    handleWarning();
+    handleShowWarning();
   };
   // ==========================================================
 
   const handleSearchSubCategory = (text) => {
     dispatch(fetchSubCategories({ limit, page: currentPage, text }));
   };
+  // ===============================================
 
+  const subCategoryDeleteAction = {
+    type: { AR: "حذف", EN: "Delete" },
+    message: {
+      AR: "هل تود حذف هذا التصنيف الفرعى؟",
+      EN: "Are you sure to Delete this subCategory ?",
+    },
+    subMessage: {
+      AR: "سوف تقوم بحذف جميع المنتجات الخاصة بعذا التصنيف ؟",
+      EN: "You will delete every products related to this subCategory too",
+    },
+    Icon: <RiDeleteBin6Line />,
+    actionHandler: (subCategoryId) => {
+      const payLoad = { subCategoryId, toast };
+      dispatch(deleteSubCategory(payLoad));
+
+      handleShowWarning();
+    },
+  };
   return (
     <div className="subCategories-page">
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All SubCategories </h1>
         <Search action={handleSearchSubCategory} />
@@ -114,10 +136,13 @@ export const SubCategories = ({
                         </NavLink>
                         <OptionButton
                           action={subCategoryDeleteAction}
-                          handleWarning={handleWarning}
+                          handleShowWarning={handleShowWarning}
                           setAction={setAction}
-                          id={subCategory?._id}
-                          actionHandler={handleDeleteSubCategory}
+                          actionHandler={() => {
+                            subCategoryDeleteAction.actionHandler(
+                              subCategory?._id
+                            );
+                          }}
                         />
                       </div>
                     </div>

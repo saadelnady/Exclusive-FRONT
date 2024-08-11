@@ -39,7 +39,7 @@ const User = () => {
       dispatch(fetchUserProfile());
     }
     if (user?._id) {
-      dispatch(getCart(user._id));
+      dispatch(getCart(user?._id));
     }
     dispatch(fetchCategories({ limit: 7, page: 1 }));
     dispatch(
@@ -59,12 +59,11 @@ const User = () => {
         type: "notFlashSale",
       })
     );
-  }, [dispatch, user._id]);
+  }, [dispatch, user?._id]);
 
   return (
     <div>
       <Header />
-
       <Routes>
         <Route
           path="/userActivation/:activationToken"

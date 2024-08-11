@@ -11,7 +11,7 @@ import { productStatus } from "../../../helpers/options";
 
 export const AcceptedProducts = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
   handleBlockProduct,
@@ -54,7 +54,9 @@ export const AcceptedProducts = ({
 
   return (
     <div>
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-6">
@@ -71,7 +73,7 @@ export const AcceptedProducts = ({
           limit={limit}
           currentPage={currentPage}
           setAction={setAction}
-          handleWarning={handleWarning}
+          handleShowWarning={handleShowWarning}
           handleBlockProduct={handleBlockProduct}
         />
       ) : (

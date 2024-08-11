@@ -8,7 +8,7 @@ const CartTotal = () => {
     <div className="col-12 col-lg-5 rounded py-3 px-4 cart-total text-center">
       <h3 className="text-start">CartTotal</h3>
       <div className="d-flex justify-content-between py-3">
-        <p>Total price</p>
+        <p>Total price before discount</p>
         <p>$ {cart?.totalPriceBeforeDiscount}</p>
       </div>
       <div className="d-flex justify-content-between py-3">
@@ -17,7 +17,7 @@ const CartTotal = () => {
       </div>
       <div className="d-flex justify-content-between py-3">
         <p>Shipping</p>
-        <p>Free</p>
+        <p>$ {cart?.shipping}</p>
       </div>
       <div className="d-flex justify-content-between py-3">
         <p>Final price</p>

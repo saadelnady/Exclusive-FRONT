@@ -6,8 +6,7 @@ import {
 } from "../../../store/actions/product/productActions";
 import Loading from "../../Shared/Loading";
 import { serverUrl } from "../../../API/API";
-import { formatDateAndTime } from "../../../helpers/formated_date_time";
-import { HiDotsVertical } from "react-icons/hi";
+ import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 
@@ -19,10 +18,10 @@ import Warning from "../../Shared/Warning";
 
 import Search from "../../Shared/Search";
 import { OptionButton } from "../../Admin/Shared/OptionButton";
-import { productDeleteAction } from "../../../helpers/options";
 import CreateCoupon from "../Shared/CreateCoupon";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Products = ({ isWarning, handleWarning }) => {
+const Products = ({ isWarning, handleShowWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
   const { products, isLoading, total } = useSelector(
     (state) => state?.productReducer
@@ -55,12 +54,7 @@ const Products = ({ isWarning, handleWarning }) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  const handleDeleteProduct = (productId) => {
-    const payLoad = { productId, toast };
-    dispatch(deleteProduct(payLoad));
-    handleWarning();
-  };
+ 
   // ==========================================================
   const handleSearchProducts = (text) => {
     dispatch(
@@ -73,9 +67,25 @@ const Products = ({ isWarning, handleWarning }) => {
     );
   };
   // ==========================================================
+  // ===============================================
+  const productDeleteAction = {
+    type: { AR: "حذف", EN: "Delete" },
+    message: {
+      AR: "هل تود حذف هذا المنتج ؟",
+      EN: "Are you sure to Delete this product ?",
+    },
+    Icon: <RiDeleteBin6Line />,
+    actionHandler: (productId) => {
+      const payLoad = { productId, toast };
+      dispatch(deleteProduct(payLoad));
+      handleShowWarning();
+    },
+  };
   return (
     <div className="products-page">
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
       {isOpen && <CreateCoupon handleIsOpen={handleIsOpen} />}
       <div className="products-list shadow pt-3   ">
         <div className="d-flex justify-content-between align-items-center flex-wrap rounded mx-3 mb-5">
@@ -145,11 +155,13 @@ const Products = ({ isWarning, handleWarning }) => {
                           </NavLink>
 
                           <OptionButton
-                            handleWarning={handleWarning}
+                            handleShowWarning={handleShowWarning}
                             action={productDeleteAction}
                             setAction={setAction}
                             id={product?._id}
-                            actionHandler={handleDeleteProduct}
+                            actionHandler={() => {
+                              productDeleteAction.actionHandler(product?._id);
+                            }}
                           />
                         </div>
                       </div>

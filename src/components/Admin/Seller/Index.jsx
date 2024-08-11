@@ -15,7 +15,7 @@ import { Pagination } from "../../Shared/Pagination";
 
 const Index = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
   handleBlockProduct,
@@ -54,7 +54,9 @@ const Index = ({
 
   return (
     <div className="row m-4 justify-content-between">
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow mb-5">
         <h1 className="special-header ps-5 fw-bold col-12 col-sm-6 col-lg-5">
           All seller products
@@ -76,7 +78,7 @@ const Index = ({
             limit={limit}
             currentPage={currentPage}
             setAction={setAction}
-            handleWarning={handleWarning}
+            handleShowWarning={handleShowWarning}
             handleBlockProduct={handleBlockProduct}
             handleAceeptProduct={handleAceeptProduct}
             handleUnBlockProduct={handleUnBlockProduct}

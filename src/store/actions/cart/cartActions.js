@@ -6,7 +6,7 @@ export const addToCart = (data, toast) => {
   return async (dispatch) => {
     try {
       dispatch(actionsCreators.addToCart());
-      const response = await postData(`/api/cart/add-to-cart`, data);
+      const response = await postData(`/api/cart/addToCart`, data);
       if (response.status === "success") {
         dispatch(actionsCreators.addToCartSuccess(response));
         showToast(toast, response?.message, "success");

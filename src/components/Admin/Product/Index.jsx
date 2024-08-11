@@ -12,7 +12,7 @@ import "./styles/Product.css";
 
 const Index = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
   handleBlockProduct,
@@ -36,12 +36,12 @@ const Index = ({
       ) : (
         <div className="admin-product-page row align-items-start justify-content-evenly my-5">
           {isWarning && (
-            <Warning handleWarning={handleWarning} action={action} />
+            <Warning handleShowWarning={handleShowWarning} action={action} />
           )}
           <ProductOwnerCard productOwner={productOwner} />
           <ProductCard
             product={product}
-            handleWarning={handleWarning}
+            handleShowWarning={handleShowWarning}
             setAction={setAction}
             handleBlockProduct={handleBlockProduct}
             handleAceeptProduct={handleAceeptProduct}

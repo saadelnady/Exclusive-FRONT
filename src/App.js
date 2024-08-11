@@ -19,7 +19,7 @@ import {
 function App() {
   const [isWarning, setIsWarning] = useState(false);
 
-  const handleWarning = () => {
+  const handleShowWarning = () => {
     setIsWarning(!isWarning);
   };
   return (
@@ -40,7 +40,10 @@ function App() {
           path="/admin/*"
           element={
             <ProtectedAdminRoute>
-              <Admin isWarning={isWarning} handleWarning={handleWarning} />
+              <Admin
+                isWarning={isWarning}
+                handleShowWarning={handleShowWarning}
+              />
             </ProtectedAdminRoute>
           }
         />
@@ -49,7 +52,10 @@ function App() {
           path="/seller/*"
           element={
             <ProtectedSellerRoute>
-              <Seller isWarning={isWarning} handleWarning={handleWarning} />
+              <Seller
+                isWarning={isWarning}
+                handleShowWarning={handleShowWarning}
+              />
             </ProtectedSellerRoute>
           }
         />

@@ -29,7 +29,7 @@ export const Pagination = ({
       {pageNumbers.map((number) => (
         <li
           key={number}
-          className={`page-item ${currentPage === number ? "active" : ""}`}
+          className={`page-item z-1 ${currentPage === number ? "active" : ""}`}
           onClick={() => paginate(number)}
         >
           <button className="page-link pagination-btn">{number}</button>

@@ -14,7 +14,7 @@ import { ProductActionsButtons } from "./ProductActionsButtons";
 
 export const ProductCard = ({
   product,
-  handleWarning,
+  handleShowWarning,
   setAction,
   handleBlockProduct,
   handleAceeptProduct,
@@ -68,7 +68,7 @@ export const ProductCard = ({
       <ProductOptions options={product?.options} />
       <ProductActionsButtons
         product={product}
-        handleWarning={handleWarning}
+        handleShowWarning={handleShowWarning}
         setAction={setAction}
         handleBlockProduct={handleBlockProduct}
         handleAceeptProduct={handleAceeptProduct}

@@ -1,15 +1,26 @@
-import React from "react";
-import {
-  pendingProducts,
-  acceptedProducts,
-  blockedProducts,
-} from "../../../helpers//options";
+import { MdBlock, MdOutlinePendingActions } from "react-icons/md";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 export const SellerProductsActions = ({
   id,
   handleGetAcceptedSellerProducts,
   handleGetPendingSellerProducts,
   handleGetBlockedSellerProducts,
 }) => {
+  const pendingProducts = {
+    type: { AR: "المنتجات المعلقة", EN: "Pending products" },
+
+    Icon: <MdOutlinePendingActions />,
+  };
+  const acceptedProducts = {
+    type: { AR: "المنتجات المقبولة", EN: "Accepted products" },
+
+    Icon: <AiOutlineCheckCircle />,
+  };
+  const blockedProducts = {
+    type: { AR: "المنتجات المحظورة", EN: "Blocked products" },
+
+    Icon: <MdBlock />,
+  };
   const status = [pendingProducts, acceptedProducts, blockedProducts];
 
   return (

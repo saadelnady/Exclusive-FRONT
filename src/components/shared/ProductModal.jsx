@@ -118,7 +118,7 @@ const ProductModal = ({ productId, handleActiveModal }) => {
                       />
                     )}
                 </div>
-                <div className="d-flex align-items-center justify-content-between mt-3 col-12">
+                <div className="d-flex align-items-center justify-content-sm-between mt-3 col-12 flex-wrap">
                   <button
                     className="btn btn-danger submit"
                     onClick={handleMessageSubmit}
@@ -140,7 +140,7 @@ const ProductModal = ({ productId, handleActiveModal }) => {
               </div>
 
               <div className="col-12 col-sm-6 ">
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex justify-content-between align-items-center flex-wrap">
                   <h3>{product?.title}</h3>
                   <p>
                     {product?.category?.title} / {product?.subCategory?.title}{" "}

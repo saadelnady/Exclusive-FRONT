@@ -34,8 +34,10 @@ import {
   unBlockProduct,
 } from "../../store/actions/product/productActions.js";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { MdBlock } from "react-icons/md";
 
-const Admin = ({ isWarning, handleWarning }) => {
+const Admin = ({ isWarning, handleShowWarning }) => {
   // =================================================================================
   const dispatch = useDispatch();
   // =================================================================================
@@ -59,20 +61,48 @@ const Admin = ({ isWarning, handleWarning }) => {
     subMessage: "",
     actionHandler: null,
   });
+
   // =================================================================================
-  const handleBlockProduct = (productId) => {
-    const payLoad = { productId, toast };
-    dispatch(blockProduct(payLoad));
+  const productAcceptAction = {
+    type: { AR: "موافقة", EN: "Accept" },
+    message: {
+      AR: "هل تود الموافقة على هذا المنتج ؟",
+      EN: "Are you sure to Accept this product ?",
+    },
+    Icon: <AiOutlineCheckCircle />,
+    actionHandler: (productId) => {
+      const payLoad = { productId, toast, handleShowWarning };
+      dispatch(acceptProduct(payLoad));
+    },
   };
-  const handleUnBlockProduct = (productId) => {
-    const payLoad = { productId, toast };
-    dispatch(unBlockProduct(payLoad));
+  // ===============================================
+
+  const productBlockAction = {
+    type: { AR: "حجب", EN: "Block" },
+    message: {
+      AR: "هل تود حجب هذا المنتج ؟",
+      EN: "Are you sure to Block this product ?",
+    },
+    Icon: <MdBlock />,
+    actionHandler: (productId) => {
+      const payLoad = { productId, toast };
+      dispatch(unBlockProduct(payLoad));
+    },
   };
-  const handleAceeptProduct = (productId) => {
-    const payLoad = { productId, toast, handleWarning };
-    dispatch(acceptProduct(payLoad));
+  // ===============================================
+
+  const productUnBlockAction = {
+    type: { AR: "أزالة الحجب", EN: "UnBlock" },
+    message: {
+      AR: "هل تود أزالة الحجب عن هذا المنتج ؟",
+      EN: "Are you sure to UnBlock this product ?",
+    },
+    Icon: <MdBlock />,
+    actionHandler: (productId) => {
+      const payLoad = { productId, toast };
+      dispatch(blockProduct(payLoad));
+    },
   };
-  // =================================================================================
   return (
     <div className="admin-layout">
       <AdminSideBar
@@ -89,11 +119,11 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <PendingProducts
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
-                handleBlockProduct={handleBlockProduct}
-                handleAceeptProduct={handleAceeptProduct}
+                handleBlockProduct={productBlockAction.actionHandler}
+                handleAceeptProduct={productAcceptAction.actionHandler}
               />
             }
           />
@@ -102,12 +132,12 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <Product
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
-                handleBlockProduct={handleBlockProduct}
-                handleAceeptProduct={handleAceeptProduct}
-                handleUnBlockProduct={handleUnBlockProduct}
+                handleBlockProduct={productBlockAction.actionHandler}
+                handleAceeptProduct={productAcceptAction.actionHandler}
+                handleUnBlockProduct={productUnBlockAction.actionHandler}
               />
             }
           />
@@ -116,10 +146,10 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <AcceptedProducts
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
-                handleBlockProduct={handleBlockProduct}
+                handleBlockProduct={productBlockAction.actionHandler}
               />
             }
           />
@@ -128,10 +158,10 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <BlockedProducts
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
-                handleUnBlockProduct={handleUnBlockProduct}
+                handleUnBlockProduct={productUnBlockAction.actionHandler}
               />
             }
           />
@@ -140,7 +170,7 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <Categories
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
               />
@@ -160,7 +190,7 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <SubCategories
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
               />
@@ -172,12 +202,12 @@ const Admin = ({ isWarning, handleWarning }) => {
             element={
               <Seller
                 isWarning={isWarning}
-                handleWarning={handleWarning}
+                handleShowWarning={handleShowWarning}
                 action={action}
                 setAction={setAction}
-                handleAceeptProduct={handleAceeptProduct}
-                handleUnBlockProduct={handleUnBlockProduct}
-                handleBlockProduct={handleBlockProduct}
+                handleAceeptProduct={productAcceptAction.actionHandler}
+                handleUnBlockProduct={productBlockAction.actionHandler}
+                handleBlockProduct={productBlockAction.actionHandler}
               />
             }
           />

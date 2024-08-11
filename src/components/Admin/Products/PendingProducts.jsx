@@ -12,7 +12,7 @@ import { productStatus } from "../../../helpers/options";
 
 export const PendingProducts = ({
   isWarning,
-  handleWarning,
+  handleShowWarning,
   action,
   setAction,
   handleBlockProduct,
@@ -57,7 +57,9 @@ export const PendingProducts = ({
   };
   return (
     <div>
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
 
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
@@ -74,7 +76,7 @@ export const PendingProducts = ({
           limit={limit}
           currentPage={currentPage}
           setAction={setAction}
-          handleWarning={handleWarning}
+          handleShowWarning={handleShowWarning}
           handleAceeptProduct={handleAceeptProduct}
           handleBlockProduct={handleBlockProduct}
         />

@@ -18,7 +18,7 @@ import DiscountCodes from "../../components/Seller/DiscountCodes/Index.jsx";
 import "../../components/Seller/Shared/styles/seller.css";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
-const Seller = ({ isWarning, handleWarning }) => {
+const Seller = ({ isWarning, handleShowWarning }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
@@ -55,7 +55,10 @@ const Seller = ({ isWarning, handleWarning }) => {
           <Route
             path="/products"
             element={
-              <Products isWarning={isWarning} handleWarning={handleWarning} />
+              <Products
+                isWarning={isWarning}
+                handleShowWarning={handleShowWarning}
+              />
             }
           />
           <Route path="*" element={<NotFoundPage navigateTo="/seller" />} />

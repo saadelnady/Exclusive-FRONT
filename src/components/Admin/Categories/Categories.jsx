@@ -15,12 +15,18 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Loading from "../../Shared/Loading";
-import  Search  from "../../Shared/Search";
+import Search from "../../Shared/Search";
 import { Pagination } from "../../Shared/Pagination";
 import { OptionButton } from "../Shared/OptionButton";
 import { categoryDeleteAction } from "../../../helpers/options";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
+export const Categories = ({
+  isWarning,
+  handleShowWarning,
+  action,
+  setAction,
+}) => {
   const { categories, isLoading, total } = useSelector(
     (state) => state.categoryReducer
   );
@@ -43,21 +49,45 @@ export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
   }, [currentPage, dispatch]);
 
   // ==========================================================
-  const handleDeleteCategory = (categoryId) => {
-    const payLoad = { categoryId, toast };
-    dispatch(deleteCategory(payLoad));
+  // const handleDeleteCategory = (categoryId) => {
+  //   const payLoad = { categoryId, toast };
+  //   dispatch(deleteCategory(payLoad));
 
-    handleWarning();
-  };
+  //   handleShowWarning();
+  // };
   // ==========================================================
 
   const handleSearchCategory = (text) => {
     dispatch(fetchCategories({ limit, page: currentPage, text }));
   };
 
+  // ===============================================
+
+  const categoryDeleteAction = {
+    type: { AR: "حذف", EN: "Delete" },
+    message: {
+      AR: "هل تود حذف هذا التصنيف ؟",
+      EN: "Are you sure to Delete this category ?",
+    },
+    subMessage: {
+      AR: "سوف تقوم بحذف جميع المنتجات الخاصة بعذا التصنيف ؟",
+      EN: "You will delete every products related to this category too",
+    },
+    Icon: <RiDeleteBin6Line />,
+    actionHandler: (categoryId) => {
+      console.log("categoryId: " + categoryId);
+
+      const payLoad = { categoryId, toast };
+      dispatch(deleteCategory(payLoad));
+
+      handleShowWarning();
+    },
+  };
   return (
     <div className="categories-page ">
-      {isWarning && <Warning handleWarning={handleWarning} action={action} />}
+      {isWarning && (
+        <Warning handleShowWarning={handleShowWarning} action={action} />
+      )}
       <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
         <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All Categories </h1>
 
@@ -108,10 +138,12 @@ export const Categories = ({ isWarning, handleWarning, action, setAction }) => {
                         </NavLink>
                         <OptionButton
                           action={categoryDeleteAction}
-                          handleWarning={handleWarning}
+                          handleShowWarning={handleShowWarning}
                           setAction={setAction}
                           id={category?._id}
-                          actionHandler={handleDeleteCategory}
+                          actionHandler={() => {
+                            categoryDeleteAction.actionHandler(category?._id);
+                          }}
                         />
                       </div>
                     </div>
