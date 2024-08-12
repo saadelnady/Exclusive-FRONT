@@ -12,6 +12,7 @@ import Warning from "../../Shared/Warning";
 import Loading from "../../Shared/Loading";
 
 import { Pagination } from "../../Shared/Pagination";
+import SpecialHeading from "../../Shared/SpecialHeading";
 
 const Index = ({
   isWarning,

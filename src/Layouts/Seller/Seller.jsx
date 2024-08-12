@@ -18,14 +18,21 @@ import DiscountCodes from "../../components/Seller/DiscountCodes/Index.jsx";
 import "../../components/Seller/Shared/styles/seller.css";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
-const Seller = ({ isWarning, handleShowWarning }) => {
+const Seller = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleSidebarActivation = () => {
     setIsActive(!isActive);
   };
   const dispatch = useDispatch();
+  // =================================================================================
 
+  const [isWarning, setIsWarning] = useState(false);
+
+  const handleShowWarning = () => {
+    setIsWarning(!isWarning);
+  };
+  // =================================================================================
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchSellerProfile());
@@ -45,7 +52,6 @@ const Seller = ({ isWarning, handleShowWarning }) => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/addProduct" element={<AddProduct />} />
           <Route path="/allorders" element={<AllOrders />} />
-
           <Route path="/messages" element={<Messages />} />
           <Route path="/discountcodes" element={<DiscountCodes />} />
           <Route

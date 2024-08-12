@@ -154,7 +154,7 @@ const Products = ({ isWarning, handleShowWarning }) => {
                             </button>
                           </NavLink>
 
-                          <OptionButton
+                          {/* <OptionButton
                             handleShowWarning={handleShowWarning}
                             action={productDeleteAction}
                             setAction={setAction}
@@ -162,7 +162,7 @@ const Products = ({ isWarning, handleShowWarning }) => {
                             actionHandler={() => {
                               productDeleteAction.actionHandler(product?._id);
                             }}
-                          />
+                          /> */}
                         </div>
                       </div>
                     </td>

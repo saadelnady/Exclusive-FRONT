@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  blockProduct,
   fetchProducts,
+  unBlockProduct,
 } from "../../../store/actions/product/productActions";
 
 import Warning from "../../Shared/Warning";
@@ -13,13 +13,9 @@ import { ProductsTable } from "../Shared/ProductsTable";
 import { productStatus } from "../../../helpers/options";
 import { MdBlock } from "react-icons/md";
 import { toast } from "react-toastify";
+import CustomeTitle from "../../Shared/CustomeTitle";
 
-export const BlockedProducts = ({
-  isWarning,
-  handleShowWarning,
-  action,
-  setAction,
-}) => {
+export const BlockedProducts = ({ isWarning, handleShowWarning }) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
@@ -45,6 +41,7 @@ export const BlockedProducts = ({
       );
     }
   }, [dispatch, currentPage]);
+  // =================================================================================
 
   const handleSearchBlockedProducts = (text) => {
     dispatch(
@@ -56,32 +53,42 @@ export const BlockedProducts = ({
       })
     );
   };
-  const productUnBlockAction = {
-    type: { AR: "أزالة الحجب", EN: "UnBlock" },
-    message: {
-      AR: "هل تود أزالة الحجب عن هذا المنتج ؟",
-      EN: "Are you sure to UnBlock this product ?",
-    },
-    Icon: <MdBlock />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(blockProduct(payLoad));
-    },
+  // =================================================================================
+
+  const [targetProductId, setTargetProductId] = useState("");
+  const targetProductIdHandler = (productId) => {
+    setTargetProductId(productId);
   };
+  const productUnBlockHandler = () => {
+    const payLoad = { productId: targetProductId, toast };
+    dispatch(unBlockProduct(payLoad));
+  };
+  const cancelHandler = () => {
+    setTargetProductId("");
+  };
+
+  console.log("targetProductId ===>", targetProductId);
+  const popupInfo = {
+    message: "Are you sure to UnBlock this product ?",
+    Icon: <MdBlock />,
+    actionTitle: "UnBlock",
+  };
+  // =================================================================================
+
   return (
     <div>
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={productUnBlockHandler}
+          popupInfo={popupInfo}
+          cancelHandler={cancelHandler}
+        />
       )}
-
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
-        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
-          All blocked products
-        </h1>
-
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
+        <CustomeTitle title={"All blocked products"} />
         <Search action={handleSearchBlockedProducts} />
       </div>
-
       {isLoading ? (
         <Loading />
       ) : products?.length > 0 ? (
@@ -89,14 +96,12 @@ export const BlockedProducts = ({
           products={products}
           limit={limit}
           currentPage={currentPage}
-          setAction={setAction}
           handleShowWarning={handleShowWarning}
-          handleUnBlockProduct={productUnBlockAction.actionHandler}
+          targetProductIdHandler={targetProductIdHandler}
         />
       ) : (
         <p className="m-4 text-center fw-bold">there 's no products to show</p>
       )}
-
       {products?.length > 0 && (
         <Pagination
           itemsPerPage={limit}

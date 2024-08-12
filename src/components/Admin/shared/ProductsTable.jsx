@@ -4,79 +4,23 @@ import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import "./styles/ProductsTable.css";
 import { FaEye } from "react-icons/fa";
-
 import { productStatus } from "../../../helpers/options";
 import { OptionButton } from "./OptionButton";
 import { AiOutlineCheckCircle } from "react-icons/ai";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import {
-  acceptProduct,
-  blockProduct,
-  unBlockProduct,
-} from "../../../store/actions/product/productActions";
 import { MdBlock } from "react-icons/md";
 
 export const ProductsTable = ({
   products,
   currentPage,
   limit,
-  setAction,
   handleShowWarning,
+  targetProductIdHandler,
 }) => {
-  const dispatch = useDispatch();
-  // =================================================================================
-  const productAcceptAction = {
-    type: { AR: "موافقة", EN: "Accept" },
-    message: {
-      AR: "هل تود الموافقة على هذا المنتج ؟",
-      EN: "Are you sure to Accept this product ?",
-    },
-    Icon: <AiOutlineCheckCircle />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast, handleShowWarning };
-      dispatch(acceptProduct(payLoad));
-    },
-  };
-  // ===============================================
-
-  const productBlockAction = {
-    type: { AR: "حجب", EN: "Block" },
-    message: {
-      AR: "هل تود حجب هذا المنتج ؟",
-      EN: "Are you sure to Block this product ?",
-    },
-    Icon: <MdBlock />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(blockProduct(payLoad));
-    },
-  };
-  // ===============================================
-
-  const productUnBlockAction = {
-    type: { AR: "أزالة الحجب", EN: "UnBlock" },
-    message: {
-      AR: "هل تود أزالة الحجب عن هذا المنتج ؟",
-      EN: "Are you sure to UnBlock this product ?",
-    },
-    Icon: <MdBlock />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(unBlockProduct(payLoad));
-    },
-  };
-  // ===============================================
-
-  const productViewAction = {
-    type: { AR: "عرض المنتج", EN: "View Product" },
-    Icon: <FaEye />,
-  };
   return (
     <div className="mt-4 mx-md-4 rounded shadow">
       <table className="col-12 rounded text-center products-table">
         <thead>
-          <tr className="">
+          <tr>
             <th>ID</th>
             <th>product Image</th>
             <th>product title</th>
@@ -87,7 +31,7 @@ export const ProductsTable = ({
         </thead>
         <tbody>
           {products?.map((product, index) => (
-            <tr key={index} className=" ">
+            <tr key={index}>
               <td className="border-end">
                 {(currentPage - 1) * limit + index + 1}
               </td>
@@ -107,46 +51,42 @@ export const ProductsTable = ({
                   <HiDotsVertical className="dotsIcon" />
                   <div className="options">
                     <NavLink to={`/admin/products/${product?._id}`}>
-                      <OptionButton
-                        action={productViewAction}
-                        buttonStyle="view"
-                      />
+                      <FaEye />
+                      View
                     </NavLink>
                     {product?.status === productStatus.PENDING ||
                     product?.status === productStatus.ACCEPTED ? (
                       <OptionButton
-                        action={productBlockAction}
+                        actoinTitle={"Block"}
+                        Icon={<MdBlock />}
                         handleShowWarning={handleShowWarning}
-                        setAction={setAction}
-                        id={product?._id}
-                        actionHandler={() => {
-                          productBlockAction.actionHandler(product?._id);
-                        }}
                         buttonStyle="block"
+                        actionHandler={() => {
+                          targetProductIdHandler(product?._id, "block");
+                        }}
                       />
                     ) : null}
                     {product?.status === productStatus.PENDING && (
                       <OptionButton
-                        action={productAcceptAction}
+                        actoinTitle={"Accept"}
+                        Icon={<AiOutlineCheckCircle />}
                         handleShowWarning={handleShowWarning}
-                        setAction={setAction}
-                        id={product?._id}
-                        actionHandler={() => {
-                          productAcceptAction.actionHandler(product?._id);
-                        }}
                         buttonStyle="accept"
+                        actionHandler={() => {
+                          targetProductIdHandler(product?._id, "accept");
+                        }}
                       />
                     )}
+
                     {product?.status === productStatus.BLOCKED && (
                       <OptionButton
-                        action={productUnBlockAction}
+                        actoinTitle={"UnBlock"}
+                        Icon={<MdBlock />}
                         handleShowWarning={handleShowWarning}
-                        setAction={setAction}
-                        id={product?._id}
-                        actionHandler={() => {
-                          productUnBlockAction.actionHandler(product?._id);
-                        }}
                         buttonStyle="block"
+                        actionHandler={() => {
+                          targetProductIdHandler(product?._id);
+                        }}
                       />
                     )}
                   </div>

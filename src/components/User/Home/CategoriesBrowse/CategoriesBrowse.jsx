@@ -1,12 +1,12 @@
 import { categoriesBrowsingData } from "../../../../static/data";
-import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
-
+import SpecialHeading from "../../../Shared/SpecialHeading";
+ 
 import "../styles/CategouriesBrowse.css";
 
 const CategoriesBrowse = () => {
   return (
     <div className="border-bottom pb-5">
-      <SpecialHeading Heading="Categories" SectionTitle="Browse By Category" />
+      <SpecialHeading title="Categories" SectionTitle="Browse By Category" />
 
       <div className="browse-by-category d-flex justify-content-between mt-4 overflow-hidden">
         {categoriesBrowsingData.map((categoryData, index) => {

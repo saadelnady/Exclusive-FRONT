@@ -17,11 +17,6 @@ import {
 } from "./components/Shared/ProtectedRoute.jsx";
 
 function App() {
-  const [isWarning, setIsWarning] = useState(false);
-
-  const handleShowWarning = () => {
-    setIsWarning(!isWarning);
-  };
   return (
     <div className="App">
       <Routes>
@@ -40,22 +35,15 @@ function App() {
           path="/admin/*"
           element={
             <ProtectedAdminRoute>
-              <Admin
-                isWarning={isWarning}
-                handleShowWarning={handleShowWarning}
-              />
+              <Admin />
             </ProtectedAdminRoute>
           }
         />
-
         <Route
           path="/seller/*"
           element={
             <ProtectedSellerRoute>
-              <Seller
-                isWarning={isWarning}
-                handleShowWarning={handleShowWarning}
-              />
+              <Seller />
             </ProtectedSellerRoute>
           }
         />

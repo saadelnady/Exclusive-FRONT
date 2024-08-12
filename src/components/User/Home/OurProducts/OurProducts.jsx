@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
 import Loading from "../../../Shared/Loading";
 import Products from "./Products";
 import AllProductsButton from "../../Shared/AllProductsButton/AllProductsButton";
 import { fetchProducts } from "../../../../store/actions/product/productActions";
 import { productStatus } from "../../../../helpers/options";
+import SpecialHeading from "../../../Shared/SpecialHeading";
 
 const OurProducts = ({ handleTargetProduct, handleActiveModal }) => {
   const { products, isLoading } = useSelector((state) => state.productReducer);
@@ -16,7 +16,7 @@ const OurProducts = ({ handleTargetProduct, handleActiveModal }) => {
   useEffect(() => {
     // Fetch products on component mount
     if (products?.length === 0 || products === null) {
-       dispatch(
+      dispatch(
         fetchProducts({
           limit,
           page: 1, // Start with page 1
@@ -76,7 +76,7 @@ const OurProducts = ({ handleTargetProduct, handleActiveModal }) => {
       ) : (
         <div className="border-bottom py-5 mb-5">
           <SpecialHeading
-            Heading="Our Products"
+            title="Our Products"
             SectionTitle="Explore Our Products"
             onNextSlide={fetchNextProducts}
             onPrevSlide={fetchPrevProducts}

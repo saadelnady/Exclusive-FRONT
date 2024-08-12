@@ -13,8 +13,7 @@ import "./styles/Product.css";
 const Index = ({
   isWarning,
   handleShowWarning,
-  action,
-  setAction,
+
   handleBlockProduct,
   handleAceeptProduct,
   handleUnBlockProduct,
@@ -29,6 +28,13 @@ const Index = ({
     }
   }, [dispatch, productId]);
 
+  // ==========================================================
+  const popupInfo = {
+    message: "Are you sure to Delete this category ?",
+    subMessage: "You will delete every products related to this category too",
+    // Icon: <RiDeleteBin6Line />,
+    actionTitle: "Delete",
+  };
   return (
     <>
       {isLoading ? (
@@ -36,13 +42,16 @@ const Index = ({
       ) : (
         <div className="admin-product-page row align-items-start justify-content-evenly my-5">
           {isWarning && (
-            <Warning handleShowWarning={handleShowWarning} action={action} />
+            <Warning
+              handleShowWarning={handleShowWarning}
+              // actionHandler={deleteCategoryHandler}
+              // popupInfo={popupInfo}
+            />
           )}
           <ProductOwnerCard productOwner={productOwner} />
           <ProductCard
             product={product}
             handleShowWarning={handleShowWarning}
-            setAction={setAction}
             handleBlockProduct={handleBlockProduct}
             handleAceeptProduct={handleAceeptProduct}
             handleUnBlockProduct={handleUnBlockProduct}

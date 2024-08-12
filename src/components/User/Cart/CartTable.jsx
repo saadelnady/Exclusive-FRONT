@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { FaXmark } from "react-icons/fa6";
-import { OptionButton } from "../../Admin/Shared/OptionButton";
-import { deleteProductFromCartAction } from "../../../helpers/options";
 
 const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
   const { cart } = useSelector((state) => state.cartReducer);

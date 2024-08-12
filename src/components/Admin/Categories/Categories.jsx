@@ -18,79 +18,65 @@ import Loading from "../../Shared/Loading";
 import Search from "../../Shared/Search";
 import { Pagination } from "../../Shared/Pagination";
 import { OptionButton } from "../Shared/OptionButton";
-import { categoryDeleteAction } from "../../../helpers/options";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import CustomeTitle from "../../Shared/CustomeTitle";
 
-export const Categories = ({
-  isWarning,
-  handleShowWarning,
-  action,
-  setAction,
-}) => {
+export const Categories = ({ isWarning, handleShowWarning }) => {
   const { categories, isLoading, total } = useSelector(
     (state) => state.categoryReducer
   );
-
   const dispatch = useDispatch();
-
   // ==========================================================
-
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   // ==========================================================
-
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(fetchCategories({ limit, page: currentPage }));
     }
   }, [currentPage, dispatch]);
-
   // ==========================================================
-  // const handleDeleteCategory = (categoryId) => {
-  //   const payLoad = { categoryId, toast };
-  //   dispatch(deleteCategory(payLoad));
-
-  //   handleShowWarning();
-  // };
-  // ==========================================================
-
   const handleSearchCategory = (text) => {
     dispatch(fetchCategories({ limit, page: currentPage, text }));
   };
-
-  // ===============================================
-
-  const categoryDeleteAction = {
-    type: { AR: "حذف", EN: "Delete" },
-    message: {
-      AR: "هل تود حذف هذا التصنيف ؟",
-      EN: "Are you sure to Delete this category ?",
-    },
-    subMessage: {
-      AR: "سوف تقوم بحذف جميع المنتجات الخاصة بعذا التصنيف ؟",
-      EN: "You will delete every products related to this category too",
-    },
-    Icon: <RiDeleteBin6Line />,
-    actionHandler: (categoryId) => {
-      console.log("categoryId: " + categoryId);
-
-      const payLoad = { categoryId, toast };
-      dispatch(deleteCategory(payLoad));
-
-      handleShowWarning();
-    },
+  // ==========================================================
+  const [targetCategoryId, setTargetCategoryId] = useState("");
+  const targetCategoryIdHanler = (categoryId) => {
+    setTargetCategoryId(categoryId);
   };
+  // ==========================================================
+  const deleteCategoryHandler = () => {
+    const payLoad = { categoryId: targetCategoryId, toast };
+    dispatch(deleteCategory(payLoad));
+    setTargetCategoryId("");
+  };
+  // ==========================================================
+  const cancelHandler = () => {
+    setTargetCategoryId("");
+  };
+  // ==========================================================
+  const popupInfo = {
+    message: "Are you sure to Delete this category ?",
+    subMessage: "You will delete every products related to this category too",
+    Icon: <RiDeleteBin6Line />,
+    actionTitle: "Delete",
+  };
+  // ==========================================================
   return (
-    <div className="categories-page ">
+    <div className="categories-page">
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={deleteCategoryHandler}
+          cancelHandler={cancelHandler}
+          popupInfo={popupInfo}
+        />
       )}
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All Categories </h1>
-
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2">
+        <CustomeTitle title={"All categories"} />
         <Search action={handleSearchCategory} />
       </div>
       <div className="categories-list bg-white ">
@@ -110,7 +96,7 @@ export const Categories = ({
             </thead>
             <tbody>
               {categories.map((category, index) => (
-                <tr key={index} className=" ">
+                <tr key={index}>
                   <td className="border-end">
                     {(currentPage - 1) * limit + index + 1}
                   </td>
@@ -124,7 +110,6 @@ export const Categories = ({
                   <td>{category?.title}</td>
                   <td>{formatDateAndTime(category?.createdAt)}</td>
                   <td>{formatDateAndTime(category?.updatedAt)}</td>
-
                   <td>
                     <div className="options-wrapper">
                       <HiDotsVertical className="dotsIcon" />
@@ -137,13 +122,14 @@ export const Categories = ({
                           </button>
                         </NavLink>
                         <OptionButton
-                          action={categoryDeleteAction}
-                          handleShowWarning={handleShowWarning}
-                          setAction={setAction}
-                          id={category?._id}
+                          actoinTitle={"Delete"}
                           actionHandler={() => {
-                            categoryDeleteAction.actionHandler(category?._id);
+                            targetCategoryIdHanler(category?._id);
                           }}
+                          Icon={<RiDeleteBin6Line />}
+                          handleShowWarning={handleShowWarning}
+                          // buttonStyle
+                          // styles
                         />
                       </div>
                     </div>

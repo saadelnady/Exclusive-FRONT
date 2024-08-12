@@ -12,14 +12,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { ProductActionsButtons } from "./ProductActionsButtons";
 
-export const ProductCard = ({
-  product,
-  handleShowWarning,
-  setAction,
-  handleBlockProduct,
-  handleAceeptProduct,
-  handleUnBlockProduct,
-}) => {
+export const ProductCard = ({ product, handleShowWarning }) => {
   return (
     <div className="product-details col-12 col-md-6 col-lg-7 bg-light rounded py-3">
       <h1 className="py-3 px-4 fw-bold">Product details</h1>
@@ -69,10 +62,6 @@ export const ProductCard = ({
       <ProductActionsButtons
         product={product}
         handleShowWarning={handleShowWarning}
-        setAction={setAction}
-        handleBlockProduct={handleBlockProduct}
-        handleAceeptProduct={handleAceeptProduct}
-        handleUnBlockProduct={handleUnBlockProduct}
       />
     </div>
   );

@@ -7,17 +7,18 @@ import Warning from "../../Shared/Warning";
 
 import { Pagination } from "../../Shared/Pagination";
 import { ProductsTable } from "../Shared/ProductsTable";
-import { fetchProducts } from "../../../store/actions/product/productActions";
+import {
+  acceptProduct,
+  blockProduct,
+  fetchProducts,
+} from "../../../store/actions/product/productActions";
 import { productStatus } from "../../../helpers/options";
+import CustomeTitle from "../../Shared/CustomeTitle";
+import { toast } from "react-toastify";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { MdBlock } from "react-icons/md";
 
-export const PendingProducts = ({
-  isWarning,
-  handleShowWarning,
-  action,
-  setAction,
-  handleBlockProduct,
-  handleAceeptProduct,
-}) => {
+export const PendingProducts = ({ isWarning, handleShowWarning }) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
@@ -26,12 +27,10 @@ export const PendingProducts = ({
   // =================================================================================
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   // =================================================================================
-
   useEffect(() => {
     if (localStorage.getItem("TOKEN")) {
       dispatch(
@@ -43,7 +42,6 @@ export const PendingProducts = ({
       );
     }
   }, [dispatch, currentPage]);
-
   // =================================================================================
   const handleSearchPendingProducts = (text) => {
     dispatch(
@@ -55,19 +53,68 @@ export const PendingProducts = ({
       })
     );
   };
+
+  // =================================================================================
+  const getPopupInfo = () => {
+    if (currentAction === "accept") {
+      return {
+        message: "Are you sure to Accept this product?",
+        Icon: <AiOutlineCheckCircle />,
+        actionTitle: "Accept",
+      };
+    } else if (currentAction === "block") {
+      return {
+        message: "Are you sure to Block this product?",
+        Icon: <MdBlock />,
+        actionTitle: "Block",
+      };
+    }
+    return {};
+  };
+  // =================================================================================
+
+  const [targetProductId, setTargetProductId] = useState("");
+  const [currentAction, setCurrentAction] = useState("");
+  const targetProductIdHandler = (productId, action) => {
+    setTargetProductId(productId);
+    setCurrentAction(action);
+  };
+  const handleBlockProduct = () => {
+    const payLoad = { productId: targetProductId, toast };
+    dispatch(blockProduct(payLoad));
+    setCurrentAction("");
+  };
+  const handleAcceptProduct = () => {
+    const payLoad = { productId: targetProductId, toast };
+    dispatch(acceptProduct(payLoad));
+    setCurrentAction("");
+  };
+  const cancelHandler = () => {
+    setTargetProductId("");
+    setCurrentAction("");
+  };
+  // =================================================================================
+
+  console.log("targetProductId ===>", targetProductId);
+
   return (
     <div>
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={
+            currentAction === "accept"
+              ? handleAcceptProduct
+              : handleBlockProduct
+          }
+          popupInfo={getPopupInfo()}
+          cancelHandler={cancelHandler}
+        />
       )}
-
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
-        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">
-          All Pending products
-        </h1>
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
+        <CustomeTitle title={"All Pending products"} />
         <Search action={handleSearchPendingProducts} />
       </div>
-
       {isLoading ? (
         <Loading />
       ) : products?.length > 0 ? (
@@ -75,15 +122,12 @@ export const PendingProducts = ({
           products={products}
           limit={limit}
           currentPage={currentPage}
-          setAction={setAction}
           handleShowWarning={handleShowWarning}
-          handleAceeptProduct={handleAceeptProduct}
-          handleBlockProduct={handleBlockProduct}
+          targetProductIdHandler={targetProductIdHandler}
         />
       ) : (
         <p className="m-4 text-center fw-bold">there 's no products to show</p>
       )}
-
       {products?.length > 0 && (
         <Pagination
           itemsPerPage={limit}

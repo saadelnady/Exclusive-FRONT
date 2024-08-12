@@ -1,4 +1,3 @@
-import React from "react";
 import { productStatus } from "../../../helpers/options";
 import { OptionButton } from "../Shared/OptionButton";
 import { MdBlock } from "react-icons/md";
@@ -14,8 +13,7 @@ import {
 export const ProductActionsButtons = ({
   product,
   handleShowWarning,
-  setAction,
-  
+  targetProductIdHandler,
 }) => {
   const dispatch = useDispatch();
   // =================================================================================
@@ -64,41 +62,45 @@ export const ProductActionsButtons = ({
       {product?.status === productStatus.PENDING && (
         <div className="d-flex justify-content-end mx-4">
           <OptionButton
-            action={productAcceptAction}
+            actoinTitle={"Accept"}
+            Icon={<AiOutlineCheckCircle />}
             handleShowWarning={handleShowWarning}
-            setAction={setAction}
-            id={product?._id}
-            actionHandler={productAcceptAction.actionHandler}
             buttonStyle="accept"
+            actionHandler={() => {
+              targetProductIdHandler(product?._id, "accept");
+            }}
           />
           <OptionButton
-            action={productBlockAction}
+            actoinTitle={"Block"}
+            Icon={<MdBlock />}
             handleShowWarning={handleShowWarning}
-            setAction={setAction}
-            id={product?._id}
-            actionHandler={productBlockAction.actionHandler}
             buttonStyle="block"
+            actionHandler={() => {
+              targetProductIdHandler(product?._id, "block");
+            }}
           />
         </div>
       )}
       {product?.status === productStatus.ACCEPTED && (
         <OptionButton
-          action={productBlockAction}
+          actoinTitle={"Block"}
+          Icon={<MdBlock />}
           handleShowWarning={handleShowWarning}
-          setAction={setAction}
-          id={product?._id}
-          actionHandler={productBlockAction.actionHandler}
           buttonStyle="block"
+          actionHandler={() => {
+            targetProductIdHandler(product?._id, "block");
+          }}
         />
       )}
       {product?.status === productStatus.BLOCKED && (
         <OptionButton
-          action={productUnBlockAction}
+          actoinTitle={"UnBlock"}
+          Icon={<MdBlock />}
           handleShowWarning={handleShowWarning}
-          setAction={setAction}
-          id={product?._id}
-          actionHandler={productUnBlockAction.actionHandler}
           buttonStyle="block"
+          actionHandler={() => {
+            targetProductIdHandler(product?._id);
+          }}
         />
       )}
     </div>

@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../../../store/actions/product/productActions";
+import {
+  blockProduct,
+  fetchProducts,
+} from "../../../store/actions/product/productActions";
 import { Pagination } from "../../Shared/Pagination";
 import Warning from "../../Shared/Warning";
 import Search from "../../Shared/Search";
@@ -8,14 +11,11 @@ import Loading from "../../Shared/Loading";
 
 import { ProductsTable } from "../Shared/ProductsTable";
 import { productStatus } from "../../../helpers/options";
+import CustomeTitle from "../../Shared/CustomeTitle";
+import { toast } from "react-toastify";
+import { MdBlock } from "react-icons/md";
 
-export const AcceptedProducts = ({
-  isWarning,
-  handleShowWarning,
-  action,
-  setAction,
-  handleBlockProduct,
-}) => {
+export const AcceptedProducts = ({ isWarning, handleShowWarning }) => {
   const { products, isLoading, total } = useSelector(
     (state) => state.productReducer
   );
@@ -51,17 +51,40 @@ export const AcceptedProducts = ({
       })
     );
   };
+  // =================================================================================
+
+  const [targetProductId, setTargetProductId] = useState("");
+  const targetProductIdHandler = (productId) => {
+    setTargetProductId(productId);
+  };
+  const productBlockHandler = () => {
+    const payLoad = { productId: targetProductId, toast };
+    dispatch(blockProduct(payLoad));
+  };
+  const cancelHandler = () => {
+    setTargetProductId("");
+  };
+
+  console.log("targetProductId ===>", targetProductId);
+  const popupInfo = {
+    message: "Are you sure to block this product ?",
+    Icon: <MdBlock />,
+    actionTitle: "Block",
+  };
 
   return (
     <div>
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={productBlockHandler}
+          popupInfo={popupInfo}
+          cancelHandler={cancelHandler}
+        />
       )}
 
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
-        <h1 className="fw-bold col-12 col-sm-6 col-lg-6">
-          All Accepted products
-        </h1>
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
+        <CustomeTitle title={"All Accepted products"} />
         <Search action={handleSearchAcceptedProducts} />
       </div>
 
@@ -72,9 +95,8 @@ export const AcceptedProducts = ({
           products={products}
           limit={limit}
           currentPage={currentPage}
-          setAction={setAction}
           handleShowWarning={handleShowWarning}
-          handleBlockProduct={handleBlockProduct}
+          targetProductIdHandler={targetProductIdHandler}
         />
       ) : (
         <p className="m-4 text-center fw-bold">there 's no Products to show</p>

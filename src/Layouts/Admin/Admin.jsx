@@ -24,8 +24,6 @@ import { AddSubCategory } from "../../components/Admin/AddsubCategory/AddSubCate
 import { SubCategories } from "../../components/Admin/SubCategories/SubCategories.jsx";
 import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx";
 
-// import Profile from "../../components/Shared/Profile/Index.jsx";
-
 import { fetchSellers } from "../../store/actions/seller/sellerActions.js";
 import "./styles/Admin.css";
 import {
@@ -37,8 +35,12 @@ import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { MdBlock } from "react-icons/md";
 
-const Admin = ({ isWarning, handleShowWarning }) => {
+const Admin = () => {
   // =================================================================================
+  const [isWarning, setIsWarning] = useState(false);
+  const handleShowWarning = () => {
+    setIsWarning(!isWarning);
+  };
   const dispatch = useDispatch();
   // =================================================================================
   const [isActive, setIsActive] = useState(false);
@@ -114,19 +116,7 @@ const Admin = ({ isWarning, handleShowWarning }) => {
         <Routes>
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/profile" element={<AdminProfile />} />
-          <Route
-            path="/pendingProducts"
-            element={
-              <PendingProducts
-                isWarning={isWarning}
-                handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
-                handleBlockProduct={productBlockAction.actionHandler}
-                handleAceeptProduct={productAcceptAction.actionHandler}
-              />
-            }
-          />
+
           <Route
             path="/products/:productId"
             element={
@@ -142,26 +132,30 @@ const Admin = ({ isWarning, handleShowWarning }) => {
             }
           />
           <Route
+            path="/pendingProducts"
+            element={
+              <PendingProducts
+                isWarning={isWarning}
+                handleShowWarning={handleShowWarning}
+              />
+            }
+          />
+          <Route
             path="/acceptedProducts"
             element={
               <AcceptedProducts
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
-                handleBlockProduct={productBlockAction.actionHandler}
               />
             }
           />
+
           <Route
             path="/blockedProducts"
             element={
               <BlockedProducts
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
-                handleUnBlockProduct={productUnBlockAction.actionHandler}
               />
             }
           />
@@ -171,8 +165,6 @@ const Admin = ({ isWarning, handleShowWarning }) => {
               <Categories
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
               />
             }
           />

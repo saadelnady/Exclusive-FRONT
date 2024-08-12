@@ -1,10 +1,10 @@
-import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
+import SpecialHeading from "../../../Shared/SpecialHeading";
 import NewArrivalProducts from "./NewArrivalProducts";
 
 const NewArrival = () => {
   return (
     <div>
-      <SpecialHeading Heading="Featured" SectionTitle="New Arrival" />
+      <SpecialHeading title="Featured" SectionTitle="New Arrival" />
       <NewArrivalProducts />
     </div>
   );

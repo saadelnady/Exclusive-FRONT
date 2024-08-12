@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import SpecialHeading from "../../Shared/SpecialHeading/SpecialHeading";
 import Loading from "../../../Shared/Loading";
 import ProductsSlider from "../../Shared/ProductsSlider/ProductsSlider";
 import AllProductsButton from "../../Shared/AllProductsButton/AllProductsButton";
+import SpecialHeading from "../../../Shared/SpecialHeading";
 
 const FlashSale = () => {
   const { flashSalesProducts, isLoading } = useSelector(
@@ -30,7 +30,7 @@ const FlashSale = () => {
       ) : (
         <div className="border-bottom py-5 mb-5">
           <SpecialHeading
-            Heading="Today’s"
+            title="Today’s"
             SectionTitle="Flash Sales"
             onNextSlide={handleNextSlide}
             onPrevSlide={handlePrevSlide}

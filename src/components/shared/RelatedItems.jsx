@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
-import SpecialHeading from "../User/Shared/SpecialHeading/SpecialHeading";
 import ProductsSlider from "../User/Shared/ProductsSlider/ProductsSlider";
+import SpecialHeading from "./SpecialHeading";
 
 const RelatedItems = ({ categoryId, subCategoryId }) => {
   const { flashSalesProducts, isLoading } = useSelector(
@@ -34,7 +34,7 @@ const RelatedItems = ({ categoryId, subCategoryId }) => {
       ) : (
         <div className="py-5 mb-5">
           <SpecialHeading
-            Heading="Related Items"
+            title="Related Items"
             onNextSlide={handleNextSlide}
             onPrevSlide={handlePrevSlide}
           />

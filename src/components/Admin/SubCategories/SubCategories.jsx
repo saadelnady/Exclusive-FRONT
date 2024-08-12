@@ -134,7 +134,7 @@ export const SubCategories = ({
                             <FaRegEdit /> Edit
                           </button>
                         </NavLink>
-                        <OptionButton
+                        {/* <OptionButton
                           action={subCategoryDeleteAction}
                           handleShowWarning={handleShowWarning}
                           setAction={setAction}
@@ -143,7 +143,7 @@ export const SubCategories = ({
                               subCategory?._id
                             );
                           }}
-                        />
+                        /> */}
                       </div>
                     </div>
                   </td>
