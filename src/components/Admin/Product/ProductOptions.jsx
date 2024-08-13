@@ -24,15 +24,41 @@ export const ProductOptions = ({ options }) => {
               <tr key={index}>
                 <td>
                   <span
-                    className="product-color"
-                    style={{ backgroundColor: option?.color }}
+                    className="product-color "
+                    style={{
+                      backgroundColor: option?.color,
+                      border: "1px solid red",
+                    }}
                   ></span>
                 </td>
-                <td>{option?.size}</td>
-                <td>{option?.price?.priceBeforeDiscount}</td>
-                <td>{option?.price?.discountPercentage}</td>
-                <td>{option?.price?.discountValue}</td>
-                <td>{option?.price?.finalPrice}</td>
+                <td>{option?.size || "__"}</td>
+                <td>{`${
+                  option?.price?.priceBeforeDiscount
+                    ? `${option?.price?.priceBeforeDiscount} $`
+                    : "__"
+                }`}</td>
+                <td>
+                  {`${
+                    option?.price?.discountPercentage
+                      ? `${option?.price?.discountPercentage} %`
+                      : "__"
+                  }`}
+                </td>
+                <td>
+                  {`${
+                    option?.price?.discountValue
+                      ? `${option?.price?.discountValue} $`
+                      : "__"
+                  }`}
+                </td>
+                <td>
+                  {`${
+                    option?.price?.finalPrice
+                      ? `${option?.price?.finalPrice} $`
+                      : "__"
+                  }`}
+                </td>
+
                 <td>{option?.stockCount}</td>
               </tr>
             );

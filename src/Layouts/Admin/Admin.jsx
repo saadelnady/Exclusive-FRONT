@@ -10,8 +10,6 @@ import { AdminSideBar } from "../../components/Admin/Shared/AdminSideBar.jsx";
 import { AdminHeader } from "../../components/Admin/Shared/AdminHeader.jsx";
 import { AdminDashboard } from "../../components/Admin/DashBoard/DashBoard.jsx";
 
-import { toast } from "react-toastify";
-
 import { AcceptedProducts } from "../../components/Admin/Products/AcceptedProducts.jsx";
 import { BlockedProducts } from "../../components/Admin/Products/BlockedProducts.jsx";
 import { PendingProducts } from "../../components/Admin/Products/PendingProducts.jsx";
@@ -26,14 +24,8 @@ import { AddCategory } from "../../components/Admin/AddCategory/AddCategory.jsx"
 
 import { fetchSellers } from "../../store/actions/seller/sellerActions.js";
 import "./styles/Admin.css";
-import {
-  acceptProduct,
-  blockProduct,
-  unBlockProduct,
-} from "../../store/actions/product/productActions.js";
+
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
-import { AiOutlineCheckCircle } from "react-icons/ai";
-import { MdBlock } from "react-icons/md";
 
 const Admin = () => {
   // =================================================================================
@@ -55,56 +47,7 @@ const Admin = () => {
       dispatch(fetchSellers());
     }
   }, [dispatch]);
-  // =================================================================================
-  const [action, setAction] = useState({
-    id: "",
-    type: "",
-    message: "",
-    subMessage: "",
-    actionHandler: null,
-  });
 
-  // =================================================================================
-  const productAcceptAction = {
-    type: { AR: "موافقة", EN: "Accept" },
-    message: {
-      AR: "هل تود الموافقة على هذا المنتج ؟",
-      EN: "Are you sure to Accept this product ?",
-    },
-    Icon: <AiOutlineCheckCircle />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast, handleShowWarning };
-      dispatch(acceptProduct(payLoad));
-    },
-  };
-  // ===============================================
-
-  const productBlockAction = {
-    type: { AR: "حجب", EN: "Block" },
-    message: {
-      AR: "هل تود حجب هذا المنتج ؟",
-      EN: "Are you sure to Block this product ?",
-    },
-    Icon: <MdBlock />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(unBlockProduct(payLoad));
-    },
-  };
-  // ===============================================
-
-  const productUnBlockAction = {
-    type: { AR: "أزالة الحجب", EN: "UnBlock" },
-    message: {
-      AR: "هل تود أزالة الحجب عن هذا المنتج ؟",
-      EN: "Are you sure to UnBlock this product ?",
-    },
-    Icon: <MdBlock />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(blockProduct(payLoad));
-    },
-  };
   return (
     <div className="admin-layout">
       <AdminSideBar
@@ -123,11 +66,6 @@ const Admin = () => {
               <Product
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
-                handleBlockProduct={productBlockAction.actionHandler}
-                handleAceeptProduct={productAcceptAction.actionHandler}
-                handleUnBlockProduct={productUnBlockAction.actionHandler}
               />
             }
           />
@@ -183,8 +121,6 @@ const Admin = () => {
               <SubCategories
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
               />
             }
           />
@@ -195,11 +131,6 @@ const Admin = () => {
               <Seller
                 isWarning={isWarning}
                 handleShowWarning={handleShowWarning}
-                action={action}
-                setAction={setAction}
-                handleAceeptProduct={productAcceptAction.actionHandler}
-                handleUnBlockProduct={productBlockAction.actionHandler}
-                handleBlockProduct={productBlockAction.actionHandler}
               />
             }
           />

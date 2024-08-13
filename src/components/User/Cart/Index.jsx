@@ -36,16 +36,24 @@ const Index = () => {
 
     // dispatch(deleteProductFromCart(payLoad));
   };
+
+  const popupInfo = {
+    message: "Are you sure to Delete this product from your cart ?",
+    Icon: <RiDeleteBin6Line />,
+    actionTitle: "Delete",
+  };
+
+  const cancelHandler = () => {
+    setCurrentProductId("");
+  };
   return (
     <>
       {isWarning && (
         <Warning
           handleShowWarning={handleShowWarning}
-          actionTitle={"Delete"}
           actionHandler={deleteProductFromCartHandler}
-          Icon={<RiDeleteBin6Line />}
-          message={"Are you sure to Delete this product from your cart ?"}
-          subMessage
+          popupInfo={popupInfo}
+          cancelHandler={cancelHandler}
         />
       )}
       <div className="container py-5">

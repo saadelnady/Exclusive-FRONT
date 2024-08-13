@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { serverUrl } from "../../../API/API";
 import Loading from "../../Shared/Loading";
+import CustomeTitle from "../../Shared/CustomeTitle";
 
 export const AddCategory = () => {
   const { isLoading, category } = useSelector((state) => state.categoryReducer);
@@ -132,9 +133,11 @@ export const AddCategory = () => {
   return (
     <div className="vh-100 bg-light py-5">
       <div className="container">
-        <h1 className="mb-5 fw-bold">
-          {categoryId ? "Edit Category " : "Add New Category"}
-        </h1>
+        <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
+          <CustomeTitle
+            title={categoryId ? "Edit Category " : "Add New Category"}
+          />
+        </div>
         <form
           onSubmit={formik.handleSubmit}
           action="POST"

@@ -6,7 +6,7 @@ import {
 } from "../../../store/actions/product/productActions";
 import Loading from "../../Shared/Loading";
 import { serverUrl } from "../../../API/API";
- import { HiDotsVertical } from "react-icons/hi";
+import { HiDotsVertical } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 
@@ -20,6 +20,7 @@ import Search from "../../Shared/Search";
 import { OptionButton } from "../../Admin/Shared/OptionButton";
 import CreateCoupon from "../Shared/CreateCoupon";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import CustomeTitle from "../../Shared/CustomeTitle";
 
 const Products = ({ isWarning, handleShowWarning }) => {
   const { seller } = useSelector((state) => state.sellerReducer);
@@ -54,7 +55,7 @@ const Products = ({ isWarning, handleShowWarning }) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
- 
+
   // ==========================================================
   const handleSearchProducts = (text) => {
     dispatch(
@@ -67,29 +68,37 @@ const Products = ({ isWarning, handleShowWarning }) => {
     );
   };
   // ==========================================================
+  const [targetProductId, setTargetProductId] = useState("");
   // ===============================================
-  const productDeleteAction = {
-    type: { AR: "حذف", EN: "Delete" },
-    message: {
-      AR: "هل تود حذف هذا المنتج ؟",
-      EN: "Are you sure to Delete this product ?",
-    },
-    Icon: <RiDeleteBin6Line />,
-    actionHandler: (productId) => {
-      const payLoad = { productId, toast };
-      dispatch(deleteProduct(payLoad));
-      handleShowWarning();
-    },
+
+  const deleteProductHandler = () => {
+    const payLoad = { productId: targetProductId, toast };
+    dispatch(deleteProduct(payLoad));
+    handleShowWarning();
   };
+  const popupInfo = {
+    Icon: <RiDeleteBin6Line />,
+    actionTitle: "Delete",
+    message: "Are you sure to Delete this product ?",
+  };
+  const cancelHandler = () => {
+    setTargetProductId("");
+  };
+
   return (
     <div className="products-page">
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={deleteProductHandler}
+          popupInfo={popupInfo}
+          cancelHandler={cancelHandler}
+        />
       )}
       {isOpen && <CreateCoupon handleIsOpen={handleIsOpen} />}
-      <div className="products-list shadow pt-3   ">
+      <div className="products-list shadow pt-3">
         <div className="d-flex justify-content-between align-items-center flex-wrap rounded mx-3 mb-5">
-          <h1 className="special-header ps-5 py-3">My Products</h1>
+          <CustomeTitle title={"My Products"} />
           <Search action={handleSearchProducts} />
         </div>
         <div className="d-flex justify-content-end mb-4 me-3">
@@ -109,7 +118,6 @@ const Products = ({ isWarning, handleShowWarning }) => {
                   <th rowSpan="2">Product title</th>
                   <th colSpan="4">Product price</th>
                   <th rowSpan="2">Sold Out</th>
-
                   <th rowSpan="2">Actions</th>
                 </tr>
                 <tr>
@@ -133,18 +141,41 @@ const Products = ({ isWarning, handleShowWarning }) => {
                       />
                     </td>
                     <td style={{ width: `100px` }}>
-                      {product?.title.slice(0, 19) + "..."}
+                      {product?.title?.slice(0, 6) + "..."}
                     </td>
 
-                    <td>{product?.options[0].price.priceBeforeDiscount}</td>
-                    <td>{product?.options[0].price.discountPercentage}</td>
-                    <td>{product?.options[0].price.discountValue}</td>
-                    <td>{product?.options[0].price.finalPrice}</td>
-                    <td>{product?.soldOut}</td>
-
+                    <td>{`${
+                      product?.options[0]?.price?.priceBeforeDiscount
+                        ? `${product?.options[0]?.price?.priceBeforeDiscount} $`
+                        : "__"
+                    }`}</td>
+                    <td>
+                      {`${
+                        product?.options[0]?.price?.discountPercentage
+                          ? `${product?.options[0]?.price?.discountPercentage} %`
+                          : "__"
+                      }`}
+                    </td>
+                    <td>
+                      {`${
+                        product?.options[0]?.price?.discountValue
+                          ? `${product?.options[0]?.price?.discountValue} $`
+                          : "__"
+                      }`}
+                    </td>
+                    <td>
+                      {`${
+                        product?.options[0]?.price?.finalPrice
+                          ? `${product?.options[0]?.price?.finalPrice} $`
+                          : "__"
+                      }`}
+                    </td>
+                    <td>
+                      {`${product?.soldOut ? `${product?.soldOut} $` : "__"}`}
+                    </td>
                     <td>
                       <div className="options-wrapper">
-                        <HiDotsVertical className=" " />
+                        <HiDotsVertical />
                         <div className="options">
                           <NavLink
                             to={`/Seller/products/editProduct/${product?._id}`}
@@ -153,16 +184,14 @@ const Products = ({ isWarning, handleShowWarning }) => {
                               <FaRegEdit /> Edit
                             </button>
                           </NavLink>
-
-                          {/* <OptionButton
+                          <OptionButton
                             handleShowWarning={handleShowWarning}
-                            action={productDeleteAction}
-                            setAction={setAction}
-                            id={product?._id}
+                            actoinTitle={"Delete"}
+                            Icon={<RiDeleteBin6Line />}
                             actionHandler={() => {
-                              productDeleteAction.actionHandler(product?._id);
+                              setTargetProductId(product?._id);
                             }}
-                          /> */}
+                          />
                         </div>
                       </div>
                     </td>

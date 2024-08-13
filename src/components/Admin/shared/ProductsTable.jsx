@@ -51,8 +51,10 @@ export const ProductsTable = ({
                   <HiDotsVertical className="dotsIcon" />
                   <div className="options">
                     <NavLink to={`/admin/products/${product?._id}`}>
-                      <FaEye />
-                      View
+                      <button className=" d-flex justify-content-between w-100 option view d-block">
+                        <FaEye />
+                        View
+                      </button>
                     </NavLink>
                     {product?.status === productStatus.PENDING ||
                     product?.status === productStatus.ACCEPTED ? (
@@ -85,7 +87,7 @@ export const ProductsTable = ({
                         handleShowWarning={handleShowWarning}
                         buttonStyle="block"
                         actionHandler={() => {
-                          targetProductIdHandler(product?._id);
+                          targetProductIdHandler(product?._id, "unBlock");
                         }}
                       />
                     )}

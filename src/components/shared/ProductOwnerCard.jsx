@@ -19,7 +19,7 @@ const ProductOwnerCard = ({ productOwner }) => {
       <p className="fs-5 mb-3">{`${productOwner?.firstName} ${productOwner?.lastName}`}</p>
 
       <p className="fw-bold">Email:</p>
-      <p className="fs-5 mb-3">{`${productOwner?.email}`}</p>
+      <p className="fs-5 mb-3">{`${productOwner?.email || "__"}`}</p>
 
       <p className="fw-bold">Date of Join:</p>
       <p className="fs-5 mb-3">{`${formatDateAndTime(
@@ -27,9 +27,9 @@ const ProductOwnerCard = ({ productOwner }) => {
       )}`}</p>
 
       <p className="fw-bold">Mobile Phone:</p>
-      <p className="fs-5 mb-3">{`${productOwner?.mobilePhone}`}</p>
+      <p className="fs-5 mb-3">{`${productOwner?.mobilePhone || "__"}`}</p>
       <p className="fw-bold">Address:</p>
-      <p className="fs-5 mb-3">{`${productOwner?.address}`}</p>
+      <p className="fs-5 mb-3">{`${productOwner?.address || "__"}`}</p>
 
       {!sellerId && (
         <NavLink to={`/admin/seller/${productOwner?._id}`}>

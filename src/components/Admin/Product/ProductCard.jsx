@@ -1,18 +1,21 @@
-import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { serverUrl } from "../../../API/API";
 import { ProductOptions } from "./ProductOptions";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { ProductActionsButtons } from "./ProductActionsButtons";
 
-export const ProductCard = ({ product, handleShowWarning }) => {
+import ProductActionsButtons from "./ProductActionsButtons";
+
+export const ProductCard = ({
+  product,
+  handleShowWarning,
+  currentActionHandler,
+}) => {
   return (
     <div className="product-details col-12 col-md-6 col-lg-7 bg-light rounded py-3">
       <h1 className="py-3 px-4 fw-bold">Product details</h1>
@@ -62,6 +65,7 @@ export const ProductCard = ({ product, handleShowWarning }) => {
       <ProductActionsButtons
         product={product}
         handleShowWarning={handleShowWarning}
+        currentActionHandler={currentActionHandler}
       />
     </div>
   );

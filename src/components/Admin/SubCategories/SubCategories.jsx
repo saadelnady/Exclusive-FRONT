@@ -21,13 +21,9 @@ import Search from "../../Shared/Search";
 import { OptionButton } from "../Shared/OptionButton";
 import { subCategoryDeleteAction } from "../../../helpers/options";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import CustomeTitle from "../../Shared/CustomeTitle";
 
-export const SubCategories = ({
-  isWarning,
-  handleShowWarning,
-  action,
-  setAction,
-}) => {
+export const SubCategories = ({ isWarning, handleShowWarning }) => {
   const { isLoading, subCategories, total } = useSelector(
     (state) => state.subCategoryReducer
   );
@@ -48,49 +44,47 @@ export const SubCategories = ({
       dispatch(fetchSubCategories({ limit, page: currentPage }));
     }
   }, [currentPage, dispatch]);
-  // ==========================================================
 
-  const handleDeleteSubCategory = (subCategoryId) => {
-    const payLoad = { subCategoryId, toast };
-    dispatch(deleteSubCategory(payLoad));
-
-    handleShowWarning();
-  };
   // ==========================================================
 
   const handleSearchSubCategory = (text) => {
     dispatch(fetchSubCategories({ limit, page: currentPage, text }));
   };
   // ===============================================
+  const [targetSubCategoryId, setSubCategoryId] = useState("");
+  const deleteSubCategoryHandler = () => {
+    const payLoad = { subCategoryId: targetSubCategoryId, toast };
+    dispatch(deleteSubCategory(payLoad));
+    handleShowWarning();
+    setSubCategoryId("");
+  };
+  // ===============================================
+  const cancelHandler = () => {
+    setSubCategoryId("");
+  };
 
-  const subCategoryDeleteAction = {
-    type: { AR: "حذف", EN: "Delete" },
-    message: {
-      AR: "هل تود حذف هذا التصنيف الفرعى؟",
-      EN: "Are you sure to Delete this subCategory ?",
-    },
-    subMessage: {
-      AR: "سوف تقوم بحذف جميع المنتجات الخاصة بعذا التصنيف ؟",
-      EN: "You will delete every products related to this subCategory too",
-    },
+  const popupInfo = {
     Icon: <RiDeleteBin6Line />,
-    actionHandler: (subCategoryId) => {
-      const payLoad = { subCategoryId, toast };
-      dispatch(deleteSubCategory(payLoad));
-
-      handleShowWarning();
-    },
+    subMessage:
+      "You will delete every products related to this subCategory too",
+    message: "Are you sure to Delete this subCategory ?",
+    actionTitle: "Delete",
   };
   return (
     <div className="subCategories-page">
       {isWarning && (
-        <Warning handleShowWarning={handleShowWarning} action={action} />
+        <Warning
+          handleShowWarning={handleShowWarning}
+          actionHandler={deleteSubCategoryHandler}
+          popupInfo={popupInfo}
+          cancelHandler={cancelHandler}
+        />
       )}
-      <div className="row justify-content-between align-items-center flex-wrap px-3 py-2">
-        <h1 className="fw-bold col-12 col-sm-6 col-lg-5">All SubCategories </h1>
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3 py-2 shadow">
+        <CustomeTitle title={"All SubCategories"} />
         <Search action={handleSearchSubCategory} />
       </div>
-      <div className="subCategories-list bg-white ">
+      <div className="subCategories-list bg-white">
         {isLoading ? (
           <Loading />
         ) : subCategories?.length > 0 ? (
@@ -134,16 +128,14 @@ export const SubCategories = ({
                             <FaRegEdit /> Edit
                           </button>
                         </NavLink>
-                        {/* <OptionButton
-                          action={subCategoryDeleteAction}
+                        <OptionButton
                           handleShowWarning={handleShowWarning}
-                          setAction={setAction}
                           actionHandler={() => {
-                            subCategoryDeleteAction.actionHandler(
-                              subCategory?._id
-                            );
+                            setSubCategoryId(subCategory?._id);
                           }}
-                        /> */}
+                          actoinTitle={"Delete"}
+                          Icon={<RiDeleteBin6Line />}
+                        />
                       </div>
                     </div>
                   </td>

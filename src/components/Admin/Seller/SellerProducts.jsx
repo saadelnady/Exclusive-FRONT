@@ -2,23 +2,20 @@ import { MdBlock, MdOutlinePendingActions } from "react-icons/md";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 export const SellerProductsActions = ({
   id,
-  handleGetAcceptedSellerProducts,
   handleGetPendingSellerProducts,
+  handleGetAcceptedSellerProducts,
   handleGetBlockedSellerProducts,
 }) => {
   const pendingProducts = {
-    type: { AR: "المنتجات المعلقة", EN: "Pending products" },
-
+    type: "Pending products",
     Icon: <MdOutlinePendingActions />,
   };
   const acceptedProducts = {
-    type: { AR: "المنتجات المقبولة", EN: "Accepted products" },
-
+    type: "Accepted products",
     Icon: <AiOutlineCheckCircle />,
   };
   const blockedProducts = {
-    type: { AR: "المنتجات المحظورة", EN: "Blocked products" },
-
+    type: "Blocked products",
     Icon: <MdBlock />,
   };
   const status = [pendingProducts, acceptedProducts, blockedProducts];
@@ -42,7 +39,7 @@ export const SellerProductsActions = ({
           }}
         >
           {product.Icon}
-          {product.type.EN}
+          {product.type}
         </button>
       ))}
     </div>
