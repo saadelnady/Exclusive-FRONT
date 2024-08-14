@@ -2,12 +2,17 @@ import Links from "./Links.jsx";
 import CartTable from "./CartTable.jsx";
 import CartButtons from "./CartButtons.jsx";
 import CartFooter from "./CartFooter.jsx";
+import bgSadCart from "../../../assets/images/pngs/bg-sadCart.png";
 import "./styles/Cart.css";
 import { useEffect, useState } from "react";
-import { getCart } from "../../../store/actions/cart/cartActions.js";
+import {
+  deleteProductFromCart,
+  getCart,
+} from "../../../store/actions/cart/cartActions.js";
 import { useDispatch, useSelector } from "react-redux";
 import Warning from "../../../components/Shared/Warning.jsx";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const Index = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -30,11 +35,9 @@ const Index = () => {
   // ==========================================================
 
   const deleteProductFromCartHandler = () => {
-    const payLoad = { cartId: cart?._id, productId: currentProductId };
-    console.log("cartId ==>", cart?._id);
-    console.log("productId ==>", currentProductId);
+    const payLoad = { cartId: cart?._id, productId: currentProductId, toast };
 
-    // dispatch(deleteProductFromCart(payLoad));
+    dispatch(deleteProductFromCart(payLoad));
   };
 
   const popupInfo = {
@@ -58,12 +61,23 @@ const Index = () => {
       )}
       <div className="container py-5">
         <Links />
-        <CartTable
-          handleShowWarning={handleShowWarning}
-          setCurrentProductId={setCurrentProductId}
-        />
-        <CartButtons />
-        <CartFooter />
+        {cart?.products && cart?.products?.length === 0 ? (
+          <div className="d-flex justify-content-center">
+            <div className="text-center col-12 col-md-6 ">
+              <img src={bgSadCart} alt="empty-cart" className="w-100 mx-auto" />
+              <p className="fw-bold mt-5 fs-2">Your cart is empty</p>
+            </div>
+          </div>
+        ) : (
+          <>
+            <CartTable
+              handleShowWarning={handleShowWarning}
+              setCurrentProductId={setCurrentProductId}
+            />
+            <CartButtons />
+            <CartFooter />
+          </>
+        )}
       </div>
     </>
   );

@@ -12,7 +12,7 @@ const SellerProducts = ({ products }) => {
     setActiveModal(!activeModal);
   };
   return (
-    <>
+    <div className="position-relative">
       {activeModal && (
         <ProductModal
           productId={targetProduct?._id}
@@ -33,7 +33,7 @@ const SellerProducts = ({ products }) => {
           <>There is no products to show</>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

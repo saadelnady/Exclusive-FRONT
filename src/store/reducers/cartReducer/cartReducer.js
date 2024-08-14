@@ -39,6 +39,22 @@ const cartReducer = (state = initialValues, action) => {
         isLoading: false,
         error: action.payLoad,
       };
+    //   =====================================================================
+    case CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART:
+      return { ...state, isLoading: true };
+    case CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        cart: { ...action?.payLoad },
+        error: null,
+      };
+    case CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payLoad,
+      };
     default:
       return state;
   }

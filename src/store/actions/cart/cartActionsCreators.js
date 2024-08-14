@@ -38,3 +38,22 @@ export const getCartFail = (payLoad) => {
     payLoad,
   };
 };
+// =================================================================
+export const deleteProductFromCart = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART,
+    payLoad,
+  };
+};
+export const deleteProductFromCartSuccess = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART_SUCCESS,
+    payLoad,
+  };
+};
+export const deleteProductFromCartFail = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.DELETE_PRODUCT_FROM_CART_FAIL,
+    payLoad,
+  };
+};

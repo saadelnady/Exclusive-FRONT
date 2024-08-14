@@ -13,13 +13,14 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
           <th>Product title</th>
           <th>Color</th>
           <th>Size</th>
-          <th>Price</th>
+          <th>Price before discount</th>
           <th>discount</th>
+          <th>Final price</th>
           <th>Quantity</th>
           <th>Subtotal</th>
         </thead>
         <tbody>
-          {cart?.products?.map((item) => {
+          {cart?.products?.map((item, index) => {
             return (
               <tr className="cart-row shadow rounded">
                 <td className="py-2 px-3">
@@ -57,14 +58,15 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
                   ></p>
                 </td>
                 <td> {item?.option?.size}</td>
-                <td>{item?.option?.price?.finalPrice} $</td>
+                <td>{item?.option?.price?.priceBeforeDiscount} $</td>
                 <td>
                   {`${
                     item?.option?.price?.discountValue
                       ? `${item?.option?.price?.discountValue} $`
                       : "--"
-                  }`}{" "}
+                  }`}
                 </td>
+                <td>{item?.option?.price?.finalPrice} $</td>
                 <td>
                   <input
                     type="number"
