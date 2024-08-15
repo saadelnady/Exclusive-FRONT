@@ -1,15 +1,20 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { FaXmark } from "react-icons/fa6";
+import { updateSelectedProductCount } from "../../../store/actions/cart/cartActionsCreators";
 
 const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
   const { cart } = useSelector((state) => state.cartReducer);
-
+  const dispatch = useDispatch();
+  const productSelectedCountHandler = (productId, selectedCount) => {
+    const payLoad = { productId, selectedCount };
+    dispatch(updateSelectedProductCount(payLoad));
+  };
   return (
-    <div className="overflow-auto">
-      <table className="cart-table col-12 mb-5">
-        <thead className="shadow rounded">
-          <th className="py-4 px-3">Product image</th>
+    <div className="overflow-auto mb-4">
+      <table className="cart-table w-100   text-center">
+        <thead className="shadow rounded py-3">
+          <th>Product image</th>
           <th>Product title</th>
           <th>Color</th>
           <th>Size</th>
@@ -22,9 +27,12 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
         <tbody>
           {cart?.products?.map((item, index) => {
             return (
-              <tr className="cart-row shadow rounded">
-                <td className="py-2 px-3">
-                  <div className="position-relative">
+              <tr className="cart-row shadow rounded text-center">
+                <td>
+                  <div
+                    className="position-relative mx-auto"
+                    style={{ width: "fit-content" }}
+                  >
                     <button
                       style={{ width: "25px", height: "25px" }}
                       onClick={() => {
@@ -35,7 +43,6 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
                     >
                       <FaXmark />
                     </button>
-
                     {item?.product && item?.product?.images?.length > 0 && (
                       <img
                         src={`${serverUrl}/${item?.product?.images[0]}`}
@@ -45,7 +52,7 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
                     )}
                   </div>
                 </td>
-                <td> {item?.product?.title}</td>
+                <td className="fs-3"> {item?.product?.title}</td>
                 <td>
                   <p
                     style={{
@@ -57,7 +64,7 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
                     }}
                   ></p>
                 </td>
-                <td> {item?.option?.size}</td>
+                <td className="fw-bold fs-3"> {item?.option?.size}</td>
                 <td>{item?.option?.price?.priceBeforeDiscount} $</td>
                 <td>
                   {`${
@@ -72,6 +79,9 @@ const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
                     type="number"
                     className="special-input px-3 py-2"
                     value={item?.selectedCount}
+                    onChange={(e) => {
+                      productSelectedCountHandler(item?._id, e.target.value);
+                    }}
                   />
                 </td>
                 <td>{item?.subTotal} $</td>

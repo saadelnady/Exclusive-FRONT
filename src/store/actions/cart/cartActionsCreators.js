@@ -57,3 +57,10 @@ export const deleteProductFromCartFail = (payLoad) => {
     payLoad,
   };
 };
+// =================================================================
+export const updateSelectedProductCount = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.UPDATE_SELECTED_PRODUCT_COUNT,
+    payLoad,
+  };
+};

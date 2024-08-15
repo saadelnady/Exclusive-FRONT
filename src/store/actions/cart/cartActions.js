@@ -24,7 +24,6 @@ export const getCart = (userId) => {
     try {
       dispatch(actionsCreators.getCart());
       const response = await getData(`/api/cart?userId=${userId}`);
-      console.log("response", response);
 
       if (response.status === "success") {
         dispatch(actionsCreators.getCartSuccess(response?.data?.cart));
@@ -43,7 +42,6 @@ export const deleteProductFromCart = ({ productId, cartId, toast }) => {
       const response = await deleteData(
         `/api/cart?cartId=${cartId}&productId=${productId}`
       );
-      console.log("response", response);
       if (response.status === "success") {
         dispatch(
           actionsCreators.deleteProductFromCartSuccess(response?.data?.cart)

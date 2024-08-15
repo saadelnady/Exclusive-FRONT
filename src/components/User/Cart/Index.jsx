@@ -3,7 +3,6 @@ import CartTable from "./CartTable.jsx";
 import CartButtons from "./CartButtons.jsx";
 import CartFooter from "./CartFooter.jsx";
 import bgSadCart from "../../../assets/images/pngs/bg-sadCart.png";
-import "./styles/Cart.css";
 import { useEffect, useState } from "react";
 import {
   deleteProductFromCart,
@@ -13,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Warning from "../../../components/Shared/Warning.jsx";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "react-toastify";
+import "./styles/Cart.css";
 
 const Index = () => {
   const { user } = useSelector((state) => state.userReducer);
@@ -36,7 +36,6 @@ const Index = () => {
 
   const deleteProductFromCartHandler = () => {
     const payLoad = { cartId: cart?._id, productId: currentProductId, toast };
-
     dispatch(deleteProductFromCart(payLoad));
   };
 
