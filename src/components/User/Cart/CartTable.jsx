@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { FaXmark } from "react-icons/fa6";
-import { updateSelectedProductCount } from "../../../store/actions/cart/cartActionsCreators";
+import { editCart } from "../../../store/actions/cart/cartActions";
+import { toast } from "react-toastify";
 
 const CartTable = ({ handleShowWarning, setCurrentProductId }) => {
   const { cart } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
-  const productSelectedCountHandler = (productId, selectedCount) => {
-    const payLoad = { productId, selectedCount };
-    dispatch(updateSelectedProductCount(payLoad));
+  const productSelectedCountHandler = (productId, newSelectedCount) => {
+    const payLoad = { productId, newSelectedCount, cartId: cart?._id, toast };
+    dispatch(editCart(payLoad));
   };
   return (
     <div className="overflow-auto mb-4">

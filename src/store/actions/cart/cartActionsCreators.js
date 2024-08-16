@@ -57,10 +57,23 @@ export const deleteProductFromCartFail = (payLoad) => {
     payLoad,
   };
 };
-// =================================================================
-export const updateSelectedProductCount = (payLoad) => {
+// ==================================================================================
+
+export const editCart = (payLoad) => {
   return {
-    type: CART_ACTIONS_TYPES.UPDATE_SELECTED_PRODUCT_COUNT,
+    type: CART_ACTIONS_TYPES.PUT_CART,
+    payLoad,
+  };
+};
+export const editCartSuccess = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.PUT_CART_SUCCESS,
+    payLoad,
+  };
+};
+export const editCartFail = (payLoad) => {
+  return {
+    type: CART_ACTIONS_TYPES.PUT_CART_FAIL,
     payLoad,
   };
 };

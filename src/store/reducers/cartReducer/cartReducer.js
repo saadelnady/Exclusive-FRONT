@@ -57,55 +57,20 @@ const cartReducer = (state = initialValues, action) => {
       };
     //   =====================================================================
 
-    case CART_ACTIONS_TYPES.UPDATE_SELECTED_PRODUCT_COUNT:
-      const updatedProducts = state?.cart?.products?.map((product) =>
-        product?._id === action?.payLoad?.productId
-          ? {
-              ...product,
-              selectedCount:
-                action.payLoad.selectedCount <= 0
-                  ? 1
-                  : action.payLoad.selectedCount,
-              subTotal:
-                action.payLoad.selectedCount <= 0
-                  ? 1 * product?.option?.price?.finalPrice
-                  : action.payLoad.selectedCount *
-                    product?.option?.price?.finalPrice,
-            }
-          : product
-      );
-
+    case CART_ACTIONS_TYPES.PUT_CART:
+      return { ...state, isLoading: true };
+    case CART_ACTIONS_TYPES.PUT_CART_SUCCESS:
       return {
         ...state,
-        cart: {
-          ...state.cart,
-          products: updatedProducts,
-          totalPriceBeforeDiscount: updatedProducts.reduce((acc, item) => {
-            const itemTotalPriceBeforeDiscount =
-              item.option.price.priceBeforeDiscount * item.selectedCount;
-
-            return acc + itemTotalPriceBeforeDiscount;
-          }, 0),
-
-          totalDiscount: updatedProducts.reduce((acc, item) => {
-            const discountPerItem =
-              item.option.price.priceBeforeDiscount -
-              item.option.price.finalPrice;
-            const itemDiscount = discountPerItem * item.selectedCount;
-
-            if (!isNaN(itemDiscount) && itemDiscount > 0) {
-              return acc + itemDiscount;
-            }
-            return acc;
-          }, 0),
-
-          totalFinalPrice:
-            updatedProducts.reduce(
-              (acc, item) =>
-                acc + item.selectedCount * item.option.price.finalPrice,
-              0
-            ) + state.cart.shipping,
-        },
+        isLoading: false,
+        cart: { ...action?.payLoad },
+        error: null,
+      };
+    case CART_ACTIONS_TYPES.PUT_CART_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payLoad,
       };
 
     default:

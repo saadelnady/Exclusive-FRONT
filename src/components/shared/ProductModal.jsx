@@ -63,7 +63,7 @@ const ProductModal = ({ productId, handleActiveModal }) => {
         user: user?._id,
         productId,
         optionId: targetOption?._id,
-        selectedQuantity: counter,
+        newSelectedCount: counter,
       };
       dispatch(addToCart(data, toast));
     }
