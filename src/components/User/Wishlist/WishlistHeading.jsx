@@ -1,5 +1,3 @@
-import React from "react";
-
 const WishlistHeading = () => {
   return (
     <div className="d-flex justify-content-between align-items-center mb-5">

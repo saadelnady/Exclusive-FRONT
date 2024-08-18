@@ -1,21 +1,22 @@
 import { FaXmark } from "react-icons/fa6";
-import "./styles/ProductModal.css";
+import { CiHeart } from "react-icons/ci";
 import { NavLink, useNavigate } from "react-router-dom";
-import { serverUrl } from "../../API/API";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../../store/actions/product/productActions";
-import { clearProduct } from "../../store/actions/product/productActionsCreators";
 import { BiMessageRoundedDetail } from "react-icons/bi";
-import Colors from "../User/Product/Colors";
-import Size from "../User/Product/Size";
 import { BsCart3 } from "react-icons/bs";
+import { toast } from "react-toastify";
+import { serverUrl } from "../../API/API";
+import { clearProduct } from "../../store/actions/product/productActionsCreators";
+import { fetchProduct } from "../../store/actions/product/productActions";
+import { addToCart } from "../../store/actions/cart/cartActions";
 import { showToast } from "../../helpers/toast_helper";
-import { CiHeart } from "react-icons/ci";
 import Counter from "./Counter";
 import Loading from "./Loading";
-import { toast } from "react-toastify";
-import { addToCart } from "../../store/actions/cart/cartActions";
+import Colors from "../User/Product/Colors";
+import Size from "../User/Product/Size";
+import "./styles/ProductModal.css";
+import { addToWishList } from "../../store/actions/wishList/wishListActions";
 
 const ProductModal = ({ productId, handleActiveModal }) => {
   const { product, isLoading } = useSelector((state) => state.productReducer);
@@ -49,7 +50,7 @@ const ProductModal = ({ productId, handleActiveModal }) => {
     setActiveColor(color);
   };
 
-  const addToCartHandler = (productId) => {
+  const addProductToCartHandler = (productId) => {
     if (!isLoggedIn) {
       showToast(toast, "You have to login first", "error");
       setTimeout(() => {
@@ -66,6 +67,21 @@ const ProductModal = ({ productId, handleActiveModal }) => {
         newSelectedCount: counter,
       };
       dispatch(addToCart(data, toast));
+    }
+  };
+  const addProductToWishListHandler = (productId) => {
+    if (!isLoggedIn) {
+      showToast(toast, "You have to login first", "error");
+      setTimeout(() => {
+        navigate("/login/user");
+      }, 2000);
+    } else {
+      const data = {
+        userId: user?._id,
+        productId,
+        optionId: targetOption?._id,
+      };
+      dispatch(addToWishList({ data, toast }));
     }
   };
 
@@ -181,14 +197,19 @@ const ProductModal = ({ productId, handleActiveModal }) => {
                   <button
                     className="btn submit-reverse me-4"
                     onClick={() => {
-                      addToCartHandler(product?._id);
+                      addProductToCartHandler(product?._id);
                     }}
                   >
                     Add to cart
                     <BsCart3 className="cursor-pointer ms-2 fs-3" />
                   </button>
 
-                  <button className="btn btn-danger submit-reverse">
+                  <button
+                    className="btn btn-danger submit-reverse"
+                    onClick={() => {
+                      addProductToWishListHandler(product?._id);
+                    }}
+                  >
                     <CiHeart className="cursor-pointer fs-3" />
                   </button>
                 </div>

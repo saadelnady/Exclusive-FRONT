@@ -1,4 +1,3 @@
-import React from "react";
 import Cuppon from "./Cuppon.jsx";
 import CartTotal from "./CartTotal.jsx";
 

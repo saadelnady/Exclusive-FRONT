@@ -12,6 +12,7 @@ import "./styles/User.css";
 const User = ({ handleActiveNavBar }) => {
   const { isLoading, isLoggedIn } = useSelector((state) => state.userReducer);
   const { cart } = useSelector((state) => state.cartReducer);
+  const { wishList } = useSelector((state) => state.wishListReducer);
 
   return (
     <div
@@ -23,7 +24,7 @@ const User = ({ handleActiveNavBar }) => {
         <NavLink to="/wishList" className="position-relative ">
           <CiHeart className="fs-2 cursor-pointer" />
           <span className="position-absolute top-0 start-100 px-2 py-1 rounded-circle translate-middle text-light bg-danger  ">
-            0
+            {wishList?.products?.length || 0}
           </span>
         </NavLink>
       )}

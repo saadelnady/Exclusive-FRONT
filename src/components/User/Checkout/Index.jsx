@@ -1,4 +1,3 @@
-import React from "react";
 import Links from "./Links.jsx";
 import BillingDetails from "./BillingDetails.jsx";
 import PlaceOrder from "./PlaceOrder.jsx";

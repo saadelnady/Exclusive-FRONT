@@ -30,6 +30,7 @@ import {
 } from "../../store/actions/product/productActions.js";
 import { productStatus } from "../../helpers/options.js";
 import { getCart } from "../../store/actions/cart/cartActions.js";
+import { getWishList } from "../../store/actions/wishList/wishListActions.js";
 
 const User = () => {
   const { isLoggedIn, user } = useSelector((state) => state.userReducer);
@@ -40,6 +41,7 @@ const User = () => {
     }
     if (user?._id) {
       dispatch(getCart(user?._id));
+      dispatch(getWishList(user?._id));
     }
     dispatch(fetchCategories({ limit: 7, page: 1 }));
     dispatch(

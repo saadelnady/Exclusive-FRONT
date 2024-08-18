@@ -1,6 +1,5 @@
 import Links from "./Links.jsx";
 import CartTable from "./CartTable.jsx";
-import CartButtons from "./CartButtons.jsx";
 import CartFooter from "./CartFooter.jsx";
 import bgSadCart from "../../../assets/images/pngs/bg-sadCart.png";
 import { useEffect, useState } from "react";
@@ -73,7 +72,6 @@ const Index = () => {
               handleShowWarning={handleShowWarning}
               setCurrentProductId={setCurrentProductId}
             />
-            <CartButtons />
             <CartFooter />
           </>
         )}
