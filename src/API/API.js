@@ -1,6 +1,9 @@
 import axios from "axios";
 
-export const serverUrl = process.env.REACT_APP_SERVER_URL;
+export const serverUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_SERVER_URL_API
+    : process.env.REACT_APP_SERVER_URL;
 
 const handleRequest = async (method, URL, data = null) => {
   const headers = {
