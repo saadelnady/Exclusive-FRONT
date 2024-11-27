@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
-import Admin from "./layouts/Admin/Admin.jsx";
+import Admin from "./layouts/Admin/Admin";
 import Seller from "./layouts/Seller/Seller.jsx";
 import Login from "./layouts/Login/Login.jsx";
 import User from "./layouts/User/User.jsx";
