@@ -8,6 +8,7 @@ import { couponCodeReducer } from "./reducers/couponCodeRdeucer/couponCodeReduce
 import { cartReducer } from "./reducers/cartReducer/cartReducer.js";
 import { wishListReducer } from "./reducers/wishListReducer/wishListReducer.js";
 import { thunk } from "redux-thunk";
+import { themeReducer } from "./reducers/themeReducer/themeReducer.js";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -24,5 +25,6 @@ const appReducers = combineReducers({
   couponCodeReducer,
   cartReducer,
   wishListReducer,
+  themeReducer,
 });
 export const store = createStore(appReducers, enhancer);

@@ -286,3 +286,7 @@ h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.admin-layout .dark {
+  color: rgba(white, 0.7) !important;
+  background-color: black;
+}

@@ -3,6 +3,9 @@
   min-height: 100vh;
   position: relative;
 }
+.admin-layout [theme="dark"] {
+  background-color: black;
+}
 .AdminDashboard {
   background-color: var(--bg-light);
 }

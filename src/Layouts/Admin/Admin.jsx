@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUserProfile,
   fetchUsers,
@@ -28,8 +28,10 @@ import "./styles/Admin.css";
 import NotFoundPage from "../../components/Shared/NotFoundPage.jsx";
 
 const Admin = () => {
+  const { theme } = useSelector((state) => state.themeReducer);
   // =================================================================================
   const [isWarning, setIsWarning] = useState(false);
+  const token = localStorage.getItem("TOKEN");
   const handleShowWarning = () => {
     setIsWarning(!isWarning);
   };
@@ -41,7 +43,7 @@ const Admin = () => {
   };
   // =================================================================================
   useEffect(() => {
-    if (localStorage.getItem("TOKEN")) {
+    if (token) {
       dispatch(fetchUserProfile());
       dispatch(fetchUsers());
       dispatch(fetchSellers());
@@ -49,7 +51,7 @@ const Admin = () => {
   }, [dispatch]);
 
   return (
-    <div className="admin-layout">
+    <div className={`admin-layout ${theme}`}>
       <AdminSideBar
         isActive={isActive}
         handleSidebarActivation={handleSidebarActivation}

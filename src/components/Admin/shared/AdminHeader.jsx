@@ -4,9 +4,12 @@ import { useSelector } from "react-redux";
 import { serverUrl } from "../../../API/API";
 import { CgMenuRight } from "react-icons/cg";
 import "./styles/AdminHeader.css";
+import ToggleTheme from "./ToggleTheme";
 
 export const AdminHeader = ({ handleSidebarActivation }) => {
   const { user } = useSelector((state) => state.userReducer);
+  const { theme } = useSelector((state) => state.themeReducer);
+
   return (
     <div className="admin-header">
       <CgMenuRight
@@ -16,6 +19,7 @@ export const AdminHeader = ({ handleSidebarActivation }) => {
         }}
       />
       <div className="d-flex align-items-center flex-wrap">
+        <ToggleTheme />
         <IoIosNotifications className="fs-2 cursor-pointer" />
         <FaEnvelope className="fs-2 cursor-pointer" />
         <img
